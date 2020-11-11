@@ -1,0 +1,10 @@
+@use "./quick-access";
+
+@import "./variables";
+
+
+body {
+    background-color: $background-primary;
+    width: 100vw;
+    height: 100vh;
+}

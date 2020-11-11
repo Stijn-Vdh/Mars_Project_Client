@@ -1,0 +1,34 @@
+#quick-access {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  bottom: 0;
+  background-color: #fbfcff;
+  box-sizing: border-box;
+  padding: 3rem 2rem;
+  box-shadow: 0 0px 1.8px rgba(0, 0, 0, 0.111), 0 0px 5px rgba(0, 0, 0, 0.16), 0 0px 12.1px rgba(0, 0, 0, 0.209), 0 0px 40px rgba(0, 0, 0, 0.32);
+  transition: bottom 0.3s ease-in-out;
+}
+#quick-access:not(.active) {
+  bottom: -75vh;
+  border-radius: 1rem 1rem 0 0;
+}
+#quick-access:not(.active) header {
+  display: flex;
+}
+#quick-access:not(.active) header h3 {
+  margin-left: 1rem;
+}
+#quick-access header::before {
+  content: "";
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  width: 10%;
+  height: 0.5rem;
+  background-color: #a79ea3;
+  border-radius: 3rem;
+  transform: translateX(-50%);
+}
+
+/*# sourceMappingURL=quick-access.css.map */
