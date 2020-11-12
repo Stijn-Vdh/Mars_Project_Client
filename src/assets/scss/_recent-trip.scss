@@ -2,7 +2,8 @@
     ul {
         display: flex;
         flex-direction: row;
-
+        overflow-x: scroll;
+        margin: 1rem 0;
 
         li {
             width: 12rem;
@@ -12,6 +13,8 @@
             border-radius: 1rem;
             box-sizing: border-box;
             border: 1px solid;
+            flex-shrink: 0;
+            margin-right: 1rem;
 
             h2 {
                 font-weight: bold;
@@ -36,6 +39,12 @@
                     margin-left: 1.2rem;
                     position: relative;
                     font-weight: bold;
+
+                    &::before {
+                        content: '-';
+                        position: absolute;
+                        left: -0.75rem;
+                    }
                 }
 
                 p:last-child {
