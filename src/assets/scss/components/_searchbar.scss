@@ -1,3 +1,5 @@
+@import '../variables';
+
 .searchbar {
     position: absolute;
     width: 75%;
@@ -5,7 +7,7 @@
     left: 50%;
     transform: translateX(-50%);
     
-    padding: 0.7rem 2rem 0.7rem 1rem;
+    padding: 0.7rem 1rem;
     border-radius: 1rem;
     box-shadow: 0 0px 1.8px rgba(0, 0, 0, 0.111), 0 0px 5px rgba(0, 0, 0, 0.16), 0 0px 12.1px rgba(0, 0, 0, 0.209), 0 0px 40px rgba(0, 0, 0, 0.32);
     box-sizing: border-box;
@@ -27,16 +29,25 @@
 
     ul {
         position: relative;
-        height: 5rem;
+        max-height: 12rem;
         overflow: hidden;
-        transition: height 0.3s ease-in-out;
+        transition: max-height 0.3s ease-in-out;
+
+        li {
+            padding: 0.5rem 0.75rem;
+            font-size: .9rem;
+
+            &:nth-child(even) {
+                background-color: $background-secondary;
+            }
+        }
     }
 
     &:not(.active) {
         border-radius: 3rem;
 
         ul {
-            height: 0;
+            max-height: 0;
         }
     }
 }

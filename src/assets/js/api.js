@@ -5,33 +5,61 @@ function getMessage() {
 function getEndpoints() {
     return [
         {
-            "id": "1",
-             "name": "Home",
+            "id": 1,
+            "name": "Home",
             "available": true,
             "location": "here",
             "privateEndpoint": true
         },
         {
-            "id": "2",
-             "name": "Home",
+            "id": 2,
+            "name": "Maldi",
             "available": true,
-            "location": "here",
+            "location": "somewhere else",
+            "privateEndpoint": false
+        },
+        {
+            "id": 3,
+            "name": "Debby",
+            "available": true,
+            "location": "somwhere else",
             "privateEndpoint": true
         },
         {
-            "id": "3",
-             "name": "Home",
+            "id": 4,
+            "name": "Tasle",
             "available": true,
-            "location": "here",
-            "privateEndpoint": true
+            "location": "somewhere else",
+            "privateEndpoint": false
         },
         {
-            "id": "4",
-             "name": "Home",
+            "id": 5,
+            "name": "Maruyt",
             "available": true,
-            "location": "here",
-            "privateEndpoint": true
+            "location": "somewhere else",
+            "privateEndpoint": false
         },
+        {
+            "id": 6,
+            "name": "Malbert Hein",
+            "available": true,
+            "location": "somewhere else",
+            "privateEndpoint": false
+        },
+        {
+            "id": 7,
+            "name": "Work",
+            "available": true,
+            "location": "somewhere else",
+            "privateEndpoint": false
+        },
+        {
+            "id": 8,
+            "name": "Mars Square",
+            "available": true,
+            "location": "somewhere else",
+            "privateEndpoint": false
+        }
     ]
 }
 
