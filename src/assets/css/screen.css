@@ -124,6 +124,35 @@
   max-height: 0;
 }
 
+#friendlist ul {
+  display: flex;
+  overflow-y: scroll;
+}
+#friendlist ul li {
+  flex-shrink: 0;
+  margin: 1rem 0;
+}
+#friendlist ul li figure {
+  text-align: center;
+}
+#friendlist ul li figure img {
+  width: 4rem;
+  border-radius: 50%;
+}
+#friendlist ul li .add {
+  background-color: #eff1f4;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  border: 0;
+}
+#friendlist ul li:not(:first-child) {
+  margin-left: 1rem;
+}
+#friendlist ul li:last-child {
+  padding-right: 2rem;
+}
+
 body {
   background-color: #fbfcff;
   width: 100vw;

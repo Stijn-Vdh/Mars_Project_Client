@@ -1,3 +1,5 @@
+"use strict";
+
 function recentTrip(route) {
     const minutes = Math.floor(route.estmTime / 60),
     seconds = route.estmTime % 60;
@@ -13,4 +15,15 @@ function recentTrip(route) {
         </div>
     </li>
     `
+}
+
+function friendListItem(friend) {
+    return `
+    <li>
+        <figure>
+            <img src="${friend.icon}" alt="User Image">
+            <figcaption>${friend.name}</figcaption>
+        </figure>
+    </li>
+    `;
 }

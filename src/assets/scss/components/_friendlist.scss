@@ -1,0 +1,38 @@
+@import '../variables';
+
+#friendlist {
+    ul {
+        display: flex;
+        overflow-y: scroll;
+
+        li {
+            flex-shrink: 0;
+            margin: 1rem 0;
+
+            figure {
+                text-align: center;
+
+                img {
+                    width: 4rem;
+                    border-radius: 50%;
+                }
+            }
+
+            .add {
+                background-color: $background-secondary;
+                width: 4rem;
+                height: 4rem;
+                border-radius: 50%;
+                border: 0;
+            }
+
+            &:not(:first-child) {
+                margin-left: 1rem;
+            }
+
+            &:last-child {
+                padding-right: 2rem;
+            }
+        }
+    }
+}
