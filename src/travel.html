@@ -11,33 +11,28 @@
     <nav>
         <a href="index.html">X</a>
     </nav>
-
-    <div id="formContainer">
         <form id="selectTravelLocation">
-        <div class="To">
             <h2>Travel to:</h2>
-        </div>
+
         <div class="podType">
-            <label for="pods">Pod type</label>
-            <select name="pods" id="pods">
-                <option value="normal">Normal pod</option>
-                <option value="luxury">Luxury</option>
-            </select>
+            <input type="radio" id="normalPod" name="podSelection" value="normalPod">
+            <label for="normalPod">Normal pod</label>
+            <input type="radio" id="luxuryPod" name="podSelection" value="luxuryPod">
+            <label for="luxuryPod">Luxury pod</label>
         </div>
-        <div class="paymentMethod">
+
+        <div class="paymentType">
             <input type="radio" id="bank" name="paymentMethod" value="bank">
             <label for="bank">Pay with martian coins</label>
             <input type="radio" id="rewardPoints" name="paymentMethod" value="rewardPoints">
             <label for="rewardPoints">Pay with reward points</label>
         </div>
+
         <div class="orderPod">
             <input type="submit" value="Order pod">
         </div>
+
     </form>
-    </div>
-
-
-
 </main>
 </body>
 </html>
