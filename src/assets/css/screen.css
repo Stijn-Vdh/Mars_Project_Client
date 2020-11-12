@@ -11,15 +11,16 @@
   padding: 0.5rem;
   border-radius: 1rem;
   box-sizing: border-box;
-  border: 1px solid;
+  border: 1px solid #989a9c;
   flex-shrink: 0;
   margin-right: 1rem;
 }
 #recent-trips ul li h2 {
-  font-weight: bold;
-  font-size: 1.1rem;
+  font-weight: 700;
+  font-size: 0.9rem;
 }
 #recent-trips ul li h3 {
+  font-size: 0.85rem;
   font-weight: normal;
 }
 #recent-trips ul li div {
@@ -29,7 +30,7 @@
   padding: 0.3rem 0.5rem 0.5rem;
   left: 0;
   width: calc(100% - 1rem);
-  border-top: 1px solid;
+  border-top: 1px solid #989a9c;
   font-size: 0.8rem;
 }
 #recent-trips ul li div .to {
@@ -80,11 +81,60 @@
   transform: translateX(-50%);
 }
 
+.searchbar {
+  position: absolute;
+  width: 75%;
+  top: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.7rem 1rem;
+  border-radius: 1rem;
+  box-shadow: 0 0px 1.8px rgba(0, 0, 0, 0.111), 0 0px 5px rgba(0, 0, 0, 0.16), 0 0px 12.1px rgba(0, 0, 0, 0.209), 0 0px 40px rgba(0, 0, 0, 0.32);
+  box-sizing: border-box;
+}
+.searchbar label {
+  position: absolute;
+  right: 0.75rem;
+  top: 0.7rem;
+}
+.searchbar input {
+  border: 0;
+  width: 95%;
+}
+.searchbar input:focus {
+  outline: none;
+}
+.searchbar ul {
+  position: relative;
+  max-height: 12rem;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out;
+}
+.searchbar ul li {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+}
+.searchbar ul li:nth-child(even) {
+  background-color: #eff1f4;
+}
+.searchbar:not(.active) {
+  border-radius: 3rem;
+}
+.searchbar:not(.active) ul {
+  max-height: 0;
+}
+
 body {
   background-color: #fbfcff;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+  font-family: "Roboto", sans-serif;
+  color: #656769;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Montserrat", sans-serif;
 }
 
 /*# sourceMappingURL=screen.css.map */
