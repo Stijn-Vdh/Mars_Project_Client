@@ -1,3 +1,20 @@
+"use strict";
+
+function getFriends() {
+    return [
+        {
+            id: 1,
+            name: "John doe",
+            icon: "https://randomuser.me/api/portraits/men/85.jpg"
+        },
+        {
+            id: 2,
+            name: "Jane Doe",
+            icon: "https://randomuser.me/api/portraits/women/85.jpg"
+        }
+    ];
+}
+
 function getMessage() {
     return apiCall("message");
 }

@@ -1,3 +1,5 @@
+"use strict";
+
 let config;
 let api;
 let endpoints;
@@ -18,6 +20,7 @@ async function init() {
     endpoints = getEndpoints();
     loadRecentTrips();
     document.querySelectorAll(".searchbar").forEach(el => loadSearchbar(el));
+    friendsInit();
 }
 
 async function loadConfig() {
