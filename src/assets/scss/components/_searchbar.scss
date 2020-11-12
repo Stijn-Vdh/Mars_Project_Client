@@ -6,7 +6,7 @@
     transform: translateX(-50%);
     
     padding: 0.7rem 2rem 0.7rem 1rem;
-    border-radius: 3rem;
+    border-radius: 1rem;
     box-shadow: 0 0px 1.8px rgba(0, 0, 0, 0.111), 0 0px 5px rgba(0, 0, 0, 0.16), 0 0px 12.1px rgba(0, 0, 0, 0.209), 0 0px 40px rgba(0, 0, 0, 0.32);
     box-sizing: border-box;
 
@@ -22,6 +22,21 @@
 
         &:focus {
             outline: none;
+        }
+    }
+
+    ul {
+        position: relative;
+        height: 5rem;
+        overflow: hidden;
+        transition: height 0.3s ease-in-out;
+    }
+
+    &:not(.active) {
+        border-radius: 3rem;
+
+        ul {
+            height: 0;
         }
     }
 }

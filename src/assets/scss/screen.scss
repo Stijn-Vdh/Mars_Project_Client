@@ -9,4 +9,10 @@ body {
     width: 100vw;
     height: 100vh;
     overflow: hidden;
+    font-family: 'Roboto', sans-serif;
+    color: $text-primary;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
 }
