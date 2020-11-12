@@ -11,6 +11,7 @@ async function init() {
     // api = `${config.host ? config.host + '/': ''}${config.group ? config.group + '/' : ''}api/`;
 
     document.querySelector('#quick-access').addEventListener('click', openQuickAccess);
+    loadRecentTrips();
 }
 
 async function loadConfig() {
@@ -22,4 +23,29 @@ function openQuickAccess(e) {
     e.preventDefault();
 
     document.querySelector('#quick-access').classList.add('active');
+}
+
+function loadRecentTrips() {
+    const dummyData= [{
+        routID: 1,
+        from: "Home",
+        destination: "Work",
+        estmTime: 60,
+    },{
+        routID: 1,
+        from: "Home",
+        destination: "Store 6",
+        estmTime: 30,
+    },{
+        routID: 1,
+        from: "Home",
+        destination: "Debby",
+        estmTime: 75,
+    }], 
+    tripContainer = document.querySelector('#recent-trips > ul');
+
+    tripContainer.innerHTML = "";
+    dummyData.forEach(route => {
+        tripContainer.innerHTML += recentTrip(route);
+    })
 }

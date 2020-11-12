@@ -1,3 +1,52 @@
+#recent-trips ul {
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+  margin: 1rem 0;
+}
+#recent-trips ul li {
+  width: 12rem;
+  height: 5rem;
+  position: relative;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  box-sizing: border-box;
+  border: 1px solid;
+  flex-shrink: 0;
+  margin-right: 1rem;
+}
+#recent-trips ul li h2 {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+#recent-trips ul li h3 {
+  font-weight: normal;
+}
+#recent-trips ul li div {
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  padding: 0.3rem 0.5rem 0.5rem;
+  left: 0;
+  width: calc(100% - 1rem);
+  border-top: 1px solid;
+  font-size: 0.8rem;
+}
+#recent-trips ul li div .to {
+  margin-left: 1.2rem;
+  position: relative;
+  font-weight: bold;
+}
+#recent-trips ul li div .to::before {
+  content: "-";
+  position: absolute;
+  left: -0.75rem;
+}
+#recent-trips ul li div p:last-child {
+  margin-left: auto;
+  display: block;
+}
+
 #quick-access {
   position: absolute;
   width: 100%;
@@ -5,7 +54,7 @@
   bottom: 0;
   background-color: #fbfcff;
   box-sizing: border-box;
-  padding: 3rem 2rem;
+  padding: 3rem 0 3rem 2rem;
   box-shadow: 0 0px 1.8px rgba(0, 0, 0, 0.111), 0 0px 5px rgba(0, 0, 0, 0.16), 0 0px 12.1px rgba(0, 0, 0, 0.209), 0 0px 40px rgba(0, 0, 0, 0.32);
   transition: bottom 0.3s ease-in-out;
 }
@@ -35,6 +84,7 @@ body {
   background-color: #fbfcff;
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
 }
 
 /*# sourceMappingURL=screen.css.map */
