@@ -1,3 +1,6 @@
+#recent-trips {
+  padding: 0 2rem;
+}
 #recent-trips ul {
   display: flex;
   flex-direction: row;
@@ -55,9 +58,7 @@
   bottom: 0;
   background-color: #fbfcff;
   box-sizing: border-box;
-  padding: 3rem 0 3rem 2rem;
   box-shadow: 0 0px 1.8px rgba(0, 0, 0, 0.111), 0 0px 5px rgba(0, 0, 0, 0.16), 0 0px 12.1px rgba(0, 0, 0, 0.209), 0 0px 40px rgba(0, 0, 0, 0.32);
-  transition: bottom 0.3s ease-in-out;
 }
 #quick-access:not(.active) {
   bottom: -75vh;
@@ -68,6 +69,9 @@
 }
 #quick-access:not(.active) header h3 {
   margin-left: 1rem;
+}
+#quick-access header {
+  padding: 3rem 0 0 2rem;
 }
 #quick-access header::before {
   content: "";
@@ -124,6 +128,9 @@
   max-height: 0;
 }
 
+#friendlist {
+  padding: 0 2rem;
+}
 #friendlist ul {
   display: flex;
   overflow-y: scroll;
