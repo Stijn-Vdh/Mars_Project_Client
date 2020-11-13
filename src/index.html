@@ -90,6 +90,24 @@
         <button id="update-account">Update account settings</button>
     </aside>
 
+    <aside id="report-modal" class="active">
+        <h2>Report an issue</h2>
+        <button class="close-modal">x</button>
+        <form action="#" method="post">
+            <label for="select-type">Category</label>
+            <select name="select-type" id="select-type">
+                <option value="0">Pod ordering / arrival</option>
+                <option value="1">Menu usage</option>
+                <option value="2">Acount information</option>
+                <option value="3">Billing</option>
+                <option value="4">Other</option>
+            </select>
+            <label for="reason">Tell us about the issue</label>
+            <textarea name="reason" id="reason"></textarea>
+            <button>Send report</button>
+        </form>
+    </aside>
+
     <script src="assets/js/templates.js"></script>
     <script src="assets/js/friends.js"></script>
     <script src="assets/js/user.js"></script>

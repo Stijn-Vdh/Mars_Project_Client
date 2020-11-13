@@ -13,6 +13,7 @@ async function init() {
     // document.cookie = 'Authorization=Basic cHJvamVjdG1lZGV3ZXJrZXI6dmVya2VlcmQ=';
     // config = await loadConfig();
     // api = `${config.host ? config.host + '/': ''}${config.group ? config.group + '/' : ''}api/`;
+    document.querySelectorAll('.close-modal').forEach(el => el.addEventListener('click', closeModal));
 
     document.querySelector('#quick-access').addEventListener('click', openQuickAccess);
     document.querySelectorAll(".searchbar > input").forEach(el => el.addEventListener('focusin', toggleFocus));
@@ -30,6 +31,12 @@ async function init() {
     // navigator.serviceWorker.register('/service-worker.js', {
     //     scope: '/'
     // });
+}
+
+function closeModal(e) {
+    e.preventDefault();
+
+    e.currentTarget.parentNode.classList.remove('active');
 }
 
 function setViewPortStatic() {

@@ -4,6 +4,23 @@
     background-color: $background-primary;
     box-shadow: 0 0px 1.8px rgba(0, 0, 0, 0.111), 0 0px 5px rgba(0, 0, 0, 0.16), 0 0px 12.1px rgba(0, 0, 0, 0.209), 0 0px 40px rgba(0, 0, 0, 0.32);
     padding: 1rem;
+
+    
+    position: absolute;
+    width: 80%;
+    height: 60%;
+    left: 50%;
+    top: 37%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    border-radius: 0.5rem;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+
+    &:not(.active) {
+        transform: scale(0.7) translate(-71%, -65%);
+        opacity: 0;
+        pointer-events: none;
+    }
 }
 
 @mixin button {
