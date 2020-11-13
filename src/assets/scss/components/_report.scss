@@ -1,0 +1,71 @@
+@use '../util';
+@use '../variables';
+
+#report-modal {
+    @include util.modal;
+    display: flex;
+    flex-flow: column nowrap;
+
+    .close-modal {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 2rem;
+        height: 2rem;
+        border: 0;
+        background-color: transparent;
+        font-weight: bold;
+        font-size: 1rem;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    form {
+        display: flex;
+        flex-flow: column nowrap;
+        flex-grow: 1;
+
+        select {
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            background-color: variables.$background-secondary;
+            border: 0;
+
+            &:focus {
+                outline: none;
+                border-radius: 0.5rem 0.5rem 0 0;
+            }
+        }
+
+        textarea {
+            height: 10rem;
+            width: 100%;
+            box-sizing: border-box;
+            flex-grow: 1;
+            resize: none;
+            border: none;
+            background-color: variables.$background-secondary;
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+
+            &:focus {
+                outline: none;
+            }
+        }
+
+        button {
+            @include util.button;
+            background-color: variables.$accent-green;
+            margin-top: 3rem;
+            color: variables.$background-primary;
+            
+        }
+    
+        label {
+            display: block;
+            margin: 1rem 0 0.5rem;
+        }
+    }
+}

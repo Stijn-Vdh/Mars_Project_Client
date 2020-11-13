@@ -2,16 +2,8 @@
 @use "../util";
 
 #account-settings {
-    position: absolute;
     display: flex;
     flex-flow: column nowrap;
-    width: 80%;
-    height: 60%;
-    left: 50%;
-    top: 37%;
-    transform: translate(-50%, -50%);
-    z-index: 100;
-    border-radius: 0.5rem;
     @include util.modal;
 
     ul {
@@ -80,9 +72,5 @@
         background-color: variables.$accent-green;
         font-weight: bold;
         color: variables.$background-primary;
-    }
-
-    &:not(.active) {
-        display: none;
     }
 }

@@ -161,9 +161,12 @@
 }
 
 #account-settings {
-  position: absolute;
   display: flex;
   flex-flow: column nowrap;
+  background-color: #fbfcff;
+  box-shadow: 0 0px 1.8px rgba(0, 0, 0, 0.111), 0 0px 5px rgba(0, 0, 0, 0.16), 0 0px 12.1px rgba(0, 0, 0, 0.209), 0 0px 40px rgba(0, 0, 0, 0.32);
+  padding: 1rem;
+  position: absolute;
   width: 80%;
   height: 60%;
   left: 50%;
@@ -171,9 +174,12 @@
   transform: translate(-50%, -50%);
   z-index: 100;
   border-radius: 0.5rem;
-  background-color: #fbfcff;
-  box-shadow: 0 0px 1.8px rgba(0, 0, 0, 0.111), 0 0px 5px rgba(0, 0, 0, 0.16), 0 0px 12.1px rgba(0, 0, 0, 0.209), 0 0px 40px rgba(0, 0, 0, 0.32);
-  padding: 1rem;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+#account-settings:not(.active) {
+  transform: scale(0.7) translate(-71%, -65%);
+  opacity: 0;
+  pointer-events: none;
 }
 #account-settings ul {
   margin-top: 2rem;
@@ -227,15 +233,94 @@
   border-radius: 3rem;
   box-shadow: 0 1px 2.2px rgba(0, 0, 0, 0.02), 0 2.3px 5.3px rgba(0, 0, 0, 0.028), 0 4.4px 10px rgba(0, 0, 0, 0.035), 0 7.8px 17.9px rgba(0, 0, 0, 0.042), 0 14.6px 33.4px rgba(0, 0, 0, 0.05), 0 35px 80px rgba(0, 0, 0, 0.07);
   box-sizing: border-box;
-  background-color: #0b7a75;
+  background-color: #aed581;
   font-weight: bold;
   color: #fbfcff;
 }
 #account-settings button:focus {
   outline: none;
 }
-#account-settings:not(.active) {
-  display: none;
+
+#report-modal {
+  background-color: #fbfcff;
+  box-shadow: 0 0px 1.8px rgba(0, 0, 0, 0.111), 0 0px 5px rgba(0, 0, 0, 0.16), 0 0px 12.1px rgba(0, 0, 0, 0.209), 0 0px 40px rgba(0, 0, 0, 0.32);
+  padding: 1rem;
+  position: absolute;
+  width: 80%;
+  height: 60%;
+  left: 50%;
+  top: 37%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  border-radius: 0.5rem;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  display: flex;
+  flex-flow: column nowrap;
+}
+#report-modal:not(.active) {
+  transform: scale(0.7) translate(-71%, -65%);
+  opacity: 0;
+  pointer-events: none;
+}
+#report-modal .close-modal {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 2rem;
+  height: 2rem;
+  border: 0;
+  background-color: transparent;
+  font-weight: bold;
+  font-size: 1rem;
+}
+#report-modal .close-modal:focus {
+  outline: none;
+}
+#report-modal form {
+  display: flex;
+  flex-flow: column nowrap;
+  flex-grow: 1;
+}
+#report-modal form select {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: #eff1f4;
+  border: 0;
+}
+#report-modal form select:focus {
+  outline: none;
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+#report-modal form textarea {
+  height: 10rem;
+  width: 100%;
+  box-sizing: border-box;
+  flex-grow: 1;
+  resize: none;
+  border: none;
+  background-color: #eff1f4;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+}
+#report-modal form textarea:focus {
+  outline: none;
+}
+#report-modal form button {
+  border: 0;
+  padding: 0.7rem 1rem;
+  border-radius: 3rem;
+  box-shadow: 0 1px 2.2px rgba(0, 0, 0, 0.02), 0 2.3px 5.3px rgba(0, 0, 0, 0.028), 0 4.4px 10px rgba(0, 0, 0, 0.035), 0 7.8px 17.9px rgba(0, 0, 0, 0.042), 0 14.6px 33.4px rgba(0, 0, 0, 0.05), 0 35px 80px rgba(0, 0, 0, 0.07);
+  box-sizing: border-box;
+  background-color: #aed581;
+  margin-top: 3rem;
+  color: #fbfcff;
+}
+#report-modal form button:focus {
+  outline: none;
+}
+#report-modal form label {
+  display: block;
+  margin: 1rem 0 0.5rem;
 }
 
 body {
