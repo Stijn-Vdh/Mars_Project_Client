@@ -7,6 +7,17 @@ const userInfo = {
 
 function userInit() {
     document.querySelectorAll('#account-settings li a').forEach(el => el.addEventListener('click', toggleEdit));
+    document.querySelector('#update-account').addEventListener('click', updateSettings);
+
+    loadDataInSettings();
+}
+
+function updateSettings() {
+    userInfo.name = document.querySelector('#new-name').value;
+    userInfo.isBusiness = document.querySelector('#edit-business-user').checked;
+
+    document.querySelector('#new-pwd').value = "";
+    document.querySelector('#current-pwd').value = "";
 
     loadDataInSettings();
 }
@@ -51,4 +62,10 @@ function loadDataInSettings() {
     document.querySelector('#new-name').value = userInfo.name;
     document.querySelector('#subscription-settings p').innerHTML = userInfo.subscription;
     document.querySelector('#business-settings input').checked = userInfo.isBusiness;
+
+    document.querySelector('#name-settings input').classList.add('hidden');
+    document.querySelector('#name-settings p').classList.remove('hidden');
+    document.querySelector('#edit-name').innerHTML = "Edit";
+    document.querySelector('#password-settings div').classList.add('hidden');
+    document.querySelector('#password-settings a').innerHTML = "Change password";
 }
