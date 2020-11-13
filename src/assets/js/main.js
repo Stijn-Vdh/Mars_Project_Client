@@ -23,8 +23,8 @@ async function init() {
     friendsInit();
     userInit();
 
-    navigator.serviceWorker.register('/service-worker.js', {
-        scope: '/'
+    navigator.serviceWorker.register('/mars-15/service-worker.js', {
+        scope: '/mars-15'
     });
 }
 
