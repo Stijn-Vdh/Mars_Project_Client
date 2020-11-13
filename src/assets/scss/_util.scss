@@ -1,0 +1,27 @@
+@import './variables';
+
+@mixin modal {
+    background-color: $background-primary;
+    box-shadow: 0 0px 1.8px rgba(0, 0, 0, 0.111), 0 0px 5px rgba(0, 0, 0, 0.16), 0 0px 12.1px rgba(0, 0, 0, 0.209), 0 0px 40px rgba(0, 0, 0, 0.32);
+    padding: 1rem;
+}
+
+@mixin button {
+    border: 0;
+    padding: 0.7rem 1rem;
+    border-radius: 3rem;
+    box-shadow:
+        0 1px 2.2px rgba(0, 0, 0, 0.02),
+        0 2.3px 5.3px rgba(0, 0, 0, 0.028),
+        0 4.4px 10px rgba(0, 0, 0, 0.035),
+        0 7.8px 17.9px rgba(0, 0, 0, 0.042),
+        0 14.6px 33.4px rgba(0, 0, 0, 0.05),
+        0 35px 80px rgba(0, 0, 0, 0.07)
+    ;
+
+    box-sizing: border-box;
+
+    &:focus {
+        outline: none;
+    }
+}
