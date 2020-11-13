@@ -1,0 +1,88 @@
+@use "../variables";
+@use "../util";
+
+#account-settings {
+    position: absolute;
+    display: flex;
+    flex-flow: column nowrap;
+    width: 80%;
+    height: 60%;
+    left: 50%;
+    top: 37%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    border-radius: 0.5rem;
+    @include util.modal;
+
+    ul {
+        margin-top: 2rem;
+        flex-grow: 1;
+        li {
+            display: flex;
+            padding: 1rem 0;
+            border-top: 1px solid lighten(variables.$text-primary, 45%);
+
+            &:last-child {
+                border-bottom: 1px solid lighten(variables.$text-primary, 45%);
+            }
+
+            p {
+                margin-right: 0.5rem;
+            }
+
+            input {
+                border: 0;
+                text-align: right;
+                padding-right: 0.5rem;
+                border-bottom: 1px solid gray;
+
+                &:focus {
+                    outline: none;
+                }
+            }
+
+            h3 {
+                flex-grow: 1;
+                font-weight: 500;
+            }
+
+            div {
+                label {
+                    display: block;
+                    margin: 0.5rem 0;
+                }
+
+                &.hidden {
+                    display: block;
+
+                    *:not(a) {
+                        display: none;
+                    }
+                }
+
+                &:not(.hidden) {
+                    a {
+                        display: block;
+                        margin-top: 1rem;
+                        text-align: right;
+                    }
+                }
+
+                input {
+                    text-align: left;
+                }
+            }
+        }
+    }
+
+    button {
+        @include util.button;
+        background-color: variables.$accent-green;
+        font-weight: bold;
+        color: variables.$background-primary;
+    }
+
+    &:not(.active) {
+        display: none;
+    }
+}

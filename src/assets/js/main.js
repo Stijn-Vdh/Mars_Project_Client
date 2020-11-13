@@ -21,6 +21,7 @@ async function init() {
     loadRecentTrips();
     document.querySelectorAll(".searchbar").forEach(el => loadSearchbar(el));
     friendsInit();
+    userInit();
 }
 
 async function loadConfig() {
