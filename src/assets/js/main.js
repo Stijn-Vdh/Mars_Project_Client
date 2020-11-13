@@ -24,7 +24,7 @@ async function init() {
     userInit();
 
     navigator.serviceWorker.register('/mars-15/service-worker.js', {
-        scope: '/mars-15'
+        scope: '/mars-15/'
     });
 }
 
