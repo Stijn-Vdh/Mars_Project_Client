@@ -3,6 +3,14 @@
 let config;
 let api;
 let endpoints;
+let dragStarted = false;
+let dragInitialized = false;
+let dragInfo = {
+    started: false,
+    initialized: false,
+    startPos: null,
+    prevPos: null
+};
 const h1Element = document.querySelector("h1");
 
 document.addEventListener("DOMContentLoaded", init);
@@ -13,7 +21,10 @@ async function init() {
     // config = await loadConfig();
     // api = `${config.host ? config.host + '/': ''}${config.group ? config.group + '/' : ''}api/`;
 
-    document.querySelector('#quick-access').addEventListener('click', openQuickAccess);
+    document.querySelector('#quick-access > header').addEventListener('touchstart', dragStart);
+    document.querySelector('#quick-access > header').addEventListener('touchmove', dragMove, {passive: true});
+    document.querySelector('#quick-access > header').addEventListener('touchend', dragEnd);
+
     document.querySelectorAll(".searchbar > input").forEach(el => el.addEventListener('focusin', toggleFocus));
     document.querySelectorAll(".searchbar > input").forEach(el => el.addEventListener('focusout', toggleFocus));
     document.querySelectorAll(".searchbar > input").forEach(el => el.addEventListener('input', (e) => loadSearchbar(e.currentTarget.parentNode, e.currentTarget.value)));
@@ -33,10 +44,33 @@ async function loadConfig() {
     return response.json();
 }
 
-function openQuickAccess(e) {
-    e.preventDefault();
+function dragStart(e) {
+    if (!dragInfo.started) {
+        dragInfo.startPos = document.querySelector('#quick-access').offsetTop;
+        document.querySelector('#quick-access').style.top = `${dragInfo.startPos}px`
+    }
+    dragInfo.started = true;
+    dragInfo.prevPos = dragInfo.startPos;
+}
 
-    document.querySelector('#quick-access').classList.add('active');
+function dragMove(e) {
+    dragInfo.initialized = true;
+    let curPos = e.clientY || e.touches[0].clientY;
+    document.querySelector('#quick-access').style.top = `${dragInfo.prevPos - (dragInfo.prevPos - curPos)}px`;
+    dragInfo.prevPos = document.querySelector('#quick-access').offsetTop;
+}
+
+function dragEnd(e) {
+    document.querySelector('#quick-access').style.transition = 'top 0.3s ease-in-out';
+    if (dragInfo.prevPos < dragInfo.startPos * .7 || !dragInfo.initialized) {
+        document.querySelector('#quick-access').style.top = '0px';
+    } else {
+        document.querySelector('#quick-access').style.top = `${dragInfo.startPos}px`;
+    }
+    dragInfo.initialized = false;
+    setTimeout(() => {
+        document.querySelector('#quick-access').style.transition = '';
+    }, 400)
 }
 
 function loadRecentTrips() {
