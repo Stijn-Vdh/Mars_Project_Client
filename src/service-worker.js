@@ -9,6 +9,16 @@ var urlsToCache = [
   '/mars-15/assets/js/user.js',
 ];
 
+// var urlsToCache = [
+//   '/',
+//   '/assets/css/screen.css',
+//   '/assets/js/main.js',
+//   '/assets/js/friends.js',
+//   '/assets/js/templates.js',
+//   '/assets/js/api.js',
+//   '/assets/js/user.js',
+// ];
+
 self.addEventListener('install', function(event) {
     // Perform install steps
     event.waitUntil(

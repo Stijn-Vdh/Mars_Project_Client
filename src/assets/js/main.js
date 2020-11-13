@@ -8,6 +8,7 @@ const h1Element = document.querySelector("h1");
 document.addEventListener("DOMContentLoaded", init);
 
 async function init() {
+    setViewPortStatic();
     // Temporary hack to allow local testing of the web client and server.
     // document.cookie = 'Authorization=Basic cHJvamVjdG1lZGV3ZXJrZXI6dmVya2VlcmQ=';
     // config = await loadConfig();
@@ -26,6 +27,17 @@ async function init() {
     navigator.serviceWorker.register('/mars-15/service-worker.js', {
         scope: '/mars-15/'
     });
+    // navigator.serviceWorker.register('/service-worker.js', {
+    //     scope: '/'
+    // });
+}
+
+function setViewPortStatic() {
+    const viewheight = window.screen.height,
+    viewwidth = window.screen.width,
+    viewport = document.querySelector("meta[name=viewport]");
+
+    viewport.setAttribute("content", `height=${viewheight}px, width=${viewwidth}px, initial-scale=1.0`);
 }
 
 async function loadConfig() {
