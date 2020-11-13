@@ -30,9 +30,47 @@
                 margin-right: 0.5rem;
             }
 
+            input {
+                border: 0;
+                text-align: right;
+                padding-right: 0.5rem;
+                border-bottom: 1px solid gray;
+
+                &:focus {
+                    outline: none;
+                }
+            }
+
             h3 {
                 flex-grow: 1;
                 font-weight: 500;
+            }
+
+            div {
+                label {
+                    display: block;
+                    margin: 0.5rem 0;
+                }
+
+                &.hidden {
+                    display: block;
+
+                    *:not(a) {
+                        display: none;
+                    }
+                }
+
+                &:not(.hidden) {
+                    a {
+                        display: block;
+                        margin-top: 1rem;
+                        text-align: right;
+                    }
+                }
+
+                input {
+                    text-align: left;
+                }
             }
         }
     }
@@ -42,5 +80,9 @@
         background-color: variables.$accent-green;
         font-weight: bold;
         color: variables.$background-primary;
+    }
+
+    &:not(.active) {
+        display: none;
     }
 }

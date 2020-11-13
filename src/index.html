@@ -56,24 +56,31 @@
         </section>
     </main>
 
-    <aside id="account-settings">
+    <aside id="account-settings" class="active">
         <h2>Account</h2>
         <ul>
-            <li>
+            <li id="name-settings">
                 <h3>Name</h3>
                 <p>Jane Roe</p>
+                <input type="text" id="new-name" class="hidden">
                 <a href="#" id="edit-name">Edit</a>
             </li>
-            <li>
+            <li id="password-settings">
                 <h3>Password</h3>
-                <a href="#" id="edit-password">Change password</a>
+                <div class="hidden">
+                    <label for="current-pwd">Current password</label>
+                    <input type="password" id="current-pwd">
+                    <label for="new-pwd">New password</label>
+                    <input type="password" id="new-pwd">
+                    <a href="#" id="edit-password">Change password</a>
+                </div>
             </li>
-            <li>
+            <li id="subscription-settings">
                 <h3>Subscription</h3>
                 <p>None</p>
                 <a href="#" id="edit-subscription">Edit</a>
             </li>
-            <li>
+            <li id="business-settings">
                 <h3>Business user</h3>
                 <input type="checkbox" id="edit-business-user">
             </li>
@@ -83,6 +90,7 @@
 
     <script src="assets/js/templates.js"></script>
     <script src="assets/js/friends.js"></script>
+    <script src="assets/js/user.js"></script>
     <script src="assets/js/main.js"></script>
     <script src="assets/js/api.js"></script>
 </body>

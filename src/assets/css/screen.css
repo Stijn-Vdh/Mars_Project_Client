@@ -183,9 +183,36 @@
 #account-settings ul li p {
   margin-right: 0.5rem;
 }
+#account-settings ul li input {
+  border: 0;
+  text-align: right;
+  padding-right: 0.5rem;
+  border-bottom: 1px solid gray;
+}
+#account-settings ul li input:focus {
+  outline: none;
+}
 #account-settings ul li h3 {
   flex-grow: 1;
   font-weight: 500;
+}
+#account-settings ul li div label {
+  display: block;
+  margin: 0.5rem 0;
+}
+#account-settings ul li div.hidden {
+  display: block;
+}
+#account-settings ul li div.hidden *:not(a) {
+  display: none;
+}
+#account-settings ul li div:not(.hidden) a {
+  display: block;
+  margin-top: 1rem;
+  text-align: right;
+}
+#account-settings ul li div input {
+  text-align: left;
 }
 #account-settings button {
   border: 0;
@@ -199,6 +226,9 @@
 }
 #account-settings button:focus {
   outline: none;
+}
+#account-settings:not(.active) {
+  display: none;
 }
 
 body {
@@ -218,6 +248,10 @@ a {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: "Montserrat", sans-serif;
+}
+
+.hidden {
+  display: none;
 }
 
 /*# sourceMappingURL=screen.css.map */
