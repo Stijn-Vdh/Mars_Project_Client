@@ -22,6 +22,10 @@ async function init() {
     document.querySelectorAll(".searchbar").forEach(el => loadSearchbar(el));
     friendsInit();
     userInit();
+
+    navigator.serviceWorker.register('/service-worker.js', {
+        scope: '/'
+    });
 }
 
 async function loadConfig() {
