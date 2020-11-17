@@ -1,0 +1,73 @@
+@use '../util';
+
+#settings {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: util.$background-primary;
+    width: 100%;
+    height: 100%;
+
+    header {
+        position: relative;
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        margin: 2rem 0 1rem;
+
+        button {
+            background: none;
+            border: 0;
+            font-size: 1.2rem;
+            position: absolute;
+
+            &:focus {
+                outline: none;
+            }
+
+            &.back {
+                left: 1rem;
+                top: -0.2rem;
+            }
+
+            &.achievements {
+                right: 1rem;
+                top: 0;
+            }
+        }
+
+        figure {
+            margin: 1rem 0;
+            
+            img {
+                border-radius: 50%;
+                padding: 0.2rem;
+                border: 1px solid darken(util.$background-secondary, 20%);
+            }
+
+            figcaption {
+                margin-top: 0.5rem;
+                font-size: 0.7rem;
+                text-align: center;
+            }
+        }
+    }
+
+    ul {
+        @include util.shadow;
+        margin-top: 4rem;
+
+        li {
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+
+            &:nth-child(even) {
+                background-color: util.$background-secondary;
+            }
+
+            ion-icon {
+                float: right;
+            }
+        }
+    }
+}
