@@ -54,9 +54,29 @@
             </article>
             <input type="button" id="send-package" value="Send Package">
             <h4>Shared locations</h4>
-            <input type="button" id="settings" value="Settings">
+            <button id="open-settings">Settings</button>
         </section>
     </main>
+
+    <aside id="settings">
+        <header>
+            <button class="back"><ion-icon name="chevron-back-outline"></ion-icon></button>
+            <button class="achievements"><ion-icon name="ribbon-outline"></ion-icon></button>
+            <h2>GREETING Name</h2>
+            <figure>
+                <img src="https://fakeimg.pl/100/" alt="">
+                <figcaption>no subscription</figcaption>
+            </figure>
+        </header>
+        <ul>
+            <li id="open-account-settings">Account information<ion-icon name="chevron-forward-outline"></ion-icon></li>
+            <li id="open-subscription">Subscriptions<ion-icon name="chevron-forward-outline"></ion-icon></li>
+            <li>Friends<ion-icon name="chevron-forward-outline"></ion-icon></li>
+            <li>Favourite routes<ion-icon name="chevron-forward-outline"></ion-icon></li>
+            <li>Notifications<ion-icon name="chevron-forward-outline"></ion-icon></li>
+            <li id="open-report">Report an issue<ion-icon name="chevron-forward-outline"></ion-icon></li>
+        </ul>
+    </aside>
 
     <aside id="account-settings">
         <h2>Account</h2>
@@ -113,5 +133,7 @@
     <script src="assets/js/user.js"></script>
     <script src="assets/js/main.js"></script>
     <script src="assets/js/api.js"></script>
+
+    <script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></script>
 </body>
 </html>

@@ -23,13 +23,10 @@ async function init() {
     // api = `${config.host ? config.host + '/': ''}${config.group ? config.group + '/' : ''}api/`;
     document.querySelectorAll('.close-modal').forEach(el => el.addEventListener('click', closeModal));
 
-    document.querySelector('#quick-access > header').addEventListener('touchstart', dragStart);
-    document.querySelector('#quick-access > header').addEventListener('touchmove', dragMove, {passive: true});
-    document.querySelector('#quick-access > header').addEventListener('touchend', dragEnd);
-
-    document.querySelectorAll(".searchbar > input").forEach(el => el.addEventListener('focusin', toggleFocus));
-    document.querySelectorAll(".searchbar > input").forEach(el => el.addEventListener('focusout', toggleFocus));
-    document.querySelectorAll(".searchbar > input").forEach(el => el.addEventListener('input', (e) => loadSearchbar(e.currentTarget.parentNode, e.currentTarget.value)));
+    quickAccessEvents();
+    searchBarEvents();
+    settingsEvents();
+    
     endpoints = getEndpoints();
     loadRecentTrips();
     document.querySelectorAll(".searchbar").forEach(el => loadSearchbar(el));
@@ -42,6 +39,32 @@ async function init() {
     // navigator.serviceWorker.register('/service-worker.js', {
     //     scope: '/'
     // });
+}
+
+function settingsEvents() {
+    document.querySelector('#settings .back').addEventListener('click', (e) => {
+        e.preventDefault();
+
+        document.querySelector('#settings').classList.remove('active');
+    });
+
+    document.querySelector('#open-settings').addEventListener('click', (e) => {
+        e.preventDefault();
+
+        document.querySelector('#settings').classList.add('active');
+    });
+}
+
+function searchBarEvents() {
+    document.querySelectorAll(".searchbar > input").forEach(el => el.addEventListener('focusin', toggleFocus));
+    document.querySelectorAll(".searchbar > input").forEach(el => el.addEventListener('focusout', toggleFocus));
+    document.querySelectorAll(".searchbar > input").forEach(el => el.addEventListener('input', (e) => loadSearchbar(e.currentTarget.parentNode, e.currentTarget.value)));
+}
+
+function quickAccessEvents() {
+    document.querySelector('#quick-access > header').addEventListener('touchstart', dragStart);
+    document.querySelector('#quick-access > header').addEventListener('touchmove', dragMove, {passive: true});
+    document.querySelector('#quick-access > header').addEventListener('touchend', dragEnd);
 }
 
 function closeModal(e) {
