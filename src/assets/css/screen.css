@@ -59,6 +59,8 @@
   background-color: #fbfcff;
   box-sizing: border-box;
   box-shadow: 0 0px 1.8px rgba(0, 0, 0, 0.111), 0 0px 5px rgba(0, 0, 0, 0.16), 0 0px 12.1px rgba(0, 0, 0, 0.209), 0 0px 40px rgba(0, 0, 0, 0.32);
+  transform: translateY(0);
+  will-change: transform;
 }
 #quick-access:not(.active) {
   bottom: -75vh;
