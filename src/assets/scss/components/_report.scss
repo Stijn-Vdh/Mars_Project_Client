@@ -1,24 +1,33 @@
 @use '../util';
 @use '../variables';
 
-#report-modal {
-    @include util.modal;
+#report {
+    @include util.setting-page(right);
     display: flex;
     flex-flow: column nowrap;
+    padding: 1rem;
+    box-sizing: border-box;
 
-    .close-modal {
-        position: absolute;
-        right: 0;
-        top: 0;
-        width: 2rem;
-        height: 2rem;
-        border: 0;
-        background-color: transparent;
-        font-weight: bold;
-        font-size: 1rem;
+    header {
+        position: relative;
+        padding: 8rem 0;
+        font-size: 2rem;
+        text-align: center;
 
-        &:focus {
-            outline: none;
+        .back {
+            position: absolute;
+            left: 1rem;
+            bottom: 1rem;
+            width: 2rem;
+            height: 2rem;
+            border: 0;
+            background-color: transparent;
+            font-weight: bold;
+            font-size: 1rem;
+
+            &:focus {
+                outline: none;
+            }
         }
     }
 

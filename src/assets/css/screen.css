@@ -175,35 +175,48 @@
 #account-settings {
   display: flex;
   flex-flow: column nowrap;
+  position: fixed;
+  top: 0;
+  left: 100%;
   background-color: #fbfcff;
-  box-shadow: 0 0px 1.8px rgba(0, 0, 0, 0.111), 0 0px 5px rgba(0, 0, 0, 0.16), 0 0px 12.1px rgba(0, 0, 0, 0.209), 0 0px 40px rgba(0, 0, 0, 0.32);
-  padding: 1rem;
-  position: absolute;
-  width: 80%;
-  height: 60%;
-  left: 50%;
-  top: 37%;
-  transform: translate(-50%, -50%);
-  z-index: 100;
-  border-radius: 0.5rem;
-  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s ease-in-out;
+  box-sizing: border-box;
 }
-#account-settings:not(.active) {
-  transform: scale(0.7) translate(-71%, -65%);
-  opacity: 0;
-  pointer-events: none;
+#account-settings.active {
+  transform: translateX(-100%);
+}
+#account-settings header {
+  position: relative;
+  padding: 8rem 0;
+  font-size: 2rem;
+  text-align: center;
+}
+#account-settings header .back {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  width: 2rem;
+  height: 2rem;
+  border: 0;
+  background-color: transparent;
+  font-weight: bold;
+  font-size: 1rem;
+}
+#account-settings header .back:focus {
+  outline: none;
 }
 #account-settings ul {
-  margin-top: 2rem;
-  flex-grow: 1;
+  box-shadow: 0 1px 2.2px rgba(0, 0, 0, 0.02), 0 2.3px 5.3px rgba(0, 0, 0, 0.028), 0 4.4px 10px rgba(0, 0, 0, 0.035), 0 7.8px 17.9px rgba(0, 0, 0, 0.042), 0 14.6px 33.4px rgba(0, 0, 0, 0.05), 0 35px 80px rgba(0, 0, 0, 0.07);
 }
 #account-settings ul li {
+  padding: 1rem 2rem;
+  font-size: 0.9rem;
   display: flex;
-  padding: 1rem 0;
-  border-top: 1px solid #d9dada;
 }
-#account-settings ul li:last-child {
-  border-bottom: 1px solid #d9dada;
+#account-settings ul li:nth-child(even) {
+  background-color: #eff1f4;
 }
 #account-settings ul li p {
   margin-right: 0.5rem;
@@ -239,7 +252,7 @@
 #account-settings ul li div input {
   text-align: left;
 }
-#account-settings button {
+#account-settings > button:last-of-type {
   border: 0;
   padding: 0.7rem 1rem;
   border-radius: 3rem;
@@ -249,35 +262,36 @@
   font-weight: bold;
   color: #fbfcff;
 }
-#account-settings button:focus {
+#account-settings > button:last-of-type:focus {
   outline: none;
 }
 
-#report-modal {
+#report {
+  position: fixed;
+  top: 0;
+  left: 100%;
   background-color: #fbfcff;
-  box-shadow: 0 0px 1.8px rgba(0, 0, 0, 0.111), 0 0px 5px rgba(0, 0, 0, 0.16), 0 0px 12.1px rgba(0, 0, 0, 0.209), 0 0px 40px rgba(0, 0, 0, 0.32);
-  padding: 1rem;
-  position: absolute;
-  width: 80%;
-  height: 60%;
-  left: 50%;
-  top: 37%;
-  transform: translate(-50%, -50%);
-  z-index: 100;
-  border-radius: 0.5rem;
-  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s ease-in-out;
   display: flex;
   flex-flow: column nowrap;
+  padding: 1rem;
+  box-sizing: border-box;
 }
-#report-modal:not(.active) {
-  transform: scale(0.7) translate(-71%, -65%);
-  opacity: 0;
-  pointer-events: none;
+#report.active {
+  transform: translateX(-100%);
 }
-#report-modal .close-modal {
+#report header {
+  position: relative;
+  padding: 8rem 0;
+  font-size: 2rem;
+  text-align: center;
+}
+#report header .back {
   position: absolute;
-  right: 0;
-  top: 0;
+  left: 1rem;
+  bottom: 1rem;
   width: 2rem;
   height: 2rem;
   border: 0;
@@ -285,25 +299,25 @@
   font-weight: bold;
   font-size: 1rem;
 }
-#report-modal .close-modal:focus {
+#report header .back:focus {
   outline: none;
 }
-#report-modal form {
+#report form {
   display: flex;
   flex-flow: column nowrap;
   flex-grow: 1;
 }
-#report-modal form select {
+#report form select {
   padding: 0.5rem;
   border-radius: 0.5rem;
   background-color: #eff1f4;
   border: 0;
 }
-#report-modal form select:focus {
+#report form select:focus {
   outline: none;
   border-radius: 0.5rem 0.5rem 0 0;
 }
-#report-modal form textarea {
+#report form textarea {
   height: 10rem;
   width: 100%;
   box-sizing: border-box;
@@ -314,10 +328,10 @@
   border-radius: 0.5rem;
   padding: 0.5rem;
 }
-#report-modal form textarea:focus {
+#report form textarea:focus {
   outline: none;
 }
-#report-modal form button {
+#report form button {
   border: 0;
   padding: 0.7rem 1rem;
   border-radius: 3rem;
@@ -327,25 +341,25 @@
   margin-top: 3rem;
   color: #fbfcff;
 }
-#report-modal form button:focus {
+#report form button:focus {
   outline: none;
 }
-#report-modal form label {
+#report form label {
   display: block;
   margin: 1rem 0 0.5rem;
 }
 
 #settings {
-  position: absolute;
+  position: fixed;
   top: 0;
-  left: 0;
+  left: -100%;
   background-color: #fbfcff;
   width: 100%;
   height: 100%;
-  transition: left 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
 }
-#settings:not(.active) {
-  left: -100%;
+#settings.active {
+  transform: translateX(100%);
 }
 #settings header {
   position: relative;

@@ -4,18 +4,41 @@
 #account-settings {
     display: flex;
     flex-flow: column nowrap;
-    @include util.modal;
+    @include util.setting-page(right);
+    box-sizing: border-box;
+
+    header {
+        position: relative;
+        padding: 8rem 0;
+        font-size: 2rem;
+        text-align: center;
+
+        .back {
+            position: absolute;
+            left: 1rem;
+            bottom: 1rem;
+            width: 2rem;
+            height: 2rem;
+            border: 0;
+            background-color: transparent;
+            font-weight: bold;
+            font-size: 1rem;
+
+            &:focus {
+                outline: none;
+            }
+        }
+    }
 
     ul {
-        margin-top: 2rem;
-        flex-grow: 1;
+        @include util.shadow;
         li {
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
             display: flex;
-            padding: 1rem 0;
-            border-top: 1px solid lighten(variables.$text-primary, 45%);
 
-            &:last-child {
-                border-bottom: 1px solid lighten(variables.$text-primary, 45%);
+            &:nth-child(even) {
+                background-color: util.$background-secondary;
             }
 
             p {
@@ -67,7 +90,7 @@
         }
     }
 
-    button {
+    & > button:last-of-type {
         @include util.button;
         background-color: variables.$accent-green;
         font-weight: bold;

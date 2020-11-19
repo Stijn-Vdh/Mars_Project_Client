@@ -80,6 +80,7 @@ function getEndpoints() {
     ]
 }
 
+
 function apiCall(uri) {
     const request = new Request(api + uri, {
         method: 'GET',

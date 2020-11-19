@@ -69,17 +69,20 @@
             </figure>
         </header>
         <ul>
-            <li id="open-account-settings">Account information<ion-icon name="chevron-forward-outline"></ion-icon></li>
-            <li id="open-subscription">Subscriptions<ion-icon name="chevron-forward-outline"></ion-icon></li>
+            <li data-open-setting="account-settings">Account information<ion-icon name="chevron-forward-outline"></ion-icon></li>
+            <li>Subscriptions<ion-icon name="chevron-forward-outline"></ion-icon></li>
             <li>Friends<ion-icon name="chevron-forward-outline"></ion-icon></li>
-            <li>Favourite routes<ion-icon name="chevron-forward-outline"></ion-icon></li>
+            <li>Quick access<ion-icon name="chevron-forward-outline"></ion-icon></li>
             <li>Notifications<ion-icon name="chevron-forward-outline"></ion-icon></li>
-            <li id="open-report">Report an issue<ion-icon name="chevron-forward-outline"></ion-icon></li>
+            <li data-open-setting="report">Report an issue<ion-icon name="chevron-forward-outline"></ion-icon></li>
         </ul>
     </aside>
 
     <aside id="account-settings">
-        <h2>Account</h2>
+        <header>
+            <h2>Account</h2>
+            <button class="back"><ion-icon name="chevron-back-outline"></ion-icon></button>
+        </header>
         <ul>
             <li id="name-settings">
                 <h3>Name</h3>
@@ -102,17 +105,19 @@
                 <p></p>
                 <a href="#" id="edit-subscription">Edit</a>
             </li>
-            <li id="business-settings">
+            <!-- <li id="business-settings">
                 <h3>Business user</h3>
                 <input type="checkbox" id="edit-business-user">
-            </li>
+            </li> -->
         </ul>
         <button id="update-account">Update account settings</button>
     </aside>
 
-    <aside id="report-modal">
-        <h2>Report an issue</h2>
-        <button class="close-modal">x</button>
+    <aside id="report">
+        <header>
+            <h2>Report an issue</h2>
+            <button class="back"><ion-icon name="chevron-back-outline"></ion-icon></button>
+        </header>
         <form action="#" method="post">
             <label for="select-type">Category</label>
             <select name="select-type" id="select-type">
@@ -129,8 +134,12 @@
     </aside>
 
     <script src="assets/js/templates.js"></script>
-    <script src="assets/js/friends.js"></script>
-    <script src="assets/js/user.js"></script>
+    <script src="assets/js/components/navigation.js"></script>
+    <script src="assets/js/components/friends.js"></script>
+    <script src="assets/js/components/user.js"></script>
+    <script src="assets/js/components/quick-access.js"></script>
+    <script src="assets/js/components/searchbar.js"></script>
+    <script src="assets/js/components/settings.js"></script>
     <script src="assets/js/main.js"></script>
     <script src="assets/js/api.js"></script>
 
