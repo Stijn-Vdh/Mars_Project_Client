@@ -63,7 +63,7 @@ function searchBarEvents() {
 
 function quickAccessEvents() {
     document.querySelector('#quick-access > header').addEventListener('touchstart', dragStart);
-    document.querySelector('#quick-access > header').addEventListener('touchmove', dragMove, {passive: true});
+    document.querySelector('#quick-access > header').addEventListener('touchmove', dragMove);
     document.querySelector('#quick-access > header').addEventListener('touchend', dragEnd);
 }
 
@@ -96,18 +96,19 @@ function dragStart(e) {
 }
 
 function dragMove(e) {
+    e.preventDefault();
     dragInfo.initialized = true;
     let curPos = e.clientY || e.touches[0].clientY;
-    document.querySelector('#quick-access').style.top = `${dragInfo.prevPos - (dragInfo.prevPos - curPos)}px`;
-    dragInfo.prevPos = document.querySelector('#quick-access').offsetTop;
+    document.querySelector('#quick-access').style.transform = `translateY(${-(dragInfo.startPos - curPos)}px)`;
+    dragInfo.prevPos = dragInfo.prevPos - (dragInfo.prevPos - curPos);
 }
 
 function dragEnd(e) {
-    document.querySelector('#quick-access').style.transition = 'top 0.3s ease-in-out';
+    document.querySelector('#quick-access').style.transition = 'transform 0.3s ease-in-out';
     if (dragInfo.prevPos < dragInfo.startPos * .7 || !dragInfo.initialized) {
-        document.querySelector('#quick-access').style.top = '0px';
+        document.querySelector('#quick-access').style.transform = `translateY(${0 - dragInfo.startPos}px)`;
     } else {
-        document.querySelector('#quick-access').style.top = `${dragInfo.startPos}px`;
+        document.querySelector('#quick-access').style.transform = `translateY(0)`;
     }
     dragInfo.initialized = false;
     setTimeout(() => {
