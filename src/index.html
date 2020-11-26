@@ -133,8 +133,9 @@
         </form>
     </aside>
 
-    <aside id="pod-order-view" class="active">
-        <form id="select-travel-location">
+    <aside id="pod-order-view">
+        <button class="back"><ion-icon name="close-outline"></ion-icon></button>
+        <form id="select-travel-location" action="#" method="post">
             <label for="select-location">Travel to</label>
             <input type="text" disabled id="select-location" value="Location">
 
@@ -149,7 +150,7 @@
                 </div>
             </div>
 
-            <div class="btn-group">
+            <div class="btn-group first">
                 <input type="checkbox" id="bank" name="paymentMethod" value="bank">
                 <label for="bank">Pay with martian bank</label>
             </div>
@@ -157,6 +158,8 @@
                 <input type="checkbox" id="reward-points" name="paymentMethod" value="rewardPoints">
                 <label for="reward-points">Pay with reward points</label>
             </div>
+
+            <h2 id="pod-pricing">You current total is <span>M2</span></h2>
 
             <input type="submit" value="Order pod">
         </form>

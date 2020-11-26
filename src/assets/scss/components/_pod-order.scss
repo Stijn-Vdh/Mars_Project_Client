@@ -1,49 +1,92 @@
 @use '../util';
 
 #pod-order-view {
-    @include util.side-view(right);
-    padding: 3rem 2rem;
+  @include util.side-view(right);
+  padding: 3rem 2rem;
 
-    form {
-        display: flex;
-        flex-flow: column nowrap;
+  .back {
+    position: absolute;
+    right: 2rem;
+    top: 3rem;
+    width: 2rem;
+    height: 2rem;
+    border: 0;
+    background-color: transparent;
+    font-weight: bold;
+    font-size: 1.5rem;
 
-        label {
-            font-family: "Montserrat", sans-serif;
-        }
-
-        input:disabled {
-            background-color: transparent;
-            border: 0;
-            color: util.$text-primary;
-            font-weight: bold;
-            font-size: 1.8rem;
-            margin: 0.5rem 0 1.5rem;
-        }
-
-        #pod-select {
-            border-radius: 1rem;
-            @include util.shadow;
-            margin-top: 0.5rem;
-            overflow: hidden;
-            display: flex;
-            flex-flow: column nowrap;
-
-            div {
-                padding: 1rem;
-                
-                &:first-of-type {
-                    border-bottom: 1px solid util.$background-secondary;
-                }
-
-                &.active {
-                    background-color: util.$accent-green;
-                }
-            }
-        }
-
-        h2 {
-            font-weight: normal;
-        }
+    &:focus {
+        outline: none;
     }
+  }
+
+  form {
+    display: flex;
+    flex-flow: column nowrap;
+    height: 100%;
+
+    label {
+      font-family: "Montserrat", sans-serif;
+    }
+
+    input:disabled {
+      background-color: transparent;
+      border: 0;
+      color: util.$text-primary;
+      font-weight: bold;
+      font-size: 1.8rem;
+      margin: 0.5rem 0 1.5rem;
+    }
+
+    #pod-select {
+      border-radius: 1rem;
+      @include util.shadow;
+      margin-top: 0.5rem;
+      overflow: hidden;
+      display: flex;
+      flex-flow: column nowrap;
+
+      div {
+        padding: 1.5rem;
+
+        &:first-of-type {
+          border-bottom: 1px solid util.$background-secondary;
+        }
+
+        &.active {
+          background-color: util.$accent-green;
+        }
+      }
+    }
+
+    .btn-group {
+      padding: 0.5rem 0;
+
+      &.first {
+          margin-top: 5rem;
+      }
+    }
+
+    #pod-pricing {
+      font-size: 1.1rem;
+      margin: auto 0 0;
+
+      span {
+        font-size: 1.3rem;
+        font-weight: bold;
+        float: right;
+      }
+    }
+
+    input[type="submit"] {
+      margin-top: 5rem;
+      @include util.button;
+      padding: 1.5rem;
+      background-color: util.$accent-green;
+    }
+
+    h2 {
+      font-weight: normal;
+    }
+  }
 }
