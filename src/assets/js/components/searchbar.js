@@ -22,8 +22,6 @@ function toggleFocus(e) {
 function loadSearchbar(sb, filter = "") {
     let endpointsToShow = [...endpoints];
 
-    console.log(filter);
-
     if (filter !== "") {
         endpointsToShow = endpointsToShow.filter(endpoint => endpoint.available && endpoint.name.toLowerCase().includes(filter.toLowerCase()));
     }
@@ -31,6 +29,6 @@ function loadSearchbar(sb, filter = "") {
 
     sb.querySelector('ul').innerHTML = "";
     endpointsToShow.forEach(endpoint => {
-        sb.querySelector('ul').innerHTML += `<li id="sb-endpoint-${endpoint.id}">${endpoint.name}</li>`;
+        sb.querySelector('ul').innerHTML += `<li data-order-pod="${endpoint.id}" id="sb-endpoint-${endpoint.id}">${endpoint.name}</li>`;
     });
 }

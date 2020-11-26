@@ -2,6 +2,7 @@
 const pageHistory = [];
 const pages = {};
 const dynamicElements = {};
+let pressedElement;
 let currentPage;
 
 function initNavigation() {
@@ -14,7 +15,7 @@ function checkForDynamicDataEvents(e) {
         const target = e.target.closest(el);
         if (target !== null) {
             e.preventDefault();
-            goTo(dynamicElements[el]);
+            goTo(dynamicElements[el], target);
         }
     });
 }
@@ -47,9 +48,16 @@ function goTo(page) {
 }
 
 class Page {
-    constructor(selector) {
+    element;
+    selector;
+    onOpen;
+    onLeave;
+
+    constructor(selector, onOpen=null, onLeave=null) {
         this.element = document.querySelector(selector);
         this.selector = selector;
+        this.onOpen = onOpen;
+        this.onLeave = onLeave;
     }
 
     goto() {
