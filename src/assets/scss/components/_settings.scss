@@ -1,17 +1,7 @@
 @use '../util';
 
 #settings {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: util.$background-primary;
-    width: 100%;
-    height: 100%;
-    transition: left 0.3s ease-in-out;
-
-    &:not(.active) {
-        left: -100%;
-    }
+    @include util.setting-page(left);
 
     header {
         position: relative;

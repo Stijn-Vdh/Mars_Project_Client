@@ -11,25 +11,25 @@ let dragInfo = {
     startPos: null,
     prevPos: null
 };
-const h1Element = document.querySelector("h1");
 
 document.addEventListener("DOMContentLoaded", init);
 
 async function init() {
     setViewPortStatic();
+
+    addPages();
+    initNavigation();
     // Temporary hack to allow local testing of the web client and server.
     // document.cookie = 'Authorization=Basic cHJvamVjdG1lZGV3ZXJrZXI6dmVya2VlcmQ=';
     // config = await loadConfig();
     // api = `${config.host ? config.host + '/': ''}${config.group ? config.group + '/' : ''}api/`;
-    document.querySelectorAll('.close-modal').forEach(el => el.addEventListener('click', closeModal));
-
-    quickAccessEvents();
-    searchBarEvents();
-    settingsEvents();
+    endpoints = getEndpoints();
+    initQuickAccess();
+    initSearchbar();
+    // initSettings();
     
     endpoints = getEndpoints();
     loadRecentTrips();
-    document.querySelectorAll(".searchbar").forEach(el => loadSearchbar(el));
     friendsInit();
     userInit();
 
@@ -41,36 +41,17 @@ async function init() {
     // });
 }
 
-function settingsEvents() {
-    document.querySelector('#settings .back').addEventListener('click', (e) => {
-        e.preventDefault();
-
-        document.querySelector('#settings').classList.remove('active');
-    });
-
-    document.querySelector('#open-settings').addEventListener('click', (e) => {
-        e.preventDefault();
-
-        document.querySelector('#settings').classList.add('active');
-    });
-}
-
-function searchBarEvents() {
-    document.querySelectorAll(".searchbar > input").forEach(el => el.addEventListener('focusin', toggleFocus));
-    document.querySelectorAll(".searchbar > input").forEach(el => el.addEventListener('focusout', toggleFocus));
-    document.querySelectorAll(".searchbar > input").forEach(el => el.addEventListener('input', (e) => loadSearchbar(e.currentTarget.parentNode, e.currentTarget.value)));
-}
-
-function quickAccessEvents() {
-    document.querySelector('#quick-access > header').addEventListener('touchstart', dragStart);
-    document.querySelector('#quick-access > header').addEventListener('touchmove', dragMove);
-    document.querySelector('#quick-access > header').addEventListener('touchend', dragEnd);
+function addPages() {
+    addPage('#settings', ['#open-settings']);
+    addPage('#quick-access');
+    addPage('#account-settings', ['li[data-open-setting="account-settings"]']);
+    addPage('#report', ['li[data-open-setting="report"]']);
 }
 
 function closeModal(e) {
     e.preventDefault();
 
-    e.currentTarget.parentNode.classList.remove('active');
+    e.currentTarget.parentNode.parentNode.classList.remove('active');
 }
 
 function setViewPortStatic() {
@@ -138,33 +119,5 @@ function loadRecentTrips() {
     tripContainer.innerHTML = "";
     dummyData.forEach(route => {
         tripContainer.innerHTML += recentTrip(route);
-    })
-}
-
-function toggleFocus(e) {
-    let wait = 0;
-    if (e.target.parentNode.classList.contains("active")) {
-        e.target.parentNode.querySelector('ul').style.height = '0';
-        wait = 300;
-    }
-    setTimeout(() => {
-        e.target.parentNode.classList.toggle('active');
-        e.target.parentNode.querySelector('ul').style.height = '';
-    }, wait)
-}
-
-function loadSearchbar(sb, filter = "") {
-    let endpointsToShow = [...endpoints];
-
-    console.log(filter);
-
-    if (filter !== "") {
-        endpointsToShow = endpointsToShow.filter(endpoint => endpoint.available && endpoint.name.toLowerCase().includes(filter.toLowerCase()));
-    }
-    endpointsToShow = endpointsToShow.slice(0, 6);
-
-    sb.querySelector('ul').innerHTML = "";
-    endpointsToShow.forEach(endpoint => {
-        sb.querySelector('ul').innerHTML += `<li id="sb-endpoint-${endpoint.id}">${endpoint.name}</li>`;
     })
 }
