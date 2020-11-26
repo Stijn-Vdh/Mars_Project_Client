@@ -1,7 +1,7 @@
 @use '../util';
 
 #settings {
-    @include util.setting-page(left);
+    @include util.side-view(left);
 
     header {
         position: relative;

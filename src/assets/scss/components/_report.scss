@@ -2,7 +2,7 @@
 @use '../variables';
 
 #report {
-    @include util.setting-page(right);
+    @include util.side-view(right);
     display: flex;
     flex-flow: column nowrap;
     padding: 1rem;

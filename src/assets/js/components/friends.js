@@ -12,7 +12,7 @@ function loadFriends() {
     document.querySelector('#friendlist > ul').innerHTML = `
     <li>
         <button class="add">
-            +
+            <ion-icon name="add-outline"></ion-icon>
         </button>
     </li>
     `;
