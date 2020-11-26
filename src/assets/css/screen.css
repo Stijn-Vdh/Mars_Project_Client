@@ -470,6 +470,8 @@
 }
 #pod-order-view form #pod-select div {
   padding: 1.5rem;
+  background-color: #fbfcff;
+  transition: background-color 0.3s ease-in-out;
 }
 #pod-order-view form #pod-select div:first-of-type {
   border-bottom: 1px solid #eff1f4;

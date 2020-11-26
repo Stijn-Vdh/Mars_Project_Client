@@ -32,6 +32,7 @@ async function init() {
     loadRecentTrips();
     friendsInit();
     userInit();
+    podOrderInit();
 
     navigator.serviceWorker.register('/mars-15/service-worker.js', {
         scope: '/mars-15/'

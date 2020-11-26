@@ -48,6 +48,8 @@
 
       div {
         padding: 1.5rem;
+        background-color: util.$background-primary;
+        transition: background-color 0.3s ease-in-out;
 
         &:first-of-type {
           border-bottom: 1px solid util.$background-secondary;
