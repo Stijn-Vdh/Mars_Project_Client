@@ -2,6 +2,7 @@
 @use '../util';
 
 #quick-access {
+    z-index: 2;
     position: absolute;
     width: 100%;
     height: 100vh;
