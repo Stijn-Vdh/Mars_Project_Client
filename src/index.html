@@ -47,7 +47,7 @@
                 <ul>
                     <li>
                         <button class="add">
-                            +
+                            <ion-icon name="add-outline"></ion-icon>
                         </button>
                     </li>
                 </ul>
@@ -131,6 +131,44 @@
             <textarea name="reason" id="reason"></textarea>
             <button>Send report</button>
         </form>
+    </aside>
+
+    <aside id="pod-order-view" class="active">
+        <form id="select-travel-location">
+            <label for="select-location">Travel to</label>
+            <input type="text" disabled id="select-location" value="Location">
+
+            <h2>Pod type</h2>
+            <div id="pod-select">
+                <input type="hidden" id="selected-pod" value="normal-pod">
+                <div id="normal-pod" class="active">
+                    <h2>Normal pod</h2>
+                </div>
+                <div id="luxury-pod">
+                    <h2>Luxury pod</h2>
+                </div>
+            </div>
+
+            <div class="btn-group">
+                <input type="checkbox" id="bank" name="paymentMethod" value="bank">
+                <label for="bank">Pay with martian bank</label>
+            </div>
+            <div class="btn-group">
+                <input type="checkbox" id="reward-points" name="paymentMethod" value="rewardPoints">
+                <label for="reward-points">Pay with reward points</label>
+            </div>
+
+            <input type="submit" value="Order pod">
+        </form>
+    </aside>
+
+    <aside id="process-payment">
+        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+            <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+            <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+            <path class="checkmark__error" fill="none" d="M17.244224,17 L35.4279902,35.1837662"></path>
+            <path class="checkmark__error" fill="none" d="M35.755776,17 L17.244224,35.8443492"></path>
+        </svg>
     </aside>
 
     <script src="assets/js/templates.js"></script>

@@ -1,0 +1,49 @@
+@use '../util';
+
+#pod-order-view {
+    @include util.side-view(right);
+    padding: 3rem 2rem;
+
+    form {
+        display: flex;
+        flex-flow: column nowrap;
+
+        label {
+            font-family: "Montserrat", sans-serif;
+        }
+
+        input:disabled {
+            background-color: transparent;
+            border: 0;
+            color: util.$text-primary;
+            font-weight: bold;
+            font-size: 1.8rem;
+            margin: 0.5rem 0 1.5rem;
+        }
+
+        #pod-select {
+            border-radius: 1rem;
+            @include util.shadow;
+            margin-top: 0.5rem;
+            overflow: hidden;
+            display: flex;
+            flex-flow: column nowrap;
+
+            div {
+                padding: 1rem;
+                
+                &:first-of-type {
+                    border-bottom: 1px solid util.$background-secondary;
+                }
+
+                &.active {
+                    background-color: util.$accent-green;
+                }
+            }
+        }
+
+        h2 {
+            font-weight: normal;
+        }
+    }
+}

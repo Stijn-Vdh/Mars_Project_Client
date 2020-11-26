@@ -22,7 +22,7 @@
     }
 }
 
-@mixin setting-page($position: left) {
+@mixin side-view($position: left) {
     $positionWhenActive: -100%;
     @if ($position == left) {
         $position: -100%;
@@ -38,6 +38,7 @@
     background-color: $background-primary;
     width: 100%;
     height: 100%;
+    box-sizing: border-box;
     
     transition: transform 0.3s ease-in-out;
 

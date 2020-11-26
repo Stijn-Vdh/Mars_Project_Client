@@ -4,7 +4,7 @@
 #account-settings {
     display: flex;
     flex-flow: column nowrap;
-    @include util.setting-page(right);
+    @include util.side-view(right);
     box-sizing: border-box;
 
     header {
