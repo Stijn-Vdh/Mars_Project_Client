@@ -1,4 +1,4 @@
-@import '../variables';
+@use '../util';
 
 .searchbar {
     position: absolute;
@@ -6,6 +6,7 @@
     top: 3rem;
     left: 50%;
     transform: translateX(-50%);
+    background-color: util.$background-primary;
     
     padding: 0.7rem 1rem;
     border-radius: 1rem;
@@ -38,7 +39,7 @@
             font-size: .9rem;
 
             &:nth-child(even) {
-                background-color: $background-secondary;
+                background-color: util.$background-secondary;
             }
         }
     }
