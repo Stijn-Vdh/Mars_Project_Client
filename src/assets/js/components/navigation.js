@@ -1,14 +1,29 @@
 "use strict";
 const pageHistory = [];
 const pages = {};
+const dynamicElements = {};
 let currentPage;
 
 function initNavigation() {
     document.querySelectorAll('.back').forEach(el => el.addEventListener('click', goBack));
+    document.querySelector('body').addEventListener('click', checkForDynamicDataEvents);
 }
 
-function addPage(selector, activators=[]) {
+function checkForDynamicDataEvents(e) {
+    Object.keys(dynamicElements).forEach(el => {
+        const target = e.target.closest(el);
+        if (target !== null) {
+            e.preventDefault();
+            goTo(dynamicElements[el]);
+        }
+    });
+}
+
+function addPage(selector, activators=[], dynamicData=false) {
     pages[selector] = new Page(selector);
+    if (dynamicData) {
+        activators.forEach(activator => dynamicElements[activator] = selector);
+    }
     activators.forEach(activator => {
         document.querySelectorAll(activator).forEach(el => el.addEventListener('click', (e) => {
             e.preventDefault();
