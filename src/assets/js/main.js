@@ -47,7 +47,7 @@ function addPages() {
     addPage('#quick-access');
     addPage('#account-settings', ['li[data-open-setting="account-settings"]']);
     addPage('#report', ['li[data-open-setting="report"]']);
-    addPage('#pod-order-view', ['*[data-order-pod]']);
+    addPage('#pod-order-view', ['*[data-order-pod]'], true);
     addPage('#process-payment', ['*[data-order-pod]']);
 }
 

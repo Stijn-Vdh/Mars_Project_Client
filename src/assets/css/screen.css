@@ -177,6 +177,7 @@
 #account-settings {
   display: flex;
   flex-flow: column nowrap;
+  z-index: 10;
   position: fixed;
   top: 0;
   left: 100%;
@@ -270,6 +271,7 @@
 }
 
 #report {
+  z-index: 10;
   position: fixed;
   top: 0;
   left: 100%;
@@ -354,6 +356,7 @@
 }
 
 #settings {
+  z-index: 10;
   position: fixed;
   top: 0;
   left: -100%;
@@ -419,6 +422,7 @@
 }
 
 #pod-order-view {
+  z-index: 10;
   position: fixed;
   top: 0;
   left: 100%;

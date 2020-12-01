@@ -1,14 +1,30 @@
 "use strict";
 const pageHistory = [];
 const pages = {};
+const dynamicElements = {};
+let pressedElement;
 let currentPage;
 
 function initNavigation() {
     document.querySelectorAll('.back').forEach(el => el.addEventListener('click', goBack));
+    document.querySelector('body').addEventListener('click', checkForDynamicDataEvents);
 }
 
-function addPage(selector, activators=[]) {
+function checkForDynamicDataEvents(e) {
+    Object.keys(dynamicElements).forEach(el => {
+        const target = e.target.closest(el);
+        if (target !== null) {
+            e.preventDefault();
+            goTo(dynamicElements[el], target);
+        }
+    });
+}
+
+function addPage(selector, activators=[], dynamicData=false) {
     pages[selector] = new Page(selector);
+    if (dynamicData) {
+        activators.forEach(activator => dynamicElements[activator] = selector);
+    }
     activators.forEach(activator => {
         document.querySelectorAll(activator).forEach(el => el.addEventListener('click', (e) => {
             e.preventDefault();
@@ -32,9 +48,16 @@ function goTo(page) {
 }
 
 class Page {
-    constructor(selector) {
+    element;
+    selector;
+    onOpen;
+    onLeave;
+
+    constructor(selector, onOpen=null, onLeave=null) {
         this.element = document.querySelector(selector);
         this.selector = selector;
+        this.onOpen = onOpen;
+        this.onLeave = onLeave;
     }
 
     goto() {
