@@ -13,6 +13,7 @@ function initNavigation() {
 function checkForDynamicDataEvents(e) {
     Object.keys(dynamicElements).forEach(el => {
         const target = e.target.closest(el);
+        console.log(e.target);
         if (target !== null) {
             e.preventDefault();
             goTo(dynamicElements[el], target);

@@ -10,12 +10,14 @@ function initSearchbar() {
 function toggleFocus(e) {
     let wait = 0;
     if (e.target.parentNode.classList.contains("active")) {
-        e.target.parentNode.querySelector('ul').style.height = '0';
+        setTimeout(() => {
+            e.target.parentNode.querySelector('ul').style.maxHeight = '0';
+        }, 100);
         wait = 300;
     }
     setTimeout(() => {
         e.target.parentNode.classList.toggle('active');
-        e.target.parentNode.querySelector('ul').style.height = '';
+        e.target.parentNode.querySelector('ul').style.maxHeight = '';
     }, wait);
 }
 
