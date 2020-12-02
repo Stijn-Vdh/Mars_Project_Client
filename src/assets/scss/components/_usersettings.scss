@@ -2,33 +2,12 @@
 @use "../util";
 
 #account-settings {
+    @include util.side-view(right);
+    @include util.default-side-view-header;
     display: flex;
     flex-flow: column nowrap;
-    @include util.side-view(right);
     box-sizing: border-box;
-
-    header {
-        position: relative;
-        padding: 8rem 0;
-        font-size: 2rem;
-        text-align: center;
-
-        .back {
-            position: absolute;
-            left: 1rem;
-            bottom: 1rem;
-            width: 2rem;
-            height: 2rem;
-            border: 0;
-            background-color: transparent;
-            font-weight: bold;
-            font-size: 1rem;
-
-            &:focus {
-                outline: none;
-            }
-        }
-    }
+    
 
     ul {
         @include util.shadow;

@@ -1,5 +1,7 @@
 "use strict";
 
+const api = 'https://project-ii.ti.howest.be/mars-15/api/';
+
 function getFriends() {
     return [
         {
@@ -15,10 +17,70 @@ function getFriends() {
     ];
 }
 
+/**
+ * Log the user in
+ * 
+ * @param {SubmitEvent} e             EventListener event
+ * 
+ * @return {Promise}            request promise 
+ */
+function login(e) {
+    e.preventDefault();
+    
+    const body = {
+        name: e.target.querySelector('#si-name').value,
+        password: e.target.querySelector('#si-password').value
+    };
+
+    apiCall('login', 'POST', false, body)
+        .then((response) => {
+            goTo('main');
+            if (response.status === 402) {
+                warn(response.message);
+            }
+        })
+}
+
+function orderPod(e) {
+    e.preventDefault();
+
+    const body = {
+        from: 1,
+        destination: e.target.querySelector('#select-location').value,
+        podType: e.target.querySelector('#selected-pod').value
+    }
+
+    apiCall('travel', 'POST', true, body)
+        .then(response => {
+            goTo('#process-payment');
+            if (response.status !== 200) {
+                setTimeout(() => {
+                    document.querySelector('#process-payment .checkmark').classList.add('active', 'error');
+                    document.querySelector('#payment-response').innerHTML = response.message;
+                    setTimeout(() => {
+                        goBack();
+                        document.querySelector('#process-payment .checkmark').classList.remove('active', 'error')
+                        document.querySelector('#payment-response').innerHTML = '';
+                    }, 3000);
+                }, 1000);
+            }
+        });
+}
+
+/**
+ * Test the api
+ * 
+ * @return {Promise}            request promise
+ */
 function getMessage() {
     return apiCall("message");
 }
 
+/**
+ * Get the pod endpoints from the server
+ * 
+ * @return {Promise}            request promise containing endpoint array.
+ */
 function getEndpoints() {
     return [
         {
@@ -80,12 +142,24 @@ function getEndpoints() {
     ]
 }
 
+/** Call the api
 
-function apiCall(uri) {
+* @param {string} url             The request url
+* @param {string} method          The request method
+* @param {boolean} authenticated  If we need to send authentication header
+
+* @return {Promise}               The request promise
+*/
+function apiCall(uri, method='GET', authenticated, body) {
     const request = new Request(api + uri, {
-        method: 'GET',
-        credentials: 'include'
+        method: method,
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: authenticated ? `Bearer ${localStorage.getItem('token')}`: undefined
+        },
+        body: JSON.stringify(body)
     });
+
     return fetch(request)
         .then(response => response.json());
 }

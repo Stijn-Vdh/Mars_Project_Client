@@ -3,33 +3,11 @@
 
 #report {
     @include util.side-view(right);
+    @include util.default-side-view-header;
     display: flex;
     flex-flow: column nowrap;
     padding: 1rem;
     box-sizing: border-box;
-
-    header {
-        position: relative;
-        padding: 8rem 0;
-        font-size: 2rem;
-        text-align: center;
-
-        .back {
-            position: absolute;
-            left: 1rem;
-            bottom: 1rem;
-            width: 2rem;
-            height: 2rem;
-            border: 0;
-            background-color: transparent;
-            font-weight: bold;
-            font-size: 1rem;
-
-            &:focus {
-                outline: none;
-            }
-        }
-    }
 
     form {
         display: flex;

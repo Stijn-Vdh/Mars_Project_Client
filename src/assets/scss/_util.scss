@@ -14,6 +14,7 @@
     z-index: 100;
     border-radius: 0.5rem;
     transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    will-change: transform;
 
     &:not(.active) {
         transform: scale(0.7) translate(-71%, -65%);
@@ -43,9 +44,37 @@
     box-sizing: border-box;
     
     transition: transform 0.3s ease-in-out;
+    will-change: transform;
 
     &.active {
         transform: translateX($positionWhenActive);
+    }
+}
+
+@mixin default-side-view-header {
+    header {
+        position: relative;
+        padding: 8rem 0;
+        font-size: 2rem;
+        text-align: center;
+
+        .back {
+            position: absolute;
+            left: 1rem;
+            bottom: 1rem;
+            width: 2rem;
+            height: 2rem;
+            border: 0;
+            background-color: transparent;
+            font-weight: bold;
+            font-size: 1rem;
+
+            &:focus {
+                outline: none;
+            }
+        }
+
+        @content;
     }
 }
 

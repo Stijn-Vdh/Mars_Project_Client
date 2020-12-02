@@ -33,8 +33,8 @@ function addPage(selector, activators=[], dynamicData=false) {
     })
 }
 
-function goBack(e) {
-    e.preventDefault();
+function goBack(e=null) {
+    if (e !== null) e.preventDefault();
     if (pageHistory.splice(pageHistory.length - 1, 1)[0].leave()) {
         pageHistory[pageHistory.length - 1].goto();
     }

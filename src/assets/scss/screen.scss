@@ -1,12 +1,13 @@
-@use "./components/quick-access";
-@use "./components/searchbar";
+@use "./components/authentication";
 @use "./components/friendlist";
-@use "./components/usersettings";
-@use "./components/report";
-@use "./components/settings";
-@use "./components/pod-order";
-@use "./components/payment-process";
 @use "./components/notification";
+@use "./components/payment-process";
+@use "./components/pod-order";
+@use "./components/quick-access";
+@use "./components/report";
+@use "./components/searchbar";
+@use "./components/settings";
+@use "./components/usersettings";
 
 @import "./variables";
 
