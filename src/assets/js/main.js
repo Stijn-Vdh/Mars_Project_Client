@@ -1,7 +1,6 @@
 "use strict";
 
 let config;
-let api;
 let endpoints;
 let dragStarted = false;
 let dragInitialized = false;
@@ -26,13 +25,19 @@ async function init() {
     endpoints = getEndpoints();
     initQuickAccess();
     initSearchbar();
+    initLogin();
     // initSettings();
     
     endpoints = getEndpoints();
     loadRecentTrips();
     friendsInit();
     userInit();
+
     podOrderInit();
+
+    if (localStorage.getItem('token') === null) {
+        goTo('#authentication');
+    }
 
     navigator.serviceWorker.register('/mars-15/service-worker.js', {
         scope: '/mars-15/'
@@ -43,12 +48,16 @@ async function init() {
 }
 
 function addPages() {
+    addPage('main', []);
     addPage('#settings', ['#open-settings']);
     addPage('#quick-access');
     addPage('#account-settings', ['li[data-open-setting="account-settings"]']);
     addPage('#report', ['li[data-open-setting="report"]']);
     addPage('#pod-order-view', ['*[data-order-pod]'], true);
     addPage('#process-payment', ['*[data-order-pod]']);
+    addPage('#authentication', []);
+    addPage('#signin', ['#open-signin']);
+    addPage('#signup', ['#open-signup']);
 }
 
 function closeModal(e) {

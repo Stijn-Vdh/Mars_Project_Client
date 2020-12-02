@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" translate="no">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -57,6 +57,61 @@
             <button id="open-settings">Settings</button>
         </section>
     </main>
+
+    <aside id="authentication">
+        <header>
+            <div class="globe">
+                <img src="./assets/images/tmp-icon.png" alt="MTTS">
+            </div>
+        </header>
+        <div class="content">
+            <button id="open-signin">Sign in</button>
+            <p>Or</p>
+            <button id="open-signup">Sign up</button>
+        </div>
+    </aside>
+
+    <aside id="signin">
+        <header>
+            <h2>Sign in</h2>
+            <button class="back"><ion-icon name="chevron-back-outline"></ion-icon></button>
+        </header>
+        <form action="signin" method="post">
+            <fieldset>
+                <label for="si-name"><ion-icon name="person-circle-outline"></ion-icon></label>
+                <input type="text" name="si-name" id="si-name" placeholder="Jane" required>
+            </fieldset>
+            <fieldset>
+                <label for="si-password"><ion-icon name="lock-closed-outline"></ion-icon></label>
+                <input type="password" name="si-password" id="si-password" placeholder="••••••••" required>
+            </fieldset>
+            
+            <button type="submit">Sign in</button>
+        </form>
+    </aside>
+
+    <aside id="signup">
+        <header>
+            <h2>Sign up</h2>
+            <button class="back"><ion-icon name="chevron-back-outline"></ion-icon></button>
+        </header>
+        <form action="signup" method="post">
+            <fieldset>
+                <label for="su-name"><ion-icon name="person-circle-outline"></ion-icon></label>
+                <input type="text" name="su-name" id="su-name" placeholder="Jane" required>
+            </fieldset>
+            <fieldset>
+                <label for="su-address"><ion-icon name="home-outline"></ion-icon></label>
+                <input type="text" name="su-address" id="su-address" placeholder="House 15" required>
+            </fieldset>
+            <fieldset>
+                <label for="su-password"><ion-icon name="lock-closed-outline"></ion-icon></label>
+                <input type="password" name="su-password" id="su-password" placeholder="••••••••" required>
+            </fieldset>
+            
+            <button type="submit">Sign up</button>
+        </form>
+    </aside>
 
     <aside id="settings">
         <header>
@@ -141,8 +196,8 @@
 
             <h2>Pod type</h2>
             <div id="pod-select">
-                <input type="hidden" id="selected-pod" value="normal-pod">
-                <div id="normal-pod" class="active">
+                <input type="hidden" id="selected-pod" value="standard">
+                <div id="standard-pod" class="active">
                     <h2>Normal pod</h2>
                 </div>
                 <div id="luxury-pod">
@@ -161,17 +216,21 @@
 
             <h2 id="pod-pricing">You current total is <span>M2</span></h2>
 
-            <input type="submit" value="Order pod">
+            <input type="submit" value="Order pod" id="order-pod">
         </form>
     </aside>
 
     <aside id="process-payment">
-        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+        <header>
+            <h2>Checking payment</h2>
+        </header>
+        <svg class="checkmark loading" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
             <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
             <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
             <path class="checkmark__error" fill="none" d="M17.244224,17 L35.4279902,35.1837662"></path>
             <path class="checkmark__error" fill="none" d="M35.755776,17 L17.244224,35.8443492"></path>
         </svg>
+        <span id="payment-response"></span>
     </aside>
 
     <aside id="notification">
@@ -179,6 +238,8 @@
     </aside>
 
     <script src="assets/js/templates.js"></script>
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/components/login.js"></script>
     <script src="assets/js/components/notification.js"></script>
     <script src="assets/js/components/navigation.js"></script>
     <script src="assets/js/components/pod-order.js"></script>
@@ -188,7 +249,6 @@
     <script src="assets/js/components/searchbar.js"></script>
     <script src="assets/js/components/settings.js"></script>
     <script src="assets/js/main.js"></script>
-    <script src="assets/js/api.js"></script>
 
     <script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></script>
 </body>
