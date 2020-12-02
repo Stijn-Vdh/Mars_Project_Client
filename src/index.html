@@ -79,11 +79,11 @@
         <form action="signin" method="post">
             <fieldset>
                 <label for="si-name"><ion-icon name="person-circle-outline"></ion-icon></label>
-                <input type="text" name="si-name" id="si-name" placeholder="Jane">
+                <input type="text" name="si-name" id="si-name" placeholder="Jane" required>
             </fieldset>
             <fieldset>
                 <label for="si-password"><ion-icon name="lock-closed-outline"></ion-icon></label>
-                <input type="password" name="si-password" id="si-password" placeholder="••••••••">
+                <input type="password" name="si-password" id="si-password" placeholder="••••••••" required>
             </fieldset>
             
             <button type="submit">Sign in</button>
@@ -98,11 +98,15 @@
         <form action="signup" method="post">
             <fieldset>
                 <label for="su-name"><ion-icon name="person-circle-outline"></ion-icon></label>
-                <input type="text" name="su-name" id="su-name" placeholder="Jane">
+                <input type="text" name="su-name" id="su-name" placeholder="Jane" required>
+            </fieldset>
+            <fieldset>
+                <label for="su-address"><ion-icon name="home-outline"></ion-icon></label>
+                <input type="text" name="su-address" id="su-address" placeholder="House 15" required>
             </fieldset>
             <fieldset>
                 <label for="su-password"><ion-icon name="lock-closed-outline"></ion-icon></label>
-                <input type="password" name="su-password" id="su-password" placeholder="••••••••">
+                <input type="password" name="su-password" id="su-password" placeholder="••••••••" required>
             </fieldset>
             
             <button type="submit">Sign up</button>

@@ -163,7 +163,7 @@
 #signin form fieldset, #signup form fieldset {
   position: relative;
 }
-#signin form fieldset:last-of-type, #signup form fieldset:last-of-type {
+#signin form fieldset:not(:first-of-type), #signup form fieldset:not(:first-of-type) {
   margin-top: 1rem;
 }
 #signin form fieldset label, #signup form fieldset label {
