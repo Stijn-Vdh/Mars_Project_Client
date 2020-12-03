@@ -106,8 +106,26 @@
         display: flex;
         flex-flow: column nowrap;
         justify-content: center;
+
+        & > div {
+            margin-top: 1rem;
+            display: flex;
+
+            fieldset {
+                margin: 0!important;
+                width: 1px;
+
+                &:first-of-type {
+                    flex-grow: 2;
+                }
+
+                &:last-of-type {
+                    flex-grow: 1;
+                }
+            }
+        }
         
-        fieldset {
+        fieldset:not(.checkbox) {
             position: relative;
 
             &:not(:first-of-type) {
@@ -144,6 +162,11 @@
             }
         }
 
+        fieldset.checkbox {
+            margin-top:  1rem;
+            color: util.$accent-red;
+        }
+
         button[type="submit"] {
             @include util.button;
             font-weight: bold;
@@ -151,6 +174,15 @@
             background-color: util.$accent-red;
 
             margin-top: 2rem;
+        }
+    }
+
+    .searchHomeEndpoint {
+        color: util.$text-primary;
+
+        &:not(.active) {
+            opacity: 0;
+            pointer-events: none;
         }
     }
 }

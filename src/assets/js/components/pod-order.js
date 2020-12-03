@@ -1,8 +1,8 @@
 "use strict";
 
 function podOrderInit() {
-    document.querySelectorAll('#standard-pod, #luxury-pod').forEach(el => el.addEventListener('click', switchPod));
-    document.querySelector('#select-travel-location').addEventListener('submit', orderPod);
+    document.querySelectorAll('#standard-pod, #luxury-pod').forEach(el => el.updateEventListener('click', switchPod));
+    document.querySelector('#select-travel-location').updateEventListener('submit', orderPod);
 }
 
 function switchPod(e) {

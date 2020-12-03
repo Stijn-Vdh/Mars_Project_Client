@@ -160,19 +160,33 @@
   flex-flow: column nowrap;
   justify-content: center;
 }
-#signin form fieldset, #signup form fieldset {
+#signin form > div, #signup form > div {
+  margin-top: 1rem;
+  display: flex;
+}
+#signin form > div fieldset, #signup form > div fieldset {
+  margin: 0 !important;
+  width: 1px;
+}
+#signin form > div fieldset:first-of-type, #signup form > div fieldset:first-of-type {
+  flex-grow: 2;
+}
+#signin form > div fieldset:last-of-type, #signup form > div fieldset:last-of-type {
+  flex-grow: 1;
+}
+#signin form fieldset:not(.checkbox), #signup form fieldset:not(.checkbox) {
   position: relative;
 }
-#signin form fieldset:not(:first-of-type), #signup form fieldset:not(:first-of-type) {
+#signin form fieldset:not(.checkbox):not(:first-of-type), #signup form fieldset:not(.checkbox):not(:first-of-type) {
   margin-top: 1rem;
 }
-#signin form fieldset label, #signup form fieldset label {
+#signin form fieldset:not(.checkbox) label, #signup form fieldset:not(.checkbox) label {
   position: absolute;
   left: 0.5rem;
   top: 0.5rem;
   color: #ee4949;
 }
-#signin form fieldset input, #signup form fieldset input {
+#signin form fieldset:not(.checkbox) input, #signup form fieldset:not(.checkbox) input {
   width: 100%;
   padding: 0.5rem 0.5rem 0.5rem 2rem;
   background-color: transparent;
@@ -182,9 +196,13 @@
   color: #ee4949;
   transition: box-shadow 0.3s ease-in-out;
 }
-#signin form fieldset input:focus, #signup form fieldset input:focus {
+#signin form fieldset:not(.checkbox) input:focus, #signup form fieldset:not(.checkbox) input:focus {
   outline: none;
   box-shadow: 0 0.9px 2.2px rgba(238, 73, 73, 0.02), 0 2.1px 5.3px rgba(238, 73, 73, 0.028), 0 3.9px 10px rgba(238, 73, 73, 0.035), 0 6.9px 17.9px rgba(238, 73, 73, 0.042), 0 13px 33.4px rgba(238, 73, 73, 0.05), 0 31px 80px rgba(238, 73, 73, 0.07);
+}
+#signin form fieldset.checkbox, #signup form fieldset.checkbox {
+  margin-top: 1rem;
+  color: #ee4949;
 }
 #signin form button[type=submit], #signup form button[type=submit] {
   border: 0;
@@ -199,6 +217,13 @@
 }
 #signin form button[type=submit]:focus, #signup form button[type=submit]:focus {
   outline: none;
+}
+#signin .searchHomeEndpoint, #signup .searchHomeEndpoint {
+  color: #656769;
+}
+#signin .searchHomeEndpoint:not(.active), #signup .searchHomeEndpoint:not(.active) {
+  opacity: 0;
+  pointer-events: none;
 }
 
 @keyframes moveLogo {
@@ -688,7 +713,7 @@
   margin: 1rem 0 0.5rem;
 }
 
-.searchbar {
+.searchbar, .searchHomeEndpoint {
   position: absolute;
   width: 75%;
   top: 3rem;
@@ -700,35 +725,35 @@
   box-shadow: 0 0px 1.8px rgba(0, 0, 0, 0.111), 0 0px 5px rgba(0, 0, 0, 0.16), 0 0px 12.1px rgba(0, 0, 0, 0.209), 0 0px 40px rgba(0, 0, 0, 0.32);
   box-sizing: border-box;
 }
-.searchbar label {
+.searchbar label, .searchHomeEndpoint label {
   position: absolute;
   right: 0.75rem;
   top: 0.7rem;
 }
-.searchbar input {
+.searchbar input, .searchHomeEndpoint input {
   border: 0;
   width: 95%;
 }
-.searchbar input:focus {
+.searchbar input:focus, .searchHomeEndpoint input:focus {
   outline: none;
 }
-.searchbar ul {
+.searchbar ul, .searchHomeEndpoint ul {
   position: relative;
   max-height: 12rem;
   overflow: hidden;
   transition: max-height 0.3s ease-in-out;
 }
-.searchbar ul li {
+.searchbar ul li, .searchHomeEndpoint ul li {
   padding: 0.5rem 0.75rem;
   font-size: 0.9rem;
 }
-.searchbar ul li:nth-child(even) {
+.searchbar ul li:nth-child(even), .searchHomeEndpoint ul li:nth-child(even) {
   background-color: #eff1f4;
 }
-.searchbar:not(.active) {
+.searchbar:not(.active), .searchHomeEndpoint:not(.active) {
   border-radius: 3rem;
 }
-.searchbar:not(.active) ul {
+.searchbar:not(.active) ul, .searchHomeEndpoint:not(.active) ul {
   max-height: 0;
 }
 

@@ -34,9 +34,41 @@ function login(e) {
 
     apiCall('login', 'POST', false, body)
         .then((response) => {
-            goTo('main');
             if (response.status === 402) {
                 warn(response.message);
+            } else {
+                localStorage.setItem('token', response);
+                goTo('main');
+                notify('Welcome back');
+            }
+        })
+}
+
+/**
+ * register a user in
+ * 
+ * @param {SubmitEvent} e             EventListener event
+ * 
+ * @return {Promise}            request promise 
+ */
+function register(e) {
+    e.preventDefault();
+    
+    const body = {
+        name: e.target.querySelector('#su-name').value,
+        password: e.target.querySelector('#su-password').value,
+        businessAccount: e.target.querySelector('#su-business').checked,
+        homeAddress: e.target.querySelector('#su-address').value,
+        homeEndpointId: parseInt(e.target.querySelector('#su-homeEndpointName').value)
+    };
+
+    apiCall('createAccount', 'POST', false, body)
+        .then((response) => {
+            if (response.status === 402) {
+                warn(response.message);
+            } else {
+                goBack();
+                goTo('#signin');
             }
         })
 }
@@ -82,64 +114,11 @@ function getMessage() {
  * @return {Promise}            request promise containing endpoint array.
  */
 function getEndpoints() {
-    return [
-        {
-            "id": 1,
-            "name": "Home",
-            "available": true,
-            "location": "here",
-            "privateEndpoint": true
-        },
-        {
-            "id": 2,
-            "name": "Maldi",
-            "available": true,
-            "location": "somewhere else",
-            "privateEndpoint": false
-        },
-        {
-            "id": 3,
-            "name": "Debby",
-            "available": true,
-            "location": "somwhere else",
-            "privateEndpoint": true
-        },
-        {
-            "id": 4,
-            "name": "Tasle",
-            "available": true,
-            "location": "somewhere else",
-            "privateEndpoint": false
-        },
-        {
-            "id": 5,
-            "name": "Maruyt",
-            "available": true,
-            "location": "somewhere else",
-            "privateEndpoint": false
-        },
-        {
-            "id": 6,
-            "name": "Malbert Hein",
-            "available": true,
-            "location": "somewhere else",
-            "privateEndpoint": false
-        },
-        {
-            "id": 7,
-            "name": "Work",
-            "available": true,
-            "location": "somewhere else",
-            "privateEndpoint": false
-        },
-        {
-            "id": 8,
-            "name": "Mars Square",
-            "available": true,
-            "location": "somewhere else",
-            "privateEndpoint": false
-        }
-    ]
+    return apiCall("endpoints", 'GET')
+}
+
+function getTravelHistory() {
+    return apiCall('travel', 'GET', true)
 }
 
 /** Call the api

@@ -5,12 +5,12 @@ function recentTrip(route) {
     seconds = route.estmTime % 60;
 
     return `
-    <li data-order-pod>
-        <h2>${route.destination}</h2>
+    <li data-order-pod="${route.destination.id}">
+        <h2>${route.destination.name}</h2>
         <h3>Yesterday</h3>
         <div>
-            <p class="from">${route.from}</p>
-            <p class="to">${route.destination}</p>
+            <p class="from">${route.from.name}</p>
+            <p class="to">${route.destination.name}</p>
             <p class="totalTravelTime">${minutes > 0 ? `${minutes}m `: ''}${seconds > 0 ? `${seconds}s`: ''}</p>
         </div>
     </li>

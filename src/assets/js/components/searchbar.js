@@ -2,9 +2,9 @@
 
 function initSearchbar() {
     document.querySelectorAll(".searchbar").forEach(el => loadSearchbar(el));
-    document.querySelectorAll(".searchbar > input").forEach(el => el.addEventListener('focusin', toggleFocus));
-    document.querySelectorAll(".searchbar > input").forEach(el => el.addEventListener('focusout', toggleFocus));
-    document.querySelectorAll(".searchbar > input").forEach(el => el.addEventListener('input', (e) => loadSearchbar(e.currentTarget.parentNode, e.currentTarget.value)));
+    document.querySelectorAll(".searchbar > input").forEach(el => el.updateEventListener('focusin', toggleFocus));
+    document.querySelectorAll(".searchbar > input").forEach(el => el.updateEventListener('focusout', toggleFocus));
+    document.querySelectorAll(".searchbar > input").forEach(el => el.updateEventListener('input', ));
 }
 
 function toggleFocus(e) {
@@ -21,11 +21,17 @@ function toggleFocus(e) {
     }, wait);
 }
 
-function loadSearchbar(sb, filter = "") {
+function loadSearchbar(e) {
+    let sb, filter = "";
+    if (e.currentTarget !== undefined) {
+        sb = e.currentTarget.parentNode, filter = e.currentTarget.value;
+    } else {
+        sb = e;
+    }
     let endpointsToShow = [...endpoints];
 
     if (filter !== "") {
-        endpointsToShow = endpointsToShow.filter(endpoint => endpoint.available && endpoint.name.toLowerCase().includes(filter.toLowerCase()));
+        endpointsToShow = endpointsToShow.filter(endpoint => endpoint.name.toLowerCase().includes(filter.toLowerCase()));
     }
     endpointsToShow = endpointsToShow.slice(0, 6);
 

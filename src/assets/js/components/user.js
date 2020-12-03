@@ -6,8 +6,8 @@ const userInfo = {
 }
 
 function userInit() {
-    document.querySelectorAll('#account-settings li a').forEach(el => el.addEventListener('click', toggleEdit));
-    document.querySelector('#update-account').addEventListener('click', updateSettings);
+    document.querySelectorAll('#account-settings li a').forEach(el => el.updateEventListener('click', toggleEdit));
+    document.querySelector('#update-account').updateEventListener('click', updateSettings);
 
     loadDataInSettings();
 }

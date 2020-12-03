@@ -95,18 +95,35 @@
             <h2>Sign up</h2>
             <button class="back"><ion-icon name="chevron-back-outline"></ion-icon></button>
         </header>
+        <div class="searchHomeEndpoint">
+            <input type="text" name="homeEndpoint" id="homeEndpoint">
+            <ul>
+                <li>test</li>
+                <li>test</li>
+            </ul>
+        </div>
         <form action="signup" method="post">
             <fieldset>
                 <label for="su-name"><ion-icon name="person-circle-outline"></ion-icon></label>
                 <input type="text" name="su-name" id="su-name" placeholder="Jane" required>
             </fieldset>
-            <fieldset>
-                <label for="su-address"><ion-icon name="home-outline"></ion-icon></label>
-                <input type="text" name="su-address" id="su-address" placeholder="House 15" required>
-            </fieldset>
+            <div>
+                <fieldset>
+                    <label for="su-address"><ion-icon name="home-outline"></ion-icon></label>
+                    <input type="text" name="su-address" id="su-address" placeholder="House 15" required>
+                </fieldset>
+                <fieldset>
+                    <label for="su-homeEndpointName"><ion-icon name="flag-outline"></ion-icon></label>
+                    <input type="text" name="su-homeEndpointName" id="su-homeEndpointName" placeholder="1" required>
+                </fieldset>
+            </div>
             <fieldset>
                 <label for="su-password"><ion-icon name="lock-closed-outline"></ion-icon></label>
                 <input type="password" name="su-password" id="su-password" placeholder="••••••••" required>
+            </fieldset>
+            <fieldset class="checkbox">
+                <label for="su-password">Business account</label>
+                <input type="checkbox" name="su-business" id="su-business">
             </fieldset>
             
             <button type="submit">Sign up</button>
@@ -239,7 +256,7 @@
 
     <script src="assets/js/templates.js"></script>
     <script src="assets/js/api.js"></script>
-    <script src="assets/js/components/login.js"></script>
+    <script src="assets/js/components/authentication.js"></script>
     <script src="assets/js/components/notification.js"></script>
     <script src="assets/js/components/navigation.js"></script>
     <script src="assets/js/components/pod-order.js"></script>
