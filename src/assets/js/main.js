@@ -14,6 +14,10 @@ let dragInfo = {
 document.addEventListener("DOMContentLoaded", init);
 
 async function init() {
+    Element.prototype.updateEventListener = function(event, cb) {
+        this.removeEventListener(event, cb);
+        this.addEventListener(event, cb);
+    }
     setViewPortStatic();
     addPages();
     initNavigation();

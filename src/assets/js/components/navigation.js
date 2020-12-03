@@ -6,8 +6,8 @@ let pressedElement;
 let currentPage;
 
 function initNavigation() {
-    document.querySelectorAll('.back').forEach(el => el.addEventListener('click', goBack));
-    document.querySelector('body').addEventListener('click', checkForDynamicDataEvents);
+    document.querySelectorAll('.back').forEach(el => el.updateEventListener('click', goBack));
+    document.querySelector('body').updateEventListener('click', checkForDynamicDataEvents);
 }
 
 function checkForDynamicDataEvents(e) {

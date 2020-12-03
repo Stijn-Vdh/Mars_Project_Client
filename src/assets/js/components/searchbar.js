@@ -2,18 +2,9 @@
 
 function initSearchbar() {
     document.querySelectorAll(".searchbar").forEach(el => loadSearchbar(el));
-    document.querySelectorAll(".searchbar > input").forEach(el => {
-        el.removeEventListener('focusin', toggleFocus);
-        el.addEventListener('focusin', toggleFocus);
-    });
-    document.querySelectorAll(".searchbar > input").forEach(el => {
-        el.removeEventListener('focusout', toggleFocus);
-        el.addEventListener('focusout', toggleFocus);
-    });
-    document.querySelectorAll(".searchbar > input").forEach(el => {
-        el.removeEventListener('input', loadSearchbar);
-        el.addEventListener('input', loadSearchbar);
-    });
+    document.querySelectorAll(".searchbar > input").forEach(el => el.updateEventListener('focusin', toggleFocus));
+    document.querySelectorAll(".searchbar > input").forEach(el => el.updateEventListener('focusout', toggleFocus));
+    document.querySelectorAll(".searchbar > input").forEach(el => el.updateEventListener('input', ));
 }
 
 function toggleFocus(e) {
