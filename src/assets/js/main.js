@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", init);
 
 async function init() {
     setViewPortStatic();
-
     addPages();
     initNavigation();
     initAuthentication();
@@ -23,20 +22,7 @@ async function init() {
     // document.cookie = 'Authorization=Basic cHJvamVjdG1lZGV3ZXJrZXI6dmVya2VlcmQ=';
     // config = await loadConfig();
     // api = `${config.host ? config.host + '/': ''}${config.group ? config.group + '/' : ''}api/`;
-    getEndpoints()
-        .then(ep => {
-            endpoints = ep;
-            initSearchbar();
-            initQuickAccess();
-            loadHomeEndpointList();
-        });
-    getTravelHistory()
-        .then(history => {
-            loadRecentTrips(history);
-        });
     // initSettings();
-    friendsInit();
-    userInit();
 
     podOrderInit();
 
@@ -48,17 +34,41 @@ async function init() {
     // });
 }
 
+function initMain() {
+    getEndpoints()
+        .then(ep => {
+            endpoints = ep;
+            initSearchbar();
+            initQuickAccess();
+        });
+    getTravelHistory()
+        .then(history => {
+            loadRecentTrips(history);
+        });
+    
+    friendsInit();
+    userInit();
+}
+
 function addPages() {
-    addPage('main', []);
+    addPage('main', [], {
+        onOpen: initMain
+    });
     addPage('#settings', ['#open-settings']);
     addPage('#quick-access');
     addPage('#account-settings', ['li[data-open-setting="account-settings"]']);
     addPage('#report', ['li[data-open-setting="report"]']);
-    addPage('#pod-order-view', ['*[data-order-pod]'], true);
+    addPage('#pod-order-view', ['*[data-order-pod]'], {dynamicData: true});
     addPage('#process-payment', ['*[data-order-pod]']);
     addPage('#authentication', []);
     addPage('#signin', ['#open-signin']);
-    addPage('#signup', ['#open-signup']);
+    addPage('#signup', ['#open-signup'], {onOpen: () => {
+        getEndpoints()
+            .then(ep => {
+                endpoints = ep;
+                loadHomeEndpointList();
+            })
+    }});
 }
 
 function closeModal(e) {

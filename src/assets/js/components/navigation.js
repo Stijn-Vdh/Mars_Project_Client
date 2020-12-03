@@ -20,9 +20,9 @@ function checkForDynamicDataEvents(e) {
     });
 }
 
-function addPage(selector, activators=[], dynamicData=false) {
-    pages[selector] = new Page(selector);
-    if (dynamicData) {
+function addPage(selector, activators=[], options={}) {
+    pages[selector] = new Page(selector, options.onOpen, options.onLeave);
+    if (options.dynamicData) {
         activators.forEach(activator => dynamicElements[activator] = selector);
     }
     activators.forEach(activator => {
@@ -61,10 +61,12 @@ class Page {
     }
 
     goto() {
+        if (this.onOpen !== undefined && this.onOpen !== null) this.onOpen();
         this.element.classList.add('active');
     }
 
     leave() {
+        if (this.onLeave !== undefined && this.onLeave !== null) this.onLeave();
         this.element.classList.remove('active');
         return true;
     }

@@ -2,9 +2,18 @@
 
 function initSearchbar() {
     document.querySelectorAll(".searchbar").forEach(el => loadSearchbar(el));
-    document.querySelectorAll(".searchbar > input").forEach(el => el.addEventListener('focusin', toggleFocus));
-    document.querySelectorAll(".searchbar > input").forEach(el => el.addEventListener('focusout', toggleFocus));
-    document.querySelectorAll(".searchbar > input").forEach(el => el.addEventListener('input', (e) => loadSearchbar(e.currentTarget.parentNode, e.currentTarget.value)));
+    document.querySelectorAll(".searchbar > input").forEach(el => {
+        el.removeEventListener('focusin', toggleFocus);
+        el.addEventListener('focusin', toggleFocus);
+    });
+    document.querySelectorAll(".searchbar > input").forEach(el => {
+        el.removeEventListener('focusout', toggleFocus);
+        el.addEventListener('focusout', toggleFocus);
+    });
+    document.querySelectorAll(".searchbar > input").forEach(el => {
+        el.removeEventListener('input', loadSearchbar);
+        el.addEventListener('input', loadSearchbar);
+    });
 }
 
 function toggleFocus(e) {
@@ -21,7 +30,13 @@ function toggleFocus(e) {
     }, wait);
 }
 
-function loadSearchbar(sb, filter = "") {
+function loadSearchbar(e) {
+    let sb, filter = "";
+    if (e.currentTarget !== undefined) {
+        sb = e.currentTarget.parentNode, filter = e.currentTarget.value;
+    } else {
+        sb = e;
+    }
     let endpointsToShow = [...endpoints];
 
     if (filter !== "") {

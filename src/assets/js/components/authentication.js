@@ -11,6 +11,8 @@ function initAuthentication() {
 
     if (localStorage.getItem('token') === null) {
         goTo('#authentication');
+    } else {
+        goTo('main');
     }
 }
 
