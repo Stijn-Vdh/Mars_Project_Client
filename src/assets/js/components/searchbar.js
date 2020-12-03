@@ -25,7 +25,7 @@ function loadSearchbar(sb, filter = "") {
     let endpointsToShow = [...endpoints];
 
     if (filter !== "") {
-        endpointsToShow = endpointsToShow.filter(endpoint => endpoint.available && endpoint.name.toLowerCase().includes(filter.toLowerCase()));
+        endpointsToShow = endpointsToShow.filter(endpoint => endpoint.name.toLowerCase().includes(filter.toLowerCase()));
     }
     endpointsToShow = endpointsToShow.slice(0, 6);
 
