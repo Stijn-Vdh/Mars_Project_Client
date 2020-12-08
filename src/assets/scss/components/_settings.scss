@@ -31,16 +31,28 @@
             }
         }
 
-        figure {
+        .user-icon-wrapper {
             margin: 1rem 0;
             
-            img {
+            .user-icon {
                 border-radius: 50%;
                 padding: 0.2rem;
                 border: 1px solid darken(util.$background-secondary, 20%);
+                
+                h2 {
+                    width: 8rem;
+                    height: 8rem;
+                    background: grey;
+                    border-radius: 50%;
+                    text-align: center;
+                    line-height: 8rem;
+                    font-size: 2rem;
+                    color: white;
+                    text-transform: capitalize;
+                }
             }
 
-            figcaption {
+            h3 {
                 margin-top: 0.5rem;
                 font-size: 0.7rem;
                 text-align: center;
