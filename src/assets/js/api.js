@@ -17,6 +17,17 @@ function getFriends() {
     ];
 }
 
+function getUserInfo() {
+    return apiCall('accountInformation', 'GET', true)
+        .then(response => {
+            if (response.status === 401) {
+                warn(response.message);
+            } else {
+                return response;
+            }
+        })
+}
+
 /**
  * Log the user in
  * 

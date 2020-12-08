@@ -58,7 +58,7 @@ function addPages() {
     addPage('main', [], {
         onOpen: initMain
     });
-    addPage('#settings', ['#open-settings']);
+    addPage('#settings', ['#open-settings'], {onOpen: initSettings});
     addPage('#quick-access');
     addPage('#account-settings', ['li[data-open-setting="account-settings"]']);
     addPage('#report', ['li[data-open-setting="report"]']);
