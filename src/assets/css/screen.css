@@ -796,15 +796,26 @@
   right: 1rem;
   top: 0;
 }
-#settings header figure {
+#settings header .user-icon-wrapper {
   margin: 1rem 0;
 }
-#settings header figure img {
+#settings header .user-icon-wrapper .user-icon {
   border-radius: 50%;
   padding: 0.2rem;
   border: 1px solid #b3bcca;
 }
-#settings header figure figcaption {
+#settings header .user-icon-wrapper .user-icon h2 {
+  width: 8rem;
+  height: 8rem;
+  background: grey;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 8rem;
+  font-size: 2rem;
+  color: white;
+  text-transform: capitalize;
+}
+#settings header .user-icon-wrapper h3 {
   margin-top: 0.5rem;
   font-size: 0.7rem;
   text-align: center;

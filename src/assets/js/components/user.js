@@ -22,6 +22,13 @@ function updateSettings() {
     loadDataInSettings();
 }
 
+function generateUserIcon(user) {
+    return `
+    <div class="user-icon">
+        <h2>${user['displayName:'].split(' ')[0].slice(0, 1)}${user['displayName:'].split(' ').length > 1 ? user['displayName:'].split(' ')[1].slice(0, 1)[0]: ''}</h2>
+    </div>`;
+}
+
 function toggleEdit(e) {
     e.preventDefault();
     const clickedEl = e.currentTarget;
