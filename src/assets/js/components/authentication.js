@@ -12,7 +12,14 @@ function initAuthentication() {
     if (localStorage.getItem('token') === null) {
         goTo('#authentication');
     } else {
-        goTo('main');
+        getUserInfo()
+            .then(response => {
+                if (response.status === 403) {
+                    goTo('#authentication');
+                } else {
+                    goTo('main');
+                }
+            });
     }
 }
 
