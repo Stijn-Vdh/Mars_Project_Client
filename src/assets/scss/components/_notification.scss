@@ -1,6 +1,6 @@
 @use '../util';
 
-#notification {
+#main-notification {
     @include util.shadow;
 
     position: fixed;
@@ -36,5 +36,71 @@
 
     &.error {
         border-color: util.$accent-red;
+    }
+}
+
+#notifications {
+    pointer-events: none;
+    z-index: 200;
+    position: relative;
+    padding-top: 0.5rem;
+    padding: 1rem;
+
+    .notification {
+        @include util.shadow;
+
+        margin-top: 0.5rem;
+        position: relative;
+        display: flex;
+        padding: 1rem;
+        border-radius: 0.6rem;
+        background-color: rgba(17,34,51,1);
+        background-image: url(../images/noise.png);
+        align-items: center;
+        overflow: hidden;
+        transform: translateX(-100vw);
+
+        will-change: transform;
+
+        transition: transform 0.3s ease-in-out;
+
+        p, ion-icon {
+            z-index: 2;
+            color: util.$background-primary;
+            font-weight: bold;
+        }
+
+        ion-icon {
+            margin-left: 0.5rem;
+            font-size: 1.4rem;
+        }
+
+        p {
+            font-size: 0.9rem;
+            margin-left: 2.5rem;
+        }
+
+        &.danger::before {
+            background-image: linear-gradient(90deg, rgba(120,42,42,1) 0%, rgba(103,51,52,1) 11%, rgba(77,38,42,1) 22%, rgba(17,34,51,1) 45%);
+        }
+
+        &.success::before {
+            background-image: linear-gradient(90deg, rgba(64,120,42,1) 0%, rgba(54,103,51,1) 11%, rgba(40,77,38,1) 22%, rgba(17,34,51,1) 45%);
+        }
+
+        &.warn::before {
+            background-image: linear-gradient(90deg, rgba(120,119,42,1) 0%, rgba(103,98,51,1) 11%, rgba(76,77,38,1) 22%, rgba(17,34,51,1) 45%);
+        }
+
+        &::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            z-index: 1;
+            filter: opacity(0.5);
+        }
     }
 }
