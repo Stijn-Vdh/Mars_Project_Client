@@ -268,7 +268,7 @@
   padding-right: 2rem;
 }
 
-#notification {
+#main-notification {
   box-shadow: 0 1px 2.2px rgba(0, 0, 0, 0.02), 0 2.3px 5.3px rgba(0, 0, 0, 0.028), 0 4.4px 10px rgba(0, 0, 0, 0.035), 0 7.8px 17.9px rgba(0, 0, 0, 0.042), 0 14.6px 33.4px rgba(0, 0, 0, 0.05), 0 35px 80px rgba(0, 0, 0, 0.07);
   position: fixed;
   overflow: hidden;
@@ -286,20 +286,75 @@
   transition: width 0.3s ease-in-out 0.6s, max-height 0.3s ease-in-out 0.6s, padding 0.3s ease-in-out 0.6s, bottom 0.3s ease-in-out;
   z-index: 1;
 }
-#notification:not(.open) {
+#main-notification:not(.open) {
   padding: 0;
   width: 0.5rem;
   max-height: 0.5rem;
   bottom: 11rem;
 }
-#notification.success {
+#main-notification.success {
   border-color: #aed581;
 }
-#notification.warning {
+#main-notification.warning {
   border-color: #f4c95d;
 }
-#notification.error {
+#main-notification.error {
   border-color: #ee4949;
+}
+
+#notifications {
+  pointer-events: none;
+  z-index: 200;
+  position: relative;
+  padding-top: 0.5rem;
+  padding: 1rem;
+}
+#notifications .notification {
+  box-shadow: 0 1px 2.2px rgba(0, 0, 0, 0.02), 0 2.3px 5.3px rgba(0, 0, 0, 0.028), 0 4.4px 10px rgba(0, 0, 0, 0.035), 0 7.8px 17.9px rgba(0, 0, 0, 0.042), 0 14.6px 33.4px rgba(0, 0, 0, 0.05), 0 35px 80px rgba(0, 0, 0, 0.07);
+  margin-top: 0.5rem;
+  position: relative;
+  display: flex;
+  padding: 1rem;
+  border-radius: 0.6rem;
+  background-color: #112233;
+  background-image: url(../images/noise.png);
+  align-items: center;
+  overflow: hidden;
+  transform: translateX(-100vw);
+  will-change: transform;
+  transition: transform 0.3s ease-in-out;
+}
+#notifications .notification p, #notifications .notification ion-icon {
+  z-index: 2;
+  color: #fbfcff;
+  font-weight: bold;
+}
+#notifications .notification ion-icon {
+  margin-left: 0.5rem;
+  font-size: 1.4rem;
+}
+#notifications .notification p {
+  font-size: 0.9rem;
+  margin-left: 2.5rem;
+}
+#notifications .notification.danger::before {
+  background-image: linear-gradient(90deg, #782a2a 0%, #673334 11%, #4d262a 22%, #112233 45%);
+}
+#notifications .notification.success::before {
+  background-image: linear-gradient(90deg, #40782a 0%, #366733 11%, #284d26 22%, #112233 45%);
+}
+#notifications .notification.warn::before {
+  background-image: linear-gradient(90deg, #78772a 0%, #676233 11%, #4c4d26 22%, #112233 45%);
+}
+#notifications .notification::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  filter: opacity(0.5);
 }
 
 #process-payment {
