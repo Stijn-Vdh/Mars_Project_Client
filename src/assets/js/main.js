@@ -60,7 +60,7 @@ function addPages() {
     addPage('#settings', ['#open-settings'], {onOpen: initSettings});
     addPage('#quick-access');
     addPage('#account-settings', ['li[data-open-setting="account-settings"]'], {onOpen: initAccountSettings});
-    addPage('#report', ['li[data-open-setting="report"]']);
+    addPage('#report', ['li[data-open-setting="report"]'], {onOpen: initReport});
     addPage('#pod-order-view', ['*[data-order-pod]'], {dynamicData: true});
     addPage('#process-payment', ['*[data-order-pod]']);
     addPage('#authentication', []);
