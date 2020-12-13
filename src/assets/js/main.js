@@ -51,7 +51,6 @@ function initMain() {
         });
     
     friendsInit();
-    userInit();
 }
 
 function addPages() {
@@ -60,7 +59,7 @@ function addPages() {
     });
     addPage('#settings', ['#open-settings'], {onOpen: initSettings});
     addPage('#quick-access');
-    addPage('#account-settings', ['li[data-open-setting="account-settings"]']);
+    addPage('#account-settings', ['li[data-open-setting="account-settings"]'], {onOpen: initAccountSettings});
     addPage('#report', ['li[data-open-setting="report"]'], {onOpen: initReport});
     addPage('#pod-order-view', ['*[data-order-pod]'], {dynamicData: true});
     addPage('#process-payment', ['*[data-order-pod]']);
@@ -86,7 +85,7 @@ function setViewPortStatic() {
     viewwidth = window.screen.width,
     viewport = document.querySelector("meta[name=viewport]");
 
-    viewport.setAttribute("content", `height=${viewheight}px, width=${viewwidth}px, initial-scale=1.0`);
+    viewport.setAttribute("content", `height=${viewheight}, width=${viewwidth}, initial-scale=1.0`);
 }
 
 async function loadConfig() {
