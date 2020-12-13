@@ -118,16 +118,26 @@ function orderPod(e) {
     apiCall('travel', 'POST', true, body)
         .then(response => {
             goTo('#process-payment');
-            if (response.status !== 200) {
+            setTimeout(() => {
+
+            }, 1000)
+            if (response.status === 401 || response.status === 403) {
+                document.querySelector('#process-payment .checkmark').classList.add('active', 'error');
+                document.querySelector('#payment-response').innerHTML = response.message;
                 setTimeout(() => {
-                    document.querySelector('#process-payment .checkmark').classList.add('active', 'error');
-                    document.querySelector('#payment-response').innerHTML = response.message;
-                    setTimeout(() => {
-                        goBack();
-                        document.querySelector('#process-payment .checkmark').classList.remove('active', 'error')
-                        document.querySelector('#payment-response').innerHTML = '';
-                    }, 3000);
-                }, 1000);
+                    goBack();
+                    document.querySelector('#process-payment .checkmark').classList.remove('active', 'error')
+                    document.querySelector('#payment-response').innerHTML = '';
+                }, 3000);
+            } else {
+                document.querySelector('#process-payment .checkmark').classList.add('active', 'success');
+                document.querySelector('#payment-response').innerHTML = `Ordered pod #${response.travelId}.`;
+                setTimeout(() => {
+                    goTo('main');
+                    notify(`Your pod is on it's way!`);
+                    document.querySelector('#process-payment .checkmark').classList.remove('active', 'success')
+                    document.querySelector('#payment-response').innerHTML = '';
+                }, 3000);
             }
         });
 }
