@@ -40,7 +40,11 @@ function goBack(e=null) {
     }
 }
 
-function goTo(page) {
+function goTo(page, from) {
+    if (page === '#pod-order-view') {
+        document.querySelector('#select-location').value = from.getAttribute('data-order-pod');
+        document.querySelector('#select-location-text').value = from.innerHTML;
+    }
     if (pageHistory.length < 1 || pageHistory[pageHistory.length - 1].leave()) {
         pages[page].goto();
         pageHistory.push(pages[page]);
