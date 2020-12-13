@@ -1,31 +1,41 @@
 "use strict";
-const userInfo = {
-    name: "Jane Roe",
-    subscription: "None",
-    isBusiness: false
+
+let userInfo = {};
+
+function initAccountSettings() {
+    getUserInfo()
+        .then(response => {
+            userInit(response);
+        });
 }
 
-function userInit() {
+function userInit(user) {
     document.querySelectorAll('#account-settings li a').forEach(el => el.updateEventListener('click', toggleEdit));
     document.querySelector('#update-account').updateEventListener('click', updateSettings);
+    userInfo.name = user.displayName;
+    userInfo.subscription = user.subscription.name;
 
     loadDataInSettings();
 }
 
 function updateSettings() {
-    userInfo.name = document.querySelector('#new-name').value;
-    userInfo.isBusiness = document.querySelector('#edit-business-user').checked;
+    if (document.querySelector('#new-name').value !== userInfo.name) {
+        updateName(document.querySelector('#new-name').value);
+    }
+    if (document.querySelector('#new-pwd').value !== '') {
+        updatePassword(document.querySelector('#current-pwd').value, document.querySelector('#new-pwd').value);
+    }
 
     document.querySelector('#new-pwd').value = "";
     document.querySelector('#current-pwd').value = "";
 
-    loadDataInSettings();
+    initAccountSettings();
 }
 
 function generateUserIcon(user) {
     return `
     <div class="user-icon">
-        <h2>${user['displayName:'].split(' ')[0].slice(0, 1)}${user['displayName:'].split(' ').length > 1 ? user['displayName:'].split(' ')[1].slice(0, 1)[0]: ''}</h2>
+        <h2>${user.displayName.split(' ')[0].slice(0, 1)}${user.displayName.split(' ').length > 1 ? user.displayName.split(' ')[1].slice(0, 1)[0]: ''}</h2>
     </div>`;
 }
 

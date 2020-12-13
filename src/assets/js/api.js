@@ -28,6 +28,28 @@ function getUserInfo() {
         })
 }
 
+function updateName(newName) {
+    apiCall('changeDisplayName', 'POST', true, {newDisplayName: newName})
+        .then(response => {
+            if (response.status === 401 || response.status === 403) {
+                warn(response.message);
+            } else {
+                notify(response);
+            }
+        });
+}
+
+function updatePassword(currentPassword, newPassword) {
+    apiCall('changePassword', 'POST', true, {newPassword: newPassword})
+        .then(response => {
+            if (response.status === 401 || response.status === 403) {
+                warn(response.message);
+            } else {
+                notify(response);
+            }
+        })
+}
+
 /**
  * Log the user in
  * 
