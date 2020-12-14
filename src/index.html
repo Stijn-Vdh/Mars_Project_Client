@@ -145,7 +145,7 @@
         <ul>
             <li data-open-setting="account-settings">Account information<ion-icon name="chevron-forward-outline"></ion-icon></li>
             <li>Subscriptions<ion-icon name="chevron-forward-outline"></ion-icon></li>
-            <li>Friends<ion-icon name="chevron-forward-outline"></ion-icon></li>
+            <li data-open-setting="friends-settings">Friends<ion-icon name="chevron-forward-outline"></ion-icon></li>
             <li>Quick access<ion-icon name="chevron-forward-outline"></ion-icon></li>
             <li>Notifications<ion-icon name="chevron-forward-outline"></ion-icon></li>
             <li data-open-setting="report">Report an issue<ion-icon name="chevron-forward-outline"></ion-icon></li>
@@ -185,6 +185,30 @@
             </li> -->
         </ul>
         <button id="update-account">Update account settings</button>
+    </aside>
+
+    <aside id="friends-settings" class="">
+        <header>
+            <h2>Friends</h2>
+            <button class="back"><ion-icon name="chevron-back-outline"></ion-icon></button>
+            <button class="add-friend"><ion-icon name="person-add-outline"></ion-icon></button>
+        </header>
+        <ul>
+            <li>
+                <ul>
+                    <li><div class="user-icon" data-user="test"></div></li>
+                    <li>John Doe</li>
+                    <li><button data-remove-friend><ion-icon name="person-remove-outline"></ion-icon></button></li>
+                </ul>
+            </li>
+            <li>
+                <ul>
+                    <li><div class="user-icon" data-user="test"></div></li>
+                    <li>John Doe</li>
+                    <li><button data-remove-friend><ion-icon name="person-remove-outline"></ion-icon></button></li>
+                </ul>
+            </li>
+        </ul>
     </aside>
 
     <aside id="report">
@@ -251,6 +275,26 @@
             <path class="checkmark__error" fill="none" d="M35.755776,17 L17.244224,35.8443492"></path>
         </svg>
         <span id="payment-response"></span>
+    </aside>
+
+    <aside id="add-friend">
+        <header>
+            <h2>Add a friend</h2>
+            <button class="back"><ion-icon name="chevron-back-outline"></ion-icon></button>
+        </header>
+        <div>
+            <form action="add-friend">
+                <input type="text" name="friend-name"  id="friend-name" placeholder="Jane" autocomplete="off" data-lpignore="true">
+                <button type="submit">add</button>
+            </form>
+            <span class="divider">Or</span>
+            <p>Let them add you</p>
+            <div>
+                <input type="text" name="own-name" id="own-name" value="test" data-lpignore="true">
+                <button id="copy-name">COPY</button>
+            </div>
+
+        </div>
     </aside>
 
     <aside id="notifications">

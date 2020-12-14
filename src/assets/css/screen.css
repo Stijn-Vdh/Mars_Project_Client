@@ -268,6 +268,207 @@
   padding-right: 2rem;
 }
 
+#friends-settings {
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  left: 100%;
+  background-color: #fbfcff;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  transition: transform 0.3s ease-in-out;
+  will-change: transform;
+}
+#friends-settings.active {
+  transform: translateX(-100%);
+}
+#friends-settings header {
+  position: relative;
+  padding: 8rem 0;
+  font-size: 2rem;
+  text-align: center;
+}
+#friends-settings header .back {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  width: 2rem;
+  height: 2rem;
+  border: 0;
+  background-color: transparent;
+  font-weight: bold;
+  font-size: 1rem;
+}
+#friends-settings header .back:focus {
+  outline: none;
+}
+#friends-settings header .add-friend {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  width: 2rem;
+  height: 2rem;
+  border: 0;
+  background-color: transparent;
+  font-weight: bold;
+  font-size: 1rem;
+}
+#friends-settings header .add-friend:focus {
+  outline: none;
+}
+#friends-settings > ul {
+  width: 100%;
+  box-shadow: 0 1px 2.2px rgba(0, 0, 0, 0.02), 0 2.3px 5.3px rgba(0, 0, 0, 0.028), 0 4.4px 10px rgba(0, 0, 0, 0.035), 0 7.8px 17.9px rgba(0, 0, 0, 0.042), 0 14.6px 33.4px rgba(0, 0, 0, 0.05), 0 35px 80px rgba(0, 0, 0, 0.07);
+}
+#friends-settings > ul > li {
+  padding: 1rem;
+}
+#friends-settings > ul > li:nth-child(even) {
+  background-color: #eff1f4;
+}
+#friends-settings > ul > li ul {
+  display: flex;
+  align-items: center;
+}
+#friends-settings > ul > li ul li:nth-child(2) {
+  flex-grow: 1;
+  margin: 0 1rem;
+}
+#friends-settings > ul > li ul button {
+  border: 0;
+  background-color: transparent;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+#add-friend {
+  background-color: #fbfcff;
+  box-shadow: 0 0px 1.8px rgba(0, 0, 0, 0.111), 0 0px 5px rgba(0, 0, 0, 0.16), 0 0px 12.1px rgba(0, 0, 0, 0.209), 0 0px 40px rgba(0, 0, 0, 0.32);
+  padding: 1rem;
+  position: fixed;
+  width: 80%;
+  height: 60%;
+  left: 50%;
+  top: 37%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  border-radius: 0.5rem;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  will-change: transform;
+}
+#add-friend:not(.active) {
+  transform: scale(0.7) translate(-71%, -65%);
+  opacity: 0;
+  pointer-events: none;
+}
+#add-friend header {
+  position: relative;
+  padding: 8rem 0;
+  font-size: 2rem;
+  text-align: center;
+  padding: 5rem 0;
+  font-size: 1.6rem;
+}
+#add-friend header .back {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  width: 2rem;
+  height: 2rem;
+  border: 0;
+  background-color: transparent;
+  font-weight: bold;
+  font-size: 1rem;
+}
+#add-friend header .back:focus {
+  outline: none;
+}
+#add-friend input {
+  padding: 0.8rem;
+  border-radius: 0.3rem;
+  border: 0;
+  background-color: #eff1f4;
+  background-image: url(../images/noise.png);
+  color: #ee4949;
+}
+#add-friend input:focus {
+  outline: none;
+}
+#add-friend > div {
+  margin: 2rem 0;
+}
+#add-friend > div > div {
+  position: relative;
+  margin-top: 1rem;
+}
+#add-friend > div > div input {
+  width: 100%;
+  box-sizing: border-box;
+}
+#add-friend > div > div button {
+  border: 0;
+  padding: 0.7rem 1rem;
+  border-radius: 3rem;
+  box-shadow: 0 1px 2.2px rgba(0, 0, 0, 0.02), 0 2.3px 5.3px rgba(0, 0, 0, 0.028), 0 4.4px 10px rgba(0, 0, 0, 0.035), 0 7.8px 17.9px rgba(0, 0, 0, 0.042), 0 14.6px 33.4px rgba(0, 0, 0, 0.05), 0 35px 80px rgba(0, 0, 0, 0.07);
+  box-sizing: border-box;
+  background-color: rgba(0, 0, 0, 0.225);
+  border-radius: 0.3rem;
+  padding: 0.3rem 0.6rem;
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fbfcff;
+}
+#add-friend > div > div button:focus {
+  outline: none;
+}
+#add-friend .divider {
+  position: relative;
+  display: block;
+  margin: 1rem 0;
+  width: 100%;
+  text-align: center;
+}
+#add-friend .divider::before, #add-friend .divider::after {
+  content: "";
+  position: absolute;
+  background-color: #8f8389;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40%;
+  height: 1px;
+}
+#add-friend .divider::before {
+  left: 0;
+}
+#add-friend .divider::after {
+  right: 0;
+}
+#add-friend form {
+  display: flex;
+}
+#add-friend form input {
+  flex-grow: 3;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+#add-friend form button {
+  border: 0;
+  padding: 0.7rem 1rem;
+  border-radius: 3rem;
+  box-shadow: 0 1px 2.2px rgba(0, 0, 0, 0.02), 0 2.3px 5.3px rgba(0, 0, 0, 0.028), 0 4.4px 10px rgba(0, 0, 0, 0.035), 0 7.8px 17.9px rgba(0, 0, 0, 0.042), 0 14.6px 33.4px rgba(0, 0, 0, 0.05), 0 35px 80px rgba(0, 0, 0, 0.07);
+  box-sizing: border-box;
+  background-color: #aed581;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  flex-grow: 1;
+}
+#add-friend form button:focus {
+  outline: none;
+}
+
 #main-notification {
   box-shadow: 0 1px 2.2px rgba(0, 0, 0, 0.02), 0 2.3px 5.3px rgba(0, 0, 0, 0.028), 0 4.4px 10px rgba(0, 0, 0, 0.035), 0 7.8px 17.9px rgba(0, 0, 0, 0.042), 0 14.6px 33.4px rgba(0, 0, 0, 0.05), 0 35px 80px rgba(0, 0, 0, 0.07);
   position: fixed;
