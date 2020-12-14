@@ -41,6 +41,10 @@ function initMain() {
         .then(history => {
             loadRecentTrips(history);
         });
+    getUserInfo()
+        .then(userInfo => {
+            checkForFriendRequests(userInfo);
+        })
     
     friendsInit();
 }

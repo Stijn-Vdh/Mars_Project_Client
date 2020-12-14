@@ -72,6 +72,7 @@ function login(e) {
             } else {
                 localStorage.setItem('token', response);
                 goTo('main');
+                clearNavigationHistory();
                 notify('Welcome back');
             }
         })
@@ -106,10 +107,24 @@ function register(e) {
         })
 }
 
-function addFriend(e) {
-    e.preventDefault();
+function addFriend(e=null) {
+    if (typeof e !== 'string') e.preventDefault();
 
-    apiCall(`friend/${document.querySelector('#friend-name').value}`, 'POST', true)
+    apiCall(`friend/${typeof e === 'string' ? e: document.querySelector('#friend-name').value}`, 'POST', true)
+        .then((response) => {
+            if (response.status === 401 || response.status === 403) {
+                warn(response.message);
+            } else {
+                notify(response);
+                goBack();
+            }
+        });
+}
+
+function removeFriend(e=null) {
+    if (typeof e !== 'string') e.preventDefault();
+
+    apiCall(`friend/${typeof e === 'string' ? e: e.currentTarget.getAttribute('data-remove-friend')}`, 'DELETE', true)
         .then((response) => {
             if (response.status === 401 || response.status === 403) {
                 warn(response.message);

@@ -504,7 +504,6 @@
 }
 
 #notifications {
-  pointer-events: none;
   z-index: 200;
   position: relative;
   padding-top: 0.5rem;
@@ -538,6 +537,22 @@
   font-size: 0.9rem;
   margin-left: 2.5rem;
 }
+#notifications .notification.prompt p {
+  flex-grow: 1;
+}
+#notifications .notification button {
+  background: transparent;
+  border: 0;
+}
+#notifications .notification button:focus {
+  outline: none;
+}
+#notifications .notification button.accept {
+  color: #aed581;
+}
+#notifications .notification button.deny {
+  color: #ee4949;
+}
 #notifications .notification.danger::before {
   background-image: linear-gradient(90deg, #782a2a 0%, #673334 11%, #4d262a 22%, #112233 45%);
 }
@@ -549,6 +564,7 @@
 }
 #notifications .notification::before {
   content: "";
+  pointer-events: none;
   position: absolute;
   width: 100%;
   height: 100%;

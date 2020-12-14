@@ -33,9 +33,14 @@ function addPage(selector, activators=[], options={}) {
     })
 }
 
+function clearNavigationHistory() {
+    pageHistory.splice(0);
+    pageHistory.push(pages['main']);
+}
+
 function goBack(e=null) {
     if (e !== null) e.preventDefault();
-    if (pageHistory.splice(pageHistory.length - 1, 1)[0].leave()) {
+    if (pageHistory.length > 1 && pageHistory.splice(pageHistory.length - 1, 1)[0].leave()) {
         pageHistory[pageHistory.length - 1].goto();
     }
 }
