@@ -4,7 +4,7 @@ function initSearchbar() {
     document.querySelectorAll(".searchbar").forEach(el => loadSearchbar(el));
     document.querySelectorAll(".searchbar > input").forEach(el => el.updateEventListener('focusin', toggleFocus));
     document.querySelectorAll(".searchbar > input").forEach(el => el.updateEventListener('focusout', toggleFocus));
-    document.querySelectorAll(".searchbar > input").forEach(el => el.updateEventListener('input', ));
+    document.querySelectorAll(".searchbar > input").forEach(el => el.updateEventListener('input',  loadSearchbar));
 }
 
 function toggleFocus(e) {
