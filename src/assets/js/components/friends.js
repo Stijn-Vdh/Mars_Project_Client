@@ -28,6 +28,7 @@ function initFriendSettings() {
 
 function initAddFriend() {
     document.querySelectorAll('#copy-name, #own-name').forEach(el => el.updateEventListener('click', copyName));
+    document.querySelector('#add-friend form').updateEventListener('submit', addFriend);
 }
 
 function copyName(e) {

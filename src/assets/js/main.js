@@ -2,14 +2,6 @@
 
 let config;
 let endpoints;
-let dragStarted = false;
-let dragInitialized = false;
-let dragInfo = {
-    started: false,
-    initialized: false,
-    startPos: null,
-    prevPos: null
-};
 
 document.addEventListener("DOMContentLoaded", init);
 

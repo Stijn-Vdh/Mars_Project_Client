@@ -106,6 +106,20 @@ function register(e) {
         })
 }
 
+function addFriend(e) {
+    e.preventDefault();
+
+    apiCall(`friend/${document.querySelector('#friend-name').value}`, 'POST', true)
+        .then((response) => {
+            if (response.status === 401 || response.status === 403) {
+                warn(response.message);
+            } else {
+                notify(response);
+                goBack();
+            }
+        });
+}
+
 function orderPod(e) {
     e.preventDefault();
 
@@ -157,7 +171,7 @@ function getMessage() {
  * @return {Promise}            request promise containing endpoint array.
  */
 function getEndpoints() {
-    return apiCall("endpoints", 'GET')
+    return apiCall("endpoint", 'GET')
 }
 
 function getTravelHistory() {
