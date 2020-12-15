@@ -14,7 +14,6 @@ function initSubscription() {
                 subscriptionListElement.querySelectorAll('li').forEach(li => {
                     li.addEventListener('click', () => {
                         mttsPrompt(`Are you sure you want to change subscription to ${li.getAttribute('data-name')}`, () => {
-                            notify('Changed');
                             changeSubscription(li.getAttribute('id'),li.getAttribute('data-name'));
                         }, () => {
                             goBack();
@@ -47,7 +46,7 @@ function changeSubscription(id, subName){
                 }, 5500);
             } else {
                 document.querySelector('#process-payment .checkmark').classList.add('active', 'success');
-                document.querySelector('#payment-response').innerHTML = `Successfully bought subscription #${subName}.`;
+                document.querySelector('#payment-response').innerHTML = `Successfully bought subscription ${subName}.`;
                 setTimeout(() => {
                     goTo('main');
                     document.querySelector('#process-payment .checkmark').classList.remove('active', 'success')
