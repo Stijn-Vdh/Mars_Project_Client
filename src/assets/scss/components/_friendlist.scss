@@ -1,4 +1,4 @@
-@import '../variables';
+@use '../util';
 
 #friendlist {
     padding: 0 2rem;
@@ -9,18 +9,12 @@
         li {
             flex-shrink: 0;
             margin: 1rem 0;
+            text-align: center;
 
-            figure {
-                text-align: center;
-
-                img {
-                    width: 4rem;
-                    border-radius: 50%;
-                }
-            }
+            @include util.user-icon(4rem);
 
             .add {
-                background-color: $background-secondary;
+                background-color: util.$background-secondary;
                 width: 4rem;
                 height: 4rem;
                 border-radius: 50%;

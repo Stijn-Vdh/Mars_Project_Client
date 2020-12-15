@@ -24,6 +24,8 @@
         width: 100%;
         @include util.shadow;
 
+        @include util.user-icon(1rem);
+
         & > li {
             padding: 1rem;
 

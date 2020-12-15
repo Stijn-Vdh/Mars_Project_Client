@@ -33,9 +33,10 @@ function updateSettings() {
 }
 
 function generateUserIcon(user) {
+    const name = typeof user === "string" ? user : user.displayName;
     return `
     <div class="user-icon">
-        <h2>${user.displayName.split(' ')[0].slice(0, 1)}${user.displayName.split(' ').length > 1 ? user.displayName.split(' ')[1].slice(0, 1)[0]: ''}</h2>
+        <h2>${name.split(' ')[0].slice(0, 1)}${name.split(' ').length > 1 ? name.split(' ')[1].slice(0, 1)[0]: ''}</h2>
     </div>`;
 }
 
