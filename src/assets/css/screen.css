@@ -1085,7 +1085,7 @@
   line-height: 8rem;
   font-size: 2rem;
   color: white;
-  text-transform: capitalize;
+  text-transform: uppercase;
 }
 #settings header .user-icon-wrapper h3 {
   margin-top: 0.5rem;
