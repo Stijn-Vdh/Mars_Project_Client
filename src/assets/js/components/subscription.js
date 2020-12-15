@@ -15,6 +15,7 @@ function initSubscription() {
                     li.addEventListener('click', () => {
                         mttsPrompt(`Are you sure you want to change subscription to ${li.getAttribute('data-name')}`, () => {
                             notify('Changed');
+                            changeSubscription(li.getAttribute('id'));
                             goBack();
                         }, () => {
                             goBack();
@@ -24,6 +25,16 @@ function initSubscription() {
 
             })
         });
+}
 
-
+function changeSubscription(id){
+    let subID = parseInt(id.substr(13));
+    apiCall('subscription', 'POST', true, {subscriptionId:subID})
+        .then(response=>{
+            if (response.status === 401 || response.status === 403) {
+                warn(response.message);
+            } else {
+                notify(response);
+            }
+        });
 }
