@@ -25,7 +25,7 @@ function initNotificationSocket() {
 }
 
 function packageReceived(error, message) {
-    const msg;
+    const msg = ``;
 }
 
 function travelPodArrived(error, message) {
