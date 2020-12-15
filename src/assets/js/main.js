@@ -69,6 +69,7 @@ function addPages() {
                 loadHomeEndpointList();
             })
     }});
+    addPage('#subscription-settings', ['li[data-open-setting="subscription-settings"', '#edit-subscription'], {onOpen: initSubscription})
 }
 
 function closeModal(e) {
