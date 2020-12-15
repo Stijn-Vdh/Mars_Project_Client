@@ -68,13 +68,13 @@ function mttsPrompt(message, accept, deny) {
 
     notificationElement.querySelector('.accept').updateEventListener('click', (e) => {
         e.preventDefault();
-        accept();
         notificationElement.remove();
+        accept();
     });
     notificationElement.querySelector('.deny').updateEventListener('click', (e) => {
         e.preventDefault();
-        deny();
         notificationElement.remove();
+        deny();
     });
 }
 

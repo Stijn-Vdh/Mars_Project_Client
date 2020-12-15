@@ -144,11 +144,21 @@
         </header>
         <ul>
             <li data-open-setting="account-settings">Account information<ion-icon name="chevron-forward-outline"></ion-icon></li>
-            <li>Subscriptions<ion-icon name="chevron-forward-outline"></ion-icon></li>
+            <li data-open-setting="subscription-settings">Subscriptions<ion-icon name="chevron-forward-outline"></ion-icon></li>
             <li data-open-setting="friends-settings">Friends<ion-icon name="chevron-forward-outline"></ion-icon></li>
             <li>Quick access<ion-icon name="chevron-forward-outline"></ion-icon></li>
             <li>Notifications<ion-icon name="chevron-forward-outline"></ion-icon></li>
             <li data-open-setting="report">Report an issue<ion-icon name="chevron-forward-outline"></ion-icon></li>
+        </ul>
+    </aside>
+
+    <aside id="subscription-settings">
+        <header>
+            <h2>Subscription</h2>
+            <button class="back"><ion-icon name="chevron-back-outline"></ion-icon></button>
+        </header>
+        <ul>
+            
         </ul>
     </aside>
 
@@ -174,7 +184,7 @@
                     <a href="#" id="edit-password">Change password</a>
                 </div>
             </li>
-            <li id="subscription-settings">
+            <li id="subscription-setting-change">
                 <h3>Subscription</h3>
                 <p></p>
                 <a href="#" id="edit-subscription">Edit</a>
@@ -300,6 +310,7 @@
     <script src="assets/js/components/report.js"></script>
     <script src="assets/js/components/searchbar.js"></script>
     <script src="assets/js/components/settings.js"></script>
+    <script src="assets/js/components/subscription.js"></script>
     <script src="assets/js/components/user.js"></script>
     <script src="assets/js/main.js"></script>
     
