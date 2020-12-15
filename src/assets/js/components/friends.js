@@ -2,22 +2,16 @@
 
 let friends = [];
 
-function friendsInit() {
-    loadFriends();
-}
-
-function loadFriends() {
-    friends = getFriends();
-
+function loadFriends(userInfo) {
     document.querySelector('#friendlist > ul').innerHTML = `
     <li>
-        <button class="add">
+        <button class="add add-friend">
             <ion-icon name="add-outline"></ion-icon>
         </button>
     </li>
     `;
 
-    friends.forEach(friend => {
+    userInfo.friends.forEach(friend => {
         document.querySelector('#friendlist > ul').innerHTML += friendListItem(friend);
     })
 }

@@ -20,7 +20,7 @@ function recentTrip(route) {
 function friendSetting(friend) {
     return `
     <ul>
-        <li><div class="user-icon" data-user="${friend}"></div></li>
+        <li>${generateUserIcon(friend)}</li>
         <li>${friend}</li>
         <li><button data-remove-friend="${friend}"><ion-icon name="person-remove-outline"></ion-icon></button></li>
     </ul>
@@ -30,10 +30,8 @@ function friendSetting(friend) {
 function friendListItem(friend) {
     return `
     <li>
-        <figure>
-            <img src="${friend.icon}" alt="User Image">
-            <figcaption>${friend.name}</figcaption>
-        </figure>
+        ${generateUserIcon(friend)}
+        <p>${friend}</p>
     </li>
     `;
 }

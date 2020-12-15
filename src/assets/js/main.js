@@ -44,9 +44,8 @@ function initMain() {
     getUserInfo()
         .then(userInfo => {
             checkForFriendRequests(userInfo);
+            loadFriends(userInfo);
         })
-    
-    friendsInit();
 }
 
 function addPages() {
