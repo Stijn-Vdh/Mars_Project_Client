@@ -1228,6 +1228,17 @@
 
 body {
   background-color: #fbfcff;
+}
+
+body main #map {
+  background-color: #7ac142;
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+}
+
+body {
+  background-color: #fbfcff;
   width: 100vw;
   height: 100vh;
   overflow: hidden;

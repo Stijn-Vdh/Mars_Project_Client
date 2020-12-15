@@ -28,6 +28,8 @@ async function init() {
     // navigator.serviceWorker.register('/service-worker.js', {
     //     scope: '/'
     // });
+
+    initMap();
 }
 
 function initMain() {
