@@ -1,0 +1,143 @@
+@use '../util';
+
+#friends-settings {
+    @include util.side-view(right);
+    @include util.default-side-view-header {
+        .add-friend {
+            position: absolute;
+            right: 1rem;
+            bottom: 1rem;
+            width: 2rem;
+            height: 2rem;
+            border: 0;
+            background-color: transparent;
+            font-weight: bold;
+            font-size: 1rem;
+
+            &:focus {
+                outline: none;
+            }
+        }
+    };
+
+    & > ul {
+        width: 100%;
+        @include util.shadow;
+
+        & > li {
+            padding: 1rem;
+
+            &:nth-child(even) {
+                background-color: util.$background-secondary;
+            }
+
+            ul {
+                display: flex;
+                align-items: center;
+
+                li:nth-child(2) {
+                    flex-grow: 1;
+                    margin: 0 1rem;
+                }
+
+                button {
+                    border: 0;
+                    background-color: transparent;
+                    font-weight: bold;
+                    font-size: 1rem;
+                }
+            }
+        }
+    }
+}
+
+#add-friend {
+    @include util.modal;
+    @include util.default-side-view-header {
+        padding: 5rem 0;
+        font-size: 1.6rem;
+    }
+
+    input {
+        padding: .8rem;
+        border-radius: .3rem;
+        border: 0;
+        background-color: util.$background-secondary;
+        background-image: url(../images/noise.png);
+        color: util.$accent-red;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    & > div {
+        margin: 2rem 0;
+
+        & > div {
+            position: relative;
+            margin-top: 1rem;
+
+            input {
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            button {
+                @include util.button;
+
+                background-color: rgba(0,0,0,.225);
+                border-radius: 0.3rem;
+                padding: 0.3rem 0.6rem;
+                position: absolute;
+                right: 1rem;
+                top: 50%;
+                transform: translateY(-50%);
+                color: util.$background-primary;
+            }
+        }
+    }
+
+    .divider {
+        position: relative;
+        display: block;
+        margin: 1rem 0;
+        width: 100%;
+        text-align: center;
+
+        &::before, &::after {
+            content: '';
+            position: absolute;
+            background-color: util.$text-secondary;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40%;
+            height: 1px;
+        }
+
+        &::before {
+            left: 0;
+        }
+
+        &::after {
+            right: 0;
+        }
+    }
+
+    form {
+        display: flex;
+        input {
+            flex-grow: 3;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        button {
+            @include util.button;
+            background-color: util.$accent-green;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            flex-grow: 1;
+        }
+    }
+}

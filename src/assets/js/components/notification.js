@@ -6,6 +6,22 @@ function notify(message) {
     sendNotification('success', message);
 }
 
+function mttsPrompt(message, accept, deny) {
+    const notificationId = sendNotification('prompt', message),
+        notificationElement = document.querySelector(`#notification-${notificationId}`);
+
+    notificationElement.querySelector('.accept').updateEventListener('click', (e) => {
+        e.preventDefault();
+        accept();
+        notificationElement.remove();
+    });
+    notificationElement.querySelector('.deny').updateEventListener('click', (e) => {
+        e.preventDefault();
+        deny();
+        notificationElement.remove();
+    });
+}
+
 function warn(message) {
     sendNotification('warn', message);
 }
@@ -14,24 +30,34 @@ function error(message) {
     sendNotification('danger', message);
 }
 
-function sendNotification(type, message) {
+function sendNotification(type, message, isPrompt=false) {
     notificationId++;
     const thisId = notificationId;
     const icon = type === 'danger' ? 'alert': type === 'warn' ? 'help': 'checkmark';
 
+    const buttons = `
+    <button class="accept"><ion-icon name="checkmark-outline"></ion-icon></button>
+    <button class="deny"><ion-icon name="close-outline"></ion-icon></button>
+    `
+
     document.querySelector('#notifications').innerHTML += `
     <div id="notification-${thisId}" class="notification ${type}">
-        <ion-icon name="${icon}-outline"></ion-icon>
+        ${type !== 'prompt' ? `<ion-icon name="${icon}-outline"></ion-icon>`: ''}
         <p>${message}</p>
+        ${type === 'prompt' ? buttons: ''}
     </div>`;
 
     setTimeout(() => {
         document.querySelector(`#notification-${thisId}`).style.transform = 'translateX(0vw)';
     }, 100);
 
-    setTimeout(() => {
-        hideNotification(thisId);
-    }, 5000)
+    if (type !== 'prompt') {
+        setTimeout(() => {
+            hideNotification(thisId);
+        }, 5000)
+    } else {
+        return thisId;
+    }
 }
 
 // function checkQueue() {
