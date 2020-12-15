@@ -70,6 +70,7 @@ function login(e) {
             if (response.status === 402) {
                 warn(response.message);
             } else {
+                checkNotificationPermissions();
                 localStorage.setItem('token', response);
                 goTo('main');
                 clearNavigationHistory();
@@ -140,7 +141,7 @@ function orderPod(e) {
 
     const body = {
         from: 1,
-        destination: e.target.querySelector('#select-location').value,
+        destination: parseInt(e.target.querySelector('#select-location').value),
         podType: e.target.querySelector('#selected-pod').value
     }
 

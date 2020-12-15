@@ -17,6 +17,7 @@ function initAuthentication() {
                 if (response.status === 403) {
                     goTo('#authentication');
                 } else {
+                    initNotificationSocket();
                     goTo('main');
                 }
             });

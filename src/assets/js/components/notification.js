@@ -2,6 +2,45 @@
 
 let notificationId = 0;
 
+const CHNL_TO_SERVER = "events.to.server";
+const EVENTBUS_PATH = "https://project-ii.ti.howest.be/mars-15/events";
+const CHNL_TO_CLIENT_NOTIFICATION = "events.client.";
+const domains = {
+    pack: "PACKAGE_POD_RECEIVED",
+    pod: "TRAVEL_POD_ARRIVAL",
+    rec: "PACKAGE_POD_ARRIVAL"
+};
+let eb;
+
+function initNotificationSocket() {
+    eb = new EventBus(EVENTBUS_PATH);
+
+    eb.onopen = function () {
+        eb.registerHandler(CHNL_TO_CLIENT_NOTIFICATION + localStorage.getItem('token') + "." + domains.pack, onMessage);
+        eb.registerHandler(CHNL_TO_CLIENT_NOTIFICATION + localStorage.getItem('token') + "." + domains.pod, onMessage);
+        eb.registerHandler(CHNL_TO_CLIENT_NOTIFICATION + localStorage.getItem('token') + "." + domains.rec, onMessage);
+    };
+}
+
+function onMessage(error, message) {
+    const msg = `Your pod to ${message.body.id} has arrived`;
+    if (document.hasFocus()) {
+        notify(msg)
+    } else {
+        new Notification(msg);
+    }
+}
+
+function checkNotificationPermissions() {
+    if (!("Notification" in window)) return;
+    if (Notification.permission === "granted") return;
+    if (Notification.permission !== "denied") Notification.requestPermission();
+}
+
+function sendToServer(message) {
+    eb.send(CHNL_TO_SERVER, message);
+}
+
 function notify(message) {
     sendNotification('success', message);
 }
