@@ -29,13 +29,7 @@ function changeSubscription(id, subName){
     let subID = parseInt(id.substr(13));
     apiCall('subscription', 'POST', true, {subscriptionId:subID})
         .then(response=>{
-            if (response.status === 401 || response.status === 403) {
-                warn(response.message);
-            } else {
-                notify(response);
-            }
             goTo('#process-payment');
-
             if (response.status === 401 || response.status === 403) {
                 document.querySelector('#process-payment .checkmark').classList.add('active', 'error');
                 document.querySelector('#payment-response').innerHTML = response.message;
@@ -46,7 +40,7 @@ function changeSubscription(id, subName){
                 }, 5500);
             } else {
                 document.querySelector('#process-payment .checkmark').classList.add('active', 'success');
-                document.querySelector('#payment-response').innerHTML = `Successfully bought subscription ${subName}.`;
+                document.querySelector('#payment-response').innerHTML = `Successfully bought subscription #${subName}.`;
                 setTimeout(() => {
                     goTo('main');
                     document.querySelector('#process-payment .checkmark').classList.remove('active', 'success')
