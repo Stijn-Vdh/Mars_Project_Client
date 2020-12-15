@@ -23,6 +23,10 @@
             &.active {
                 background-color: util.$accent-green;
             }
+            p{
+                text-align: right;
+                float: right;
+            }
         }
     }
 }

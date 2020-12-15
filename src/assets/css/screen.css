@@ -1181,6 +1181,10 @@
 #subscription-settings ul li.active {
   background-color: #aed581;
 }
+#subscription-settings ul li p {
+  text-align: right;
+  float: right;
+}
 
 #account-settings {
   z-index: 10;
