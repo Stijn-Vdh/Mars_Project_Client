@@ -4,7 +4,7 @@ let packageEndpoints;
 
 function initPackage() {
     document.querySelector('#select-package-order ion-icon').addEventListener('click', swap);
-    document.querySelector('#select-package-order').addEventListener('click', orderPackagePod);
+    //document.querySelector('#select-package-order').addEventListener('submit', orderPackagePod);
 
     getPackageEndpoints()
         .then(response =>{
@@ -16,6 +16,7 @@ function initPackage() {
 function initEndpoints(){
     document.querySelectorAll(".packageSearch").forEach(el => loadPackageEndpoints(el));
     loadPackageEndpoints();
+
 }
 
 function swap(){
@@ -26,6 +27,7 @@ function swap(){
     document.querySelector('#p-destination').value = from;
 }
 
+
 function loadPackageEndpoints() {
     let endpointsToShow = [...packageEndpoints];
     let selectDestination = document.querySelector('#select-package-order #p-destination')
@@ -35,8 +37,8 @@ function loadPackageEndpoints() {
     selectFrom.innerHTML = "";
 
     endpointsToShow.forEach(endpoint => {
-        selectDestination.innerHTML += `<option data-order-Packagepod="${endpoint.id}" id="orderPackage-endpoint-${endpoint.id}">${endpoint.name}</option>`;
-        selectFrom.innerHTML += `<option data-order-Packagepod="${endpoint.id}" id="orderPackage-endpoint-${endpoint.id}">${endpoint.name}</option>`;
+        selectDestination.innerHTML += `<option data-order-Packagepod="${endpoint.id}" id="orderPackage-${endpoint.id}">${endpoint.name}</option>`;
+        selectFrom.innerHTML += `<option data-order-Packagepod="${endpoint.id}" id="orderPackage-${endpoint.id}">${endpoint.name}</option>`;
     });
 }
 
