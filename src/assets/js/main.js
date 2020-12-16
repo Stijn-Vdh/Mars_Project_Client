@@ -61,7 +61,7 @@ function addPages() {
     addPage('#friends-settings', ['li[data-open-setting="friends-settings"]'], {onOpen: initFriendSettings});
     addPage('#add-friend', ['.add-friend'], {onOpen: initAddFriend});
     addPage('#report', ['li[data-open-setting="report"]'], {onOpen: initReport});
-    addPage('#pod-order-view', ['*[data-order-pod]'], {dynamicData: true});
+    addPodOrderPage('#pod-order-view', ['*[data-order-pod]'], {});
     addPage('#process-payment', ['*[data-order-pod]']);
     addPage('#authentication', []);
     addPage('#signin', ['#open-signin']);

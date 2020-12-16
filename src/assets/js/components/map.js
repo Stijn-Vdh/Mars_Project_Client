@@ -20,8 +20,8 @@ function initMap() {
     }).addTo(map)
 
     //show the center
-    const marker = L.marker([52.468728, -2.025817]).addTo(map);
-    marker.bindTooltip("CENTER",).openTooltip();
+    //const marker = L.marker([52.468728, -2.025817]).addTo(map);
+    //marker.bindTooltip("CENTER",).openTooltip();
 
     //limit the map to these bounds
     const northEast = L.latLng(53, -1.5);
@@ -114,8 +114,8 @@ function debounce() {
 
 function travelTo() {
     if (debounce()) return;
-    const p = document.createElement("p");
-    p.setAttribute("data-order-pod", this.options.endpointId);
-    p.innerHTML = this.options.endpointName
-    goTo('#pod-order-view', p);
+    goTo('#pod-order-view', {
+        id : this.options.endpointId,
+        name : this.options.endpointName
+    });
 }
