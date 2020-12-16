@@ -6,14 +6,19 @@
     <title>Mars Concept Title goes here</title>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Roboto:wght@300;400;700&display=swap"
+          rel="stylesheet">
 
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/screen.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+          integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+          crossorigin=""/>
 
     <link rel="manifest" href="manifest.webmanifest" crossorigin="use-credentials">
 </head>
 <body>
+
     <main>
         <div class="searchbar">
             <label for="searchBox-1"><ion-icon name="search-outline"></ion-icon></label>
@@ -97,230 +102,360 @@
         </form>
     </aside>
 
-    <aside id="signup">
+<main>
+    <div id="map">
+
+
+    </div>
+    <div class="searchbar">
+        <label for="searchBox-1">
+            <ion-icon name="search-outline"></ion-icon>
+        </label>
+        <input type="text" id="searchBox-1" name="searchbox" placeholder="Where are we going?">
+        <ul>
+        </ul>
+    </div>
+    <section id="quick-access">
         <header>
-            <h2>Sign up</h2>
-            <button class="back"><ion-icon name="chevron-back-outline"></ion-icon></button>
+            <h2>GREETINGS</h2>
+            <h3>Name</h3>
         </header>
-        <div class="searchHomeEndpoint">
-            <input type="text" name="homeEndpoint" id="homeEndpoint">
+        <article id="recent-trips">
+            <h2>Recent trips</h2>
             <ul>
-                <li>test</li>
-                <li>test</li>
+                <li>
+                    <h2>Work</h2>
+                    <h3>Yesterday</h3>
+                    <div>
+                        <p class="from">Home</p>
+                        <p class="to">Home</p>
+                        <p class="totalTravelTime">1 min</p>
+                    </div>
+                </li>
+                <li></li>
+                <li></li>
             </ul>
-        </div>
-        <form action="signup" method="post">
-            <fieldset>
-                <label for="su-name"><ion-icon name="person-circle-outline"></ion-icon></label>
-                <input type="text" name="su-name" id="su-name" placeholder="Jane" required>
-            </fieldset>
-            <div>
-                <fieldset>
-                    <label for="su-address"><ion-icon name="home-outline"></ion-icon></label>
-                    <input type="text" name="su-address" id="su-address" placeholder="House 15" required>
-                </fieldset>
-                <fieldset>
-                    <label for="su-homeEndpointName"><ion-icon name="flag-outline"></ion-icon></label>
-                    <input type="text" name="su-homeEndpointName" id="su-homeEndpointName" placeholder="1" required>
-                </fieldset>
-            </div>
-            <fieldset>
-                <label for="su-password"><ion-icon name="lock-closed-outline"></ion-icon></label>
-                <input type="password" name="su-password" id="su-password" placeholder="••••••••" required>
-            </fieldset>
-            <fieldset class="checkbox">
-                <label for="su-password">Business account</label>
-                <input type="checkbox" name="su-business" id="su-business">
-            </fieldset>
-            
-            <button type="submit">Sign up</button>
-        </form>
-    </aside>
-
-    <aside id="settings">
-        <header>
-            <button class="back"><ion-icon name="chevron-back-outline"></ion-icon></button>
-            <button class="achievements"><ion-icon name="ribbon-outline"></ion-icon></button>
-            <h2>GREETING Name</h2>
-            <div class="user-icon-wrapper">
-                <div class="user-icon">
-
-                </div>
-                <h3>no subscription active</h3>
-            </div>
-        </header>
-        <ul>
-            <li data-open-setting="account-settings">Account information<ion-icon name="chevron-forward-outline"></ion-icon></li>
-            <li data-open-setting="subscription-settings">Subscriptions<ion-icon name="chevron-forward-outline"></ion-icon></li>
-            <li data-open-setting="friends-settings">Friends<ion-icon name="chevron-forward-outline"></ion-icon></li>
-            <li>Quick access<ion-icon name="chevron-forward-outline"></ion-icon></li>
-            <li>Notifications<ion-icon name="chevron-forward-outline"></ion-icon></li>
-            <li data-open-setting="report">Report an issue<ion-icon name="chevron-forward-outline"></ion-icon></li>
-        </ul>
-    </aside>
-
-    <aside id="subscription-settings">
-        <header>
-            <h2>Subscription</h2>
-            <button class="back"><ion-icon name="chevron-back-outline"></ion-icon></button>
-        </header>
-        <ul>
-            
-        </ul>
-    </aside>
-
-    <aside id="account-settings">
-        <header>
-            <h2>Account</h2>
-            <button class="back"><ion-icon name="chevron-back-outline"></ion-icon></button>
-        </header>
-        <ul>
-            <li id="name-settings">
-                <h3>Name</h3>
-                <p></p>
-                <input type="text" id="new-name" class="hidden">
-                <a href="#" id="edit-name">Edit</a>
-            </li>
-            <li id="password-settings">
-                <h3>Password</h3>
-                <div class="hidden">
-                    <label for="current-pwd">Current password</label>
-                    <input type="password" id="current-pwd">
-                    <label for="new-pwd">New password</label>
-                    <input type="password" id="new-pwd">
-                    <a href="#" id="edit-password">Change password</a>
-                </div>
-            </li>
-            <li id="subscription-setting-change">
-                <h3>Subscription</h3>
-                <p></p>
-                <a href="#" id="edit-subscription">Edit</a>
-            </li>
-            <!-- <li id="business-settings">
-                <h3>Business user</h3>
-                <input type="checkbox" id="edit-business-user">
-            </li> -->
-        </ul>
-        <button id="update-account">Update account settings</button>
-    </aside>
-
-    <aside id="friends-settings" class="">
-        <header>
+        </article>
+        <article id="friendlist">
             <h2>Friends</h2>
-            <button class="back"><ion-icon name="chevron-back-outline"></ion-icon></button>
-            <button class="add-friend"><ion-icon name="person-add-outline"></ion-icon></button>
-        </header>
-        <ul>
-        </ul>
-    </aside>
+            <ul>
+                <li>
+                    <button class="add">
+                        <ion-icon name="add-outline"></ion-icon>
+                    </button>
+                </li>
+            </ul>
+        </article>
+        <input type="button" id="send-package" value="Send Package">
+        <h4>Shared locations</h4>
+        <button id="open-settings">Settings</button>
+    </section>
+</main>
 
-    <aside id="report">
-        <header>
-            <h2>Report an issue</h2>
-            <button class="back"><ion-icon name="chevron-back-outline"></ion-icon></button>
-        </header>
-        <form action="#" method="post">
-            <label for="select-type">Category</label>
-            <select name="select-type" id="select-type">
-                <option>Pod ordering / arrival</option>
-                <option>Menu usage</option>
-                <option>Account information</option>
-                <option>Billing</option>
-                <option>Other</option>
-            </select>
-            <label for="reason">Tell us about the issue</label>
-            <textarea name="reason" id="reason"></textarea>
-            <button>Send report</button>
-        </form>
-    </aside>
-
-    <aside id="pod-order-view">
-        <button class="back"><ion-icon name="close-outline"></ion-icon></button>
-        <form id="select-travel-location" action="#" method="post">
-            <label for="select-location-text">Travel to</label>
-            <input type="hidden" disabled id="select-location">
-            <input type="text" disabled id="select-location-text" value="Location">
-
-            <h2>Pod type</h2>
-            <div id="pod-select">
-                <input type="hidden" id="selected-pod" value="standard">
-                <div id="standard-pod" class="active">
-                    <h2>Normal pod</h2>
-                </div>
-                <div id="luxury-pod">
-                    <h2>Luxury pod</h2>
-                </div>
-            </div>
-
-            <div class="btn-group first">
-                <input type="checkbox" id="bank" name="paymentMethod" value="bank">
-                <label for="bank">Pay with martian bank</label>
-            </div>
-            <div class="btn-group">
-                <input type="checkbox" id="reward-points" name="paymentMethod" value="rewardPoints">
-                <label for="reward-points">Pay with reward points</label>
-            </div>
-
-            <h2 id="pod-pricing">You current total is <span>M2</span></h2>
-
-            <input type="submit" value="Order pod" id="order-pod">
-        </form>
-    </aside>
-
-    <aside id="process-payment">
-        <header>
-            <h2>Checking payment</h2>
-        </header>
-        <svg class="checkmark loading" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-            <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
-            <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
-            <path class="checkmark__error" fill="none" d="M17.244224,17 L35.4279902,35.1837662"></path>
-            <path class="checkmark__error" fill="none" d="M35.755776,17 L17.244224,35.8443492"></path>
-        </svg>
-        <span id="payment-response"></span>
-    </aside>
-
-    <aside id="add-friend">
-        <header>
-            <h2>Add a friend</h2>
-            <button class="back"><ion-icon name="chevron-back-outline"></ion-icon></button>
-        </header>
-        <div>
-            <form action="add-friend">
-                <input type="text" name="friend-name"  id="friend-name" placeholder="Jane" autocomplete="off" data-lpignore="true">
-                <button type="submit">add</button>
-            </form>
-            <span class="divider">Or</span>
-            <p>Let them add you</p>
-            <div>
-                <input type="text" name="own-name" id="own-name" value="test" data-lpignore="true">
-                <button id="copy-name">COPY</button>
-            </div>
-
+<aside id="authentication">
+    <header>
+        <div class="globe">
+            <img src="./assets/images/tmp-icon.png" alt="MTTS">
         </div>
-    </aside>
+    </header>
+    <div class="content">
+        <button id="open-signin">Sign in</button>
+        <p>Or</p>
+        <button id="open-signup">Sign up</button>
+    </div>
+</aside>
 
-    <aside id="notifications">
-    </aside>
+<aside id="signin">
+    <header>
+        <h2>Sign in</h2>
+        <button class="back">
+            <ion-icon name="chevron-back-outline"></ion-icon>
+        </button>
+    </header>
+    <form action="signin" method="post">
+        <fieldset>
+            <label for="si-name">
+                <ion-icon name="person-circle-outline"></ion-icon>
+            </label>
+            <input type="text" name="si-name" id="si-name" placeholder="Jane" required>
+        </fieldset>
+        <fieldset>
+            <label for="si-password">
+                <ion-icon name="lock-closed-outline"></ion-icon>
+            </label>
+            <input type="password" name="si-password" id="si-password" placeholder="••••••••" required>
+        </fieldset>
 
-    <script src="https://cdn.jsdelivr.net/sockjs/0.3.4/sockjs.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vertx/3.5.4/vertx-eventbus.min.js"></script>
+        <button type="submit">Sign in</button>
+    </form>
+</aside>
 
-    <script src="assets/js/templates.js"></script>
-    <script src="assets/js/api.js"></script>
-    <script src="assets/js/components/authentication.js"></script>
-    <script src="assets/js/components/friends.js"></script>
-    <script src="assets/js/components/navigation.js"></script>
-    <script src="assets/js/components/notification.js"></script>
-    <script src="assets/js/components/pod-order.js"></script>
-    <script src="assets/js/components/quick-access.js"></script>
-    <script src="assets/js/components/report.js"></script>
-    <script src="assets/js/components/searchbar.js"></script>
-    <script src="assets/js/components/settings.js"></script>
-    <script src="assets/js/components/subscription.js"></script>
-    <script src="assets/js/components/user.js"></script>
-    <script src="assets/js/main.js"></script>
-    
-    <script type="module" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.esm.js"></script>
+<aside id="signup">
+    <header>
+        <h2>Sign up</h2>
+        <button class="back">
+            <ion-icon name="chevron-back-outline"></ion-icon>
+        </button>
+    </header>
+    <div class="searchHomeEndpoint">
+        <input type="text" name="homeEndpoint" id="homeEndpoint">
+        <ul>
+            <li>test</li>
+            <li>test</li>
+        </ul>
+    </div>
+    <form action="signup" method="post">
+        <fieldset>
+            <label for="su-name">
+                <ion-icon name="person-circle-outline"></ion-icon>
+            </label>
+            <input type="text" name="su-name" id="su-name" placeholder="Jane" required>
+        </fieldset>
+        <div>
+            <fieldset>
+                <label for="su-address">
+                    <ion-icon name="home-outline"></ion-icon>
+                </label>
+                <input type="text" name="su-address" id="su-address" placeholder="House 15" required>
+            </fieldset>
+            <fieldset>
+                <label for="su-homeEndpointName">
+                    <ion-icon name="flag-outline"></ion-icon>
+                </label>
+                <input type="text" name="su-homeEndpointName" id="su-homeEndpointName" placeholder="1" required>
+            </fieldset>
+        </div>
+        <fieldset>
+            <label for="su-password">
+                <ion-icon name="lock-closed-outline"></ion-icon>
+            </label>
+            <input type="password" name="su-password" id="su-password" placeholder="••••••••" required>
+        </fieldset>
+        <fieldset class="checkbox">
+            <label for="su-password">Business account</label>
+            <input type="checkbox" name="su-business" id="su-business">
+        </fieldset>
+
+        <button type="submit">Sign up</button>
+    </form>
+</aside>
+
+<aside id="settings">
+    <header>
+        <button class="back">
+            <ion-icon name="chevron-back-outline"></ion-icon>
+        </button>
+        <button class="achievements">
+            <ion-icon name="ribbon-outline"></ion-icon>
+        </button>
+        <h2>GREETING Name</h2>
+        <div class="user-icon-wrapper">
+            <div class="user-icon">
+
+            </div>
+        </div>
+    </header>
+    <ul>
+        <li data-open-setting="account-settings">Account information
+            <ion-icon name="chevron-forward-outline"></ion-icon>
+        </li>
+        <li data-open-setting="subscription-settings">Subscriptions
+            <ion-icon name="chevron-forward-outline"></ion-icon>
+        </li>
+        <li data-open-setting="friends-settings">Friends
+            <ion-icon name="chevron-forward-outline"></ion-icon>
+        </li>
+        <li>Quick access
+            <ion-icon name="chevron-forward-outline"></ion-icon>
+        </li>
+        <li>Notifications
+            <ion-icon name="chevron-forward-outline"></ion-icon>
+        </li>
+        <li data-open-setting="report">Report an issue
+            <ion-icon name="chevron-forward-outline"></ion-icon>
+        </li>
+    </ul>
+</aside>
+
+<aside id="subscription-settings">
+    <header>
+        <h2>Subscription</h2>
+        <button class="back">
+            <ion-icon name="chevron-back-outline"></ion-icon>
+        </button>
+    </header>
+    <ul>
+
+    </ul>
+</aside>
+
+<aside id="account-settings">
+    <header>
+        <h2>Account</h2>
+        <button class="back">
+            <ion-icon name="chevron-back-outline"></ion-icon>
+        </button>
+    </header>
+    <ul>
+        <li id="name-settings">
+            <h3>Name</h3>
+            <p></p>
+            <input type="text" id="new-name" class="hidden">
+            <a href="#" id="edit-name">Edit</a>
+        </li>
+        <li id="password-settings">
+            <h3>Password</h3>
+            <div class="hidden">
+                <label for="current-pwd">Current password</label>
+                <input type="password" id="current-pwd">
+                <label for="new-pwd">New password</label>
+                <input type="password" id="new-pwd">
+                <a href="#" id="edit-password">Change password</a>
+            </div>
+        </li>
+        <li id="subscription-setting-change">
+            <h3>Subscription</h3>
+            <p></p>
+            <a href="#" id="edit-subscription">Edit</a>
+        </li>
+        <!-- <li id="business-settings">
+            <h3>Business user</h3>
+            <input type="checkbox" id="edit-business-user">
+        </li> -->
+    </ul>
+    <button id="update-account">Update account settings</button>
+</aside>
+
+<aside id="friends-settings" class="">
+    <header>
+        <h2>Friends</h2>
+        <button class="back">
+            <ion-icon name="chevron-back-outline"></ion-icon>
+        </button>
+        <button class="add-friend">
+            <ion-icon name="person-add-outline"></ion-icon>
+        </button>
+    </header>
+    <ul>
+    </ul>
+</aside>
+
+<aside id="report">
+    <header>
+        <h2>Report an issue</h2>
+        <button class="back">
+            <ion-icon name="chevron-back-outline"></ion-icon>
+        </button>
+    </header>
+    <form action="#" method="post">
+        <label for="select-type">Category</label>
+        <select name="select-type" id="select-type">
+            <option>Pod ordering / arrival</option>
+            <option>Menu usage</option>
+            <option>Account information</option>
+            <option>Billing</option>
+            <option>Other</option>
+        </select>
+        <label for="reason">Tell us about the issue</label>
+        <textarea name="reason" id="reason"></textarea>
+        <button>Send report</button>
+    </form>
+</aside>
+
+<aside id="pod-order-view">
+    <button class="back">
+        <ion-icon name="close-outline"></ion-icon>
+    </button>
+    <form id="select-travel-location" action="#" method="post">
+        <label for="select-location-text">Travel to</label>
+        <input type="hidden" disabled id="select-location">
+        <input type="text" disabled id="select-location-text" value="Location">
+
+        <h2>Pod type</h2>
+        <div id="pod-select">
+            <input type="hidden" id="selected-pod" value="standard">
+            <div id="standard-pod" class="active">
+                <h2>Normal pod</h2>
+            </div>
+            <div id="luxury-pod">
+                <h2>Luxury pod</h2>
+            </div>
+        </div>
+
+        <div class="btn-group first">
+            <input type="checkbox" id="bank" name="paymentMethod" value="bank">
+            <label for="bank">Pay with martian bank</label>
+        </div>
+        <div class="btn-group">
+            <input type="checkbox" id="reward-points" name="paymentMethod" value="rewardPoints">
+            <label for="reward-points">Pay with reward points</label>
+        </div>
+
+        <h2 id="pod-pricing">You current total is <span>M2</span></h2>
+
+        <input type="submit" value="Order pod" id="order-pod">
+    </form>
+</aside>
+
+<aside id="process-payment">
+    <header>
+        <h2>Checking payment</h2>
+    </header>
+    <svg class="checkmark loading" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+        <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+        <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+        <path class="checkmark__error" fill="none" d="M17.244224,17 L35.4279902,35.1837662"></path>
+        <path class="checkmark__error" fill="none" d="M35.755776,17 L17.244224,35.8443492"></path>
+    </svg>
+    <span id="payment-response"></span>
+</aside>
+
+<aside id="add-friend">
+    <header>
+        <h2>Add a friend</h2>
+        <button class="back">
+            <ion-icon name="chevron-back-outline"></ion-icon>
+        </button>
+    </header>
+    <div>
+        <form action="add-friend">
+            <input type="text" name="friend-name" id="friend-name" placeholder="Jane" autocomplete="off"
+                   data-lpignore="true">
+            <button type="submit">add</button>
+        </form>
+        <span class="divider">Or</span>
+        <p>Let them add you</p>
+        <div>
+            <input type="text" name="own-name" id="own-name" value="test" data-lpignore="true">
+            <button id="copy-name">COPY</button>
+        </div>
+
+    </div>
+</aside>
+
+<aside id="notifications">
+</aside>
+
+<script src="assets/js/templates.js"></script>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/components/authentication.js"></script>
+<script src="assets/js/components/friends.js"></script>
+<script src="assets/js/components/navigation.js"></script>
+<script src="assets/js/components/notification.js"></script>
+<script src="assets/js/components/pod-order.js"></script>
+<script src="assets/js/components/quick-access.js"></script>
+<script src="assets/js/components/report.js"></script>
+<script src="assets/js/components/searchbar.js"></script>
+<script src="assets/js/components/settings.js"></script>
+<script src="assets/js/components/subscription.js"></script>
+<script src="assets/js/components/user.js"></script>
+<script src="assets/js/main.js"></script>
+
+<script type="module" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.esm.js"></script>
+
+<script src="assets/js/components/map.js"></script>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 "use strict";
 
 const api = 'https://project-ii.ti.howest.be/mars-15/api/';
+const localApi = 'http://localhost:8080/api/'
 
 function getUserInfo() {
     return apiCall('accountInformation', 'GET', true)
@@ -37,14 +38,14 @@ function updatePassword(currentPassword, newPassword) {
 
 /**
  * Log the user in
- * 
+ *
  * @param {SubmitEvent} e             EventListener event
- * 
- * @return {Promise}            request promise 
+ *
+ * @return {Promise}            request promise
  */
 function login(e) {
     e.preventDefault();
-    
+
     const body = {
         name: e.target.querySelector('#si-name').value,
         password: e.target.querySelector('#si-password').value
@@ -66,14 +67,14 @@ function login(e) {
 
 /**
  * register a user in
- * 
+ *
  * @param {SubmitEvent} e             EventListener event
- * 
- * @return {Promise}            request promise 
+ *
+ * @return {Promise}            request promise
  */
 function register(e) {
     e.preventDefault();
-    
+
     const body = {
         name: e.target.querySelector('#su-name').value,
         password: e.target.querySelector('#su-password').value,
@@ -93,10 +94,10 @@ function register(e) {
         })
 }
 
-function addFriend(e=null) {
+function addFriend(e = null) {
     if (typeof e !== 'string') e.preventDefault();
 
-    apiCall(`friend/${typeof e === 'string' ? e: document.querySelector('#friend-name').value}`, 'POST', true)
+    apiCall(`friend/${typeof e === 'string' ? e : document.querySelector('#friend-name').value}`, 'POST', true)
         .then((response) => {
             if (response.status === 401 || response.status === 403) {
                 warn(response.message);
@@ -107,10 +108,10 @@ function addFriend(e=null) {
         });
 }
 
-function removeFriend(e=null) {
+function removeFriend(e = null) {
     if (typeof e !== 'string') e.preventDefault();
 
-    apiCall(`friend/${typeof e === 'string' ? e: e.currentTarget.getAttribute('data-remove-friend')}`, 'DELETE', true)
+    apiCall(`friend/${typeof e === 'string' ? e : e.currentTarget.getAttribute('data-remove-friend')}`, 'DELETE', true)
         .then((response) => {
             if (response.status === 401 || response.status === 403) {
                 warn(response.message);
@@ -159,7 +160,7 @@ function orderPod(e) {
 
 /**
  * Test the api
- * 
+ *
  * @return {Promise}            request promise
  */
 function getMessage() {
@@ -168,12 +169,22 @@ function getMessage() {
 
 /**
  * Get the pod endpoints from the server
- * 
+ *
  * @return {Promise}            request promise containing endpoint array.
  */
 function getEndpoints() {
     return apiCall("endpoint", 'GET')
 }
+
+function getTravelEndpoints(){
+    return apiCall("endpoint/travel", 'GET', true);
+}
+
+
+function getEndpoint(id) {
+    return apiCall(`endpoint/${id}`, 'GET');
+}
+
 
 function getTravelHistory() {
     return apiCall('travel', 'GET', true)
@@ -181,18 +192,18 @@ function getTravelHistory() {
 
 /** Call the api
 
-* @param {string} url             The request url
-* @param {string} method          The request method
-* @param {boolean} authenticated  If we need to send authentication header
+ * @param {string} uri             The request url
+ * @param {string} method          The request method
+ * @param {boolean} authenticated  If we need to send authentication header
 
-* @return {Promise}               The request promise
-*/
-function apiCall(uri, method='GET', authenticated, body) {
+ * @return {Promise}               The request promise
+ */
+function apiCall(uri, method = 'GET', authenticated, body) {
     const request = new Request(api + uri, {
         method: method,
         headers: {
             "Content-Type": "application/json",
-            Authorization: authenticated ? `Bearer ${localStorage.getItem('token')}`: undefined
+            Authorization: authenticated ? `Bearer ${localStorage.getItem('token')}` : undefined
         },
         body: JSON.stringify(body)
     });

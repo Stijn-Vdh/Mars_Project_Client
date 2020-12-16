@@ -1,0 +1,12 @@
+@use "../variables";
+
+body {
+  background-color: variables.$background-primary;
+}
+
+body main #map {
+  background-color: black;
+  width: 100%;
+  height: 100vh;
+  z-index: 0;
+}

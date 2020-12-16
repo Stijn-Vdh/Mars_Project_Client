@@ -28,6 +28,7 @@ async function init() {
     // navigator.serviceWorker.register('/service-worker.js', {
     //     scope: '/'
     // });
+
 }
 
 function initMain() {
@@ -45,8 +46,9 @@ function initMain() {
         .then(userInfo => {
             checkForFriendRequests(userInfo);
             loadFriends(userInfo);
-            loadDataInQuickAccess(userInfo)
+            loadDataInQuickAccess(userInfo);
         });
+    initMap();
 }
 
 function addPages() {

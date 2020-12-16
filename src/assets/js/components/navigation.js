@@ -46,6 +46,7 @@ function goBack(e=null) {
 }
 
 function goTo(page, from) {
+    console.log(page);
     if (page === '#pod-order-view') {
         document.querySelector('#select-location').value = from.getAttribute('data-order-pod');
         document.querySelector('#select-location-text').value = from.innerHTML;
