@@ -15,12 +15,12 @@ function checkForDynamicDataEvents(e) {
         const target = e.target.closest(el);
         if (target !== null) {
             e.preventDefault();
-            goTo(dynamicElements[el], target);
+            goTo(dynamicElements[el], {from: target});
         }
     });
 }
 
-function addPage(selector, activators=[], options={}) {
+function addPage(selector, activators = [], options = {}) {
     pages[selector] = new Page(selector, options.onOpen, options.onLeave);
     if (options.dynamicData) {
         activators.forEach(activator => dynamicElements[activator] = selector);
@@ -38,21 +38,17 @@ function clearNavigationHistory() {
     pageHistory.push(pages['main']);
 }
 
-function goBack(e=null) {
+function goBack(e = null) {
     if (e !== null) e.preventDefault();
     if (pageHistory.length > 1 && pageHistory.splice(pageHistory.length - 1, 1)[0].leave()) {
         pageHistory[pageHistory.length - 1].goto();
     }
 }
 
-function goTo(page, from) {
+function goTo(page, payload) {
     console.log(page);
-    if (page === '#pod-order-view') {
-        document.querySelector('#select-location').value = from.getAttribute('data-order-pod');
-        document.querySelector('#select-location-text').value = from.innerHTML;
-    }
     if (pageHistory.length < 1 || pageHistory[pageHistory.length - 1].leave()) {
-        pages[page].goto();
+        pages[page].goto(payload);
         pageHistory.push(pages[page]);
     }
 }
@@ -63,15 +59,15 @@ class Page {
     onOpen;
     onLeave;
 
-    constructor(selector, onOpen=null, onLeave=null) {
+    constructor(selector, onOpen = null, onLeave = null) {
         this.element = document.querySelector(selector);
         this.selector = selector;
         this.onOpen = onOpen;
         this.onLeave = onLeave;
     }
 
-    goto() {
-        if (this.onOpen !== undefined && this.onOpen !== null) this.onOpen();
+    goto(payload = {}) {
+        if (this.onOpen !== undefined && this.onOpen !== null) this.onOpen(payload);
         this.element.classList.add('active');
     }
 
