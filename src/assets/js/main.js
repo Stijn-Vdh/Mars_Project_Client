@@ -56,10 +56,10 @@ function addPages() {
         onOpen: initMain
     });
     addPage('#settings', ['#open-settings'], {onOpen: initSettings});
-    addPage('#quick-access');
+    addPage('#quick-access', [], {onOpen: openQuickAccess, onLeave: closeQuickAccess});
     addPage('#account-settings', ['li[data-open-setting="account-settings"]'], {onOpen: initAccountSettings});
     addPage('#friends-settings', ['li[data-open-setting="friends-settings"]'], {onOpen: initFriendSettings});
-    addPage('#add-friend', ['.add-friend'], {onOpen: initAddFriend});
+    addPage('#add-friend', ['.add-friend'], {onOpen: initAddFriend, dynamicData: true});
     addPage('#report', ['li[data-open-setting="report"]'], {onOpen: initReport});
     addPage('#pod-order-view', ['*[data-order-pod]'], {dynamicData: true, onOpen: payloadConsumer});
     addPage('#process-payment', ['*[data-order-pod]']);

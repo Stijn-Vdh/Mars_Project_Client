@@ -1,7 +1,10 @@
 @use '../util';
 
 #friendlist {
-    padding: 0 2rem;
+    & > h2 {
+        margin-left: 2rem;
+    }
+
     ul {
         display: flex;
         overflow-y: scroll;
@@ -12,6 +15,10 @@
             text-align: center;
 
             @include util.user-icon(4rem);
+
+            &:first-child {
+                margin-left: 2rem;
+            }
 
             .add {
                 background-color: util.$background-secondary;

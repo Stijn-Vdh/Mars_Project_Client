@@ -19,15 +19,20 @@
 
         header {
             display: flex;
+            padding: 3rem 0 0 2rem;
+            background-color: transparent;
 
             h3 {
-                margin-left: 1rem;
+                margin-left: 0.4rem;
             }
         }
     }
     
     header {
-        padding: 3rem 0 0 2rem;
+        padding: 3rem 0 2.3rem 2rem;
+        background-color: util.$background-secondary;
+        transition: background-color 0.3s ease-in-out;
+
         &::before {
             content: '';
             position: absolute;
@@ -42,8 +47,24 @@
         }
     }
 
-    #open-settings {
+    article:first-of-type {
+        margin-top: 2.7rem;
+    }
+
+    #open-settings, #send-package {
         @include util.button;
+        margin: 2rem;
+
+        width: calc(100% - 4rem);
+        box-sizing: border-box;
+    }
+
+    #open-settings {
+        margin-top: 1rem;
+    }
+
+    #send-package {
+        margin-bottom: 1rem;
     }
 
 }
