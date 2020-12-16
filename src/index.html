@@ -19,89 +19,6 @@
 </head>
 <body>
 
-    <main>
-        <div class="searchbar">
-            <label for="searchBox-1"><ion-icon name="search-outline"></ion-icon></label>
-            <input type="text" id="searchBox-1" name="searchbox" placeholder="Where are we going?">
-            <ul>
-            </ul>
-        </div>
-        <section id="quick-access">
-            <header>
-                <h2>GREETINGS</h2>
-                <h3>Name</h3>
-            </header>
-            <article id="recent-trips">
-                <h2>Recent trips</h2>
-                <ul>
-                    <li>
-                        <h2>Work</h2>
-                        <h3>Yesterday</h3>
-                        <div>
-                            <p class="from">Home</p>
-                            <p class="to">Home</p>
-                            <p class="totalTravelTime">1 min</p>
-                        </div>
-                    </li>
-                    <li></li>
-                    <li></li>
-                </ul>
-            </article>
-            <article id="friendlist">
-                <h2>Friends</h2>
-                <ul>
-                    <li>
-                        <button class="add">
-                            <ion-icon name="add-outline"></ion-icon>
-                        </button>
-                    </li>
-                </ul>
-            </article>
-            <article id="subscription-quick">
-                <h2>Current subscription</h2>
-                <div>
-                    <p>test</p>
-                    <a href="#" id="edit-subscription-quick">Edit</a>
-                </div>
-            </article>
-            <input type="button" id="send-package" value="Send Package">
-            <h4>Shared locations</h4>
-            <button id="open-settings">Settings</button>
-        </section>
-    </main>
-
-    <aside id="authentication">
-        <header>
-            <div class="globe">
-                <img src="./assets/images/tmp-icon.png" alt="MTTS">
-            </div>
-        </header>
-        <div class="content">
-            <button id="open-signin">Sign in</button>
-            <p>Or</p>
-            <button id="open-signup">Sign up</button>
-        </div>
-    </aside>
-
-    <aside id="signin">
-        <header>
-            <h2>Sign in</h2>
-            <button class="back"><ion-icon name="chevron-back-outline"></ion-icon></button>
-        </header>
-        <form action="signin" method="post">
-            <fieldset>
-                <label for="si-name"><ion-icon name="person-circle-outline"></ion-icon></label>
-                <input type="text" name="si-name" id="si-name" placeholder="Jane" required>
-            </fieldset>
-            <fieldset>
-                <label for="si-password"><ion-icon name="lock-closed-outline"></ion-icon></label>
-                <input type="password" name="si-password" id="si-password" placeholder="••••••••" required>
-            </fieldset>
-            
-            <button type="submit">Sign in</button>
-        </form>
-    </aside>
-
 <main>
     <div id="map">
 
@@ -146,6 +63,13 @@
                 </li>
             </ul>
         </article>
+        <article id="subscription-quick">
+            <h2>Current subscription</h2>
+            <div>
+                <p>test</p>
+                <a href="#" id="edit-subscription-quick">Edit</a>
+            </div>
+        </article>
         <input type="button" id="send-package" value="Send Package">
         <h4>Shared locations</h4>
         <button id="open-settings">Settings</button>
@@ -189,6 +113,7 @@
         <button type="submit">Sign in</button>
     </form>
 </aside>
+
 
 <aside id="signup">
     <header>
