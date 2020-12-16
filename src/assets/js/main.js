@@ -6,7 +6,7 @@ let endpoints;
 document.addEventListener("DOMContentLoaded", init);
 
 async function init() {
-    Element.prototype.updateEventListener = function(event, cb) {
+    Element.prototype.updateEventListener = function (event, cb) {
         this.removeEventListener(event, cb);
         this.addEventListener(event, cb);
     }
@@ -28,6 +28,7 @@ async function init() {
     // navigator.serviceWorker.register('/service-worker.js', {
     //     scope: '/'
     // });
+
 }
 
 function initMain() {
@@ -45,7 +46,8 @@ function initMain() {
         .then(userInfo => {
             checkForFriendRequests(userInfo);
             loadFriends(userInfo);
-        })
+        });
+    initMap();
 }
 
 function addPages() {
@@ -80,8 +82,8 @@ function closeModal(e) {
 
 function setViewPortStatic() {
     const viewheight = window.screen.height,
-    viewwidth = window.screen.width,
-    viewport = document.querySelector("meta[name=viewport]");
+        viewwidth = window.screen.width,
+        viewport = document.querySelector("meta[name=viewport]");
 
     viewport.setAttribute("content", `height=${viewheight}, width=${viewwidth}, initial-scale=1.0`);
 }
