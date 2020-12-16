@@ -158,6 +158,44 @@ function orderPod(e) {
         });
 }
 
+function orderPackagePod(e){
+    e.preventDefault();
+
+    //does not work yet
+
+    const body = {
+        deliveryType: "small",
+        from: parseInt(e.target.querySelector('#select-p-from').value),
+        destination: parseInt(e.target.querySelector('#select-p-destination').value)
+    }
+
+    apiCall("sendPackage", "POST", true, body)
+        .then(response => {
+            goTo('#process-payment');
+            setTimeout(() => {
+
+            }, 1000)
+            if (response.status === 401 || response.status === 403 || response.status === 400) {
+                document.querySelector('#process-payment .checkmark').classList.add('active', 'error');
+                document.querySelector('#payment-response').innerHTML = response.message;
+                setTimeout(() => {
+                    goBack();
+                    document.querySelector('#process-payment .checkmark').classList.remove('active', 'error')
+                    document.querySelector('#payment-response').innerHTML = '';
+                }, 3000);
+            } else {
+                document.querySelector('#process-payment .checkmark').classList.add('active', 'success');
+                document.querySelector('#payment-response').innerHTML = `Package pod ordered #1.`;
+                setTimeout(() => {
+                    goTo('main');
+                    notify(`Your pod is on it's way!`);
+                    document.querySelector('#process-payment .checkmark').classList.remove('active', 'success')
+                    document.querySelector('#payment-response').innerHTML = '';
+                }, 3000);
+            }
+        });
+}
+
 /**
  * Test the api
  *
@@ -174,6 +212,10 @@ function getMessage() {
  */
 function getEndpoints() {
     return apiCall("endpoint", 'GET')
+}
+
+function getPackageEndpoints() {
+    return apiCall("endpoint/package", "GET", true)
 }
 
 function getTravelEndpoints(){

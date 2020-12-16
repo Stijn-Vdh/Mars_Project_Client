@@ -74,7 +74,8 @@ function addPages() {
                 })
         }
     });
-    addPage('#subscription-settings', ['li[data-open-setting="subscription-settings"', '#edit-subscription', '#edit-subscription-quick'], {onOpen: initSubscription})
+    addPage('#subscription-settings', ['li[data-open-setting="subscription-settings"', '#edit-subscription', '#edit-subscription-quick'], {onOpen: initSubscription});
+    addPage('#package-order-view', ['#send-package'], {onOpen: initPackage});
 }
 
 function closeModal(e) {
