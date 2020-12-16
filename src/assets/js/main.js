@@ -48,7 +48,7 @@ function initMain() {
             loadFriends(userInfo);
             loadDataInQuickAccess(userInfo);
         });
-    initMap();
+    if (!mapInitialized) initMap();
 }
 
 function addPages() {

@@ -42,9 +42,12 @@
 #notifications {
     pointer-events: none;
     z-index: 200;
-    position: relative;
+    position: absolute;
+    top: 0;
     padding-top: 0.5rem;
     padding: 1rem;
+    width: 100%;
+    box-sizing: border-box;
 
     .notification {
         @include util.shadow;

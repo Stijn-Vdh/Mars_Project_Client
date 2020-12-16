@@ -66,6 +66,8 @@ function mttsPrompt(message, accept, deny) {
     const notificationId = sendNotification('prompt', message),
         notificationElement = document.querySelector(`#notification-${notificationId}`);
 
+    if (!notificationElement) return;
+
     notificationElement.querySelector('.accept').updateEventListener('click', (e) => {
         e.preventDefault();
         notificationElement.remove();
@@ -95,7 +97,14 @@ function sendNotification(type, message, isPrompt=false) {
     const buttons = `
     <button class="accept"><ion-icon name="checkmark-outline"></ion-icon></button>
     <button class="deny"><ion-icon name="close-outline"></ion-icon></button>
-    `
+    `;
+    let exists = false;
+
+    notificationsElement.querySelectorAll('*[id^="notification-"] p').forEach(el => {
+        if (el.innerHTML === message) exists = true;
+    });
+
+    if (exists) return false;
 
     notificationsElement.style.pointerEvents = 'all';
     notificationsElement.innerHTML += `
@@ -138,7 +147,7 @@ function hideNotification(id) {
         document.querySelector(`#notification-${id}`).remove();
 
         if (document.querySelector('#notifications').children.length === 0) {
-            notificationsElement.style.pointerEvents = 'none';
+            document.querySelector('#notifications').style.pointerEvents = 'none';
         }
     }, 300);
 }
