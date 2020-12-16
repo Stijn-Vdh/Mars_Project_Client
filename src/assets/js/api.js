@@ -176,6 +176,10 @@ function getEndpoints() {
     return apiCall("endpoint", 'GET')
 }
 
+function getPackageEndpoints() {
+    return apiCall("endpoint/package", "GET", true)
+}
+
 function getTravelEndpoints(){
     return apiCall("endpoint/travel", 'GET', true);
 }
