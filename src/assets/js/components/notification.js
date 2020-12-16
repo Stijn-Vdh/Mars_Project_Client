@@ -68,13 +68,13 @@ function mttsPrompt(message, accept, deny) {
 
     notificationElement.querySelector('.accept').updateEventListener('click', (e) => {
         e.preventDefault();
-        accept();
         notificationElement.remove();
+        accept();
     });
     notificationElement.querySelector('.deny').updateEventListener('click', (e) => {
         e.preventDefault();
-        deny();
         notificationElement.remove();
+        deny();
     });
 }
 
@@ -89,6 +89,7 @@ function error(message) {
 function sendNotification(type, message, isPrompt=false) {
     notificationId++;
     const thisId = notificationId;
+    const notificationsElement = document.querySelector('#notifications');
     const icon = type === 'danger' ? 'alert': type === 'warn' ? 'help': 'checkmark';
 
     const buttons = `
@@ -96,7 +97,8 @@ function sendNotification(type, message, isPrompt=false) {
     <button class="deny"><ion-icon name="close-outline"></ion-icon></button>
     `
 
-    document.querySelector('#notifications').innerHTML += `
+    notificationsElement.style.pointerEvents = 'all';
+    notificationsElement.innerHTML += `
     <div id="notification-${thisId}" class="notification ${type}">
         ${type !== 'prompt' ? `<ion-icon name="${icon}-outline"></ion-icon>`: ''}
         <p>${message}</p>
@@ -130,8 +132,13 @@ function sendNotification(type, message, isPrompt=false) {
 // }
 
 function hideNotification(id) {
+
     document.querySelector(`#notification-${id}`).style.transform = 'translateX(-100vw)';
     setTimeout(() => {
         document.querySelector(`#notification-${id}`).remove();
+
+        if (document.querySelector('#notifications').children.length === 0) {
+            notificationsElement.style.pointerEvents = 'none';
+        }
     }, 300);
 }

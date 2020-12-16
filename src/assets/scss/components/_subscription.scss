@@ -1,0 +1,32 @@
+@use '../util';
+
+#subscription-settings {
+    @include util.side-view(right);
+    @include util.default-side-view-header;
+
+    ul {
+        @include util.shadow;
+        margin-top: 4rem;
+
+        li {
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+
+            &:nth-child(even) {
+                background-color: util.$background-secondary;
+            }
+
+            ion-icon {
+                float: right;
+            }
+
+            &.active {
+                background-color: util.$accent-green;
+            }
+            p{
+                text-align: right;
+                float: right;
+            }
+        }
+    }
+}

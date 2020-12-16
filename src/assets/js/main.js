@@ -64,15 +64,14 @@ function addPages() {
     addPage('#process-payment', ['*[data-order-pod]']);
     addPage('#authentication', []);
     addPage('#signin', ['#open-signin']);
-    addPage('#signup', ['#open-signup'], {
-        onOpen: () => {
-            getEndpoints()
-                .then(ep => {
-                    endpoints = ep;
-                    loadHomeEndpointList();
-                })
-        }
-    });
+    addPage('#signup', ['#open-signup'], {onOpen: () => {
+        getEndpoints()
+            .then(ep => {
+                endpoints = ep;
+                loadHomeEndpointList();
+            })
+    }});
+    addPage('#subscription-settings', ['li[data-open-setting="subscription-settings"', '#edit-subscription'], {onOpen: initSubscription})
 }
 
 function closeModal(e) {
