@@ -1284,6 +1284,17 @@
   outline: none;
 }
 
+#subscription-quick {
+  padding: 0 2rem;
+  margin-bottom: 1rem;
+}
+#subscription-quick div {
+  display: flex;
+}
+#subscription-quick div a {
+  padding-left: 8rem;
+}
+
 body {
   background-color: #fbfcff;
 }
