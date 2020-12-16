@@ -528,9 +528,12 @@
 #notifications {
   pointer-events: none;
   z-index: 200;
-  position: relative;
+  position: absolute;
+  top: 0;
   padding-top: 0.5rem;
   padding: 1rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 #notifications .notification {
   box-shadow: 0 1px 2.2px rgba(0, 0, 0, 0.02), 0 2.3px 5.3px rgba(0, 0, 0, 0.028), 0 4.4px 10px rgba(0, 0, 0, 0.035), 0 7.8px 17.9px rgba(0, 0, 0, 0.042), 0 14.6px 33.4px rgba(0, 0, 0, 0.05), 0 35px 80px rgba(0, 0, 0, 0.07);

@@ -1,5 +1,7 @@
 "use strict";
 
+let mapInitialized = false;
+
 function initMap() {
     //set the map config
     const map = L.map('map', {
@@ -46,6 +48,7 @@ function initMap() {
 
     //limit the tooltips to a certain zoom
     setToolTipRange(map, 12);
+    mapInitialized = true;
 }
 
 function getDistance(origin, destination) {     // return distance in meters

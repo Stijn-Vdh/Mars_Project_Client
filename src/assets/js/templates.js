@@ -3,11 +3,17 @@
 function recentTrip(route) {
     const minutes = Math.floor(route.estmTime / 60),
     seconds = route.estmTime % 60;
+    let ordered_on = new Date(route.dateTime);
+    let timeAgo = Math.round((new Date().getTime() - ordered_on.getTime()) / 1000);
+    const minute = 60, hour = minute * 60, day = hour * 24, month = day * 30, year = 31556926;
+    timeAgo = timeAgo < 30 ? 'Just now': timeAgo < minute ? `${timeAgo} seconds ago` : timeAgo < hour ? `${Math.round(timeAgo / minute)} minutes ago` : timeAgo < day ? `${Math.round(timeAgo / hour)} hours ago`: timeAgo < month ? `${Math.round(timeAgo / day)} days ago`: timeAgo < year ? `${Math.round(timeAgo / month)} months ago`: `${Math.round(timeAgo / year)} years ago`
+
+    
 
     return `
     <li data-order-pod="${route.destination.id}">
         <h2>${route.destination.name}</h2>
-        <h3>Yesterday</h3>
+        <h3>${timeAgo}</h3>
         <div>
             <p class="from">${route.from.name}</p>
             <p class="to">${route.destination.name}</p>

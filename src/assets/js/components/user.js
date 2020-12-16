@@ -78,7 +78,7 @@ function toggleEdit(e) {
 function loadDataInSettings() {
     document.querySelector('#name-settings p').innerHTML = userInfo.name;
     document.querySelector('#new-name').value = userInfo.name;
-    document.querySelector('#subscription-settings p').innerHTML = userInfo.subscription;
+    document.querySelector('#subscription-setting-change p').innerHTML = userInfo.subscription;
     // document.querySelector('#business-settings input').checked = userInfo.isBusiness;
 
     document.querySelector('#name-settings input').classList.add('hidden');
