@@ -199,7 +199,7 @@ function getTravelHistory() {
  * @return {Promise}               The request promise
  */
 function apiCall(uri, method = 'GET', authenticated, body) {
-    const request = new Request(localApi + uri, {
+    const request = new Request(api + uri, {
         method: method,
         headers: {
             "Content-Type": "application/json",
