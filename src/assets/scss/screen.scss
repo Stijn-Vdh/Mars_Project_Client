@@ -26,6 +26,15 @@ body {
     color: $text-primary;
 }
 
+.leaflet-routing-alternatives-container {
+    display: none;
+}
+
+.animate-route {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+}
+
 a {
     color: $accent-red;
     font-weight: bold;
@@ -38,4 +47,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .hidden {
     display: none;
+}
+
+@keyframes test {
+    to {
+        stroke-dashoffset: 0;
+    }
 }

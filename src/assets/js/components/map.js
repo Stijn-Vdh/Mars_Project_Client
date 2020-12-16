@@ -1,10 +1,11 @@
 "use strict";
 
 let mapInitialized = false;
+let map, routeController, markers = [];
 
 function initMap() {
     //set the map config
-    const map = L.map('map', {
+    map = L.map('map', {
         wheelPxPerZoomLevel: 150,
         zoom: 12,
         center: [52.468728, -2.025817]
@@ -30,12 +31,14 @@ function initMap() {
 
     //add the endpoints to the map
     getTravelEndpoints().then(endpoints => {
+        sessionStorage.setItem('endpoints', JSON.stringify(endpoints));
         endpoints.forEach(endpoint => {
             const CD = endpoint.coordinate;
             const tooltip = L.marker(L.latLng(CD.latitude, CD.longitude), {
                 endpointId: endpoint.id,
                 endpointName: endpoint.name
             }).addTo(map);
+            markers.push(tooltip);
             tooltip.bindTooltip(`${endpoint.name}`, {}).openTooltip();
             tooltip.on("click", travelTo)
         });
@@ -49,6 +52,24 @@ function initMap() {
         fillOpacity: 0.2,
     }).addTo(map);
     dome.bindPopup("This is the start dome");
+
+    routeController = L.Routing.control({
+        waypoints: [
+        ],
+        plan: L.Routing.plan([], {
+            addWaypoints: false,
+            draggableWaypoints: false
+        }),
+        lineOptions: {
+            styles: [{className: 'animate-route'}] // Adding animate class
+        }
+    }).addTo(map);
+
+    routeController.on('waypointschanged', () => {
+        if (routeController.getWaypoints().length > 2) {
+            routeController.setWaypoints(currentRoute);
+        }
+    })
 
     //limit the tooltips to a certain zoom
     setToolTipRange(map, 12);

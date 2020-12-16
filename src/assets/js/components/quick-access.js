@@ -15,6 +15,28 @@ function initQuickAccess() {
     document.querySelector('#quick-access > header').updateEventListener('touchend', dragEnd);
 
     showGreeting();
+    document.querySelector('#recent-trips ul').updateEventListener('scroll', recentTripScroll);
+}
+
+function recentTripScroll(e) {
+    document.querySelectorAll('#recent-trips ul li').forEach(el => {
+        const loc = (el.getBoundingClientRect().left + el.getBoundingClientRect().right) / 2;
+        let maxShadow = loc % (window.screen.width / 2);
+        let halfScreen = (window.screen.width / 2);
+
+        if (loc > halfScreen) {
+            maxShadow = halfScreen - maxShadow;
+            if (loc > window.screen.width) {
+                maxShadow = 0;
+            }
+        }
+
+        if (maxShadow < halfScreen * 0.25) maxShadow = halfScreen * 0.25;
+
+        maxShadow = (33 / halfScreen) * maxShadow;
+        
+        el.style.boxShadow = `0 ${maxShadow * 0.08}px ${maxShadow * 0.12}px rgba(0, 0, 0, 0.02), 0 ${maxShadow * 0.15}px ${maxShadow * 0.15}px rgba(0, 0, 0, 0.028), 0 ${maxShadow * 0.28}px ${maxShadow * 0.3}px rgba(0, 0, 0, 0.035), 0 ${maxShadow * 0.36}px ${maxShadow * 0.54}px rgba(0, 0, 0, 0.042), 0 ${maxShadow / 2}px ${maxShadow}px rgba(0, 0, 0, 0.07)`
+    })
 }
 
 function openQuickAccess() {

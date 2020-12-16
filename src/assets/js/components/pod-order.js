@@ -17,4 +17,28 @@ function switchPod(e) {
             el.classList.remove('active');
         }
     })
-} 
+}
+
+function setTraveling() {
+    apiCall('routeInfo', 'GET', true)
+        .then(routeInfo => {
+            const eps = JSON.parse(sessionStorage.getItem('endpoints')),
+                fromCoords = eps.find(ep => ep.id === routeInfo.from.id).coordinate,
+                toCoords = eps.find(ep => ep.id === routeInfo.destination.id).coordinate,
+                arriveOn = getDistance([fromCoords.latitude, fromCoords.longitude], [toCoords.latitude, toCoords.longitude]) / 600;
+
+            document.querySelector('.animate-route').style.animation = `test ${arriveOn}s ease-in-out forwards`;
+        
+            setTimeout(() => {
+                notify(`You arrived at ${routeInfo.destination.name}.`);
+                setTimeout(() => {
+                    document.querySelector('.animate-route').style.animation = ``;
+                    document.querySelector('.searchbar').style.display = '';
+                    routeController.setWaypoints([]);
+                    markers.filter(marker => marker.options.endpointId !== routeInfo.from.id && marker.options.endpointId !== routeInfo.destination.id).forEach(marker => {
+                        marker.addTo(map);
+                    });
+                }, 2000)
+            }, (arriveOn * 1000));
+        })
+}

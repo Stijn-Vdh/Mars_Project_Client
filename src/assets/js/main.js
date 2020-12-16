@@ -44,6 +44,7 @@ function initMain() {
         });
     getUserInfo()
         .then(userInfo => {
+            sessionStorage.setItem('user', JSON.stringify(userInfo));
             checkForFriendRequests(userInfo);
             loadFriends(userInfo);
             loadDataInQuickAccess(userInfo);
