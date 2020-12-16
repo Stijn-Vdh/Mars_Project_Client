@@ -32,8 +32,12 @@ function initMap() {
     getTravelEndpoints().then(endpoints => {
         endpoints.forEach(endpoint => {
             const CD = endpoint.coordinate;
-            L.marker(L.latLng(CD.latitude, CD.longitude)).addTo(map).bindTooltip(`${endpoint.name}`).openTooltip();
-
+            const tooltip = L.marker(L.latLng(CD.latitude, CD.longitude), {
+                endpointId: endpoint.id,
+                endpointName: endpoint.name
+            }).addTo(map);
+            tooltip.bindTooltip(`${endpoint.name}`, {}).openTooltip();
+            tooltip.on("click", travelTo)
         });
     });
 
@@ -42,7 +46,7 @@ function initMap() {
         radius: 10000,
         color: 'red',
         fillColor: '#f03',
-        fillOpacity: 0.5,
+        fillOpacity: 0.2,
     }).addTo(map);
     dome.bindPopup("This is the start dome");
 
@@ -96,4 +100,22 @@ function setToolTipRange(map, tooltipThreshold) {
         }
         lastZoom = zoom;
     });
+}
+
+let lastClick = 0;
+const delay = 20;
+
+function debounce() {
+    if (lastClick >= (Date.now() - delay)) return true;
+    lastClick = Date.now();
+    return false
+}
+
+
+function travelTo() {
+    if (debounce()) return;
+    const p = document.createElement("p");
+    p.setAttribute("data-order-pod", this.options.endpointId);
+    p.innerHTML = this.options.endpointName
+    goTo('#pod-order-view', p);
 }
