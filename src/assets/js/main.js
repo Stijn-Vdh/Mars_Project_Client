@@ -56,12 +56,18 @@ function addPages() {
         onOpen: initMain
     });
     addPage('#settings', ['#open-settings'], {onOpen: initSettings});
-    addPage('#quick-access');
+    addPage('#quick-access', [], {onOpen: openQuickAccess, onLeave: closeQuickAccess});
     addPage('#account-settings', ['li[data-open-setting="account-settings"]'], {onOpen: initAccountSettings});
     addPage('#friends-settings', ['li[data-open-setting="friends-settings"]'], {onOpen: initFriendSettings});
     addPage('#add-friend', ['.add-friend'], {onOpen: initAddFriend, dynamicData: true});
     addPage('#report', ['li[data-open-setting="report"]'], {onOpen: initReport});
-    addPage('#pod-order-view', ['*[data-order-pod]'], {dynamicData: true});
+    addPage('#pod-order-view', ['*[data-order-pod]'], {dynamicData: true, onOpen: (page, payload) => {
+        let id = payload.id === undefined ? payload.from.getAttribute('data-order-pod'): payload.id,
+            name = payload.name === undefined ? payload.from.querySelector('h2') !== null ? payload.from.querySelector('h2').innerHTML: payload.from.innerHTML: payload.name;
+        
+        document.querySelector('#select-location').value = id
+        document.querySelector('#select-location-text').value = name;
+    }});
     addPage('#process-payment', ['*[data-order-pod]']);
     addPage('#authentication', []);
     addPage('#signin', ['#open-signin']);

@@ -15,7 +15,7 @@ function checkForDynamicDataEvents(e) {
         const target = e.target.closest(el);
         if (target !== null) {
             e.preventDefault();
-            goTo(dynamicElements[el], target);
+            goTo(dynamicElements[el], {from: target});
         }
     });
 }
@@ -45,14 +45,10 @@ function goBack(e=null) {
     }
 }
 
-function goTo(page, from) {
+function goTo(page, payload={}) {
     console.log(page);
-    if (page === '#pod-order-view') {
-        document.querySelector('#select-location').value = from.getAttribute('data-order-pod');
-        document.querySelector('#select-location-text').value = from.innerHTML;
-    }
     if (pageHistory.length < 1 || pageHistory[pageHistory.length - 1].leave()) {
-        pages[page].goto();
+        pages[page].goto(page, payload);
         pageHistory.push(pages[page]);
     }
 }
@@ -70,8 +66,8 @@ class Page {
         this.onLeave = onLeave;
     }
 
-    goto() {
-        if (this.onOpen !== undefined && this.onOpen !== null) this.onOpen();
+    goto(page=null, payload=null) {
+        if (this.onOpen !== undefined && this.onOpen !== null) this.onOpen(page, payload);
         this.element.classList.add('active');
     }
 

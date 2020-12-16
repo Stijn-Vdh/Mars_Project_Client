@@ -236,8 +236,8 @@
     background-position: 0%;
   }
 }
-#friendlist {
-  padding: 0 2rem;
+#friendlist > h2 {
+  margin-left: 2rem;
 }
 #friendlist ul {
   display: flex;
@@ -261,6 +261,9 @@
   font-size: 1rem;
   color: white;
   text-transform: uppercase;
+}
+#friendlist ul li:first-child {
+  margin-left: 2rem;
 }
 #friendlist ul li .add {
   background-color: #eff1f4;
@@ -826,7 +829,10 @@
 }
 
 #recent-trips {
-  padding: 0 2rem;
+  margin-top: 1rem;
+}
+#recent-trips > h2 {
+  margin-left: 2rem;
 }
 #recent-trips ul {
   display: flex;
@@ -844,6 +850,9 @@
   border: 1px solid #989a9c;
   flex-shrink: 0;
   margin-right: 1rem;
+}
+#recent-trips ul li:first-child {
+  margin-left: 2rem;
 }
 #recent-trips ul li h2 {
   font-weight: 700;
@@ -896,12 +905,16 @@
 }
 #quick-access:not(.active) header {
   display: flex;
+  padding: 3rem 0 0 2rem;
+  background-color: transparent;
 }
 #quick-access:not(.active) header h3 {
-  margin-left: 1rem;
+  margin-left: 0.4rem;
 }
 #quick-access header {
-  padding: 3rem 0 0 2rem;
+  padding: 3rem 0 2.3rem 2rem;
+  background-color: #eff1f4;
+  transition: background-color 0.3s ease-in-out;
 }
 #quick-access header::before {
   content: "";
@@ -914,15 +927,27 @@
   border-radius: 3rem;
   transform: translateX(-50%);
 }
-#quick-access #open-settings {
+#quick-access article:first-of-type {
+  margin-top: 2.7rem;
+}
+#quick-access #open-settings, #quick-access #send-package {
   border: 0;
   padding: 0.7rem 1rem;
   border-radius: 3rem;
   box-shadow: 0 1px 2.2px rgba(0, 0, 0, 0.02), 0 2.3px 5.3px rgba(0, 0, 0, 0.028), 0 4.4px 10px rgba(0, 0, 0, 0.035), 0 7.8px 17.9px rgba(0, 0, 0, 0.042), 0 14.6px 33.4px rgba(0, 0, 0, 0.05), 0 35px 80px rgba(0, 0, 0, 0.07);
   box-sizing: border-box;
+  margin: 2rem;
+  width: calc(100% - 4rem);
+  box-sizing: border-box;
 }
-#quick-access #open-settings:focus {
+#quick-access #open-settings:focus, #quick-access #send-package:focus {
   outline: none;
+}
+#quick-access #open-settings {
+  margin-top: 1rem;
+}
+#quick-access #send-package {
+  margin-bottom: 1rem;
 }
 
 #report {
@@ -1022,6 +1047,11 @@
   border-radius: 1rem;
   box-shadow: 0 0px 1.8px rgba(0, 0, 0, 0.111), 0 0px 5px rgba(0, 0, 0, 0.16), 0 0px 12.1px rgba(0, 0, 0, 0.209), 0 0px 40px rgba(0, 0, 0, 0.32);
   box-sizing: border-box;
+  transition: transform 0.3s ease-in-out;
+}
+.searchbar.quick-access-open, .searchHomeEndpoint.quick-access-open {
+  z-index: 3;
+  transform: translate(-50%, 3rem);
 }
 .searchbar label, .searchHomeEndpoint label {
   position: absolute;

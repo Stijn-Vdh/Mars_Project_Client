@@ -13,6 +13,22 @@ function initQuickAccess() {
     document.querySelector('#quick-access > header').updateEventListener('touchstart', dragStart);
     document.querySelector('#quick-access > header').updateEventListener('touchmove', dragMove);
     document.querySelector('#quick-access > header').updateEventListener('touchend', dragEnd);
+
+    showGreeting();
+}
+
+function openQuickAccess() {
+    document.querySelector('#searchBox-1').parentNode.classList.add('quick-access-open');
+}
+
+function closeQuickAccess() {
+    document.querySelector('#searchBox-1').parentNode.classList.remove('quick-access-open');
+}
+
+function showGreeting() {
+    const currentTime = new Date().getHours();
+
+    document.querySelector('#quick-access > header h2').innerHTML = currentTime < 6 ? 'Good night': currentTime < 12 ? 'Good morning': currentTime < 18 ? 'Good afternoon': 'Good evening';
 }
 
 function dragStart(e) {
