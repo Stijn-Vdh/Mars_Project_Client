@@ -168,61 +168,78 @@
             <div class="user-icon">
 
             </div>
-        </header>
-        <ul>
-            <li data-open-setting="account-settings">Account information<ion-icon name="chevron-forward-outline"></ion-icon></li>
-            <li data-open-setting="subscription-settings">Subscriptions<ion-icon name="chevron-forward-outline"></ion-icon></li>
-            <li data-open-setting="friends-settings">Friends<ion-icon name="chevron-forward-outline"></ion-icon></li>
-            <li>Quick access<ion-icon name="chevron-forward-outline"></ion-icon></li>
-            <li>Notifications<ion-icon name="chevron-forward-outline"></ion-icon></li>
-            <li data-open-setting="report">Report an issue<ion-icon name="chevron-forward-outline"></ion-icon></li>
-        </ul>
-    </aside>
+        </div>
+    </header>
+    <ul>
+        <li data-open-setting="account-settings">Account information
+            <ion-icon name="chevron-forward-outline"></ion-icon>
+        </li>
+        <li data-open-setting="subscription-settings">Subscriptions
+            <ion-icon name="chevron-forward-outline"></ion-icon>
+        </li>
+        <li data-open-setting="friends-settings">Friends
+            <ion-icon name="chevron-forward-outline"></ion-icon>
+        </li>
+        <li>Quick access
+            <ion-icon name="chevron-forward-outline"></ion-icon>
+        </li>
+        <li>Notifications
+            <ion-icon name="chevron-forward-outline"></ion-icon>
+        </li>
+        <li data-open-setting="report">Report an issue
+            <ion-icon name="chevron-forward-outline"></ion-icon>
+        </li>
+    </ul>
+</aside>
 
-    <aside id="subscription-settings">
-        <header>
-            <h2>Subscription</h2>
-            <button class="back"><ion-icon name="chevron-back-outline"></ion-icon></button>
-        </header>
-        <ul>
-            
-        </ul>
-    </aside>
+<aside id="subscription-settings">
+    <header>
+        <h2>Subscription</h2>
+        <button class="back">
+            <ion-icon name="chevron-back-outline"></ion-icon>
+        </button>
+    </header>
+    <ul>
 
-    <aside id="account-settings">
-        <header>
-            <h2>Account</h2>
-            <button class="back"><ion-icon name="chevron-back-outline"></ion-icon></button>
-        </header>
-        <ul>
-            <li id="name-settings">
-                <h3>Name</h3>
-                <p></p>
-                <input type="text" id="new-name" class="hidden">
-                <a href="#" id="edit-name">Edit</a>
-            </li>
-            <li id="password-settings">
-                <h3>Password</h3>
-                <div class="hidden">
-                    <label for="current-pwd">Current password</label>
-                    <input type="password" id="current-pwd">
-                    <label for="new-pwd">New password</label>
-                    <input type="password" id="new-pwd">
-                    <a href="#" id="edit-password">Change password</a>
-                </div>
-            </li>
-            <li id="subscription-setting-change">
-                <h3>Subscription</h3>
-                <p></p>
-                <a href="#" id="edit-subscription">Edit</a>
-            </li>
-            <!-- <li id="business-settings">
-                <h3>Business user</h3>
-                <input type="checkbox" id="edit-business-user">
-            </li> -->
-        </ul>
-        <button id="update-account">Update account settings</button>
-    </aside>
+    </ul>
+</aside>
+
+<aside id="account-settings">
+    <header>
+        <h2>Account</h2>
+        <button class="back">
+            <ion-icon name="chevron-back-outline"></ion-icon>
+        </button>
+    </header>
+    <ul>
+        <li id="name-settings">
+            <h3>Name</h3>
+            <p></p>
+            <input type="text" id="new-name" class="hidden">
+            <a href="#" id="edit-name">Edit</a>
+        </li>
+        <li id="password-settings">
+            <h3>Password</h3>
+            <div class="hidden">
+                <label for="current-pwd">Current password</label>
+                <input type="password" id="current-pwd">
+                <label for="new-pwd">New password</label>
+                <input type="password" id="new-pwd">
+                <a href="#" id="edit-password">Change password</a>
+            </div>
+        </li>
+        <li id="subscription-setting-change">
+            <h3>Subscription</h3>
+            <p></p>
+            <a href="#" id="edit-subscription">Edit</a>
+        </li>
+        <!-- <li id="business-settings">
+            <h3>Business user</h3>
+            <input type="checkbox" id="edit-business-user">
+        </li> -->
+    </ul>
+    <button id="update-account">Update account settings</button>
+</aside>
 
 <aside id="friends-settings" class="">
     <header>
@@ -334,22 +351,23 @@
 <aside id="notifications">
 </aside>
 
-    <script src="assets/js/templates.js"></script>
-    <script src="assets/js/api.js"></script>
-    <script src="assets/js/components/authentication.js"></script>
-    <script src="assets/js/components/friends.js"></script>
-    <script src="assets/js/components/navigation.js"></script>
-    <script src="assets/js/components/notification.js"></script>
-    <script src="assets/js/components/pod-order.js"></script>
-    <script src="assets/js/components/quick-access.js"></script>
-    <script src="assets/js/components/report.js"></script>
-    <script src="assets/js/components/searchbar.js"></script>
-    <script src="assets/js/components/settings.js"></script>
-    <script src="assets/js/components/subscription.js"></script>
-    <script src="assets/js/components/user.js"></script>
-    <script src="assets/js/main.js"></script>
-    
-    <script type="module" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.esm.js"></script>
+<script src="assets/js/templates.js"></script>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/components/authentication.js"></script>
+<script src="assets/js/components/friends.js"></script>
+<script src="assets/js/components/navigation.js"></script>
+<script src="assets/js/components/notification.js"></script>
+<script src="assets/js/components/pod-order.js"></script>
+<script src="assets/js/components/quick-access.js"></script>
+<script src="assets/js/components/report.js"></script>
+<script src="assets/js/components/searchbar.js"></script>
+<script src="assets/js/components/settings.js"></script>
+<script src="assets/js/components/subscription.js"></script>
+<script src="assets/js/components/user.js"></script>
+<script src="assets/js/main.js"></script>
+
+<script type="module" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.esm.js"></script>
+
 <script src="assets/js/components/map.js"></script>
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
         integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
