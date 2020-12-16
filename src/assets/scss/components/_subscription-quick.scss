@@ -1,0 +1,12 @@
+@import '../variables';
+
+#subscription-quick {
+  padding: 0 2rem;
+  margin-bottom: 1rem;
+  div{
+    display: flex;
+    a{
+      padding-left: 8rem;
+    }
+  }
+}

@@ -6,7 +6,7 @@ let endpoints;
 document.addEventListener("DOMContentLoaded", init);
 
 async function init() {
-    Element.prototype.updateEventListener = function(event, cb) {
+    Element.prototype.updateEventListener = function (event, cb) {
         this.removeEventListener(event, cb);
         this.addEventListener(event, cb);
     }
@@ -45,7 +45,8 @@ function initMain() {
         .then(userInfo => {
             checkForFriendRequests(userInfo);
             loadFriends(userInfo);
-        })
+            loadDataInQuickAccess(userInfo)
+        });
 }
 
 function addPages() {
@@ -62,14 +63,16 @@ function addPages() {
     addPage('#process-payment', ['*[data-order-pod]']);
     addPage('#authentication', []);
     addPage('#signin', ['#open-signin']);
-    addPage('#signup', ['#open-signup'], {onOpen: () => {
-        getEndpoints()
-            .then(ep => {
-                endpoints = ep;
-                loadHomeEndpointList();
-            })
-    }});
-    addPage('#subscription-settings', ['li[data-open-setting="subscription-settings"', '#edit-subscription'], {onOpen: initSubscription})
+    addPage('#signup', ['#open-signup'], {
+        onOpen: () => {
+            getEndpoints()
+                .then(ep => {
+                    endpoints = ep;
+                    loadHomeEndpointList();
+                })
+        }
+    });
+    addPage('#subscription-settings', ['li[data-open-setting="subscription-settings"', '#edit-subscription', '#edit-subscription-quick'], {onOpen: initSubscription})
 }
 
 function closeModal(e) {
@@ -80,8 +83,8 @@ function closeModal(e) {
 
 function setViewPortStatic() {
     const viewheight = window.screen.height,
-    viewwidth = window.screen.width,
-    viewport = document.querySelector("meta[name=viewport]");
+        viewwidth = window.screen.width,
+        viewport = document.querySelector("meta[name=viewport]");
 
     viewport.setAttribute("content", `height=${viewheight}, width=${viewwidth}, initial-scale=1.0`);
 }
@@ -98,4 +101,9 @@ function loadRecentTrips(history) {
     history.forEach(route => {
         tripContainer.innerHTML += recentTrip(route);
     })
+}
+
+function loadDataInQuickAccess(userInfo) {
+    document.querySelector('#quick-access header h3').innerHTML = userInfo.name;
+    document.querySelector('#quick-access article#subscription-quick p').innerHTML = userInfo.subscription.name;
 }
