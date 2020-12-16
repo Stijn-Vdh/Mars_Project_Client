@@ -526,6 +526,7 @@
 }
 
 #notifications {
+  pointer-events: none;
   z-index: 200;
   position: relative;
   padding-top: 0.5rem;
@@ -887,7 +888,7 @@
   will-change: transform;
 }
 #quick-access:not(.active) {
-  bottom: -75vh;
+  transform: translateY(75vh);
   border-radius: 1rem 1rem 0 0;
 }
 #quick-access:not(.active) header {

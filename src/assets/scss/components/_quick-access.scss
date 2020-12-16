@@ -14,7 +14,7 @@
     will-change: transform;
 
     &:not(.active) {
-        bottom: -100vh + 25vh; // We want the quick access to be partially shown when not active
+        transform: translateY(75vh);
         border-radius: 1rem 1rem 0 0;
 
         header {

@@ -17,9 +17,8 @@ function initQuickAccess() {
 
 function dragStart(e) {
     if (!dragInfo.started) {
-        dragInfo.startPos = document.querySelector('#quick-access').offsetTop;
+        dragInfo.startPos = document.querySelector('#quick-access').getBoundingClientRect().top;
     }
-    document.querySelector('#quick-access').style.top = `${dragInfo.startPos}px`
     dragInfo.started = true;
     dragInfo.prevPos = dragInfo.startPos;
 }
@@ -28,7 +27,7 @@ function dragMove(e) {
     e.preventDefault();
     dragInfo.initialized = true;
     let curPos = e.clientY || e.touches[0].clientY;
-    document.querySelector('#quick-access').style.transform = `translateY(${-(dragInfo.startPos - curPos)}px)`;
+    document.querySelector('#quick-access').style.transform = `translateY(${curPos}px)`;
     dragInfo.prevPos = dragInfo.prevPos - (dragInfo.prevPos - curPos);
 }
 
@@ -36,15 +35,17 @@ function dragEnd(e) {
     document.querySelector('#quick-access').style.transition = 'transform 0.3s ease-in-out';
 
     if (dragInfo.prevPos < dragInfo.startPos * .7 || (!dragInfo.initialized && !document.querySelector('#quick-access').classList.contains('active'))) {
-        document.querySelector('#quick-access').style.transform = `translateY(${0 - dragInfo.startPos}px)`;
-        goTo('#quick-access');
-    } else {
         document.querySelector('#quick-access').style.transform = `translateY(0)`;
+        if (!document.querySelector('#quick-access').classList.contains('active')) {
+            goTo('#quick-access');
+        }
+    } else {
+        document.querySelector('#quick-access').style.transform = `translateY(75vh)`;
         goBack();
     }
     dragInfo.initialized = false;
     setTimeout(() => {
-        document.querySelector('#quick-access').style.transform = `translateY(0)`;
+        document.querySelector('#quick-access').style.transform = ``;
         document.querySelector('#quick-access').style.top = ``;
         document.querySelector('#quick-access').style.transition = '';
     }, 400)
