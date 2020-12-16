@@ -158,6 +158,10 @@ function orderPod(e) {
         });
 }
 
+function orderPackagePod(e){
+    console.log('ordered');
+}
+
 /**
  * Test the api
  *
