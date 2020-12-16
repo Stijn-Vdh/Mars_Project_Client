@@ -1,0 +1,104 @@
+@use '../util';
+@use '../variables';
+
+#package-order-view {
+  @include util.side-view(right);
+  @include util.default-side-view-header;
+  padding: 3rem 2rem;
+
+  .back {
+    position: absolute;
+    right: 2rem;
+    top: 3rem;
+    width: 2rem;
+    height: 2rem;
+    border: 0;
+    background-color: transparent;
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+
+  img {
+    width: 100%;
+    padding-top: 3rem;
+    padding-bottom: 1.5rem;
+    align-self: center;
+  }
+
+  #package-title {
+    background-color: transparent;
+    border: 0;
+    color: util.$text-primary;
+    font-weight: bold;
+    font-size: 1.8rem;
+    margin: 0.5rem 0 1.5rem;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  form {
+    display: flex;
+    flex-flow: column nowrap;
+    height: 100%;
+
+    h2 {
+      padding-top: 1rem;
+    }
+
+    label {
+      font-family: "Montserrat", sans-serif;
+    }
+
+    ion-icon {
+      color: variables.$accent-red;
+      align-self: center;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
+    .btn-group {
+      padding: 0.5rem 0;
+
+      &.first {
+        margin-top: 5rem;
+      }
+    }
+
+    .package-location:first-child {
+      padding-top: 1rem;
+    }
+
+    #package-pod-pricing {
+      font-size: 1.1rem;
+      margin: auto 0 0;
+
+      span {
+        font-size: 1.3rem;
+        font-weight: bold;
+        float: right;
+      }
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+      margin-top: 5rem;
+      @include util.button;
+      padding: 1.5rem;
+      background-color: util.$accent-green;
+    }
+
+    h2 {
+      font-weight: normal;
+    }
+  }
+}

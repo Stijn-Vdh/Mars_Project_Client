@@ -322,6 +322,40 @@
     </form>
 </aside>
 
+<aside id="package-order-view">
+    <button class="back">
+        <ion-icon name="close-outline"></ion-icon>
+    </button>
+    <form id="select-package-order" action="#" method="post">
+        <label id="package-title" for="select-location-text">Send package</label>
+        <img src="./assets/images/Lightspeed.png" alt="LightspeedLogo">
+
+        <label class="package-location" for="p-from">Send package from:</label>
+        <input type="text" id="p-from">
+
+        <ion-icon size="large" name="swap-vertical-outline"></ion-icon>
+
+        <label class="package-location" for="p-destination">Send package to:</label>
+        <input type="text" id="p-destination">
+
+
+        <h2>Payment method</h2>
+        <div class="btn-group ">
+            <input type="checkbox" id="p-bank" name="paymentMethod" value="bank">
+            <label for="p-bank">Pay with martian bank</label>
+        </div>
+        <div class="btn-group">
+            <input type="checkbox" id="p-reward-points" name="paymentMethod" value="rewardPoints">
+            <label for="p-reward-points">Pay with reward points</label>
+        </div>
+
+
+        <h2 id="package-pod-pricing">You current total is <span>M2</span></h2>
+
+        <input type="submit" value="Order pod" id="order-package-pod">
+    </form>
+</aside>
+
 <aside id="process-payment">
     <header>
         <h2>Checking payment</h2>
@@ -375,6 +409,7 @@
 <script src="assets/js/components/searchbar.js"></script>
 <script src="assets/js/components/settings.js"></script>
 <script src="assets/js/components/subscription.js"></script>
+<script src="assets/js/components/package.js"></script>
 <script src="assets/js/components/user.js"></script>
 <script src="assets/js/main.js"></script>
 
