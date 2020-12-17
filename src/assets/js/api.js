@@ -1,7 +1,7 @@
 "use strict";
 
 const api = 'https://project-ii.ti.howest.be/mars-15/api/';
-const localApi = 'http://localhost:8080/api/'
+// const api = 'http://localhost:8080/api/';
 
 function getUserInfo() {
     return apiCall('accountInformation', 'GET', true)
@@ -15,14 +15,15 @@ function getUserInfo() {
 }
 
 function updateName(newName) {
-    apiCall('changeDisplayName', 'POST', true, {newDisplayName: newName})
+    return apiCall('changeDisplayName', 'POST', true, {newDisplayName: newName})
         .then(response => {
             if (response.status === 401 || response.status === 403) {
                 warn(response.message);
             } else {
                 notify(response);
             }
-        });
+        })
+        .then(updateAccInfo);
 }
 
 function updatePassword(currentPassword, newPassword) {
@@ -33,7 +34,7 @@ function updatePassword(currentPassword, newPassword) {
             } else {
                 notify(response);
             }
-        })
+        });
 }
 
 /**
@@ -91,7 +92,7 @@ function register(e) {
                 goBack();
                 goTo('#signin');
             }
-        })
+        });
 }
 
 function addFriend(e = null) {
@@ -105,7 +106,7 @@ function addFriend(e = null) {
                 notify(response);
                 goBack();
             }
-        });
+        }).finally(updateAccInfo);
 }
 
 function removeFriend(e = null) {
@@ -119,7 +120,7 @@ function removeFriend(e = null) {
                 notify(response);
                 goBack();
             }
-        });
+        }).finally(updateAccInfo);
 }
 
 function orderPod(e) {
@@ -180,7 +181,7 @@ function orderPod(e) {
         });
 }
 
-function orderPackagePod(e){
+function orderPackagePod(e) {
     e.preventDefault();
 
     //does not work yet
@@ -240,7 +241,7 @@ function getPackageEndpoints() {
     return apiCall("endpoint/package", "GET", true)
 }
 
-function getTravelEndpoints(){
+function getTravelEndpoints() {
     return apiCall("endpoint/travel", 'GET', true);
 }
 
@@ -254,12 +255,18 @@ function getTravelHistory() {
     return apiCall('travel', 'GET', true)
 }
 
+function setSubscription(id) {
+    return apiCall('subscription', 'POST', true, {subscriptionId: id})
+        .finally(updateAccInfo);
+}
+
 /** Call the api
 
  * @param {string} uri             The request url
  * @param {string} method          The request method
  * @param {boolean} authenticated  If we need to send authentication header
-
+ * @param body                     body sent with the request
+ *
  * @return {Promise}               The request promise
  */
 function apiCall(uri, method = 'GET', authenticated, body) {

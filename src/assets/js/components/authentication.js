@@ -17,13 +17,13 @@ function initAuthentication() {
                 if (response.status === 403) {
                     goTo('#authentication');
                 } else {
+                    accInfo = response;
                     initNotificationSocket();
                     goTo('main');
                 }
             });
     }
 }
-
 
 
 function selectHomeEndpoint(e) {
@@ -33,7 +33,7 @@ function selectHomeEndpoint(e) {
     document.querySelector('.searchHomeEndpoint').classList.remove('active');
 }
 
-function loadHomeEndpointList(e=null, filter="") {
+function loadHomeEndpointList(e = null, filter = "") {
     const homeEndpointContainer = document.querySelector('.searchHomeEndpoint ul');
     let endpointsToShow = [...endpoints];
 

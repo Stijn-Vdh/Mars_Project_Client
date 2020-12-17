@@ -13,7 +13,7 @@ function initQuickAccess() {
     document.querySelector('#quick-access > header').updateEventListener('touchstart', dragStart);
     document.querySelector('#quick-access > header').updateEventListener('touchmove', dragMove);
     document.querySelector('#quick-access > header').updateEventListener('touchend', dragEnd);
-
+    document.querySelector('#logout').updateEventListener('click', logout);
     showGreeting();
     document.querySelector('#recent-trips ul').updateEventListener('scroll', recentTripScroll);
 }
@@ -50,7 +50,19 @@ function closeQuickAccess() {
 function showGreeting() {
     const currentTime = new Date().getHours();
 
-    document.querySelector('#quick-access > header h2').innerHTML = currentTime < 6 ? 'Good night': currentTime < 12 ? 'Good morning': currentTime < 18 ? 'Good afternoon': 'Good evening';
+    document.querySelector('#quick-access > header h2').innerHTML = currentTime < 6
+        ? 'Good night' : currentTime < 12
+            ? 'Good morning' : currentTime < 18
+                ? 'Good afternoon' : 'Good evening';
+}
+
+function logout(){
+
+    apiCall("login", "delete", true)
+        .then(() => {
+                localStorage.removeItem("token");
+                goTo('#authentication');
+        });
 }
 
 function dragStart(e) {

@@ -1,5 +1,6 @@
 "use strict";
 
+
 function recentTrip(route) {
     const minutes = Math.floor(route.estmTime / 60),
     seconds = route.estmTime % 60;

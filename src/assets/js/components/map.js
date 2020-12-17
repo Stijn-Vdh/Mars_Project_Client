@@ -1,34 +1,36 @@
 "use strict";
 
-let mapInitialized = false;
+let onceMap = false;
 let map, routeController, markers = [];
 
 function initMap() {
-    //set the map config
-    map = L.map('map', {
-        wheelPxPerZoomLevel: 150,
-        zoom: 12,
-        center: [52.468728, -2.025817]
-    });
+    if (!onceMap){
+        onceMap = true
 
-    //set the tileLayer
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-        subdomains: 'abcd',
-        maxZoom: 18,
-        minZoom: 9,
+        //set the map config
+        const map = L.map('map', {
+            wheelPxPerZoomLevel: 150,
+            zoom: 12,
+            center: [52.468728, -2.025817]
+        });
 
-    }).addTo(map)
+        //set the tileLayer
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+            subdomains: 'abcd',
+            maxZoom: 18,
+            minZoom: 9,
 
-    //show the center
-    //const marker = L.marker([52.468728, -2.025817]).addTo(map);
-    //marker.bindTooltip("CENTER",).openTooltip();
+        }).addTo(map)
 
-    //limit the map to these bounds
-    const northEast = L.latLng(53, -1.5);
-    const southWest = L.latLng(52, -2.7);
-    map.setMaxBounds(L.latLngBounds(southWest, northEast));
+        //show the center
+        //const marker = L.marker([52.468728, -2.025817]).addTo(map);
+        //marker.bindTooltip("CENTER",).openTooltip();
 
+        //limit the map to these bounds
+        const northEast = L.latLng(53, -1.5);
+        const southWest = L.latLng(52, -2.7);
+        map.setMaxBounds(L.latLngBounds(southWest, northEast));
     //add the endpoints to the map
     getTravelEndpoints().then(endpoints => {
         sessionStorage.setItem('endpoints', JSON.stringify(endpoints));
@@ -41,17 +43,17 @@ function initMap() {
             markers.push(tooltip);
             tooltip.bindTooltip(`${endpoint.name}`, {}).openTooltip();
             tooltip.on("click", travelTo)
+            });
         });
-    });
 
-    //show the dome
-    const dome = L.circle([52.468728, -2.025817], {
-        radius: 10000,
-        color: 'red',
-        fillColor: '#f03',
-        fillOpacity: 0.2,
-    }).addTo(map);
-    dome.bindPopup("This is the start dome");
+        //show the dome
+        const dome = L.circle([52.468728, -2.025817], {
+            radius: 10000,
+            color: 'red',
+            fillColor: '#f03',
+            fillOpacity: 0.2,
+        }).addTo(map);
+        dome.bindPopup("This is the start dome");
 
     routeController = L.Routing.control({
         waypoints: [
@@ -73,7 +75,6 @@ function initMap() {
 
     //limit the tooltips to a certain zoom
     setToolTipRange(map, 12);
-    mapInitialized = true;
 }
 
 function getDistance(origin, destination) {     // return distance in meters
