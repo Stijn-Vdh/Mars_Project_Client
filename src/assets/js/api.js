@@ -1,6 +1,7 @@
 "use strict";
 
 const api = 'https://project-ii.ti.howest.be/mars-15/api/';
+
 // const api = 'http://localhost:8080/api/';
 
 function getUserInfo() {
@@ -29,12 +30,37 @@ function updateName(newName) {
 function updatePassword(currentPassword, newPassword) {
     apiCall('changePassword', 'POST', true, {newPassword: newPassword})
         .then(response => {
-            if (response.status === 401 || response.status === 403) {
-                warn(response.message);
-            } else {
-                notify(response);
+                if (response.status === 401 || response.status === 403) {
+                    warn(response.message);
+                } else {
+                    notify(response);
+                }
             }
-        });
+        );
+}
+
+function updateSharingLocation(sharing) {
+    if (sharing) {
+        return apiCall("shareLocation", "DELETE", true)
+            .then(response => {
+                if (response.status === 401 || response.status === 403) {
+                    warn(response.message);
+                } else {
+                    notify(response);
+                }
+            })
+            .then(updateAccInfo);
+    } else {
+        return apiCall("shareLocation", "POST", true)
+            .then(response => {
+                if (response.status === 401 || response.status === 403) {
+                    warn(response.message);
+                } else {
+                    notify(response);
+                }
+            })
+            .then(updateAccInfo);
+    }
 }
 
 /**
@@ -127,16 +153,22 @@ function orderPod(e) {
     e.preventDefault();
 
     const body = {
-        from: 1,
+        from: currentLocationEndpointId,
         destination: parseInt(e.target.querySelector('#select-location').value),
         podType: e.target.querySelector('#selected-pod').value
+    }
+
+    if (body.from === body.destination){
+        warn("FROM AND DEST IS SAME: this shouldn't be allowed to happen");
+        return;
     }
 
     apiCall('travel', 'POST', true, body)
         .then(response => {
             const user = accInfo;
+            updateCurrentLocation(body.destination);
             goTo('#process-payment');
-            if (user.subscription.unlimitedTravels) {
+            if (accInfo.subscription.unlimitedTravels) {
                 document.querySelector('#process-payment h2').innerHTML = 'Checking subscription.';
             } else {
                 document.querySelector('#process-payment h2').innerHTML = 'Checking payment.';
@@ -165,6 +197,7 @@ function orderPod(e) {
                         markers.filter(marker => marker.options.endpointId !== route.from.id && marker.options.endpointId !== route.destination.id).forEach(marker => {
                             map.removeLayer(marker);
                         });
+                        document.querySelector('#current-location').classList.add("hidden");
 
                         document.querySelector('#travel-view').style.transitionDuration = `${route.arrivalTime}s`;
                         document.querySelector('#travel-view .travel-pod').style.top = `9rem`;
@@ -183,6 +216,34 @@ function orderPod(e) {
                     });
             }
         });
+}
+
+function favouriteRoute(e){
+    e.preventDefault();
+    let id = parseInt(e.path[2].querySelector('#select-location').value);
+    let checked = e.target.checked;
+
+    if (!checked){
+        apiCall(`endpoint/favorite/${id}`,"DELETE", true)
+            .then(response=>{
+                if (response.status === 401 || response.status === 403) {
+                    warn(response.message);
+                } else {
+                    notify(response);
+                }
+            })
+            .then(updateAccInfo);
+    }else{
+        return apiCall(`endpoint/favorite/${id}`,"POST", true)
+            .then(response=>{
+                if (response.status === 401 || response.status === 403) {
+                    warn(response.message);
+                } else {
+                    notify(response);
+                }
+            })
+            .then(updateAccInfo);
+    }
 }
 
 function orderPackagePod(e) {

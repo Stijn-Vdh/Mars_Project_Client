@@ -2,6 +2,8 @@
 
 // save here responses from api calls, they are available inside each script, and prevent unnecessary api calls which lead to delayed interface
 let accInfo;
+let currentLocationEndpointId;
+let markers = [];
 
 function updateAccInfo() {
     return getUserInfo().then(userInfo => {
@@ -11,5 +13,8 @@ function updateAccInfo() {
         loadFriends(userInfo);
         loadDataInQuickAccess(userInfo);
         updatePrice();
+        if (currentLocationEndpointId === undefined) {
+            currentLocationEndpointId = accInfo.homeEndpoint;
+        }
     });
 }

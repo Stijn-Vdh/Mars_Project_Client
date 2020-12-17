@@ -8,11 +8,15 @@
     ul {
         display: flex;
         overflow-y: scroll;
+        margin-bottom: 1rem;
 
         li {
             flex-shrink: 0;
             margin: 1rem 0;
             text-align: center;
+            h2{
+                margin: 0 auto;
+            }
 
             h2 {
                 margin: 0 auto;

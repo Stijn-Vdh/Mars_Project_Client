@@ -24,6 +24,13 @@
 
 
     </div>
+    <div id="current-location" class="leaflet-bottom leaflet-right">
+        <span></span>
+    </div>
+    <div id="show-legend" class="leaflet-bottom leaflet-right">
+        <ion-icon name="information-circle" class="hidden"></ion-icon>
+        <ion-icon name="information" ></ion-icon>
+    </div>
     <div class="searchbar">
         <label for="searchBox-1">
             <ion-icon name="search-outline"></ion-icon>
@@ -53,8 +60,15 @@
                 <li>Destination</li>
             </ul>
         </article>
-        <article id="recent-trips">
-            <h2>Recent trips</h2>
+        <article id="trips">
+            <h2>Trips</h2>
+            <div id="change-trips">
+                <input type="radio" id="recent" name="trip">
+                <label id="label-recent" for="recent">Recent</label>
+                <input type="radio" id="favorite" name="trip">
+                <label id="label-favorite" for="favorite">Favourite</label>
+            </div>
+
             <ul>
                 <li>
                     <h2>Work</h2>
@@ -129,7 +143,6 @@
         <button type="submit">Sign in</button>
     </form>
 </aside>
-
 
 <aside id="signup">
     <header>
@@ -236,6 +249,10 @@
         </button>
     </header>
     <ul>
+        <li id="userName-setting">
+            <h3>Username</h3>
+            <p></p>
+        </li>
         <li id="name-settings">
             <h3>Display Name</h3>
             <p></p>
@@ -256,6 +273,17 @@
             <h3>Subscription</h3>
             <p></p>
             <a href="#" id="edit-subscription">Edit</a>
+        </li>
+        <li id="shareLocation-setting-change">
+            <h3>Share location to friends</h3>
+            <label class="custom-checkbox">
+                <input type="checkbox" id="update-shareLocation">
+                <span></span>
+            </label>
+        </li>
+        <li id="address-setting">
+            <h3>Address</h3>
+            <p></p>
         </li>
         <!-- <li id="business-settings">
             <h3>Business user</h3>
@@ -309,7 +337,11 @@
         <label for="select-location-text">Travel to</label>
         <input type="hidden" disabled id="select-location">
         <input type="text" disabled id="select-location-text" value="Location">
-
+        <h3>Favourite endpoint</h3>
+        <label class="custom-checkbox" id="favourite-route">
+            <input  type="checkbox" id="favourite-endpoint">
+            <span></span>
+        </label>
         <h2>Pod type</h2>
         <div id="pod-select">
             <input type="hidden" id="selected-pod" value="standard">
@@ -418,7 +450,12 @@
 </aside>
 <script src="https://cdn.jsdelivr.net/sockjs/0.3.4/sockjs.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vertx/3.5.4/vertx-eventbus.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+<script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
 
+<script src="assets/js/components/leaflet-color-markers.js"></script>
 <script src="assets/js/templates.js"></script>
 <script src="assets/js/api.js"></script>
 <script src="assets/js/cache.js"></script>
@@ -434,15 +471,9 @@
 <script src="assets/js/components/subscription.js"></script>
 <script src="assets/js/components/package.js"></script>
 <script src="assets/js/components/user.js"></script>
+<script src="assets/js/components/map.js"></script>
 <script src="assets/js/main.js"></script>
 
 <script type="module" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.esm.js"></script>
-
-<script src="assets/js/components/map.js"></script>
-<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-        crossorigin=""></script>
-<script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
-
 </body>
 </html>

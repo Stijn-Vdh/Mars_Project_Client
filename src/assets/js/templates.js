@@ -24,6 +24,17 @@ function recentTrip(route) {
     `
 }
 
+function favouriteTrip(route){
+    return `
+    <li data-order-pod="${route.id}">
+        <h2>${route.name}</h2>
+        <div>
+            <p class="from">id : ${route.id}</p>
+        </div>
+    </li>
+    `
+}
+
 function friendSetting(friend) {
     return `
     <ul>

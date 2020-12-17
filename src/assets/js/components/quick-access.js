@@ -9,17 +9,37 @@ let dragInfo = {
     prevPos: null
 };
 
+
+
 function initQuickAccess() {
     document.querySelector('#quick-access > header').updateEventListener('touchstart', dragStart);
     document.querySelector('#quick-access > header').updateEventListener('touchmove', dragMove);
     document.querySelector('#quick-access > header').updateEventListener('touchend', dragEnd);
     document.querySelector('#logout').updateEventListener('click', logout);
     showGreeting();
-    document.querySelector('#recent-trips ul').updateEventListener('scroll', recentTripScroll);
+    document.querySelector('#trips ul').updateEventListener('scroll', recentTripScroll);
+    document.querySelectorAll('#change-trips input').forEach(el => el.updateEventListener('change',changeTrips));
+    document.querySelector('#change-trips #recent').checked = true;
+    document.querySelector('#change-trips ').classList.remove('favourite');
+}
+
+function changeTrips() {
+    let recent = document.querySelector('#change-trips #recent');
+
+    if (recent.checked){
+        getTravelHistory()
+            .then(history => {
+                loadRecentTrips(history, "recent");
+            });
+        document.querySelector('#change-trips').classList.remove('favourite');
+    }else{
+        loadRecentTrips(accInfo.favouriteEndpoints, "favourites")
+        document.querySelector('#change-trips').classList.add('favourite');
+    }
 }
 
 function recentTripScroll(e) {
-    document.querySelectorAll('#recent-trips ul li').forEach(el => {
+    document.querySelectorAll('#trips ul li').forEach(el => {
         const loc = (el.getBoundingClientRect().left + el.getBoundingClientRect().right) / 2;
         let maxShadow = loc % (window.screen.width / 2);
         let halfScreen = (window.screen.width / 2);

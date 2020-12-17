@@ -3,6 +3,8 @@
 function podOrderInit() {
     document.querySelectorAll('#standard-pod, #luxury-pod').forEach(el => el.updateEventListener('click', switchPod));
     document.querySelector('#select-travel-location').updateEventListener('submit', orderPod);
+    document.querySelector('#favourite-endpoint').addEventListener('change',favouriteRoute);
+
 }
 
 function switchPod(e) {
@@ -65,6 +67,7 @@ function setTraveling() {
                     document.querySelector('#travel-estm-time').innerHTML = ``;
                     document.querySelector('.animate-route').style.animation = ``;
                     document.querySelector('.searchbar').style.display = '';
+                    document.querySelector('#current-location').classList.remove("hidden");
                     document.querySelector('#quick-access').classList.remove('traveling');
                     routeController.setWaypoints([]);
                     markers.filter(marker => marker.options.endpointId !== routeInfo.from.id && marker.options.endpointId !== routeInfo.destination.id).forEach(marker => {
@@ -73,4 +76,15 @@ function setTraveling() {
                 }, 2000)
             }, (arriveOn * 1000));
         })
+}
+
+function checkFavoured(){
+    let id = document.querySelector('#select-location').value;
+    document.querySelector('#favourite-endpoint').checked = false;
+    accInfo.favouriteEndpoints.forEach(endpoint =>{
+        if (endpoint.id === parseInt(id)){
+            document.querySelector('#favourite-endpoint').checked = true;
+        }
+    });
+
 }

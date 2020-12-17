@@ -16,9 +16,17 @@ function updateSettings() {
     const newName = document.querySelector('#new-name').value;
     if (newName !== '' && newName !== accInfo.displayName) {
         updateName(newName).finally(userInit);
-    } else {
-        userInit();
     }
+
+    if (accInfo.shareLocation && !(document.querySelector('#shareLocation-setting-change input').checked)){
+        updateSharingLocation(accInfo.shareLocation).finally(userInit);
+
+
+    }
+    if (!(accInfo.shareLocation) && document.querySelector('#shareLocation-setting-change input').checked){
+        updateSharingLocation(accInfo.shareLocation).finally(userInit);
+    }
+
 }
 
 function generateUserIcon(user) {
@@ -74,4 +82,7 @@ function loadDataInSettings() {
     document.querySelector('#edit-name').innerHTML = "Edit";
     document.querySelector('#password-settings div').classList.add('hidden');
     document.querySelector('#password-settings a').innerHTML = "Change password";
+    document.querySelector('#userName-setting p').innerHTML = accInfo.name;
+    document.querySelector('#address-setting p').innerHTML = accInfo.homeAddress + "    " + accInfo.homeEndpoint;
+    document.querySelector('#shareLocation-setting-change input').checked = accInfo.shareLocation;
 }
