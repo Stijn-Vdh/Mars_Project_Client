@@ -187,9 +187,9 @@ function updateCurrentLocation(id) {
     marker.off("click", travelTo);
 }
 
-function addLegend() {
-    const legend = L.control({position: "bottomleft"});
+const legend = L.control({position: "bottomleft"});
 
+function addLegend() {
     legend.onAdd = function () {
         const div = L.DomUtil.create("div", "legend");
         div.innerHTML += "<h4>Legend</h4>";
@@ -200,6 +200,16 @@ function addLegend() {
         return div;
     };
 
-    legend.addTo(map);
+    document.querySelector("#show-legend").addEventListener("click", toggleLegend);
+}
 
+let flagLegend = false;
+
+function toggleLegend() {
+    if (flagLegend) {
+        legend.addTo(map);
+    } else {
+        map.removeControl(legend);
+    }
+    flagLegend = !flagLegend;
 }
