@@ -38,14 +38,17 @@ function initMap() {
             endpoints.forEach(endpoint => {
                 const CD = endpoint.coordinate;
 
-                const tooltip = L.marker(L.latLng(CD.latitude, CD.longitude), {
+                const marker = L.marker(L.latLng(CD.latitude, CD.longitude), {
                     endpointId: endpoint.id,
                     endpointName: endpoint.name,
-                    icon: getIcon(endpoint)
+                    icon: getIcon(endpoint),
                 }).addTo(map);
-                markers.push(tooltip);
-                tooltip.bindTooltip(`${endpoint.name}`, {}).openTooltip();
-                tooltip.on("click", travelTo)
+                markers.push(marker);
+                marker.bindTooltip(`${endpoint.name}`, {
+                    direction: "top",
+                    offset: L.point(0, -40)
+                }).openTooltip();
+                marker.on("click", travelTo)
             });
         });
 
