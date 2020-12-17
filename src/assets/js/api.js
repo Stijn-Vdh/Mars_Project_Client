@@ -165,6 +165,9 @@ function orderPod(e) {
                         markers.filter(marker => marker.options.endpointId !== route.from.id && marker.options.endpointId !== route.destination.id).forEach(marker => {
                             map.removeLayer(marker);
                         });
+
+                        document.querySelector('#travel-view').style.transitionDuration = `${route.arrivalTime}s`;
+                        document.querySelector('#travel-view .travel-pod').style.top = `9rem`;
                         
                         document.querySelector('.searchbar').style.display = 'none';
                         document.querySelector('#quick-access').classList.add('traveling');

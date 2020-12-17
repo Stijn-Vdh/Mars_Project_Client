@@ -1,8 +1,15 @@
 @use '../util';
 
 #travel-view {
+    position: relative;
+
     h2 {
         margin-left: 2rem;
+    }
+
+    .travel-pod {
+        left: 2.05rem;
+        top: 2rem;
     }
 
     ul {
@@ -13,6 +20,8 @@
         height: 20rem;
         display: flex;
         flex-flow: column nowrap;
+        transition-duration: inherit;
+        background-position-y: 100%;
 
         &::before {
             content: '';

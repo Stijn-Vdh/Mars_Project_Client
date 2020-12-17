@@ -902,33 +902,46 @@
   transform: translateY(0);
   will-change: transform;
 }
-#quick-access:not(.transport) .transport {
+#quick-access:not(.traveling) .traveling {
   display: none;
 }
-#quick-access.transport > *:not(header):not(.transport) {
+#quick-access .travel-pod {
+  width: 1rem;
+  position: absolute;
+  top: -0.15rem;
+  left: 0%;
+  z-index: 1;
+  transform: rotate(90deg);
+  transition: left 0s ease-in-out, top 0s ease-in-out;
+  transition-duration: inherit;
+}
+#quick-access.traveling > *:not(header):not(.traveling) {
   display: none;
 }
-#quick-access.transport header .transport {
+#quick-access.traveling header .traveling {
   position: absolute;
   display: flex;
   top: -1.5rem;
   left: 0;
   width: 100%;
-  background-color: #fbfcff;
+  background-color: #eff1f4;
   z-index: -1;
   height: 3rem;
   padding: 0.5rem;
   box-sizing: border-box;
   border-radius: 1rem 1rem 0 0;
 }
-#quick-access.transport header .transport .timeline {
+#quick-access.traveling header .traveling .timeline {
   position: relative;
   flex-grow: 1;
   height: 2px;
   margin: 0.5rem 1rem;
   background-color: #8f8389;
 }
-#quick-access.transport header .transport .timeline::before, #quick-access.transport header .transport .timeline::after {
+#quick-access.traveling header .traveling .timeline .travel-pod {
+  transform: rotate(0deg);
+}
+#quick-access.traveling header .traveling .timeline::before, #quick-access.traveling header .traveling .timeline::after {
   content: "";
   position: absolute;
   top: -5px;
@@ -938,13 +951,13 @@
   height: 0.5rem;
   background-color: #8f8389;
 }
-#quick-access.transport header .transport .timeline::before {
+#quick-access.traveling header .traveling .timeline::before {
   left: 0;
 }
-#quick-access.transport header .transport .timeline::after {
+#quick-access.traveling header .traveling .timeline::after {
   right: 0;
 }
-#quick-access.transport header .transport::after {
+#quick-access.traveling header .traveling::after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -1278,8 +1291,15 @@
   float: right;
 }
 
+#travel-view {
+  position: relative;
+}
 #travel-view h2 {
   margin-left: 2rem;
+}
+#travel-view .travel-pod {
+  left: 2.05rem;
+  top: 2rem;
 }
 #travel-view ul {
   position: relative;
@@ -1289,6 +1309,8 @@
   height: 20rem;
   display: flex;
   flex-flow: column nowrap;
+  transition-duration: inherit;
+  background-position-y: 100%;
 }
 #travel-view ul::before {
   content: "";

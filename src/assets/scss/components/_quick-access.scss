@@ -13,26 +13,37 @@
     transform: translateY(0);
     will-change: transform;
 
-    &:not(.transport) {
-        .transport {
+    &:not(.traveling) {
+        .traveling {
             display: none;
         }
     }
+    
+    .travel-pod {
+        width: 1rem;
+        position: absolute;
+        top: -0.15rem;
+        left: 0%;
+        z-index: 1;
+        transform: rotate(90deg);
+        transition: left 0s ease-in-out, top 0s ease-in-out;
+        transition-duration: inherit;
+    }
 
-    &.transport {
-        & > *:not(header):not(.transport) {
+    &.traveling {
+        & > *:not(header):not(.traveling) {
             display: none;
         }
 
         header {
 
-            .transport {
+            .traveling {
                 position: absolute;
                 display: flex;
                 top: -1.5rem;
                 left: 0;
                 width: 100%;
-                background-color: util.$background-primary;
+                background-color: util.$background-secondary;
                 z-index: -1;
                 height: 3rem;
                 padding: 0.5rem;
@@ -45,6 +56,10 @@
                     height: 2px;
                     margin: 0.5rem 1rem;
                     background-color: util.$text-secondary;
+
+                    .travel-pod {
+                        transform: rotate(0deg);
+                    }
 
                     &::before, &::after {
                         content: '';
