@@ -37,8 +37,15 @@
             <h2>Hey</h2>
             <h3>you</h3>
         </header>
-        <article id="recent-trips">
-            <h2>Recent trips</h2>
+        <article id="trips">
+            <h2>Trips</h2>
+            <div id="change-trips">
+                <input type="radio" id="recent" name="trip">
+                <label id="label-recent" for="recent">Recent</label>
+                <input type="radio" id="favorite" name="trip">
+                <label id="label-favorite" for="favorite">Favourite</label>
+            </div>
+
             <ul>
                 <li>
                     <h2>Work</h2>
@@ -113,7 +120,6 @@
         <button type="submit">Sign in</button>
     </form>
 </aside>
-
 
 <aside id="signup">
     <header>
@@ -308,7 +314,11 @@
         <label for="select-location-text">Travel to</label>
         <input type="hidden" disabled id="select-location">
         <input type="text" disabled id="select-location-text" value="Location">
-
+        <h3>Favourite endpoint</h3>
+        <label class="custom-checkbox" id="favourite-route">
+            <input  type="checkbox" id="favourite-endpoint">
+            <span></span>
+        </label>
         <h2>Pod type</h2>
         <div id="pod-select">
             <input type="hidden" id="selected-pod" value="standard">
