@@ -1,7 +1,7 @@
 "use strict";
 
 let onceMap = false;
-let map, routeController, markers = [];
+let map, routeController;
 
 function initMap() {
     if (!onceMap) {
@@ -91,8 +91,10 @@ function initMap() {
     }
 }
 
-function getIcon(endpoint) {
-    if (endpoint.id === accInfo.homeEndpoint) {
+function getIcon(endpoint, skipCurrentLocation = false) {
+    if (endpoint.id === currentLocationEndpointId && !skipCurrentLocation) {
+        return greenIcon;
+    } else if (endpoint.id === accInfo.homeEndpoint) {
         return redIcon;
     } else if (endpoint.privateEndpoint) {
         return yellowIcon;
@@ -166,12 +168,16 @@ function travelTo() {
 }
 
 function showLocation() {
-    console.log("clicked");
     const marker = markers.find(marker => marker.options.endpointId === currentLocationEndpointId);
-    map.fitBounds(L.latLngBounds([marker.getLatLng()]));
-
-    // map.flyTo([
-    //     47.57652571374621,
-    //     -27.333984375
-    //   ],3,{animate: true, duration: 5})
+    map.flyTo(marker.getLatLng(), 14, {animate: true, duration: 5})
 }
+
+function updateCurrentLocation(id) {
+    const oldMarker = markers.find(marker => marker.options.endpointId === currentLocationEndpointId);
+    oldMarker.setIcon(getIcon(endpoints.find(endpoint => endpoint.id === currentLocationEndpointId), true));
+    currentLocationEndpointId = id;
+    const marker = markers.find(marker => marker.options.endpointId === currentLocationEndpointId);
+    marker.setIcon(greenIcon);
+}
+
+// #todo remove travel function to marker that is ur current location

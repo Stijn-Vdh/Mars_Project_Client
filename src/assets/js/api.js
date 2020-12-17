@@ -160,7 +160,7 @@ function orderPod(e) {
 
     apiCall('travel', 'POST', true, body)
         .then(response => {
-            currentLocationEndpointId = body.destination;
+            updateCurrentLocation(body.destination);
             goTo('#process-payment');
             if (accInfo.subscription.unlimitedTravels) {
                 document.querySelector('#process-payment h2').innerHTML = 'Checking subscription.';
