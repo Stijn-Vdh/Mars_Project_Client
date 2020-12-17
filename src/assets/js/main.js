@@ -5,7 +5,7 @@ let endpoints;
 
 document.addEventListener("DOMContentLoaded", init);
 
-async function init() {
+function init() {
     Element.prototype.updateEventListener = function (event, cb) {
         this.removeEventListener(event, cb);
         this.addEventListener(event, cb);
@@ -14,21 +14,11 @@ async function init() {
     addPages();
     initNavigation();
     initAuthentication();
-    // Temporary hack to allow local testing of the web client and server.
-    // document.cookie = 'Authorization=Basic cHJvamVjdG1lZGV3ZXJrZXI6dmVya2VlcmQ=';
-    // config = await loadConfig();
-    // api = `${config.host ? config.host + '/': ''}${config.group ? config.group + '/' : ''}api/`;
-    // initSettings();
-
     podOrderInit();
 
     navigator.serviceWorker.register('/mars-15/service-worker.js', {
         scope: '/mars-15/'
     });
-    // navigator.serviceWorker.register('/service-worker.js', {
-    //     scope: '/'
-    // });
-
 }
 
 function initMain() {
@@ -42,13 +32,8 @@ function initMain() {
         .then(history => {
             loadRecentTrips(history);
         });
-    getUserInfo()
-        .then(userInfo => {
-            checkForFriendRequests(userInfo);
-            loadFriends(userInfo);
-            loadDataInQuickAccess(userInfo);
-        });
-    if (!mapInitialized) initMap();
+    updateAccInfo();
+    initMap();
 }
 
 function addPages() {
@@ -57,7 +42,7 @@ function addPages() {
     });
     addPage('#settings', ['#open-settings'], {onOpen: initSettings});
     addPage('#quick-access', [], {onOpen: openQuickAccess, onLeave: closeQuickAccess});
-    addPage('#account-settings', ['li[data-open-setting="account-settings"]'], {onOpen: initAccountSettings});
+    addPage('#account-settings', ['li[data-open-setting="account-settings"]'], {onOpen: userInit});
     addPage('#friends-settings', ['li[data-open-setting="friends-settings"]'], {onOpen: initFriendSettings});
     addPage('#add-friend', ['.add-friend'], {onOpen: initAddFriend, dynamicData: true});
     addPage('#report', ['li[data-open-setting="report"]'], {onOpen: initReport});

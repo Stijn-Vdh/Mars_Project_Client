@@ -17,15 +17,12 @@ function loadFriends(userInfo) {
 }
 
 function initFriendSettings() {
-    getUserInfo()
-        .then(userInfo => {
-            const friendlist = document.querySelector('#friends-settings > ul');
-            friendlist.innerHTML = '';
-            userInfo.friends.forEach(friend => {
-                friendlist.innerHTML += `<li>${friendSetting(friend)}</li>`;
-                friendlist.querySelector('li:last-child button').addEventListener('click', removeFriend);
-            });
-        });
+    const friendlist = document.querySelector('#friends-settings > ul');
+    friendlist.innerHTML = '';
+    accInfo.friends.forEach(friend => {
+        friendlist.innerHTML += `<li>${friendSetting(friend)}</li>`;
+        friendlist.querySelector('li:last-child button').addEventListener('click', removeFriend);
+    });
 }
 
 function initAddFriend() {

@@ -16,5 +16,9 @@ function switchPod(e) {
         } else {
             el.classList.remove('active');
         }
-    })
+    });
+
+    // const price = document.querySelector("#pod-pricing span");
+    //
+    // if ()
 } 
