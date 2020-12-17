@@ -248,6 +248,9 @@
   margin: 1rem 0;
   text-align: center;
 }
+#friendlist ul li h2 {
+  margin: 0 auto;
+}
 #friendlist ul li .user-icon {
   border-radius: 50%;
 }
@@ -899,6 +902,58 @@
   transform: translateY(0);
   will-change: transform;
 }
+#quick-access:not(.transport) .transport {
+  display: none;
+}
+#quick-access.transport > *:not(header):not(.transport) {
+  display: none;
+}
+#quick-access.transport header .transport {
+  position: absolute;
+  display: flex;
+  top: -1.5rem;
+  left: 0;
+  width: 100%;
+  background-color: #fbfcff;
+  z-index: -1;
+  height: 3rem;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  border-radius: 1rem 1rem 0 0;
+}
+#quick-access.transport header .transport .timeline {
+  position: relative;
+  flex-grow: 1;
+  height: 2px;
+  margin: 0.5rem 1rem;
+  background-color: #8f8389;
+}
+#quick-access.transport header .transport .timeline::before, #quick-access.transport header .transport .timeline::after {
+  content: "";
+  position: absolute;
+  top: -5px;
+  border-radius: 50%;
+  border: 2px solid #eff1f4;
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: #8f8389;
+}
+#quick-access.transport header .transport .timeline::before {
+  left: 0;
+}
+#quick-access.transport header .transport .timeline::after {
+  right: 0;
+}
+#quick-access.transport header .transport::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 1rem;
+  background-color: #fbfcff;
+  left: 0;
+  border-radius: 1rem 1rem 0 0;
+}
 #quick-access:not(.active) {
   transform: translateY(75vh);
   border-radius: 1rem 1rem 0 0;
@@ -950,7 +1005,7 @@
   margin-bottom: 1rem;
 }
 #quick-access #logout {
-  margin-top: 13rem;
+  margin-top: 8rem;
 }
 
 #report {
@@ -1221,6 +1276,48 @@
 #subscription-settings ul li p {
   text-align: right;
   float: right;
+}
+
+#travel-view h2 {
+  margin-left: 2rem;
+}
+#travel-view ul {
+  position: relative;
+  margin-left: 2.5rem;
+  margin-top: 1rem;
+  padding-left: 2rem;
+  height: 20rem;
+  display: flex;
+  flex-flow: column nowrap;
+}
+#travel-view ul::before {
+  content: "";
+  width: 2px;
+  height: calc(100% - 0.5rem);
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: #8f8389;
+}
+#travel-view ul li {
+  position: relative;
+}
+#travel-view ul li::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -2.3rem;
+  border-radius: 50%;
+  border: 2px solid #eff1f4;
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: #8f8389;
+}
+#travel-view ul li:nth-child(1) {
+  flex-grow: 1;
+}
+#travel-view ul li:nth-child(2) {
+  flex-grow: 2;
 }
 
 #account-settings {

@@ -14,6 +14,10 @@
             margin: 1rem 0;
             text-align: center;
 
+            h2 {
+                margin: 0 auto;
+            }
+
             @include util.user-icon(4rem);
 
             &:first-child {

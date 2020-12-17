@@ -134,7 +134,7 @@ function orderPod(e) {
 
     apiCall('travel', 'POST', true, body)
         .then(response => {
-            const user = JSON.parse(sessionStorage.getItem('user'));
+            const user = accInfo;
             goTo('#process-payment');
             if (user.subscription.unlimitedTravels) {
                 document.querySelector('#process-payment h2').innerHTML = 'Checking subscription.';
@@ -167,6 +167,7 @@ function orderPod(e) {
                         });
                         
                         document.querySelector('.searchbar').style.display = 'none';
+                        document.querySelector('#quick-access').classList.add('traveling');
                         document.querySelector('#process-payment .checkmark').classList.add('active', 'success');
                         document.querySelector('#payment-response').innerHTML = `Ordered pod #${response.travelId}.`;
                         setTimeout(() => {
