@@ -1,6 +1,7 @@
 "use strict";
 
 const api = 'https://project-ii.ti.howest.be/mars-15/api/';
+
 // const api = 'http://localhost:8080/api/';
 
 function getUserInfo() {
@@ -29,19 +30,19 @@ function updateName(newName) {
 function updatePassword(currentPassword, newPassword) {
     apiCall('changePassword', 'POST', true, {newPassword: newPassword})
         .then(response => {
-            if (response.status === 401 || response.status === 403) {
-                warn(response.message);
-            } else {
-                notify(response);
+                if (response.status === 401 || response.status === 403) {
+                    warn(response.message);
+                } else {
+                    notify(response);
+                }
             }
-        }
         );
 }
 
-function updateSharingLocation(sharing){
-    if (sharing){
+function updateSharingLocation(sharing) {
+    if (sharing) {
         return apiCall("shareLocation", "DELETE", true)
-            .then(response =>{
+            .then(response => {
                 if (response.status === 401 || response.status === 403) {
                     warn(response.message);
                 } else {
@@ -49,9 +50,9 @@ function updateSharingLocation(sharing){
                 }
             })
             .then(updateAccInfo);
-    }else{
+    } else {
         return apiCall("shareLocation", "POST", true)
-            .then(response =>{
+            .then(response => {
                 if (response.status === 401 || response.status === 403) {
                     warn(response.message);
                 } else {
@@ -152,16 +153,21 @@ function orderPod(e) {
     e.preventDefault();
 
     const body = {
-        from: 1,
+        from: currentLocationEndpointId,
         destination: parseInt(e.target.querySelector('#select-location').value),
         podType: e.target.querySelector('#selected-pod').value
     }
 
+    if (body.from === body.destination){
+        warn("FROM AND DEST IS SAME: this shouldn't be allowed to happen");
+        return;
+    }
+
     apiCall('travel', 'POST', true, body)
         .then(response => {
-            const user = JSON.parse(sessionStorage.getItem('user'));
+            updateCurrentLocation(body.destination);
             goTo('#process-payment');
-            if (user.subscription.unlimitedTravels) {
+            if (accInfo.subscription.unlimitedTravels) {
                 document.querySelector('#process-payment h2').innerHTML = 'Checking subscription.';
             } else {
                 document.querySelector('#process-payment h2').innerHTML = 'Checking payment.';
@@ -190,7 +196,7 @@ function orderPod(e) {
                         markers.filter(marker => marker.options.endpointId !== route.from.id && marker.options.endpointId !== route.destination.id).forEach(marker => {
                             map.removeLayer(marker);
                         });
-                        
+                        document.querySelector('#current-location').classList.add("hidden");
                         document.querySelector('.searchbar').style.display = 'none';
                         document.querySelector('#process-payment .checkmark').classList.add('active', 'success');
                         document.querySelector('#payment-response').innerHTML = `Ordered pod #${response.travelId}.`;

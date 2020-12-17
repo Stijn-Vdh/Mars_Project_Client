@@ -50,6 +50,7 @@ function setTraveling() {
                 setTimeout(() => {
                     document.querySelector('.animate-route').style.animation = ``;
                     document.querySelector('.searchbar').style.display = '';
+                    document.querySelector('#current-location').classList.remove("hidden");
                     routeController.setWaypoints([]);
                     markers.filter(marker => marker.options.endpointId !== routeInfo.from.id && marker.options.endpointId !== routeInfo.destination.id).forEach(marker => {
                         marker.addTo(map);

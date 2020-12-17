@@ -24,6 +24,13 @@
 
 
     </div>
+    <div id="current-location" class="leaflet-bottom leaflet-right">
+        <span></span>
+    </div>
+    <div id="show-legend" class="leaflet-bottom leaflet-right">
+        <ion-icon name="information-circle" class="hidden"></ion-icon>
+        <ion-icon name="information" ></ion-icon>
+    </div>
     <div class="searchbar">
         <label for="searchBox-1">
             <ion-icon name="search-outline"></ion-icon>
@@ -254,7 +261,7 @@
         <li id="shareLocation-setting-change">
             <h3>Share location to friends</h3>
             <label class="custom-checkbox">
-                <input  type="checkbox" id="update-shareLocation">
+                <input type="checkbox" id="update-shareLocation">
                 <span></span>
             </label>
         </li>
@@ -427,7 +434,12 @@
 </aside>
 <script src="https://cdn.jsdelivr.net/sockjs/0.3.4/sockjs.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vertx/3.5.4/vertx-eventbus.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+<script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
 
+<script src="assets/js/components/leaflet-color-markers.js"></script>
 <script src="assets/js/templates.js"></script>
 <script src="assets/js/api.js"></script>
 <script src="assets/js/cache.js"></script>
@@ -443,15 +455,9 @@
 <script src="assets/js/components/subscription.js"></script>
 <script src="assets/js/components/package.js"></script>
 <script src="assets/js/components/user.js"></script>
+<script src="assets/js/components/map.js"></script>
 <script src="assets/js/main.js"></script>
 
 <script type="module" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.esm.js"></script>
-
-<script src="assets/js/components/map.js"></script>
-<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-        crossorigin=""></script>
-<script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
-
 </body>
 </html>
