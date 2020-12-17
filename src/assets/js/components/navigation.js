@@ -46,7 +46,6 @@ function goBack(e = null) {
 }
 
 function goTo(page, payload) {
-    console.log(page);
     if (pageHistory.length < 1 || pageHistory[pageHistory.length - 1].leave()) {
         pages[page].goto(payload);
         pageHistory.push(pages[page]);

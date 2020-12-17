@@ -28,7 +28,10 @@ function closeQuickAccess() {
 function showGreeting() {
     const currentTime = new Date().getHours();
 
-    document.querySelector('#quick-access > header h2').innerHTML = currentTime < 6 ? 'Good night': currentTime < 12 ? 'Good morning': currentTime < 18 ? 'Good afternoon': 'Good evening';
+    document.querySelector('#quick-access > header h2').innerHTML = currentTime < 6
+        ? 'Good night' : currentTime < 12
+            ? 'Good morning' : currentTime < 18
+                ? 'Good afternoon' : 'Good evening';
 }
 
 function logout(){

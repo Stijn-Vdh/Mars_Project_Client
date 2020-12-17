@@ -1,13 +1,7 @@
 "use strict";
 
 function initSettings() {
-    getUserInfo()
-        .then(response => {
-            console.log(response);
-            sessionStorage.setItem('user', JSON.stringify(response));
-
-            loadDataIntoSettings(response);
-        });
+    loadDataIntoSettings(accInfo);
 }
 
 function loadDataIntoSettings(user) {
