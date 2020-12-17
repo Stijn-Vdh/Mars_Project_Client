@@ -75,11 +75,10 @@ function loadRecentTrips(trips, type) {
     let tripContainer = document.querySelector('#trips > ul');
     tripContainer.innerHTML = "";
 
-    if (trips.length > 5){
-        trips = trips.slice(-5);
-    }
-
     if (type === "recent"){
+        if (trips.length > 5){
+            trips = trips.slice(-5);
+        }
         trips.reverse().forEach(route => {
             tripContainer.innerHTML += recentTrip(route);
         })
