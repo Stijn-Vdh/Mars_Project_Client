@@ -1,5 +1,41 @@
 # MTTS Client
 
+##Client core functionality
+
+The core functionality is travel. By choosing an endpoint on the interactive map or by searching for 
+one in the search bar, you can order pods to travel or send packages with. Travel is visualised on the map.
+
+MTTS Client main screen             |  MTSS Client quick access
+:-------------------------:|:-------------------------:|
+![](img/mtts%20main%20screen.jpg)  |  ![](img/mtts%20quick%20access.jpg)
+
+### Quick access menu:
+
+* #### Access to recent or favourite endpoints
+* #### See friends list
+* #### Add new friends
+* #### Travel to friends
+* #### Switch to package transport
+* #### Open the settings menu
+* #### Log out
+
+### Default user flow:
+
+#### Martian transport
+The user:
+* elects endpoint on map or enters endpoint in search bar
+* selects pod type
+* payment or subscription is checked
+* pod arrival time and travel is visualised
+
+#### Package transport
+
+User:
+* selects "Send Package" in quick access menu
+* selects endpoint on map or enters endpoint in search bar
+* payment or subscription is checked
+* pod arrival time and travel is visualised
+
 ## Setting up
 First let's make sure you have the repo on your device.
 ```bash
@@ -31,16 +67,28 @@ Just as with the styling, when working on js files we'd want to split up our com
 * Naming should be camelCase
 * Use `'` instead of `"`
 
-### Alpha functionality
-When loading the alpha page you'll be prompted to login. You're currently not able to sign up but you can use a random name and password. You won't be authenticated but you'll have a demo of the app.
-Current working features
-* Ordering a pod
-* Search bar
-* Settings
-* Look at your user settings
-* Look at the report page
+### Client optimised for Iphone X display
+
+Please note that this client is made specifically for Iphone X screens.
+Set your browser accordingly to mobile  
+Our quick access menu is built to work with touch emulation.
+
+![](img/Iphone%20X%20setting.jpg)
+
+### Standard user for testing
+
+A standard user is automatically provided with the following login data:
+
+```
+Login: test
+Password: test
+```
 
 ## Important public urls  
 * [Wiki](https://git.ti.howest.be/TI/2020-2021/s3/project-ii/projects/groep-15/client/-/wikis/home)
 * [Web project](https://project-ii.ti.howest.be/mars-15/)
 * [Sonar reports](https://sonar.ti.howest.be/sonar/dashboard?id=2020.project-ii%3Amars-client-15)
+
+---
+
+Client readme written by Liam Deferm and Daniel Vlaeminck
