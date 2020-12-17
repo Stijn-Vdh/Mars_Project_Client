@@ -67,6 +67,14 @@ Just as with the styling, when working on js files we'd want to split up our com
 * Naming should be camelCase
 * Use `'` instead of `"`
 
+### Client optimised for Iphone X display
+
+Please note that this client is made specifically for Iphone X screens.
+Set your browser accordingly to mobile  
+Our quick access menu is built to work with touch emulation.
+
+![](img/Iphone%20X%20setting.jpg)
+
 ### Standard user for testing
 
 A standard user is automatically provided with the following login data:
