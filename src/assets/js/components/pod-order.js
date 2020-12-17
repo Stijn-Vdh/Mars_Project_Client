@@ -22,7 +22,6 @@ function switchPod(e) {
 }
 
 function updatePrice() {
-    console.log("test");
     const price = document.querySelector("#pod-pricing span");
     const standardPod = document.querySelector("#standard-pod.active");
     if (accInfo.subscription.unlimitedTravels && standardPod) {
