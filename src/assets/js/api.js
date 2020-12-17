@@ -134,9 +134,8 @@ function orderPod(e) {
 
     apiCall('travel', 'POST', true, body)
         .then(response => {
-            const user = JSON.parse(sessionStorage.getItem('user'));
             goTo('#process-payment');
-            if (user.subscription.unlimitedTravels) {
+            if (accInfo.subscription.unlimitedTravels) {
                 document.querySelector('#process-payment h2').innerHTML = 'Checking subscription.';
             } else {
                 document.querySelector('#process-payment h2').innerHTML = 'Checking payment.';
