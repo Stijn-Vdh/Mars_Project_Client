@@ -3,6 +3,8 @@
 function podOrderInit() {
     document.querySelectorAll('#standard-pod, #luxury-pod').forEach(el => el.updateEventListener('click', switchPod));
     document.querySelector('#select-travel-location').updateEventListener('submit', orderPod);
+    document.querySelector('#favourite-endpoint').addEventListener('change',favouriteRoute);
+
 }
 
 function switchPod(e) {
@@ -55,4 +57,15 @@ function setTraveling() {
                 }, 2000)
             }, (arriveOn * 1000));
         })
+}
+
+function checkFavoured(){
+    let id = document.querySelector('#select-location').value;
+    document.querySelector('#favourite-endpoint').checked = false;
+    accInfo.favouriteEndpoints.forEach(endpoint =>{
+        if (endpoint.id === parseInt(id)){
+            document.querySelector('#favourite-endpoint').checked = true;
+        }
+    });
+
 }

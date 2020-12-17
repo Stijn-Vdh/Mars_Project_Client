@@ -774,6 +774,42 @@
 #pod-order-view form label {
   font-family: "Montserrat", sans-serif;
 }
+#pod-order-view form .custom-checkbox {
+  display: inline-flex;
+  cursor: pointer;
+  position: relative;
+}
+#pod-order-view form .custom-checkbox span {
+  color: #34495E;
+  padding: 0.5rem 0.25rem;
+}
+#pod-order-view form .custom-checkbox input {
+  height: 25px;
+  width: 25px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 1px solid #ee4949;
+  border-radius: 4px;
+  outline: none;
+  transition-duration: 0.3s;
+  background-color: #fbfcff;
+  cursor: pointer;
+}
+#pod-order-view form .custom-checkbox input:checked {
+  border: 1px solid #ee4949;
+}
+#pod-order-view form .custom-checkbox input:active {
+  border: 2px solid #ee4949;
+}
+#pod-order-view form .custom-checkbox input:checked + span::before {
+  content: "✓";
+  display: block;
+  text-align: center;
+  color: #ee4949;
+  position: absolute;
+  left: 0.7rem;
+}
 #pod-order-view form input:disabled {
   background-color: transparent;
   border: 0;

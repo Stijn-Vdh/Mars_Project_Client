@@ -206,6 +206,34 @@ function orderPod(e) {
         });
 }
 
+function favouriteRoute(e){
+    e.preventDefault();
+    let id = parseInt(e.path[2].querySelector('#select-location').value);
+    let checked = e.target.checked;
+
+    if (!checked){
+        apiCall(`endpoint/favorite/${id}`,"DELETE", true)
+            .then(response=>{
+                if (response.status === 401 || response.status === 403) {
+                    warn(response.message);
+                } else {
+                    notify(response);
+                }
+            })
+            .then(updateAccInfo);
+    }else{
+        return apiCall(`endpoint/favorite/${id}`,"POST", true)
+            .then(response=>{
+                if (response.status === 401 || response.status === 403) {
+                    warn(response.message);
+                } else {
+                    notify(response);
+                }
+            })
+            .then(updateAccInfo);
+    }
+}
+
 function orderPackagePod(e) {
     e.preventDefault();
 

@@ -109,4 +109,5 @@ function payloadConsumer(payload) {
         loc.value = payload.id;
         text.value = payload.name;
     }
+    checkFavoured();
 }
