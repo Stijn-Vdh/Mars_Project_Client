@@ -158,6 +158,11 @@ function orderPod(e) {
         podType: e.target.querySelector('#selected-pod').value
     }
 
+    if (body.from === body.destination){
+        warn("FROM AND DEST IS SAME: this shouldn't be allowed to happen");
+        return;
+    }
+
     apiCall('travel', 'POST', true, body)
         .then(response => {
             updateCurrentLocation(body.destination);

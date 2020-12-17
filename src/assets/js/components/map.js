@@ -53,7 +53,9 @@ function initMap() {
                     direction: "top",
                     offset: L.point(0, -40)
                 }).openTooltip();
-                marker.on("click", travelTo)
+                if (endpoint.id !== currentLocationEndpointId) {
+                    marker.on("click", travelTo);
+                }
             });
         });
 
@@ -87,7 +89,7 @@ function initMap() {
         setToolTipRange(map, 12);
 
         //add current Location button functionality
-        document.querySelector("#current-location").addEventListener("click", showLocation)
+        document.querySelector("#current-location").addEventListener("click", showLocation);
     }
 }
 
@@ -175,9 +177,9 @@ function showLocation() {
 function updateCurrentLocation(id) {
     const oldMarker = markers.find(marker => marker.options.endpointId === currentLocationEndpointId);
     oldMarker.setIcon(getIcon(endpoints.find(endpoint => endpoint.id === currentLocationEndpointId), true));
+    oldMarker.on("click", travelTo);
     currentLocationEndpointId = id;
     const marker = markers.find(marker => marker.options.endpointId === currentLocationEndpointId);
     marker.setIcon(greenIcon);
+    marker.off("click", travelTo);
 }
-
-// #todo remove travel function to marker that is ur current location
