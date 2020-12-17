@@ -38,6 +38,64 @@ body main #map {
     width: 18px;
     background-image: url("../../assets/images/currentLoc-sprite.png");
     background-size: 180px 18px;
-    background-position: -36px 0 ;
+    background-position: -36px 0;
+  }
+}
+
+
+.legend {
+  padding: 6px 8px;
+  font: 14px Arial, Helvetica, sans-serif;
+  background: white;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  line-height: 24px;
+  color: #555;
+  margin-bottom: calc(25vh + 29px + 1rem) !important;
+
+  h4 {
+    text-align: center;
+    font-size: 16px;
+    margin: 2px 12px 8px;
+    color: #777;
+  }
+
+  div {
+    display: flex;
+    height: 41px;
+
+    + div {
+      margin-top: 5px;
+    }
+
+    span {
+
+      position: relative;
+      align-self: center;
+    }
+
+    i {
+      width: 25px;
+      height: 41px;
+      float: left;
+      margin: 0 8px 0 0;
+    }
+  }
+
+
+  .green-icon {
+    background-image: url("../../assets/images/markers/marker-icon-green.png");
+  }
+
+  .blue-icon {
+    background-image: url("../../assets/images/markers/marker-icon-blue.png");
+  }
+
+  .red-icon {
+    background-image: url("../../assets/images/markers/marker-icon-red.png");
+  }
+
+  .yellow-icon {
+    background-image: url("../../assets/images/markers/marker-icon-yellow.png");
   }
 }

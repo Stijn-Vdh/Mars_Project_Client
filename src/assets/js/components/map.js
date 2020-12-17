@@ -90,6 +90,9 @@ function initMap() {
 
         //add current Location button functionality
         document.querySelector("#current-location").addEventListener("click", showLocation);
+
+        //add legend
+        addLegend();
     }
 }
 
@@ -182,4 +185,21 @@ function updateCurrentLocation(id) {
     const marker = markers.find(marker => marker.options.endpointId === currentLocationEndpointId);
     marker.setIcon(greenIcon);
     marker.off("click", travelTo);
+}
+
+function addLegend() {
+    const legend = L.control({position: "bottomleft"});
+
+    legend.onAdd = function () {
+        const div = L.DomUtil.create("div", "legend");
+        div.innerHTML += "<h4>Legend</h4>";
+        div.innerHTML += `<div><i class="blue-icon"></i><span>Public endpoint</span></div>`;
+        div.innerHTML += `<div><i class="red-icon"></i><span>Home endpoint</span><br>`;
+        div.innerHTML += `<div><i class="yellow-icon"></i><span>Friend endpoint</span><br>`;
+        div.innerHTML += `<div><i class="green-icon"></i><span>Current location</span><br>`;
+        return div;
+    };
+
+    legend.addTo(map);
+
 }
