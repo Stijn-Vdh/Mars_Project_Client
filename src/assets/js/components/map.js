@@ -11,8 +11,13 @@ function initMap() {
         map = L.map('map', {
             wheelPxPerZoomLevel: 150,
             zoom: 12,
-            center: [52.468728, -2.025817]
+            center: [52.468728, -2.025817],
+            zoomControl: false
         });
+        // add the zoombuttons
+        L.control.zoom({
+            position: 'bottomright'
+        }).addTo(map);
 
         //set the tileLayer
         L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
@@ -84,7 +89,6 @@ function initMap() {
 }
 
 function getIcon(endpoint) {
-    console.log(endpoint);
     if (endpoint.id === accInfo.homeEndpoint) {
         return redIcon;
     } else if (endpoint.privateEndpoint) {

@@ -15,6 +15,7 @@
             padding: 1rem 2rem;
             font-size: 0.9rem;
             display: flex;
+            align-items: center;
 
             &:nth-child(even) {
                 background-color: util.$background-secondary;
