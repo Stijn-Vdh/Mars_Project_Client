@@ -1,11 +1,11 @@
 # MTTS Client
 
-##Client core functionality
+## Client core functionality
 
 The core functionality is travel. By choosing an endpoint on the interactive map or by searching for 
 one in the search bar, you can order pods to travel or send packages with. Travel is visualised on the map.
 
-MTTS Client main screen             |  MTSS Client quick access
+MTTS Client main screen             |  MTTS Client quick access
 :-------------------------:|:-------------------------:|
 ![](img/mtts%20main%20screen.jpg)  |  ![](img/mtts%20quick%20access.jpg)
 
@@ -55,7 +55,7 @@ Now you're  all set-up to use the client. Make sure to read the [Wiki](https://g
 ## Working on the client
 When working on the client we want you to use our practices to keep the codebase consistent.
 
-* File names should be kebap-cas
+* File names should be kebab-case
 
 ### When styling
 Every component should have it's own scss file. 
@@ -70,7 +70,7 @@ Just as with the styling, when working on js files we'd want to split up our com
 ### Client optimised for Iphone X display
 
 Please note that this client is made specifically for Iphone X screens.
-Set your browser accordingly to mobile  
+Set your browser accordingly to mobile and refresh your page.
 Our quick access menu is built to work with touch emulation.
 
 ![](img/Iphone%20X%20setting.jpg)
