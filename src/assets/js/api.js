@@ -34,7 +34,32 @@ function updatePassword(currentPassword, newPassword) {
             } else {
                 notify(response);
             }
-        });
+        }
+        );
+}
+
+function updateSharingLocation(sharing){
+    if (sharing){
+        return apiCall("shareLocation", "DELETE", true)
+            .then(response =>{
+                if (response.status === 401 || response.status === 403) {
+                    warn(response.message);
+                } else {
+                    notify(response);
+                }
+            })
+            .then(updateAccInfo);
+    }else{
+        return apiCall("shareLocation", "POST", true)
+            .then(response =>{
+                if (response.status === 401 || response.status === 403) {
+                    warn(response.message);
+                } else {
+                    notify(response);
+                }
+            })
+            .then(updateAccInfo);
+    }
 }
 
 /**
