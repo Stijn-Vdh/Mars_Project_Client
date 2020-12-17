@@ -930,7 +930,7 @@
 #quick-access article:first-of-type {
   margin-top: 2.7rem;
 }
-#quick-access #open-settings, #quick-access #send-package {
+#quick-access #open-settings, #quick-access #send-package, #quick-access #logout {
   border: 0;
   padding: 0.7rem 1rem;
   border-radius: 3rem;
@@ -940,7 +940,7 @@
   width: calc(100% - 4rem);
   box-sizing: border-box;
 }
-#quick-access #open-settings:focus, #quick-access #send-package:focus {
+#quick-access #open-settings:focus, #quick-access #send-package:focus, #quick-access #logout:focus {
   outline: none;
 }
 #quick-access #open-settings {
@@ -948,6 +948,9 @@
 }
 #quick-access #send-package {
   margin-bottom: 1rem;
+}
+#quick-access #logout {
+  margin-top: 13rem;
 }
 
 #report {

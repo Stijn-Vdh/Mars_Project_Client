@@ -1,7 +1,7 @@
 "use strict";
 
-const api = 'https://project-ii.ti.howest.be/mars-15/api/';
-const localApi = 'http://localhost:8080/api/'
+// const api = 'https://project-ii.ti.howest.be/mars-15/api/';
+const api = 'http://localhost:8080/api/';
 
 function getUserInfo() {
     return apiCall('accountInformation', 'GET', true)
