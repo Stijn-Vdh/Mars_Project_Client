@@ -99,9 +99,13 @@ async function loadConfig() {
 
 function loadRecentTrips(history) {
     let tripContainer = document.querySelector('#recent-trips > ul');
-
     tripContainer.innerHTML = "";
-    history.forEach(route => {
+
+    if (history.length > 5){
+        history = history.slice(-5);
+    }
+
+    history.reverse().forEach(route => {
         tripContainer.innerHTML += recentTrip(route);
     })
 }
