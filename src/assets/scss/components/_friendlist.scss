@@ -18,6 +18,10 @@
                 margin: 0 auto;
             }
 
+            h2 {
+                margin: 0 auto;
+            }
+
             @include util.user-icon(4rem);
 
             &:first-child {

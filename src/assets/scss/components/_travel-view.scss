@@ -1,0 +1,61 @@
+@use '../util';
+
+#travel-view {
+    position: relative;
+
+    h2 {
+        margin-left: 2rem;
+    }
+
+    .travel-pod {
+        left: 2.05rem;
+        top: 2rem;
+    }
+
+    ul {
+        position: relative;
+        margin-left: 2.5rem;
+        margin-top: 1rem;
+        padding-left: 2rem;
+        height: 20rem;
+        display: flex;
+        flex-flow: column nowrap;
+        transition-duration: inherit;
+        background-position-y: 100%;
+
+        &::before {
+            content: '';
+            width: 2px;
+            height: calc(100% - 0.5rem);
+            position: absolute;
+
+            left: 0;
+            top: 0;
+            background-color: util.$text-secondary;
+        }
+
+        li {
+            position: relative;
+
+            &::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -2.3rem;
+                border-radius: 50%;
+                border: 2px solid util.$background-secondary;
+                width: 0.5rem;
+                height: 0.5rem;
+                background-color: util.$text-secondary;
+            }
+
+            &:nth-child(1) {
+                flex-grow: 1;
+            }
+            
+            &:nth-child(2) {
+                flex-grow: 2;
+            }
+        }
+    }
+}

@@ -35,6 +35,13 @@ function updatePrice() {
     }
 }
 
+function countdown(time) {
+    setTimeout(() => {
+        document.querySelector('#travel-estm-time').innerHTML = `${time}s`;
+        if (time !== 0) countdown(time - 1);
+    }, 1000)
+}
+
 function setTraveling() {
     apiCall('routeInfo', 'GET', true)
         .then(routeInfo => {
@@ -43,14 +50,25 @@ function setTraveling() {
                 toCoords = eps.find(ep => ep.id === routeInfo.destination.id).coordinate,
                 arriveOn = getDistance([fromCoords.latitude, fromCoords.longitude], [toCoords.latitude, toCoords.longitude]) / 600;
 
-            document.querySelector('.animate-route').style.animation = `test ${arriveOn}s ease-in-out forwards`;
+            document.querySelector('.animate-route').style.animation = `test ${arriveOn * 1.6333}s ease-in-out forwards`;
+
+            document.querySelector('#travel-view').style.transitionDuration = `${Math.round(arriveOn)}s`;
+            document.querySelector('#travel-view .travel-pod').style.top = `21rem`;
+            document.querySelector('.timeline .travel-pod').style.transitionDuration = `${Math.round(arriveOn)}s`;
+            document.querySelector('.timeline .travel-pod').style.left = `90%`;
+            document.querySelector('#travel-status').innerHTML = `Going to ${routeInfo.destination.name}`;
+        
+            countdown(Math.round(arriveOn) - 1);
         
             setTimeout(() => {
                 notify(`You arrived at ${routeInfo.destination.name}.`);
                 setTimeout(() => {
+                    document.querySelector('#travel-status').innerHTML = `Pod on it's way to you`;
+                    document.querySelector('#travel-estm-time').innerHTML = ``;
                     document.querySelector('.animate-route').style.animation = ``;
                     document.querySelector('.searchbar').style.display = '';
                     document.querySelector('#current-location').classList.remove("hidden");
+                    document.querySelector('#quick-access').classList.remove('traveling');
                     routeController.setWaypoints([]);
                     markers.filter(marker => marker.options.endpointId !== routeInfo.from.id && marker.options.endpointId !== routeInfo.destination.id).forEach(marker => {
                         marker.addTo(map);

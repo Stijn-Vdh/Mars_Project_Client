@@ -165,6 +165,7 @@ function orderPod(e) {
 
     apiCall('travel', 'POST', true, body)
         .then(response => {
+            const user = accInfo;
             updateCurrentLocation(body.destination);
             goTo('#process-payment');
             if (accInfo.subscription.unlimitedTravels) {
@@ -197,7 +198,12 @@ function orderPod(e) {
                             map.removeLayer(marker);
                         });
                         document.querySelector('#current-location').classList.add("hidden");
+
+                        document.querySelector('#travel-view').style.transitionDuration = `${route.arrivalTime}s`;
+                        document.querySelector('#travel-view .travel-pod').style.top = `9rem`;
+                        
                         document.querySelector('.searchbar').style.display = 'none';
+                        document.querySelector('#quick-access').classList.add('traveling');
                         document.querySelector('#process-payment .checkmark').classList.add('active', 'success');
                         document.querySelector('#payment-response').innerHTML = `Ordered pod #${response.travelId}.`;
                         setTimeout(() => {
