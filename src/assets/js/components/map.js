@@ -8,7 +8,7 @@ function initMap() {
         onceMap = true
 
         //set the map config
-        const map = L.map('map', {
+        map = L.map('map', {
             wheelPxPerZoomLevel: 150,
             zoom: 12,
             center: [52.468728, -2.025817]
@@ -31,50 +31,51 @@ function initMap() {
         const northEast = L.latLng(53, -1.5);
         const southWest = L.latLng(52, -2.7);
         map.setMaxBounds(L.latLngBounds(southWest, northEast));
-    //add the endpoints to the map
-    getTravelEndpoints().then(endpoints => {
-        sessionStorage.setItem('endpoints', JSON.stringify(endpoints));
-        endpoints.forEach(endpoint => {
-            const CD = endpoint.coordinate;
-            const tooltip = L.marker(L.latLng(CD.latitude, CD.longitude), {
-                endpointId: endpoint.id,
-                endpointName: endpoint.name
-            }).addTo(map);
-            markers.push(tooltip);
-            tooltip.bindTooltip(`${endpoint.name}`, {}).openTooltip();
-            tooltip.on("click", travelTo)
+        //add the endpoints to the map
+        getTravelEndpoints().then(endpoints => {
+            sessionStorage.setItem('endpoints', JSON.stringify(endpoints));
+            endpoints.forEach(endpoint => {
+                const CD = endpoint.coordinate;
+                const tooltip = L.marker(L.latLng(CD.latitude, CD.longitude), {
+                    endpointId: endpoint.id,
+                    endpointName: endpoint.name
+                }).addTo(map);
+                markers.push(tooltip);
+                tooltip.bindTooltip(`${endpoint.name}`, {}).openTooltip();
+                tooltip.on("click", travelTo)
+                });
             });
+
+            //show the dome
+            const dome = L.circle([52.468728, -2.025817], {
+                radius: 10000,
+                color: 'red',
+                fillColor: '#f03',
+                fillOpacity: 0.2,
+            }).addTo(map);
+            dome.bindPopup("This is the start dome");
+
+        routeController = L.Routing.control({
+            waypoints: [
+            ],
+            plan: L.Routing.plan([], {
+                addWaypoints: false,
+                draggableWaypoints: false
+            }),
+            lineOptions: {
+                styles: [{className: 'animate-route'}] // Adding animate class
+            }
+        }).addTo(map);
+
+        routeController.on('waypointschanged', () => {
+            if (routeController.getWaypoints().length > 2) {
+                routeController.setWaypoints(currentRoute);
+            }
         });
 
-        //show the dome
-        const dome = L.circle([52.468728, -2.025817], {
-            radius: 10000,
-            color: 'red',
-            fillColor: '#f03',
-            fillOpacity: 0.2,
-        }).addTo(map);
-        dome.bindPopup("This is the start dome");
-
-    routeController = L.Routing.control({
-        waypoints: [
-        ],
-        plan: L.Routing.plan([], {
-            addWaypoints: false,
-            draggableWaypoints: false
-        }),
-        lineOptions: {
-            styles: [{className: 'animate-route'}] // Adding animate class
-        }
-    }).addTo(map);
-
-    routeController.on('waypointschanged', () => {
-        if (routeController.getWaypoints().length > 2) {
-            routeController.setWaypoints(currentRoute);
-        }
-    })
-
-    //limit the tooltips to a certain zoom
-    setToolTipRange(map, 12);
+        //limit the tooltips to a certain zoom
+        setToolTipRange(map, 12);
+    }
 }
 
 function getDistance(origin, destination) {     // return distance in meters
