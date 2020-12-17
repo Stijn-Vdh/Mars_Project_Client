@@ -1394,6 +1394,7 @@ body main #map .leaflet-control-zoom {
   margin-right: 12px;
   z-index: 0;
   margin-bottom: calc(25vh + 1rem);
+  pointer-events: auto;
 }
 #current-location span {
   display: block;
@@ -1577,7 +1578,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 @keyframes test {

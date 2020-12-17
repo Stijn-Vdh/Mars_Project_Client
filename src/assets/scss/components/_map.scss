@@ -25,6 +25,7 @@ body main #map {
   margin-right: 12px;
   z-index: 0;
   margin-bottom: calc(25vh + 1rem);
+  pointer-events: auto;
 
   span {
     display: block;

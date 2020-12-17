@@ -36,8 +36,8 @@ function initMap() {
         const northEast = L.latLng(53, -1.5);
         const southWest = L.latLng(52, -2.7);
         map.setMaxBounds(L.latLngBounds(southWest, northEast));
-        //add the endpoints to the map
 
+        //add the endpoints to the map
         getTravelEndpoints().then(endpoints => {
             sessionStorage.setItem('endpoints', JSON.stringify(endpoints));
             endpoints.forEach(endpoint => {
@@ -85,6 +85,9 @@ function initMap() {
 
         //limit the tooltips to a certain zoom
         setToolTipRange(map, 12);
+
+        //add current Location button functionality
+        document.querySelector("#current-location").addEventListener("click", showLocation)
     }
 }
 
@@ -160,4 +163,15 @@ function travelTo() {
         id: this.options.endpointId,
         name: this.options.endpointName
     });
+}
+
+function showLocation() {
+    console.log("clicked");
+    const marker = markers.find(marker => marker.options.endpointId === currentLocationEndpointId);
+    map.fitBounds(L.latLngBounds([marker.getLatLng()]));
+
+    // map.flyTo([
+    //     47.57652571374621,
+    //     -27.333984375
+    //   ],3,{animate: true, duration: 5})
 }
