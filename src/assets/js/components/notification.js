@@ -30,6 +30,7 @@ function packageReceived(error, message) {
 
 function travelPodArrived(error, message) {
     onMessage(`Your pod to ${message.body.id} has arrived.`);
+    setTraveling();
 }
 
 function packagePodArrived(error, message) {
