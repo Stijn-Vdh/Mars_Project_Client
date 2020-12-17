@@ -4,7 +4,7 @@ let onceMap = false;
 let map, routeController, markers = [];
 
 function initMap() {
-    if (!onceMap){
+    if (!onceMap) {
         onceMap = true
 
         //set the map config
@@ -32,32 +32,34 @@ function initMap() {
         const southWest = L.latLng(52, -2.7);
         map.setMaxBounds(L.latLngBounds(southWest, northEast));
         //add the endpoints to the map
+
         getTravelEndpoints().then(endpoints => {
             sessionStorage.setItem('endpoints', JSON.stringify(endpoints));
             endpoints.forEach(endpoint => {
                 const CD = endpoint.coordinate;
+
                 const tooltip = L.marker(L.latLng(CD.latitude, CD.longitude), {
                     endpointId: endpoint.id,
-                    endpointName: endpoint.name
+                    endpointName: endpoint.name,
+                    icon: getIcon(endpoint)
                 }).addTo(map);
                 markers.push(tooltip);
                 tooltip.bindTooltip(`${endpoint.name}`, {}).openTooltip();
                 tooltip.on("click", travelTo)
-                });
             });
+        });
 
-            //show the dome
-            const dome = L.circle([52.468728, -2.025817], {
-                radius: 10000,
-                color: 'red',
-                fillColor: '#f03',
-                fillOpacity: 0.2,
-            }).addTo(map);
-            dome.bindPopup("This is the start dome");
+        //show the dome
+        const dome = L.circle([52.468728, -2.025817], {
+            radius: 10000,
+            color: 'red',
+            fillColor: '#f03',
+            fillOpacity: 0.2,
+        }).addTo(map);
+        dome.bindPopup("This is the start dome");
 
         routeController = L.Routing.control({
-            waypoints: [
-            ],
+            waypoints: [],
             plan: L.Routing.plan([], {
                 addWaypoints: false,
                 draggableWaypoints: false
@@ -76,6 +78,16 @@ function initMap() {
         //limit the tooltips to a certain zoom
         setToolTipRange(map, 12);
     }
+}
+
+function getIcon(endpoint) {
+    console.log(endpoint);
+    if (endpoint.id === accInfo.homeEndpoint) {
+        return redIcon;
+    } else if (endpoint.privateEndpoint) {
+        return yellowIcon;
+    }
+    return blueIcon;
 }
 
 function getDistance(origin, destination) {     // return distance in meters
@@ -138,7 +150,7 @@ function debounce() {
 function travelTo() {
     if (debounce()) return;
     goTo('#pod-order-view', {
-        id : this.options.endpointId,
-        name : this.options.endpointName
+        id: this.options.endpointId,
+        name: this.options.endpointName
     });
 }
