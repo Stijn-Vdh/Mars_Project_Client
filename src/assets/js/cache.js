@@ -10,5 +10,6 @@ function updateAccInfo() {
         checkForFriendRequests(userInfo);
         loadFriends(userInfo);
         loadDataInQuickAccess(userInfo);
+        updatePrice();
     });
 }

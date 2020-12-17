@@ -18,7 +18,18 @@ function switchPod(e) {
         }
     });
 
-    // const price = document.querySelector("#pod-pricing span");
-    //
-    // if ()
-} 
+    updatePrice();
+}
+
+function updatePrice() {
+    console.log("test");
+    const price = document.querySelector("#pod-pricing span");
+    const standardPod = document.querySelector("#standard-pod.active");
+    if (accInfo.subscription.unlimitedTravels && standardPod) {
+        price.innerHTML = `M0`;
+    } else if (standardPod) {
+        price.innerHTML = `M1`;
+    } else {
+        price.innerHTML = `M3`;
+    }
+}

@@ -63,23 +63,12 @@ function addPages() {
     addPage('#package-order-view', ['#send-package'], {onOpen: initPackage});
 }
 
-function closeModal(e) {
-    e.preventDefault();
-
-    e.currentTarget.parentNode.parentNode.classList.remove('active');
-}
-
 function setViewPortStatic() {
     const viewheight = window.screen.height,
         viewwidth = window.screen.width,
         viewport = document.querySelector("meta[name=viewport]");
 
     viewport.setAttribute("content", `height=${viewheight}, width=${viewwidth}, initial-scale=1.0`);
-}
-
-async function loadConfig() {
-    const response = await fetch("config.json");
-    return response.json();
 }
 
 function loadRecentTrips(history) {
