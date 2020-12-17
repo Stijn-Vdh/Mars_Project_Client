@@ -30,7 +30,7 @@ function initMain() {
         });
     getTravelHistory()
         .then(history => {
-            loadRecentTrips(history);
+            loadRecentTrips(history, "recent");
         });
     updateAccInfo();
     initMap();
@@ -71,17 +71,25 @@ function setViewPortStatic() {
     viewport.setAttribute("content", `height=${viewheight}, width=${viewwidth}, initial-scale=1.0`);
 }
 
-function loadRecentTrips(history) {
-    let tripContainer = document.querySelector('#recent-trips > ul');
+function loadRecentTrips(trips, type) {
+    let tripContainer = document.querySelector('#trips > ul');
     tripContainer.innerHTML = "";
 
-    if (history.length > 5){
-        history = history.slice(-5);
+    if (trips.length > 5){
+        trips = trips.slice(-5);
     }
 
-    history.reverse().forEach(route => {
-        tripContainer.innerHTML += recentTrip(route);
-    })
+    if (type === "recent"){
+        trips.reverse().forEach(route => {
+            tripContainer.innerHTML += recentTrip(route);
+        })
+    }else{
+        trips.reverse().forEach(route => {
+            tripContainer.innerHTML += favouriteTrip(route);
+        })
+    }
+
+
 }
 
 function loadDataInQuickAccess(userInfo) {
