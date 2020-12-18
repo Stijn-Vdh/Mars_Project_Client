@@ -87,21 +87,9 @@ function login(body) {
 /**
  * register a user in
  *
- * @param {SubmitEvent} e             EventListener event
- *
- * @return {Promise}            request promise
+ * @param body            body to be sent with request
  */
-function register(e) {
-    e.preventDefault();
-
-    const body = {
-        name: e.target.querySelector('#su-name').value,
-        password: e.target.querySelector('#su-password').value,
-        businessAccount: e.target.querySelector('#su-business').checked,
-        homeAddress: e.target.querySelector('#su-address').value,
-        homeEndpointId: parseInt(e.target.querySelector('#su-homeEndpointName').value)
-    };
-
+function register(body) {
     apiCall('createAccount', 'POST', false, body)
         .then((response) => {
             if (response.status === 402) {

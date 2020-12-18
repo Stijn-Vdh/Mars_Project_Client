@@ -2,7 +2,7 @@
 
 function initAuthentication() {
     document.querySelector('#signin form').updateEventListener('submit', btnLogin);
-    document.querySelector('#signup form').updateEventListener('submit', register);
+    document.querySelector('#signup form').updateEventListener('submit', btnRegister);
     document.querySelector('.searchHomeEndpoint input').updateEventListener('input', (e) => loadHomeEndpointList(e, e.target.value));
     document.querySelector('#signup #su-homeEndpointName').updateEventListener('focusin', () => {
         document.querySelector('.searchHomeEndpoint').classList.add('active');
@@ -54,5 +54,16 @@ function btnLogin(e) {
     login({
         name: e.target.querySelector('#si-name').value,
         password: e.target.querySelector('#si-password').value
+    });
+}
+
+function btnRegister(e) {
+    e.preventDefault();
+    register({
+        name: e.target.querySelector('#su-name').value,
+        password: e.target.querySelector('#su-password').value,
+        businessAccount: false,
+        homeAddress: e.target.querySelector('#su-address').value,
+        homeEndpointId: parseInt(e.target.querySelector('#su-homeEndpointName').value)
     });
 }
