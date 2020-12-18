@@ -1,5 +1,7 @@
 # MTTS Client
 
+[Back to documentation repo](https://git.ti.howest.be/TI/2020-2021/s3/project-ii/projects/groep-15/documentation)
+
 ## Client core functionality
 
 The core functionality is travel. By choosing an endpoint on the interactive map or by searching for 
@@ -11,15 +13,15 @@ MTTS Client main screen             |  MTTS Client quick access
 
 ### Quick access menu:
 
-* #### Access to recent or favourite endpoints
-* #### See friends list
-* #### Add new friends
-* #### Travel to friends
-* #### Switch to package transport
-* #### Open the settings menu
-* #### Log out
+* **Access to recent and favourite endpoints**
+* **See friends list**
+* **Add new friends**
+* **Travel to friends**
+* **Switch to package transport**
+* **Open the settings menu**
+* **Log out**
 
-### Default user flow:
+### Default user flows:
 
 #### Martian transport
 The user:
@@ -30,7 +32,7 @@ The user:
 
 #### Package transport
 
-User:
+The user:
 * selects "Send Package" in quick access menu
 * selects endpoint on map or enters endpoint in search bar
 * payment or subscription is checked
@@ -67,11 +69,10 @@ Just as with the styling, when working on js files we'd want to split up our com
 * Naming should be camelCase
 * Use `'` instead of `"`
 
-### Client optimised for Iphone X display
+### Client optimised for Iphone X displays
 
-Please note that this client is made specifically for Iphone X screens.
-Set your browser accordingly to mobile and refresh your page.
-Our quick access menu is built to work with touch emulation.
+Please note that this client is made specifically for Iphone X screens since all martians in our concept use standardized mobile devices. 
+**Set your browser accordingly to mobile and refresh your page (see image below)**. Our quick access menu is built to work with **touch emulation**.
 
 ![](img/Iphone%20X%20setting.jpg)
 
@@ -91,4 +92,4 @@ Password: test
 
 ---
 
-Client readme written by Liam Deferm and Daniel Vlaeminck
+*Written by Liam Deferm and Daniel Vlaeminck*

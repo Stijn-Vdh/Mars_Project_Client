@@ -97,9 +97,18 @@ function payloadConsumer(payload) {
     const from = payload.from;
 
     if (from) {
+        if (from.hasAttribute('data-friend')) {
+            document.querySelector('#select-travel-location').setAttribute('data-friend', from.getAttribute('data-friend'));
+        }
+
         loc.value = from.getAttribute('data-order-pod');
         text.value = from.querySelector('h2') ? from.querySelector('h2').innerHTML : from.innerHTML;
     } else {
+        
+        if (payload.friend) {
+            document.querySelector('#select-travel-location').setAttribute('data-friend', payload.friend);
+        }
+
         loc.value = payload.id;
         text.value = payload.name;
     }
