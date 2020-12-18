@@ -111,8 +111,9 @@ function payloadConsumer(payload) {
 function initLogin() {
     return updateAccInfo().finally(() => {
         initNotificationSocket();
-        initMap();
         cacheSubscriptions();
+        cacheTravelEndpoints()
+            .finally(initMap);
         goTo('main');
     });
 }

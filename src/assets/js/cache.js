@@ -5,6 +5,7 @@ let accInfo;
 let currentLocationEndpointId;
 let markers = [];
 let subscriptions
+let travelEndpoints;
 
 function updateAccInfo() {
     return getUserInfo().then(userInfo => {
@@ -23,4 +24,8 @@ function updateAccInfo() {
 function cacheSubscriptions() {
     apiCall('subscription', 'GET', true)
         .then((currSubscriptions) => subscriptions = currSubscriptions);
+}
+
+function cacheTravelEndpoints() {
+    return getTravelEndpoints().then(endpoints => travelEndpoints = endpoints);
 }

@@ -164,7 +164,7 @@ function orderPod(e) {
             } else {
                 apiCall('routeInfo', 'GET', true)
                     .then(route => {
-                        const eps = JSON.parse(sessionStorage.getItem('endpoints')),
+                        const eps = travelEndpoints,
                             fromCoords = eps.find(ep => ep.id === route.from.id).coordinate,
                             toCoords = eps.find(ep => ep.id === route.destination.id).coordinate,
                             travelWaypoints = [

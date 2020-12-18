@@ -34,27 +34,7 @@ function initMap() {
     const southWest = L.latLng(52, -2.7);
     map.setMaxBounds(L.latLngBounds(southWest, northEast));
 
-    //add the endpoints to the map
-    getTravelEndpoints().then(endpoints => {
-        sessionStorage.setItem('endpoints', JSON.stringify(endpoints));
-        endpoints.forEach(endpoint => {
-            const CD = endpoint.coordinate;
-
-            const marker = L.marker(L.latLng(CD.latitude, CD.longitude), {
-                endpointId: endpoint.id,
-                endpointName: endpoint.name,
-                icon: getIcon(endpoint),
-            }).addTo(map);
-            markers.push(marker);
-            marker.bindTooltip(`${endpoint.name}`, {
-                direction: "top",
-                offset: L.point(0, -40)
-            }).openTooltip();
-            if (endpoint.id !== currentLocationEndpointId) {
-                marker.on("click", travelTo);
-            }
-        });
-    });
+    addMarkers();
 
     //show the dome
     const dome = L.circle([52.468728, -2.025817], {
@@ -215,4 +195,26 @@ function toggleLegend() {
         map.removeControl(legend);
     }
     flagLegend = !flagLegend;
+}
+
+function addMarkers() {
+    travelEndpoints.forEach(endpoint => {
+        const CD = endpoint.coordinate;
+
+        const marker = L.marker(L.latLng(CD.latitude, CD.longitude), {
+            endpointId: endpoint.id,
+            endpointName: endpoint.name,
+            icon: getIcon(endpoint),
+        }).addTo(map);
+
+        markers.push(marker);
+        marker.bindTooltip(`${endpoint.name}`, {
+            direction: "top",
+            offset: L.point(0, -40)
+        }).openTooltip();
+
+        if (endpoint.id !== currentLocationEndpointId) {
+            marker.on("click", travelTo);
+        }
+    });
 }
