@@ -1,6 +1,7 @@
 "use strict";
 
 let notificationId = 0;
+const notifications = {};
 
 const CHNL_TO_SERVER = "events.to.server";
 const EVENTBUS_PATH = "https://project-ii.ti.howest.be/mars-15/events";
@@ -76,14 +77,25 @@ function mttsPrompt(message, accept, deny) {
 
     if (!notificationElement) return;
 
-    notificationElement.querySelector('.accept').updateEventListener('click', (e) => {
+    notifications[`notification-${notificationId}`].accept = accept;
+    notifications[`notification-${notificationId}`].deny = deny;
+
+    promptAccept(notificationElement, accept);
+    promptDeny(notificationElement, deny);
+}
+
+function promptAccept(el, accept) {
+    el.querySelector('.accept').updateEventListener('click', (e) => {
         e.preventDefault();
-        notificationElement.remove();
+        hideNotification(el.id.split('-')[1]);
         accept();
     });
-    notificationElement.querySelector('.deny').updateEventListener('click', (e) => {
+}
+
+function promptDeny(el, deny) {
+    el.querySelector('.deny').updateEventListener('click', (e) => {
         e.preventDefault();
-        notificationElement.remove();
+        hideNotification(el.id.split('-')[1]);
         deny();
     });
 }
@@ -126,12 +138,32 @@ function sendNotification(type, message, isPrompt=false) {
         document.querySelector(`#notification-${thisId}`).style.transform = 'translateX(0vw)';
     }, 100);
 
+    Object.keys(notifications).forEach(k => {
+        let notificationElement = document.querySelector(`#${k}`),
+            notification = notifications[k];
+        if (Object.keys(notification).includes('accept')) {
+            promptAccept(notificationElement, notification.accept);
+            promptDeny(notificationElement, notification.deny);
+        }
+
+        notificationElement.updateEventListener('click', removeNotification);
+    });
+    notifications[`notification-${thisId}`] = {};
+
     if (type !== 'prompt') {
-        setTimeout(() => {
+        document.querySelector(`#notification-${thisId}`).updateEventListener('click', removeNotification);
+        notifications[`notification-${thisId}`].timeOut = setTimeout(() => {
             hideNotification(thisId);
-        }, 5000)
+        }, 5000);
     } else {
         return thisId;
+    }
+}
+
+function removeNotification(e) {
+    if (e.target.closest('.accept') === null && e.target.closest('.deny') === null) {
+        clearTimeout(notifications[e.currentTarget.id].timeOut);
+        hideNotification(e.currentTarget.id.split('-')[1]);
     }
 }
 
@@ -149,7 +181,7 @@ function sendNotification(type, message, isPrompt=false) {
 // }
 
 function hideNotification(id) {
-
+    delete notifications[`notification-${id}`]
     document.querySelector(`#notification-${id}`).style.transform = 'translateX(-100vw)';
     setTimeout(() => {
         document.querySelector(`#notification-${id}`).remove();
