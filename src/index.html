@@ -319,7 +319,7 @@
             <option>Other</option>
         </select>
         <label for="reason">Tell us about the issue</label>
-        <textarea name="reason" id="reason"></textarea>
+        <textarea required minlength="25" name="reason" id="reason"></textarea>
         <button>Send report</button>
     </form>
 </aside>
@@ -348,7 +348,7 @@
         </div>
 
         <div class="btn-group first">
-            <input type="checkbox" id="bank" name="paymentMethod" value="bank">
+            <input type="checkbox" id="bank" name="paymentMethod" value="bank" checked>
             <label for="bank">Pay with martian bank</label>
         </div>
         <div class="btn-group">
