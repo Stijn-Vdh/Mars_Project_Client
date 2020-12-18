@@ -23,20 +23,55 @@ function toggleFocus(e) {
 
 function loadSearchbar(e) {
     let sb, filter = "";
+    let favorites = accInfo.favouriteEndpoints.map(ep => ep.id);
+    let friends = accInfo.friends.map(friend => {return {id: friend.homeEndpoint, name: friend.displayName, username: friend.username}});
+
+    console.log(friends);
+
     if (e.currentTarget !== undefined) {
         sb = e.currentTarget.parentNode, filter = e.currentTarget.value;
     } else {
         sb = e;
     }
-    let endpointsToShow = [...endpoints];
+    let endpointsToShow = [...endpoints, ...friends];
 
     if (filter !== "") {
-        endpointsToShow = endpointsToShow.filter(endpoint => endpoint.name.toLowerCase().includes(filter.toLowerCase()));
+        endpointsToShow = endpointsToShow.filter(endpoint => endpoint.name.toLowerCase().includes(filter.toLowerCase()) && endpoint.id !== -1);
+    } else {
+        endpointsToShow = endpointsToShow.filter(endpoint => endpoint.id !== -1);
     }
+
+
+    endpointsToShow.sort((a, b) => {
+        if (favorites.includes(a.id)) {
+            if (favorites.includes(b.id)) {
+                return alphabeticSort(a, b);
+            }
+            return -1;
+        } else if (favorites.includes(b.id)) {
+            return 1;
+        } else if (Object.keys(a).includes('username')) {
+            if (Object.keys(b).includes('username')) {
+                return alphabeticSort(a, b);
+            }
+            return -1;
+        } else if (Object.keys(b).includes('username')) {
+            return 1;
+        } else {
+            return alphabeticSort(a, b);
+        }
+    });
+
     endpointsToShow = endpointsToShow.slice(0, 6);
 
     sb.querySelector('ul').innerHTML = "";
     endpointsToShow.forEach(endpoint => {
-        sb.querySelector('ul').innerHTML += `<li data-order-pod="${endpoint.id}" id="sb-endpoint-${endpoint.id}">${endpoint.name}</li>`;
+        sb.querySelector('ul').innerHTML += `<li data-order-pod="${endpoint.id}" id="sb-endpoint-${endpoint.id}"><h2>${endpoint.name}</h2>${favorites.includes(endpoint.id) ? '<ion-icon name="star"></ion-icon>': Object.keys(endpoint).includes('username') ? '<ion-icon name="person"></ion-icon>': ''}</li>`;
     });
+}
+
+function alphabeticSort(a, b) {
+    if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
+    if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
+    return 0;
 }

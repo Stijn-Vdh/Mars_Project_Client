@@ -890,7 +890,7 @@
 }
 
 #trips {
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
 #trips > h2 {
   margin-left: 2rem;
@@ -1220,6 +1220,9 @@
   box-sizing: border-box;
   transition: transform 0.3s ease-in-out;
 }
+.searchbar ion-icon, .searchHomeEndpoint ion-icon {
+  float: right;
+}
 .searchbar.quick-access-open, .searchHomeEndpoint.quick-access-open {
   z-index: 3;
   transform: translate(-50%, 3rem);
@@ -1243,8 +1246,13 @@
   transition: max-height 0.3s ease-in-out;
 }
 .searchbar ul li, .searchHomeEndpoint ul li {
+  display: flex;
   padding: 0.5rem 0.75rem;
   font-size: 0.9rem;
+}
+.searchbar ul li h2, .searchHomeEndpoint ul li h2 {
+  flex-grow: 1;
+  font-weight: normal;
 }
 .searchbar ul li:nth-child(even), .searchHomeEndpoint ul li:nth-child(even) {
   background-color: #eff1f4;
