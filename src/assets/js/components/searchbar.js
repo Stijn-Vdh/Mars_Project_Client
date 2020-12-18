@@ -22,18 +22,20 @@ function toggleFocus(e) {
 }
 
 function loadSearchbar(e) {
-    let sb, filter = "";
-    let favorites = accInfo.favouriteEndpoints.map(ep => ep.id);
-    let friends = accInfo.friends.map(friend => {return {id: friend.homeEndpoint, name: friend.displayName, username: friend.username}});
+    let sb, filter = "", favorites = [], friends = [];
+    let endpointsToShow = [...endpoints];
 
-    console.log(friends);
+    if (accInfo !== undefined && accInfo !== null) {
+        favorites = accInfo.favouriteEndpoints.map(ep => ep.id);
+        friends = accInfo.friends.map(friend => {return {id: friend.homeEndpoint, name: friend.displayName, username: friend.username}});
+        endpointsToShow = [...endpointsToShow, ...friends];
+    }
 
     if (e.currentTarget !== undefined) {
         sb = e.currentTarget.parentNode, filter = e.currentTarget.value;
     } else {
         sb = e;
     }
-    let endpointsToShow = [...endpoints, ...friends];
 
     if (filter !== "") {
         endpointsToShow = endpointsToShow.filter(endpoint => endpoint.name.toLowerCase().includes(filter.toLowerCase()) && endpoint.id !== -1);
