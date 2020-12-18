@@ -23,6 +23,8 @@ function toggleFocus(e) {
 
 function loadSearchbar(e) {
     let sb, filter = "";
+    let favorites = accInfo.favouriteEndpoints.map(ep => ep.id);
+
     if (e.currentTarget !== undefined) {
         sb = e.currentTarget.parentNode, filter = e.currentTarget.value;
     } else {
@@ -33,10 +35,38 @@ function loadSearchbar(e) {
     if (filter !== "") {
         endpointsToShow = endpointsToShow.filter(endpoint => endpoint.name.toLowerCase().includes(filter.toLowerCase()));
     }
+
+
+    endpointsToShow.sort((a, b) => {
+        if (favorites.includes(a.id)) {
+            if (favorites.includes(b.id)) {
+                return alphabeticSort(a, b);
+            }
+            return -1;
+        } else if (favorites.includes(b.id)) {
+            return 1;
+        } else if (Object.keys(a).includes('displayName')) {
+            if (Object.keys(b).includes('displayName')) {
+                return alphabeticSort(a, b);
+            }
+            return -1;
+        } else if (Object.keys(b).includes('displayName')) {
+            return 1;
+        } else {
+            return alphabeticSort(a, b);
+        }
+    });
+
     endpointsToShow = endpointsToShow.slice(0, 6);
 
     sb.querySelector('ul').innerHTML = "";
     endpointsToShow.forEach(endpoint => {
-        sb.querySelector('ul').innerHTML += `<li data-order-pod="${endpoint.id}" id="sb-endpoint-${endpoint.id}">${endpoint.name}</li>`;
+        sb.querySelector('ul').innerHTML += `<li data-order-pod="${endpoint.id}" id="sb-endpoint-${endpoint.id}"><h2>${endpoint.name}</h2>${favorites.includes(endpoint.id) ? '<ion-icon name="star"></ion-icon>': Object.keys(endpoint).includes('displayName') ? '<ion-icon name="person"></ion-icon>': ''}</li>`;
     });
+}
+
+function alphabeticSort(a, b) {
+    if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
+    if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
+    return 0;
 }
