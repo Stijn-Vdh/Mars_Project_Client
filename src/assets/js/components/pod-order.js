@@ -81,9 +81,13 @@ function setTraveling() {
 function checkFavoured(){
     let id = document.querySelector('#select-location').value;
     document.querySelector('#favourite-endpoint').checked = false;
+    document.querySelector('#favourite-icon').setAttribute('name', 'star-outline');
     accInfo.favouriteEndpoints.forEach(endpoint =>{
         if (endpoint.id === parseInt(id)){
             document.querySelector('#favourite-endpoint').checked = true;
+            setTimeout(() => {
+                document.querySelector('#favourite-icon').setAttribute('name', 'star');
+            }, 100)
         }
     });
 

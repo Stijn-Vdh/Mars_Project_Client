@@ -230,6 +230,7 @@ function favouriteRoute(e){
                     warn(response.message);
                 } else {
                     notify(response);
+                    document.querySelector('#favourite-icon').setAttribute('name', 'star-outline');
                 }
             })
             .then(updateAccInfo);
@@ -240,6 +241,7 @@ function favouriteRoute(e){
                     warn(response.message);
                 } else {
                     notify(response);
+                    document.querySelector('#favourite-icon').setAttribute('name', 'star');
                 }
             })
             .then(updateAccInfo);
