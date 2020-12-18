@@ -92,4 +92,4 @@ Password: test
 
 ---
 
-*Client readme written by Liam Deferm and Daniel Vlaeminck*
+*Written by Liam Deferm and Daniel Vlaeminck*
