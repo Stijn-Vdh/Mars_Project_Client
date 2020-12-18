@@ -14,13 +14,13 @@ function initAuthentication() {
     } else {
         getUserInfo()
             .then(response => {
-                if (response.status === 403) {
-                    goTo('#authentication');
-                } else {
+                if (response.status === 200) {
                     accInfo = response;
                     initLogin();
+                } else {
+                    goTo('#authentication');
                 }
-            });
+            }).catch(() => goTo('#authentication'));
     }
 }
 
