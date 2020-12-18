@@ -9,7 +9,8 @@ const domains = {
     pack: "PACKAGE_POD_RECEIVED",
     pod: "TRAVEL_POD_ARRIVAL",
     rec: "PACKAGE_POD_ARRIVAL",
-    friend: "TRAVEL_TO_FRIEND"
+    friend: "TRAVEL_TO_FRIEND",
+    friend_req: 'FRIEND_REQUESTS'
 };
 let eb;
 
@@ -21,11 +22,17 @@ function initNotificationSocket() {
         eb.registerHandler(CHNL_TO_CLIENT_NOTIFICATION + localStorage.getItem('token') + "." + domains.pod, travelPodArrived);
         eb.registerHandler(CHNL_TO_CLIENT_NOTIFICATION + localStorage.getItem('token') + "." + domains.rec, packagePodArrived);
         eb.registerHandler(CHNL_TO_CLIENT_NOTIFICATION + localStorage.getItem('token') + "." + domains.friend, friendOnItsWay);
+        eb.registerHandler(CHNL_TO_CLIENT_NOTIFICATION + localStorage.getItem('token') + "." + domains.friend_req, receivedFriendRequest);
     };
 }
 
 function packageReceived(error, message) {
     const msg = ``;
+}
+
+function receivedFriendRequest(error, message) {
+    updateAccInfo()
+        .finally(() => checkForFriendRequests(accInfo));
 }
 
 function travelPodArrived(error, message) {

@@ -38,18 +38,18 @@ function favouriteTrip(route){
 function friendSetting(friend) {
     return `
     <ul>
-        <li>${generateUserIcon(friend)}</li>
-        <li>${friend}</li>
-        <li><button data-remove-friend="${friend}"><ion-icon name="person-remove-outline"></ion-icon></button></li>
+        <li>${generateUserIcon(friend.displayName)}</li>
+        <li>${friend.displayName}</li>
+        <li><button data-remove-friend="${friend.username}"><ion-icon name="person-remove-outline"></ion-icon></button></li>
     </ul>
     `
 }
 
 function friendListItem(friend) {
     return `
-    <li>
-        ${generateUserIcon(friend)}
-        <p>${friend}</p>
+    <li ${friend.homeEndpoint !== -1 ? `data-order-friend-pod="${friend.homeEndpoint}"`: ''} data-friend="${friend.username}">
+        ${generateUserIcon(friend.displayName)}
+        <p>${friend.displayName}</p>
     </li>
     `;
 }
