@@ -138,6 +138,11 @@ function orderPod(e) {
         podType: e.target.querySelector('#selected-pod').value
     }
 
+    if (e.target.hasAttribute('data-friend')) {
+        body.toFriend = e.target.getAttribute('data-friend');
+        e.target.removeAttribute('data-friend');
+    }
+
     if (body.from === body.destination) {
         warn("You are at this endpoint already!");
         return;

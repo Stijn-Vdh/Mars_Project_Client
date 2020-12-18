@@ -68,7 +68,7 @@ function loadSearchbar(e) {
 
     sb.querySelector('ul').innerHTML = "";
     endpointsToShow.forEach(endpoint => {
-        sb.querySelector('ul').innerHTML += `<li data-order-pod="${endpoint.id}" id="sb-endpoint-${endpoint.id}"><h2>${endpoint.name}</h2>${favorites.includes(endpoint.id) ? '<ion-icon name="star"></ion-icon>': Object.keys(endpoint).includes('username') ? '<ion-icon name="person"></ion-icon>': ''}</li>`;
+        sb.querySelector('ul').innerHTML += `<li data-order-pod="${endpoint.id}"${Object.keys(endpoint).includes('username') ? `data-friend="${endpoint.username}"` : ''} id="sb-endpoint-${endpoint.id}"><h2>${endpoint.name}</h2>${favorites.includes(endpoint.id) ? '<ion-icon name="star"></ion-icon>': Object.keys(endpoint).includes('username') ? '<ion-icon name="person"></ion-icon>': ''}</li>`;
     });
 }
 

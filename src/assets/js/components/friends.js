@@ -13,7 +13,19 @@ function loadFriends(userInfo) {
 
     userInfo.friends.forEach(friend => {
         document.querySelector('#friendlist > ul').innerHTML += friendListItem(friend);
-    })
+    });
+
+    document.querySelectorAll('#friendlist > ul *[data-order-friend-pod]').forEach(el => el.updateEventListener('click', customOrder))
+}
+
+function customOrder(e) {
+    e.preventDefault();
+
+    goTo('#pod-order-view', {
+        id: e.currentTarget.getAttribute('data-order-friend-pod'),
+        name: e.currentTarget.querySelector('p').innerHTML,
+        friend: e.currentTarget.getAttribute('data-friend')
+    });
 }
 
 function initFriendSettings() {
@@ -21,8 +33,9 @@ function initFriendSettings() {
     friendlist.innerHTML = '';
     accInfo.friends.forEach(friend => {
         friendlist.innerHTML += `<li>${friendSetting(friend)}</li>`;
-        friendlist.querySelector('li:last-child button').addEventListener('click', removeFriend);
     });
+
+    friendlist.querySelectorAll('li button').forEach(el => el.updateEventListener('click', removeFriend));
 }
 
 function initAddFriend() {
