@@ -1,6 +1,5 @@
 "use strict";
 
-let config;
 let endpoints;
 
 document.addEventListener("DOMContentLoaded", init);
