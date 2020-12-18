@@ -112,6 +112,7 @@ function initLogin() {
     return updateAccInfo().finally(() => {
         initNotificationSocket();
         initMap();
+        cacheSubscriptions();
         goTo('main');
     });
 }

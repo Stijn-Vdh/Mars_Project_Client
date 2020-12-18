@@ -4,6 +4,7 @@
 let accInfo;
 let currentLocationEndpointId;
 let markers = [];
+let subscriptions
 
 function updateAccInfo() {
     return getUserInfo().then(userInfo => {
@@ -17,4 +18,9 @@ function updateAccInfo() {
             currentLocationEndpointId = accInfo.homeEndpoint;
         }
     });
+}
+
+function cacheSubscriptions() {
+    apiCall('subscription', 'GET', true)
+        .then((currSubscriptions) => subscriptions = currSubscriptions);
 }
