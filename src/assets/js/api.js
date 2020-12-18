@@ -139,7 +139,7 @@ function orderPod(e) {
     }
 
     if (body.from === body.destination) {
-        warn("FROM AND DEST IS SAME: this shouldn't be allowed to happen");
+        warn("You are at this endpoint already!");
         return;
     }
 
