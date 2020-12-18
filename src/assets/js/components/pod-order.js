@@ -3,7 +3,7 @@
 function podOrderInit() {
     document.querySelectorAll('#standard-pod, #luxury-pod').forEach(el => el.updateEventListener('click', switchPod));
     document.querySelector('#select-travel-location').updateEventListener('submit', orderPod);
-    document.querySelector('#favourite-endpoint').addEventListener('change',favouriteRoute);
+    document.querySelector('#favourite-endpoint').addEventListener('change', favouriteRoute);
 
 }
 
@@ -45,7 +45,7 @@ function countdown(time) {
 function setTraveling() {
     apiCall('routeInfo', 'GET', true)
         .then(routeInfo => {
-            const eps = JSON.parse(sessionStorage.getItem('endpoints')),
+            const eps = travelEndpoints,
                 fromCoords = eps.find(ep => ep.id === routeInfo.from.id).coordinate,
                 toCoords = eps.find(ep => ep.id === routeInfo.destination.id).coordinate,
                 arriveOn = getDistance([fromCoords.latitude, fromCoords.longitude], [toCoords.latitude, toCoords.longitude]) / 600;
@@ -57,9 +57,9 @@ function setTraveling() {
             document.querySelector('.timeline .travel-pod').style.transitionDuration = `${Math.round(arriveOn)}s`;
             document.querySelector('.timeline .travel-pod').style.left = `90%`;
             document.querySelector('#travel-status').innerHTML = `Going to ${routeInfo.destination.name}`;
-        
+
             countdown(Math.round(arriveOn) - 1);
-        
+
             setTimeout(() => {
                 notify(`You arrived at ${routeInfo.destination.name}.`);
                 setTimeout(() => {
@@ -78,12 +78,16 @@ function setTraveling() {
         })
 }
 
-function checkFavoured(){
+function checkFavoured() {
     let id = document.querySelector('#select-location').value;
     document.querySelector('#favourite-endpoint').checked = false;
+    document.querySelector('#favourite-icon').setAttribute('name', 'star-outline');
     accInfo.favouriteEndpoints.forEach(endpoint =>{
         if (endpoint.id === parseInt(id)){
             document.querySelector('#favourite-endpoint').checked = true;
+            setTimeout(() => {
+                document.querySelector('#favourite-icon').setAttribute('name', 'star');
+            }, 100)
         }
     });
 

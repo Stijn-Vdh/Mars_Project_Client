@@ -1,22 +1,11 @@
 "use strict";
 
-let packageEndpoints;
+
 
 function initPackage() {
     document.querySelector('#select-package-order ion-icon').addEventListener('click', swap);
     //document.querySelector('#select-package-order').addEventListener('submit', orderPackagePod);
-
-    getPackageEndpoints()
-        .then(response =>{
-            packageEndpoints = response;
-            initEndpoints();
-        })
-}
-
-function initEndpoints(){
-    document.querySelectorAll(".packageSearch").forEach(el => loadPackageEndpoints(el));
     loadPackageEndpoints();
-
 }
 
 function swap(){

@@ -66,18 +66,9 @@ function updateSharingLocation(sharing) {
 /**
  * Log the user in
  *
- * @param {SubmitEvent} e             EventListener event
- *
- * @return {Promise}            request promise
+ * @param body            body sent with request
  */
-function login(e) {
-    e.preventDefault();
-
-    const body = {
-        name: e.target.querySelector('#si-name').value,
-        password: e.target.querySelector('#si-password').value
-    };
-
+function login(body) {
     apiCall('login', 'POST', false, body)
         .then((response) => {
             if (response.status === 402) {
@@ -85,31 +76,20 @@ function login(e) {
             } else {
                 checkNotificationPermissions();
                 localStorage.setItem('token', response);
-                goTo('main');
-                clearNavigationHistory();
-                notify('Welcome back');
+                initLogin().finally(() => {
+                    clearNavigationHistory();
+                    notify('Welcome back');
+                });
             }
-        })
+        });
 }
 
 /**
  * register a user in
  *
- * @param {SubmitEvent} e             EventListener event
- *
- * @return {Promise}            request promise
+ * @param body            body to be sent with request
  */
-function register(e) {
-    e.preventDefault();
-
-    const body = {
-        name: e.target.querySelector('#su-name').value,
-        password: e.target.querySelector('#su-password').value,
-        businessAccount: e.target.querySelector('#su-business').checked,
-        homeAddress: e.target.querySelector('#su-address').value,
-        homeEndpointId: parseInt(e.target.querySelector('#su-homeEndpointName').value)
-    };
-
+function register(body) {
     apiCall('createAccount', 'POST', false, body)
         .then((response) => {
             if (response.status === 402) {
@@ -158,8 +138,8 @@ function orderPod(e) {
         podType: e.target.querySelector('#selected-pod').value
     }
 
-    if (body.from === body.destination){
-        warn("FROM AND DEST IS SAME: this shouldn't be allowed to happen");
+    if (body.from === body.destination) {
+        warn("You are at this endpoint already!");
         return;
     }
 
@@ -184,7 +164,7 @@ function orderPod(e) {
             } else {
                 apiCall('routeInfo', 'GET', true)
                     .then(route => {
-                        const eps = JSON.parse(sessionStorage.getItem('endpoints')),
+                        const eps = travelEndpoints,
                             fromCoords = eps.find(ep => ep.id === route.from.id).coordinate,
                             toCoords = eps.find(ep => ep.id === route.destination.id).coordinate,
                             travelWaypoints = [
@@ -201,7 +181,7 @@ function orderPod(e) {
 
                         document.querySelector('#travel-view').style.transitionDuration = `${route.arrivalTime}s`;
                         document.querySelector('#travel-view .travel-pod').style.top = `9rem`;
-                        
+
                         document.querySelector('.searchbar').style.display = 'none';
                         document.querySelector('#quick-access').classList.add('traveling');
                         document.querySelector('#process-payment .checkmark').classList.add('active', 'success');
@@ -218,28 +198,30 @@ function orderPod(e) {
         });
 }
 
-function favouriteRoute(e){
+function favouriteRoute(e) {
     e.preventDefault();
     let id = parseInt(e.path[2].querySelector('#select-location').value);
     let checked = e.target.checked;
 
-    if (!checked){
-        apiCall(`endpoint/favorite/${id}`,"DELETE", true)
-            .then(response=>{
+    if (!checked) {
+        apiCall(`endpoint/favorite/${id}`, "DELETE", true)
+            .then(response => {
                 if (response.status === 401 || response.status === 403) {
                     warn(response.message);
                 } else {
                     notify(response);
+                    document.querySelector('#favourite-icon').setAttribute('name', 'star-outline');
                 }
             })
             .then(updateAccInfo);
-    }else{
-        return apiCall(`endpoint/favorite/${id}`,"POST", true)
-            .then(response=>{
+    } else {
+        return apiCall(`endpoint/favorite/${id}`, "POST", true)
+            .then(response => {
                 if (response.status === 401 || response.status === 403) {
                     warn(response.message);
                 } else {
                     notify(response);
+                    document.querySelector('#favourite-icon').setAttribute('name', 'star');
                 }
             })
             .then(updateAccInfo);

@@ -777,6 +777,23 @@
 #pod-order-view form label {
   font-family: "Montserrat", sans-serif;
 }
+#pod-order-view form div:first-of-type {
+  display: flex;
+  box-sizing: border-box;
+}
+#pod-order-view form div:first-of-type input[type=text] {
+  width: 1px;
+  flex-grow: 1;
+}
+#pod-order-view form div:first-of-type input[type=checkbox] {
+  width: 0;
+}
+#pod-order-view form div:first-of-type ion-icon {
+  font-size: 1.5rem;
+  margin-top: 0.75rem;
+  margin-right: 0.5rem;
+  color: #f4c95d;
+}
 #pod-order-view form .custom-checkbox {
   display: inline-flex;
   cursor: pointer;
