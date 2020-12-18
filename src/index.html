@@ -331,12 +331,11 @@
     <form id="select-travel-location" action="#" method="post">
         <label for="select-location-text">Travel to</label>
         <input type="hidden" disabled id="select-location">
-        <input type="text" disabled id="select-location-text" value="Location">
-        <h3>Favourite endpoint</h3>
-        <label class="custom-checkbox" id="favourite-route">
+        <div>
+            <label for="favourite-endpoint"><ion-icon name="star-outline" id="favourite-icon"></ion-icon></label>
+            <input type="text" disabled id="select-location-text" value="Location">
             <input type="checkbox" id="favourite-endpoint">
-            <span></span>
-        </label>
+        </div>
         <h2>Pod type</h2>
         <div id="pod-select">
             <input type="hidden" id="selected-pod" value="standard">

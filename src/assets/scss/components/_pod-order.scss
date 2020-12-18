@@ -29,6 +29,26 @@
       font-family: "Montserrat", sans-serif;
     }
 
+    div:first-of-type {
+      display: flex;
+      box-sizing: border-box;
+      input[type="text"] {
+        width: 1px;
+        flex-grow: 1;
+      }
+
+      input[type="checkbox"] {
+        width: 0;
+      }
+
+      ion-icon {
+        font-size: 1.5rem;
+        margin-top: .75rem;
+        margin-right: 0.5rem;
+        color: util.$accent-yellow;
+      }
+    }
+
     .custom-checkbox{
       display: inline-flex;
       cursor: pointer;
