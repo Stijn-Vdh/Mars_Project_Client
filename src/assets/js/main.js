@@ -1,6 +1,5 @@
 "use strict";
 
-let config;
 let endpoints;
 
 document.addEventListener("DOMContentLoaded", init);
@@ -32,8 +31,6 @@ function initMain() {
         .then(history => {
             loadRecentTrips(history, "recent");
         });
-    updateAccInfo();
-    initMap();
 }
 
 function addPages() {
@@ -60,7 +57,7 @@ function addPages() {
         }
     });
     addPage('#subscription-settings', ['li[data-open-setting="subscription-settings"', '#edit-subscription', '#edit-subscription-quick'], {onOpen: initSubscription});
-    addPage('#package-order-view', ['#send-package'], {onOpen: initPackage});
+    addPage('#package-order-view', ['#send-package']);
 }
 
 function setViewPortStatic() {
@@ -75,20 +72,18 @@ function loadRecentTrips(trips, type) {
     let tripContainer = document.querySelector('#trips > ul');
     tripContainer.innerHTML = "";
 
-    if (type === "recent"){
-        if (trips.length > 5){
+    if (type === "recent") {
+        if (trips.length > 5) {
             trips = trips.slice(-5);
         }
         trips.reverse().forEach(route => {
             tripContainer.innerHTML += recentTrip(route);
         })
-    }else{
+    } else {
         trips.reverse().forEach(route => {
             tripContainer.innerHTML += favouriteTrip(route);
         })
     }
-
-
 }
 
 function loadDataInQuickAccess(userInfo) {
@@ -109,4 +104,17 @@ function payloadConsumer(payload) {
         text.value = payload.name;
     }
     checkFavoured();
+}
+
+// put here all the functions that only can be executed once after the user has logged in!
+function initLogin() {
+    return updateAccInfo().finally(() => {
+        initNotificationSocket();
+        cacheSubscriptions();
+        cacheTravelEndpoints()
+            .finally(initMap);
+        cachePackageEndpoints()
+            .finally(initPackage);
+        goTo('main');
+    });
 }

@@ -1,8 +1,8 @@
 "use strict";
 
 function initAuthentication() {
-    document.querySelector('#signin form').updateEventListener('submit', login);
-    document.querySelector('#signup form').updateEventListener('submit', register);
+    document.querySelector('#signin form').updateEventListener('submit', btnLogin);
+    document.querySelector('#signup form').updateEventListener('submit', btnRegister);
     document.querySelector('.searchHomeEndpoint input').updateEventListener('input', (e) => loadHomeEndpointList(e, e.target.value));
     document.querySelector('#signup #su-homeEndpointName').updateEventListener('focusin', () => {
         document.querySelector('.searchHomeEndpoint').classList.add('active');
@@ -18,8 +18,7 @@ function initAuthentication() {
                     goTo('#authentication');
                 } else {
                     accInfo = response;
-                    initNotificationSocket();
-                    goTo('main');
+                    initLogin();
                 }
             });
     }
@@ -48,4 +47,23 @@ function loadHomeEndpointList(e = null, filter = "") {
     });
 
     homeEndpointContainer.querySelectorAll('li').forEach(el => el.updateEventListener('click', selectHomeEndpoint));
+}
+
+function btnLogin(e) {
+    e.preventDefault();
+    login({
+        name: e.target.querySelector('#si-name').value,
+        password: e.target.querySelector('#si-password').value
+    });
+}
+
+function btnRegister(e) {
+    e.preventDefault();
+    register({
+        name: e.target.querySelector('#su-name').value,
+        password: e.target.querySelector('#su-password').value,
+        businessAccount: false,
+        homeAddress: e.target.querySelector('#su-address').value,
+        homeEndpointId: parseInt(e.target.querySelector('#su-homeEndpointName').value)
+    });
 }

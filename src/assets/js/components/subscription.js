@@ -4,22 +4,21 @@ function initSubscription() {
     const subscriptionListElement = document.querySelector('#subscription-settings ul');
     subscriptionListElement.innerHTML = '';
 
-    apiCall('subscription', 'GET')
-        .then((subscriptions) => {
-            subscriptions.forEach((subscription) => {
-                subscriptionListElement.innerHTML += `<li id='subscription-${subscription.id}' data-name='${subscription.name}' ${subscription.id === accInfo.subscription.id ? 'class="active"' : ''}>${subscription.name} <p>M ${subscription.price}</p></li>`;
-            });
 
-            subscriptionListElement.querySelectorAll('li').forEach(li => {
-                li.addEventListener('click', () => {
-                    mttsPrompt(`Are you sure you want to change subscription to ${li.getAttribute('data-name')}`, () => {
-                        changeSubscription(li.getAttribute('id'), li.getAttribute('data-name'));
-                    }, () => {
-                        goBack();
-                    });
-                });
+    subscriptions.forEach((subscription) => {
+        subscriptionListElement.innerHTML += `<li id='subscription-${subscription.id}' data-name='${subscription.name}' ${subscription.id === accInfo.subscription.id ? 'class="active"' : ''}>${subscription.name} <p>M ${subscription.price}</p></li>`;
+    });
+
+    subscriptionListElement.querySelectorAll('li').forEach(li => {
+        li.addEventListener('click', () => {
+            mttsPrompt(`Are you sure you want to change subscription to ${li.getAttribute('data-name')}`, () => {
+                changeSubscription(li.getAttribute('id'), li.getAttribute('data-name'));
+            }, () => {
+                goBack();
             });
         });
+    });
+
 }
 
 function changeSubscription(id, subName) {

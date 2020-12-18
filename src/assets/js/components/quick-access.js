@@ -10,7 +10,6 @@ let dragInfo = {
 };
 
 
-
 function initQuickAccess() {
     document.querySelector('#quick-access > header').updateEventListener('touchstart', dragStart);
     document.querySelector('#quick-access > header').updateEventListener('touchmove', dragMove);
@@ -18,7 +17,7 @@ function initQuickAccess() {
     document.querySelector('#logout').updateEventListener('click', logout);
     showGreeting();
     document.querySelector('#trips ul').updateEventListener('scroll', recentTripScroll);
-    document.querySelectorAll('#change-trips input').forEach(el => el.updateEventListener('change',changeTrips));
+    document.querySelectorAll('#change-trips input').forEach(el => el.updateEventListener('change', changeTrips));
     document.querySelector('#change-trips #recent').checked = true;
     document.querySelector('#change-trips ').classList.remove('favourite');
 }
@@ -26,13 +25,13 @@ function initQuickAccess() {
 function changeTrips() {
     let recent = document.querySelector('#change-trips #recent');
 
-    if (recent.checked){
+    if (recent.checked) {
         getTravelHistory()
             .then(history => {
                 loadRecentTrips(history, "recent");
             });
         document.querySelector('#change-trips').classList.remove('favourite');
-    }else{
+    } else {
         loadRecentTrips(accInfo.favouriteEndpoints, "favourites")
         document.querySelector('#change-trips').classList.add('favourite');
     }
@@ -54,7 +53,7 @@ function recentTripScroll(e) {
         if (maxShadow < halfScreen * 0.25) maxShadow = halfScreen * 0.25;
 
         maxShadow = (33 / halfScreen) * maxShadow;
-        
+
         el.style.boxShadow = `0 ${maxShadow * 0.08}px ${maxShadow * 0.12}px rgba(0, 0, 0, 0.02), 0 ${maxShadow * 0.15}px ${maxShadow * 0.15}px rgba(0, 0, 0, 0.028), 0 ${maxShadow * 0.28}px ${maxShadow * 0.3}px rgba(0, 0, 0, 0.035), 0 ${maxShadow * 0.36}px ${maxShadow * 0.54}px rgba(0, 0, 0, 0.042), 0 ${maxShadow / 2}px ${maxShadow}px rgba(0, 0, 0, 0.07)`
     })
 }
@@ -76,12 +75,12 @@ function showGreeting() {
                 ? 'Good afternoon' : 'Good evening';
 }
 
-function logout(){
-
+function logout() {
     apiCall("login", "delete", true)
         .then(() => {
-                localStorage.removeItem("token");
-                goTo('#authentication');
+            localStorage.removeItem("token");
+            deInitMap();
+            goTo('#authentication');
         });
 }
 
