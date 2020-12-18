@@ -6,6 +6,8 @@ let currentLocationEndpointId;
 let markers = [];
 let subscriptions
 let travelEndpoints;
+let packageEndpoints;
+
 
 function updateAccInfo() {
     return getUserInfo().then(userInfo => {
@@ -28,4 +30,9 @@ function cacheSubscriptions() {
 
 function cacheTravelEndpoints() {
     return getTravelEndpoints().then(endpoints => travelEndpoints = endpoints);
+}
+
+function cachePackageEndpoints() {
+    return getPackageEndpoints()
+        .then(endpoints => packageEndpoints = endpoints);
 }
