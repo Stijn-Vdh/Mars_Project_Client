@@ -103,16 +103,17 @@ function register(body) {
 
 function addFriend(e = null) {
     if (typeof e !== 'string') e.preventDefault();
+        apiCall(`friend/${typeof e === 'string' ? e : document.querySelector('#friend-name').value}`, 'POST', true)
+            .then((response) => {
+                if (response.status === 401 || response.status === 403 || response.status === 402) {
+                    warn(response.message);
+                } else {
+                    notify(response);
+                    goBack();
+                }
+            })
+            .finally(updateAccInfo)
 
-    apiCall(`friend/${typeof e === 'string' ? e : document.querySelector('#friend-name').value}`, 'POST', true)
-        .then((response) => {
-            if (response.status === 401 || response.status === 403) {
-                warn(response.message);
-            } else {
-                notify(response);
-                goBack();
-            }
-        }).finally(updateAccInfo);
 }
 
 function removeFriend(e = null) {
@@ -132,70 +133,74 @@ function removeFriend(e = null) {
 function orderPod(e) {
     e.preventDefault();
 
-    const body = {
-        from: currentLocationEndpointId,
-        destination: parseInt(e.target.querySelector('#select-location').value),
-        podType: e.target.querySelector('#selected-pod').value
-    }
+    if (document.querySelector('#bank').checked || document.querySelector('#reward-points').checked){
+        const body = {
+            from: currentLocationEndpointId,
+            destination: parseInt(e.target.querySelector('#select-location').value),
+            podType: e.target.querySelector('#selected-pod').value
+        }
 
-    if (body.from === body.destination) {
-        warn("You are at this endpoint already!");
-        return;
-    }
+        if (body.from === body.destination) {
+            warn("You are at this endpoint already!");
+            return;
+        }
 
-    apiCall('travel', 'POST', true, body)
-        .then(response => {
-            const user = accInfo;
-            updateCurrentLocation(body.destination);
-            goTo('#process-payment');
-            if (accInfo.subscription.unlimitedTravels) {
-                document.querySelector('#process-payment h2').innerHTML = 'Checking subscription.';
-            } else {
-                document.querySelector('#process-payment h2').innerHTML = 'Checking payment.';
-            }
-            if (response.status === 401 || response.status === 403) {
-                document.querySelector('#process-payment .checkmark').classList.add('active', 'error');
-                document.querySelector('#payment-response').innerHTML = response.message;
-                setTimeout(() => {
-                    goBack();
-                    document.querySelector('#process-payment .checkmark').classList.remove('active', 'error')
-                    document.querySelector('#payment-response').innerHTML = '';
-                }, 3000);
-            } else {
-                apiCall('routeInfo', 'GET', true)
-                    .then(route => {
-                        const eps = travelEndpoints,
-                            fromCoords = eps.find(ep => ep.id === route.from.id).coordinate,
-                            toCoords = eps.find(ep => ep.id === route.destination.id).coordinate,
-                            travelWaypoints = [
-                                L.latLng(fromCoords.latitude, fromCoords.longitude),
-                                L.latLng(toCoords.latitude, toCoords.longitude)
-                            ];
+        apiCall('travel', 'POST', true, body)
+            .then(response => {
+                const user = accInfo;
+                updateCurrentLocation(body.destination);
+                goTo('#process-payment');
+                if (accInfo.subscription.unlimitedTravels) {
+                    document.querySelector('#process-payment h2').innerHTML = 'Checking subscription.';
+                } else {
+                    document.querySelector('#process-payment h2').innerHTML = 'Checking payment.';
+                }
+                if (response.status === 401 || response.status === 403) {
+                    document.querySelector('#process-payment .checkmark').classList.add('active', 'error');
+                    document.querySelector('#payment-response').innerHTML = response.message;
+                    setTimeout(() => {
+                        goBack();
+                        document.querySelector('#process-payment .checkmark').classList.remove('active', 'error')
+                        document.querySelector('#payment-response').innerHTML = '';
+                    }, 3000);
+                } else {
+                    apiCall('routeInfo', 'GET', true)
+                        .then(route => {
+                            const eps = travelEndpoints,
+                                fromCoords = eps.find(ep => ep.id === route.from.id).coordinate,
+                                toCoords = eps.find(ep => ep.id === route.destination.id).coordinate,
+                                travelWaypoints = [
+                                    L.latLng(fromCoords.latitude, fromCoords.longitude),
+                                    L.latLng(toCoords.latitude, toCoords.longitude)
+                                ];
 
-                        routeController.setWaypoints(travelWaypoints);
+                            routeController.setWaypoints(travelWaypoints);
 
-                        markers.filter(marker => marker.options.endpointId !== route.from.id && marker.options.endpointId !== route.destination.id).forEach(marker => {
-                            map.removeLayer(marker);
+                            markers.filter(marker => marker.options.endpointId !== route.from.id && marker.options.endpointId !== route.destination.id).forEach(marker => {
+                                map.removeLayer(marker);
+                            });
+                            document.querySelector('#current-location').classList.add("hidden");
+
+                            document.querySelector('#travel-view').style.transitionDuration = `${route.arrivalTime}s`;
+                            document.querySelector('#travel-view .travel-pod').style.top = `9rem`;
+
+                            document.querySelector('.searchbar').style.display = 'none';
+                            document.querySelector('#quick-access').classList.add('traveling');
+                            document.querySelector('#process-payment .checkmark').classList.add('active', 'success');
+                            document.querySelector('#payment-response').innerHTML = `Ordered pod #${response.travelId}.`;
+                            setTimeout(() => {
+                                goTo('main');
+                                notify(`Your pod is on it's way!`);
+                                document.querySelector('#process-payment h2').innerHTML = 'Checking payment.';
+                                document.querySelector('#process-payment .checkmark').classList.remove('active', 'success')
+                                document.querySelector('#payment-response').innerHTML = '';
+                            }, 3000);
                         });
-                        document.querySelector('#current-location').classList.add("hidden");
-
-                        document.querySelector('#travel-view').style.transitionDuration = `${route.arrivalTime}s`;
-                        document.querySelector('#travel-view .travel-pod').style.top = `9rem`;
-
-                        document.querySelector('.searchbar').style.display = 'none';
-                        document.querySelector('#quick-access').classList.add('traveling');
-                        document.querySelector('#process-payment .checkmark').classList.add('active', 'success');
-                        document.querySelector('#payment-response').innerHTML = `Ordered pod #${response.travelId}.`;
-                        setTimeout(() => {
-                            goTo('main');
-                            notify(`Your pod is on it's way!`);
-                            document.querySelector('#process-payment h2').innerHTML = 'Checking payment.';
-                            document.querySelector('#process-payment .checkmark').classList.remove('active', 'success')
-                            document.querySelector('#payment-response').innerHTML = '';
-                        }, 3000);
-                    });
-            }
-        });
+                }
+            });
+    }else{
+        notify('Please choose a payment type.');
+    }
 }
 
 function favouriteRoute(e) {
@@ -316,6 +321,7 @@ function setSubscription(id) {
  *
  * @return {Promise}               The request promise
  */
+
 function apiCall(uri, method = 'GET', authenticated, body) {
     const request = new Request(api + uri, {
         method: method,
