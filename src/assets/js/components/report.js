@@ -14,11 +14,7 @@ function postReport(e) {
 
     apiCall('report', 'POST', true, body)
         .then(response => {
-            if (response.status === 401 || response.status === 403 || response.status === 422) {
-                warn(response.message);
-            } else {
-                notify(response);
-                goBack();
-            }
-        })
+            notify(response);
+            goBack();
+        });
 }

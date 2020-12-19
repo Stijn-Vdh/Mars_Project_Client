@@ -10,26 +10,13 @@ function getUserInfo() {
 
 function updateName(newName) {
     return apiCall('changeDisplayName', 'POST', true, {newDisplayName: newName})
-        .then(response => {
-            if (response.status === 401 || response.status === 403) {
-                warn(response.message);
-            } else {
-                notify(response);
-            }
-        })
+        .then(notify)
         .then(updateAccInfo);
 }
 
 function updatePassword(currentPassword, newPassword) {
     apiCall('changePassword', 'POST', true, {newPassword: newPassword})
-        .then(response => {
-                if (response.status === 401 || response.status === 403) {
-                    warn(response.message);
-                } else {
-                    notify(response);
-                }
-            }
-        );
+        .then(notify);
 }
 
 function updateSharingLocation(sharing) {
@@ -80,7 +67,7 @@ function addFriend(e = null) {
     if (typeof e !== 'string') e.preventDefault();
     apiCall(`friend/${typeof e === 'string' ? e : document.querySelector('#friend-name').value}`, 'POST', true)
         .then((response) => {
-            if (response.status === 401 || response.status === 403 || response.status === 402) {
+            if (response.status === 402) {
                 warn(response.message);
             } else {
                 notify(response);
@@ -95,14 +82,11 @@ function removeFriend(e = null) {
     if (typeof e !== 'string') e.preventDefault();
 
     apiCall(`friend/${typeof e === 'string' ? e : e.currentTarget.getAttribute('data-remove-friend')}`, 'DELETE', true)
-        .then((response) => {
-            if (response.status === 401 || response.status === 403) {
-                warn(response.message);
-            } else {
-                notify(response);
-                goBack();
-            }
-        }).then(updateAccInfo);
+        .then(response => {
+            notify(response);
+            goBack();
+        })
+        .then(updateAccInfo);
 }
 
 function orderPod(e) {
@@ -199,23 +183,15 @@ function favouriteRoute(e) {
     if (!checked) {
         apiCall(`endpoint/favorite/${id}`, "DELETE", true)
             .then(response => {
-                if (response.status === 401 || response.status === 403) {
-                    warn(response.message);
-                } else {
-                    notify(response);
-                    document.querySelector('#favourite-icon').setAttribute('name', 'star-outline');
-                }
+                notify(response);
+                document.querySelector('#favourite-icon').setAttribute('name', 'star-outline');
             })
             .then(updateAccInfo);
     } else {
         return apiCall(`endpoint/favorite/${id}`, "POST", true)
             .then(response => {
-                if (response.status === 401 || response.status === 403) {
-                    warn(response.message);
-                } else {
-                    notify(response);
-                    document.querySelector('#favourite-icon').setAttribute('name', 'star');
-                }
+                notify(response);
+                document.querySelector('#favourite-icon').setAttribute('name', 'star');
             })
             .then(updateAccInfo);
     }
@@ -339,7 +315,7 @@ function apiCall(uri, method = 'GET', authenticated, body) {
 }
 
 function validate(response) {
-    if (response.status === 403 || response.status === 401 || response.status === 500) {
+    if (response.status === 403 || response.status === 401 || response.status === 500) { // sometimes server throws 500 if token is not long enough needs to fixed so that we dont catch 500s
         goTo('#authentication');
         error("Something went wrong!");
         localStorage.removeItem("token");
