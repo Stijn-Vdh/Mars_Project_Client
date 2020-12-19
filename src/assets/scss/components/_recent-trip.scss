@@ -50,13 +50,14 @@
             transform: translateX(calc(100% - 0.4rem));
         }
     }
-
+    ul::-webkit-scrollbar { width: 0 !important }
     ul {
         display: flex;
         flex-direction: row;
         overflow-x: scroll;
         padding: 2rem 0;
-
+        overflow: -moz-scrollbars-none;
+        -ms-overflow-style: none;
         li {
             width: 12rem;
             height: 5rem;

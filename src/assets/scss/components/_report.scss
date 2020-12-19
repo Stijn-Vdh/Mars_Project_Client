@@ -44,7 +44,7 @@
 
         button {
             @include util.button;
-            background-color: variables.$accent-green;
+            background-color: util.$accent-red;
             margin-top: 3rem;
             color: variables.$background-primary;
             
