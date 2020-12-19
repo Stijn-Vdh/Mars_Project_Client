@@ -5,14 +5,7 @@ const api = 'https://project-ii.ti.howest.be/mars-15/api/';
 // const api = 'http://localhost:8080/api/';
 
 function getUserInfo() {
-    return apiCall('accountInformation', 'GET', true)
-        .then(response => {
-            if (response.status === 401) {
-                warn(response.message);
-            } else {
-                return response;
-            }
-        })
+    return apiCall('accountInformation', 'GET', true);
 }
 
 function updateName(newName) {
@@ -76,7 +69,7 @@ function login(body) {
             } else {
                 checkNotificationPermissions();
                 localStorage.setItem('token', response);
-                initLogin().finally(() => {
+                initLogin().then(() => {
                     clearNavigationHistory();
                     notify('Welcome back');
                 });
@@ -250,14 +243,14 @@ function orderPackagePod(e) {
     e.preventDefault();
 
 
-    if (document.querySelector('#p-bank').checked || document.querySelector('#p-reward-points').checked){
+    if (document.querySelector('#p-bank').checked || document.querySelector('#p-reward-points').checked) {
         let pFrom = parseInt(e.target.querySelector('#p-location').value);
         let pDestination = parseInt(e.target.querySelector('#p-destination-value').value);
         if (pFrom === pDestination) {
             error("You cannot send a package to yourself!");
             return;
         }
-        if (document.querySelector("#p-destination").value === ""){
+        if (document.querySelector("#p-destination").value === "") {
             error("Please fill in a destination!");
             return;
         }
@@ -294,7 +287,7 @@ function orderPackagePod(e) {
                 }
             });
 
-    }else{
+    } else {
         error("Please choose a payment method!");
     }
 }
@@ -351,33 +344,35 @@ function setSubscription(id) {
  */
 
 function apiCall(uri, method = 'GET', authenticated, body) {
-    if (localStorage.getItem('token') !== ""){
-        const request = new Request(api + uri, {
-            method: method,
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: authenticated ? `Bearer ${localStorage.getItem('token')}` : undefined
-            },
-            body: JSON.stringify(body)
-        });
-
-        return fetch(request)
-            .then(validate)
-            .then(response => response.json());
-    }else{
-        errorHandling();
-    }
+    return fetch(api + uri, {
+        method: method,
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: authenticated ? `Bearer ${localStorage.getItem('token')}` : undefined
+        },
+        body: JSON.stringify(body)
+    })
+        .then(validate)
+        .then(response => response.json());
 }
 
-function validate(response){
-    if (response.status === 403){
-        errorHandling();
+function validate(response) {
+    if (response.status === 403 || response.status === 401 || response.status === 500) {
+        goTo('#authentication');
+        error("Something went wrong!");
+        localStorage.removeItem("token");
+        deInitMap();
+        throw new AuthError("USER NOT AUTHENTICATED"); // makes the promise rejected and prevents the resolved callbacks from being called
     }
     return response;
 }
 
-function errorHandling(){
-    goTo('#authentication');
-    error("Something went wrong!");
-    localStorage.removeItem("token");
+window.addEventListener('unhandledrejection', function (event) { //catches the unhandled rejection
+    if (event.reason instanceof AuthError) { // no need to log these errors and i dont want to add manually a catch at the end of each promise.
+        event.preventDefault();
+    }
+});
+
+class AuthError extends Error { // custom error
+
 }

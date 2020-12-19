@@ -18,6 +18,8 @@ function init() {
     navigator.serviceWorker.register('/mars-15/service-worker.js', {
         scope: '/mars-15/'
     });
+
+    initLogin()
 }
 
 function initMain() {
@@ -124,7 +126,7 @@ function payloadConsumer(payload) {
 
 // put here all the functions that only can be executed once after the user has logged in!
 function initLogin() {
-    return updateAccInfo().finally(() => {
+    return updateAccInfo().then(() => {
         initNotificationSocket();
         cacheSubscriptions();
         cacheTravelEndpoints()

@@ -11,7 +11,6 @@ let packageEndpoints;
 
 function updateAccInfo() {
     return getUserInfo().then(userInfo => {
-        console.log("updatedAccInfo");
         accInfo = userInfo
         checkForFriendRequests(userInfo);
         loadFriends(userInfo);
