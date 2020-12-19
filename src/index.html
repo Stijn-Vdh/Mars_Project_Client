@@ -107,6 +107,13 @@
     </section>
 </main>
 
+<aside id="points-popup">
+    <div class="icon">
+        <ion-icon name="gift-outline"></ion-icon>
+    </div>
+    <p id="points-changed">+15</p>
+</aside>
+
 <aside id="authentication">
     <header>
         <div class="globe">
@@ -193,9 +200,10 @@
         <button class="back">
             <ion-icon name="chevron-back-outline"></ion-icon>
         </button>
-        <button class="achievements">
-            <ion-icon name="ribbon-outline"></ion-icon>
-        </button>
+        <div class="points" title="points">
+            <p>0<span>10</span></p>
+            <button id="points-button"><ion-icon name="gift-outline"></ion-icon></button>
+        </div>
         <h2>GREETING Name</h2>
         <div class="user-icon-wrapper">
             <div class="user-icon">
@@ -351,6 +359,20 @@
             <label for="reward-points">Pay with reward points</label>
         </div>
 
+        <div id="travel-discount-info" class="hidden">
+            <h2>Discount</h2>
+            <p>You are able to convert every 100 points to M1.</p>
+            <p>You have <span id="info-amount"></span> points.</p>
+
+            <div class="btn-group">
+                <div>
+                    <label for="discount">How many points do you want to use?</label>
+                    <input type="range" name="discount" id="discount" value="0" min="0" step="100">
+                </div>
+                <input type="text" id="discount-used" disabled value="0">
+            </div>
+        </div>
+
         <h2 id="pod-pricing">You current total is <span>M2</span></h2>
 
         <input type="submit" value="Order pod" id="order-pod">
@@ -456,6 +478,7 @@
 <script src="assets/js/components/navigation.js"></script>
 <script src="assets/js/components/notification.js"></script>
 <script src="assets/js/components/pod-order.js"></script>
+<script src="assets/js/components/points.js"></script>
 <script src="assets/js/components/quick-access.js"></script>
 <script src="assets/js/components/report.js"></script>
 <script src="assets/js/components/searchbar.js"></script>

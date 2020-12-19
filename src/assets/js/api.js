@@ -159,8 +159,6 @@ function orderPod(e) {
 
         apiCall('travel', 'POST', true, body)
             .then(response => {
-                const user = accInfo;
-                updateCurrentLocation(body.destination);
                 goTo('#process-payment');
                 if (accInfo.subscription.unlimitedTravels) {
                     document.querySelector('#process-payment h2').innerHTML = 'Checking subscription.';
@@ -176,6 +174,12 @@ function orderPod(e) {
                         document.querySelector('#payment-response').innerHTML = '';
                     }, 3000);
                 } else {
+                    updateCurrentLocation(body.destination);
+                    if (document.querySelector('#reward-points').checked) points -= parseInt(document.querySelector('#discount').value);
+
+                    document.querySelector('#reward-points').checked = false;
+                    checkedRewardPoints();
+
                     apiCall('routeInfo', 'GET', true)
                         .then(route => {
                             const eps = travelEndpoints,
@@ -202,6 +206,9 @@ function orderPod(e) {
                             document.querySelector('#payment-response').innerHTML = `Ordered pod #${response.travelId}.`;
                             setTimeout(() => {
                                 goTo('main');
+                                if (!accInfo.subscription.unlimitedTravels) {
+                                    addPoints(Math.round(Math.random() * 9) + 1);
+                                }
                                 notify(`Your pod is on it's way!`);
                                 document.querySelector('#process-payment h2').innerHTML = 'Checking payment.';
                                 document.querySelector('#process-payment .checkmark').classList.remove('active', 'success')
@@ -270,6 +277,9 @@ function orderPackagePod(e) {
                 document.querySelector('#payment-response').innerHTML = `Package pod ordered #1.`;
                 setTimeout(() => {
                     goTo('main');
+                    if (!accInfo.subscription.unlimitedPackages) {
+                        addPoints(Math.round(Math.random() * 9) + 1);
+                    }
                     notify(`Your pod is on it's way!`);
                     document.querySelector('#process-payment .checkmark').classList.remove('active', 'success')
                     document.querySelector('#payment-response').innerHTML = '';

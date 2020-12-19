@@ -119,6 +119,32 @@
       }
     }
 
+    #travel-discount-info {
+      p {
+        font-size: 0.8rem;
+      }
+
+      #info-amount {
+        font-weight: bold;
+      }
+      
+      .btn-group {
+        display: flex;
+        width: 100%;
+        div {
+          width: 75%;
+          display: flex;
+          flex-flow: column;
+        }
+
+        input {
+          text-align: right;
+          font-size: 1rem;
+          letter-spacing: 0.2rem;
+        }
+      }
+    }
+
     .btn-group {
       padding: 0.5rem 0;
 
