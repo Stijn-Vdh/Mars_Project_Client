@@ -15,7 +15,7 @@ function updateName(newName) {
 }
 
 function updatePassword(currentPassword, newPassword) {
-    apiCall('changePassword', 'POST', true, {newPassword: newPassword})
+    return apiCall('changePassword', 'POST', true, {newPassword: newPassword})
         .then(notify);
 }
 
