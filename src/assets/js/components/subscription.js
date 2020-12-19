@@ -25,23 +25,29 @@ function changeSubscription(id, subName) {
     let subID = parseInt(id.substr(13));
     setSubscription(subID)
         .then(response => {
-            goTo('#process-payment');
             if (response.status === 401 || response.status === 403) {
+                goTo('#process-payment');
                 document.querySelector('#process-payment .checkmark').classList.add('active', 'error');
                 document.querySelector('#payment-response').innerHTML = response.message;
                 setTimeout(() => {
                     goBack();
                     document.querySelector('#process-payment .checkmark').classList.remove('active', 'error')
                     document.querySelector('#payment-response').innerHTML = '';
-                }, 5500);
+                }, 2000);
             } else {
-                document.querySelector('#process-payment .checkmark').classList.add('active', 'success');
-                document.querySelector('#payment-response').innerHTML = `Successfully bought subscription #${subName}.`;
-                setTimeout(() => {
+                if (subID !== 0){
+                    goTo('#process-payment');
+                    document.querySelector('#process-payment .checkmark').classList.add('active', 'success');
+                    document.querySelector('#payment-response').innerHTML = `Successfully bought subscription ${subName}.`;
+                    setTimeout(() => {
+                        goTo('main');
+                        document.querySelector('#process-payment .checkmark').classList.remove('active', 'success')
+                        document.querySelector('#payment-response').innerHTML = '';
+                    }, 2000);
+                }else{
                     goTo('main');
-                    document.querySelector('#process-payment .checkmark').classList.remove('active', 'success')
-                    document.querySelector('#payment-response').innerHTML = '';
-                }, 5500);
+                    notify("Successfully stopped your subscription.");
+                }
             }
         });
 }

@@ -855,7 +855,8 @@
   border-bottom: 1px solid #eff1f4;
 }
 #pod-order-view form #pod-select div.active {
-  background-color: #aed581;
+  background-color: #ee4949;
+  color: #fbfcff;
 }
 #pod-order-view form .btn-group {
   padding: 0.5rem 0;
@@ -880,7 +881,8 @@
   box-shadow: 0 1px 2.2px rgba(0, 0, 0, 0.02), 0 2.3px 5.3px rgba(0, 0, 0, 0.028), 0 4.4px 10px rgba(0, 0, 0, 0.035), 0 7.8px 17.9px rgba(0, 0, 0, 0.042), 0 14.6px 33.4px rgba(0, 0, 0, 0.05), 0 35px 80px rgba(0, 0, 0, 0.07);
   box-sizing: border-box;
   padding: 1.5rem;
-  background-color: #aed581;
+  background-color: #ee4949;
+  color: #fbfcff;
 }
 #pod-order-view form input[type=submit]:focus {
   outline: none;
@@ -937,11 +939,16 @@
 #trips #change-trips.favourite::after {
   transform: translateX(calc(100% - 0.4rem));
 }
+#trips ul::-webkit-scrollbar {
+  width: 0 !important;
+}
 #trips ul {
   display: flex;
   flex-direction: row;
   overflow-x: scroll;
   padding: 2rem 0;
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
 }
 #trips ul li {
   width: 12rem;
@@ -1195,7 +1202,7 @@
   border-radius: 3rem;
   box-shadow: 0 1px 2.2px rgba(0, 0, 0, 0.02), 0 2.3px 5.3px rgba(0, 0, 0, 0.028), 0 4.4px 10px rgba(0, 0, 0, 0.035), 0 7.8px 17.9px rgba(0, 0, 0, 0.042), 0 14.6px 33.4px rgba(0, 0, 0, 0.05), 0 35px 80px rgba(0, 0, 0, 0.07);
   box-sizing: border-box;
-  background-color: #aed581;
+  background-color: #ee4949;
   margin-top: 3rem;
   color: #fbfcff;
 }
@@ -1416,7 +1423,8 @@
   float: right;
 }
 #subscription-settings ul li.active {
-  background-color: #aed581;
+  background-color: #ee4949;
+  color: #fbfcff;
 }
 #subscription-settings ul li p {
   text-align: right;
@@ -1600,10 +1608,12 @@
   border-radius: 3rem;
   box-shadow: 0 1px 2.2px rgba(0, 0, 0, 0.02), 0 2.3px 5.3px rgba(0, 0, 0, 0.028), 0 4.4px 10px rgba(0, 0, 0, 0.035), 0 7.8px 17.9px rgba(0, 0, 0, 0.042), 0 14.6px 33.4px rgba(0, 0, 0, 0.05), 0 35px 80px rgba(0, 0, 0, 0.07);
   box-sizing: border-box;
-  margin-top: 2rem;
-  background-color: #aed581;
+  margin-top: 1rem;
+  background-color: #ee4949;
   font-weight: bold;
   color: #fbfcff;
+  width: 60%;
+  align-self: center;
 }
 #account-settings > button:last-of-type:focus {
   outline: none;
@@ -1853,7 +1863,8 @@ body main #map .leaflet-control-zoom {
   box-shadow: 0 1px 2.2px rgba(0, 0, 0, 0.02), 0 2.3px 5.3px rgba(0, 0, 0, 0.028), 0 4.4px 10px rgba(0, 0, 0, 0.035), 0 7.8px 17.9px rgba(0, 0, 0, 0.042), 0 14.6px 33.4px rgba(0, 0, 0, 0.05), 0 35px 80px rgba(0, 0, 0, 0.07);
   box-sizing: border-box;
   padding: 1.5rem;
-  background-color: #aed581;
+  background-color: #ee4949;
+  color: #fbfcff;
 }
 #package-order-view form input[type=submit]:focus {
   outline: none;

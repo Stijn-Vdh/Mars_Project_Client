@@ -168,7 +168,7 @@ function orderPod(e) {
                         goBack();
                         document.querySelector('#process-payment .checkmark').classList.remove('active', 'error')
                         document.querySelector('#payment-response').innerHTML = '';
-                    }, 3000);
+                    }, 2000);
                 } else {
                     apiCall('routeInfo', 'GET', true)
                         .then(route => {
@@ -200,7 +200,7 @@ function orderPod(e) {
                                 document.querySelector('#process-payment h2').innerHTML = 'Checking payment.';
                                 document.querySelector('#process-payment .checkmark').classList.remove('active', 'success')
                                 document.querySelector('#payment-response').innerHTML = '';
-                            }, 3000);
+                            }, 2000);
                         });
                 }
             });
@@ -271,7 +271,7 @@ function orderPackagePod(e) {
                         goBack();
                         document.querySelector('#process-payment .checkmark').classList.remove('active', 'error')
                         document.querySelector('#payment-response').innerHTML = '';
-                    }, 3000);
+                    }, 2000);
                 } else {
                     document.querySelector('#process-payment .checkmark').classList.add('active', 'success');
                     document.querySelector('#payment-response').innerHTML = `Package pod ordered #1.`;
@@ -280,7 +280,7 @@ function orderPackagePod(e) {
                         notify(`Your pod is on it's way!`);
                         document.querySelector('#process-payment .checkmark').classList.remove('active', 'success')
                         document.querySelector('#payment-response').innerHTML = '';
-                    }, 3000);
+                    }, 2000);
                 }
             });
 
