@@ -341,15 +341,33 @@ function setSubscription(id) {
  */
 
 function apiCall(uri, method = 'GET', authenticated, body) {
-    const request = new Request(api + uri, {
-        method: method,
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: authenticated ? `Bearer ${localStorage.getItem('token')}` : undefined
-        },
-        body: JSON.stringify(body)
-    });
+    if (localStorage.getItem('token') !== ""){
+        const request = new Request(api + uri, {
+            method: method,
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: authenticated ? `Bearer ${localStorage.getItem('token')}` : undefined
+            },
+            body: JSON.stringify(body)
+        });
 
-    return fetch(request)
-        .then(response => response.json());
+        return fetch(request)
+            .then(validate)
+            .then(response => response.json());
+    }else{
+        errorHandling();
+    }
+}
+
+function validate(response){
+    if (response.status === 403){
+        errorHandling();
+    }
+    return response;
+}
+
+function errorHandling(){
+    goTo('#authentication');
+    error("Something went wrong!");
+    localStorage.removeItem("token");
 }
