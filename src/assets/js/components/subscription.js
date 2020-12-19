@@ -24,30 +24,19 @@ function initSubscription() {
 function changeSubscription(id, subName) {
     let subID = parseInt(id.substr(13));
     setSubscription(subID)
-        .then(response => {
-            if (response.status === 401 || response.status === 403) {
+        .then(() => {
+            if (subID !== 0) {
                 goTo('#process-payment');
-                document.querySelector('#process-payment .checkmark').classList.add('active', 'error');
-                document.querySelector('#payment-response').innerHTML = response.message;
+                document.querySelector('#process-payment .checkmark').classList.add('active', 'success');
+                document.querySelector('#payment-response').innerHTML = `Successfully bought subscription ${subName}.`;
                 setTimeout(() => {
-                    goBack();
-                    document.querySelector('#process-payment .checkmark').classList.remove('active', 'error')
+                    goTo('main');
+                    document.querySelector('#process-payment .checkmark').classList.remove('active', 'success')
                     document.querySelector('#payment-response').innerHTML = '';
                 }, 2000);
             } else {
-                if (subID !== 0){
-                    goTo('#process-payment');
-                    document.querySelector('#process-payment .checkmark').classList.add('active', 'success');
-                    document.querySelector('#payment-response').innerHTML = `Successfully bought subscription ${subName}.`;
-                    setTimeout(() => {
-                        goTo('main');
-                        document.querySelector('#process-payment .checkmark').classList.remove('active', 'success')
-                        document.querySelector('#payment-response').innerHTML = '';
-                    }, 2000);
-                }else{
-                    goTo('main');
-                    notify("Successfully stopped your subscription.");
-                }
+                goTo('main');
+                notify("Successfully stopped your subscription.");
             }
         });
 }

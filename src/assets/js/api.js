@@ -87,7 +87,7 @@ function addFriend(e = null) {
                 goBack();
             }
         })
-        .finally(updateAccInfo)
+        .then(updateAccInfo)
 
 }
 
@@ -102,7 +102,7 @@ function removeFriend(e = null) {
                 notify(response);
                 goBack();
             }
-        }).finally(updateAccInfo);
+        }).then(updateAccInfo);
 }
 
 function orderPod(e) {
@@ -312,7 +312,7 @@ function getTravelHistory() {
 
 function setSubscription(id) {
     return apiCall('subscription', 'POST', true, {subscriptionId: id})
-        .finally(updateAccInfo);
+        .then(updateAccInfo);
 }
 
 /** Call the api

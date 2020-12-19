@@ -130,11 +130,11 @@ function initLogin() {
         initNotificationSocket();
         cacheSubscriptions();
         cacheTravelEndpoints()
-            .finally(initMap)
-            .finally(initSearchbar)
-            .finally(initQuickAccess);
+            .then(initMap)
+            .then(initSearchbar)
+            .then(initQuickAccess);
         cachePackageEndpoints()
-            .finally(initPackage);
+            .then(initPackage);
         goTo('main');
     });
 }

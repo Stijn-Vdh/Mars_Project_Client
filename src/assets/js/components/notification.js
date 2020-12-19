@@ -33,7 +33,7 @@ function packageReceived(error, message) {
 
 function receivedFriendRequest(error, message) {
     updateAccInfo()
-        .finally(() => checkForFriendRequests(accInfo));
+        .then(() => checkForFriendRequests(accInfo));
 }
 
 function travelPodArrived(error, message) {
