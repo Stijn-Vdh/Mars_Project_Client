@@ -284,6 +284,9 @@ function orderPackagePod(e) {
                     document.querySelector('#payment-response').innerHTML = `Package pod ordered #1.`;
                     setTimeout(() => {
                         goTo('main');
+                        if (!accInfo.subscription.unlimitedPackages) {
+                            addPoints(Math.round(Math.random() * 9) + 1);
+                        }
                         notify(`Your pod is on it's way!`);
                         document.querySelector('#process-payment .checkmark').classList.remove('active', 'success')
                         document.querySelector('#payment-response').innerHTML = '';
