@@ -43,6 +43,15 @@
     flex-flow: column nowrap;
     height: 100%;
 
+    input[disabled] {
+      background-color: transparent;
+      border: 0;
+      color: util.$text-primary;
+      font-weight: bold;
+      font-size: 1.8rem;
+      margin: 0.5rem 0 1.5rem;
+    }
+
     h2 {
       padding-top: 1rem;
       font-weight: normal;
@@ -99,7 +108,7 @@
       background-color: util.$accent-green;
     }
 
-    .packageSearch{
+    .packageSearch {
       background-color: util.$background-primary;
 
       ul {
@@ -110,7 +119,7 @@
 
         li {
           padding: 0.5rem 0.75rem;
-          font-size: .9rem;
+          font-size: 0.9rem;
 
           &:nth-child(even) {
             background-color: util.$background-secondary;
@@ -119,5 +128,19 @@
       }
     }
 
+    .search-thingy {
+      position: relative;
+      height: 4.4rem;
+      width: 100%;
+
+      .package-endpoint-selection {
+        position: absolute;
+        width: 100%;
+        top: 0;
+        left: 0;
+        transform: translateX(0);
+        margin: 1rem 0;
+      }
+    }
   }
 }

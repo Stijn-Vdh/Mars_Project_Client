@@ -3,31 +3,14 @@
 
 
 function initPackage() {
-    document.querySelector('#select-package-order ion-icon').addEventListener('click', swap);
-    //document.querySelector('#select-package-order').addEventListener('submit', orderPackagePod);
-    loadPackageEndpoints();
+    document.querySelector('#select-package-order').addEventListener('submit', orderPackagePod);
+    loadSearchbar(document.querySelector('.package-endpoint-selection'), packageEndpoints);
+    document.querySelector('.package-endpoint-selection ul').updateEventListener('click', selectEndpoint);
 }
 
-function swap(){
-    let from = document.querySelector('#p-from').value;
-    let to = document.querySelector('#p-destination').value;
+function selectEndpoint(e) {
+    const selectedEndpoint = e.target.closest('*[data-select-package-endpoint]');
 
-    document.querySelector('#p-from').value = to;
-    document.querySelector('#p-destination').value = from;
+    document.querySelector('#p-destination-value').value = selectedEndpoint.getAttribute('data-select-package-endpoint');
+    document.querySelector('#p-destination').value = selectedEndpoint.querySelector('h2') ? selectedEndpoint.querySelector('h2').innerHTML : selectedEndpoint.innerHTML
 }
-
-
-function loadPackageEndpoints() {
-    let endpointsToShow = [...packageEndpoints];
-    let selectDestination = document.querySelector('#select-package-order #p-destination')
-    let selectFrom = document.querySelector('#select-package-order #p-from')
-
-    selectDestination.innerHTML = "";
-    selectFrom.innerHTML = "";
-
-    endpointsToShow.forEach(endpoint => {
-        selectDestination.innerHTML += `<option data-order-Packagepod="${endpoint.id}" id="orderPackage-${endpoint.id}">${endpoint.name}</option>`;
-        selectFrom.innerHTML += `<option data-order-Packagepod="${endpoint.id}" id="orderPackage-${endpoint.id}">${endpoint.name}</option>`;
-    });
-}
-

@@ -1,10 +1,11 @@
 "use strict";
 
 function initSearchbar() {
-    document.querySelectorAll(".searchbar").forEach(el => loadSearchbar(el));
-    document.querySelectorAll(".searchbar > input").forEach(el => el.updateEventListener('focusin', toggleFocus));
-    document.querySelectorAll(".searchbar > input").forEach(el => el.updateEventListener('focusout', toggleFocus));
-    document.querySelectorAll(".searchbar > input").forEach(el => el.updateEventListener('input',  loadSearchbar));
+    document.querySelectorAll(".searchbar").forEach(el => loadSearchbar(el, travelEndpoints));
+    document.querySelectorAll(".searchbar > input, .package-endpoint-selection > input").forEach(el => el.updateEventListener('focusin', toggleFocus));
+    document.querySelectorAll(".searchbar > input, .package-endpoint-selection > input").forEach(el => el.updateEventListener('focusout', toggleFocus));
+    document.querySelectorAll(".searchbar > input").forEach(el => el.updateEventListener('input',  (e) => loadSearchbar(e, travelEndpoints)));
+    document.querySelector(".package-endpoint-selection > input").updateEventListener('input',  (e) => loadSearchbar(e, packageEndpoints));
 }
 
 function toggleFocus(e) {
@@ -21,7 +22,7 @@ function toggleFocus(e) {
     }, wait);
 }
 
-function loadSearchbar(e) {
+function loadSearchbar(e, endpoints=travelEndpoints) {
     let sb, filter = "", favorites = [], friends = [];
     let endpointsToShow = [...endpoints];
 
@@ -68,8 +69,16 @@ function loadSearchbar(e) {
 
     sb.querySelector('ul').innerHTML = "";
     endpointsToShow.forEach(endpoint => {
-        sb.querySelector('ul').innerHTML += `<li data-order-pod="${endpoint.id}"${Object.keys(endpoint).includes('username') ? `data-friend="${endpoint.username}"` : ''} id="sb-endpoint-${endpoint.id}"><h2>${endpoint.name}</h2>${favorites.includes(endpoint.id) ? '<ion-icon name="star"></ion-icon>': Object.keys(endpoint).includes('username') ? '<ion-icon name="person"></ion-icon>': ''}</li>`;
+        sb.querySelector('ul').innerHTML += `<li ${neededDataObject(endpoint, e)}${Object.keys(endpoint).includes('username') ? `data-friend="${endpoint.username}"` : ''} id="sb-endpoint-${endpoint.id}"><h2>${endpoint.name}</h2>${favorites.includes(endpoint.id) ? '<ion-icon name="star"></ion-icon>': Object.keys(endpoint).includes('username') ? '<ion-icon name="person"></ion-icon>': ''}</li>`;
     });
+}
+
+function neededDataObject(endpoint, e) {
+    if (e.classList.contains('package-endpoint-selection')) {
+        return `data-select-package-endpoint="${endpoint.id}"`;
+    } else {
+        return `data-order-pod="${endpoint.id}"`;
+    }
 }
 
 function alphabeticSort(a, b) {
