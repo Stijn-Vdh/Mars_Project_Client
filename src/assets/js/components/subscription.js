@@ -6,7 +6,7 @@ function initSubscription() {
 
 
     subscriptions.forEach((subscription) => {
-        subscriptionListElement.innerHTML += `<li id='subscription-${subscription.id}' data-name='${subscription.name}' ${subscription.id === accInfo.subscription.id ? 'class="active"' : ''}>${subscription.name} <p>M ${subscription.price}</p></li>`;
+        subscriptionListElement.innerHTML += `<li id='subscription-${subscription.id}' data-name='${subscription.name}' ${subscription.id === accInfo.subscription.id ? 'class="active"' : ''}>${subscription.name} <p>M ${subscription.price} / Month</p></li>`;
     });
 
     subscriptionListElement.querySelectorAll('li').forEach(li => {
