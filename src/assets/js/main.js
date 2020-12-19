@@ -57,7 +57,10 @@ function addPages() {
         }
     });
     addPage('#subscription-settings', ['li[data-open-setting="subscription-settings"', '#edit-subscription', '#edit-subscription-quick'], {onOpen: initSubscription});
-    addPage('#package-order-view', ['#send-package']);
+    addPage('#package-order-view', ['#send-package'], {onOpen: () => {
+        document.querySelector('#p-location').value = currentLocationEndpointId;
+        document.querySelector('#p-from').value = travelEndpoints.find(ep => ep.id === currentLocationEndpointId).name;
+    }});
 }
 
 function setViewPortStatic() {
@@ -121,7 +124,9 @@ function initLogin() {
         initNotificationSocket();
         cacheSubscriptions();
         cacheTravelEndpoints()
-            .finally(initMap);
+            .finally(initMap)
+            .finally(initSearchbar)
+            .finally(initQuickAccess);
         cachePackageEndpoints()
             .finally(initPackage);
         goTo('main');

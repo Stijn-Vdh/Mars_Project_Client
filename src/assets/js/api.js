@@ -248,20 +248,15 @@ function favouriteRoute(e) {
 function orderPackagePod(e) {
     e.preventDefault();
 
-    //does not work yet
-
     const body = {
         deliveryType: "small",
-        from: parseInt(e.target.querySelector('#select-p-from').value),
-        destination: parseInt(e.target.querySelector('#select-p-destination').value)
+        from: parseInt(e.target.querySelector('#p-location').value),
+        destination: parseInt(e.target.querySelector('#p-destination-value').value)
     }
 
     apiCall("sendPackage", "POST", true, body)
         .then(response => {
             goTo('#process-payment');
-            setTimeout(() => {
-
-            }, 1000)
             if (response.status === 401 || response.status === 403 || response.status === 400) {
                 document.querySelector('#process-payment .checkmark').classList.add('active', 'error');
                 document.querySelector('#payment-response').innerHTML = response.message;

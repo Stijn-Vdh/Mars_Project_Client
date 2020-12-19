@@ -1207,7 +1207,9 @@
   margin: 1rem 0 0.5rem;
 }
 
-.searchbar, .searchHomeEndpoint {
+.searchbar,
+.searchHomeEndpoint,
+.package-endpoint-selection {
   position: absolute;
   width: 75%;
   top: 3rem;
@@ -1220,47 +1222,69 @@
   box-sizing: border-box;
   transition: transform 0.3s ease-in-out;
 }
-.searchbar ion-icon, .searchHomeEndpoint ion-icon {
+.searchbar ion-icon,
+.searchHomeEndpoint ion-icon,
+.package-endpoint-selection ion-icon {
   float: right;
 }
-.searchbar.quick-access-open, .searchHomeEndpoint.quick-access-open {
+.searchbar.quick-access-open,
+.searchHomeEndpoint.quick-access-open,
+.package-endpoint-selection.quick-access-open {
   z-index: 3;
   transform: translate(-50%, 3rem);
 }
-.searchbar label, .searchHomeEndpoint label {
+.searchbar label,
+.searchHomeEndpoint label,
+.package-endpoint-selection label {
   position: absolute;
   right: 0.75rem;
   top: 0.7rem;
 }
-.searchbar input, .searchHomeEndpoint input {
+.searchbar input,
+.searchHomeEndpoint input,
+.package-endpoint-selection input {
   border: 0;
   width: 95%;
 }
-.searchbar input:focus, .searchHomeEndpoint input:focus {
+.searchbar input:focus,
+.searchHomeEndpoint input:focus,
+.package-endpoint-selection input:focus {
   outline: none;
 }
-.searchbar ul, .searchHomeEndpoint ul {
+.searchbar ul,
+.searchHomeEndpoint ul,
+.package-endpoint-selection ul {
   position: relative;
   max-height: 12rem;
   overflow: hidden;
   transition: max-height 0.3s ease-in-out;
 }
-.searchbar ul li, .searchHomeEndpoint ul li {
+.searchbar ul li,
+.searchHomeEndpoint ul li,
+.package-endpoint-selection ul li {
   display: flex;
   padding: 0.5rem 0.75rem;
   font-size: 0.9rem;
 }
-.searchbar ul li h2, .searchHomeEndpoint ul li h2 {
+.searchbar ul li h2,
+.searchHomeEndpoint ul li h2,
+.package-endpoint-selection ul li h2 {
   flex-grow: 1;
   font-weight: normal;
 }
-.searchbar ul li:nth-child(even), .searchHomeEndpoint ul li:nth-child(even) {
+.searchbar ul li:nth-child(even),
+.searchHomeEndpoint ul li:nth-child(even),
+.package-endpoint-selection ul li:nth-child(even) {
   background-color: #eff1f4;
 }
-.searchbar:not(.active), .searchHomeEndpoint:not(.active) {
+.searchbar:not(.active),
+.searchHomeEndpoint:not(.active),
+.package-endpoint-selection:not(.active) {
   border-radius: 3rem;
 }
-.searchbar:not(.active) ul, .searchHomeEndpoint:not(.active) ul {
+.searchbar:not(.active) ul,
+.searchHomeEndpoint:not(.active) ul,
+.package-endpoint-selection:not(.active) ul {
   max-height: 0;
 }
 
@@ -1773,6 +1797,14 @@ body main #map .leaflet-control-zoom {
   flex-flow: column nowrap;
   height: 100%;
 }
+#package-order-view form input[disabled] {
+  background-color: transparent;
+  border: 0;
+  color: #656769;
+  font-weight: bold;
+  font-size: 1.8rem;
+  margin: 0.5rem 0 1.5rem;
+}
 #package-order-view form h2 {
   padding-top: 1rem;
   font-weight: normal;
@@ -1841,6 +1873,19 @@ body main #map .leaflet-control-zoom {
 }
 #package-order-view form .packageSearch ul li:nth-child(even) {
   background-color: #eff1f4;
+}
+#package-order-view form .search-thingy {
+  position: relative;
+  height: 4.4rem;
+  width: 100%;
+}
+#package-order-view form .search-thingy .package-endpoint-selection {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  transform: translateX(0);
+  margin: 1rem 0;
 }
 
 body {

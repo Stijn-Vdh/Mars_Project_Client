@@ -1,70 +1,73 @@
 @use '../util';
 
-.searchbar, .searchHomeEndpoint {
+.searchbar,
+.searchHomeEndpoint,
+.package-endpoint-selection {
+  position: absolute;
+  width: 75%;
+  top: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: util.$background-primary;
+
+  padding: 0.7rem 1rem;
+  border-radius: 1rem;
+  box-shadow: 0 0px 1.8px rgba(0, 0, 0, 0.111), 0 0px 5px rgba(0, 0, 0, 0.16),
+    0 0px 12.1px rgba(0, 0, 0, 0.209), 0 0px 40px rgba(0, 0, 0, 0.32);
+  box-sizing: border-box;
+  transition: transform 0.3s ease-in-out;
+
+  ion-icon {
+    float: right;
+  }
+
+  &.quick-access-open {
+    z-index: 3;
+    transform: translate(-50%, 3rem);
+  }
+
+  label {
     position: absolute;
-    width: 75%;
-    top: 3rem;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: util.$background-primary;
-    
-    padding: 0.7rem 1rem;
-    border-radius: 1rem;
-    box-shadow: 0 0px 1.8px rgba(0, 0, 0, 0.111), 0 0px 5px rgba(0, 0, 0, 0.16), 0 0px 12.1px rgba(0, 0, 0, 0.209), 0 0px 40px rgba(0, 0, 0, 0.32);
-    box-sizing: border-box;
-    transition: transform 0.3s ease-in-out;
+    right: 0.75rem;
+    top: 0.7rem;
+  }
 
-    ion-icon {
-        float: right;
+  input {
+    border: 0;
+    width: 95%;
+
+    &:focus {
+      outline: none;
     }
+  }
 
-    &.quick-access-open {
-        z-index: 3;
-        transform: translate(-50%, 3rem);
+  ul {
+    position: relative;
+    max-height: 12rem;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+
+    li {
+      display: flex;
+      padding: 0.5rem 0.75rem;
+      font-size: 0.9rem;
+
+      h2 {
+        flex-grow: 1;
+        font-weight: normal;
+      }
+
+      &:nth-child(even) {
+        background-color: util.$background-secondary;
+      }
     }
+  }
 
-    label {
-        position: absolute;
-        right: .75rem;
-        top: .7rem;
-    }
-
-    input {
-        border: 0;
-        width: 95%;
-
-        &:focus {
-            outline: none;
-        }
-    }
+  &:not(.active) {
+    border-radius: 3rem;
 
     ul {
-        position: relative;
-        max-height: 12rem;
-        overflow: hidden;
-        transition: max-height 0.3s ease-in-out;
-
-        li {
-            display: flex;
-            padding: 0.5rem 0.75rem;
-            font-size: .9rem;
-
-            h2 {
-                flex-grow: 1;
-                font-weight: normal;
-            }
-
-            &:nth-child(even) {
-                background-color: util.$background-secondary;
-            }
-        }
+      max-height: 0;
     }
-
-    &:not(.active) {
-        border-radius: 3rem;
-
-        ul {
-            max-height: 0;
-        }
-    }
+  }
 }
