@@ -9,7 +9,7 @@ function initSubscription() {
         subscriptionListElement.innerHTML += `<li id='subscription-${subscription.id}' data-name='${subscription.name}' ${subscription.id === accInfo.subscription.id ? 'class="active"' : ''}>${subscription.name} <p>M ${subscription.price} / Month</p></li>`;
     });
 
-    subscriptionListElement.querySelectorAll('li').forEach(li => {
+    subscriptionListElement.querySelectorAll('li:not(.active)').forEach(li => {
         li.addEventListener('click', () => {
             mttsPrompt(`Are you sure you want to change subscription to ${li.getAttribute('data-name')}`, () => {
                 changeSubscription(li.getAttribute('id'), li.getAttribute('data-name'));
