@@ -33,27 +33,9 @@ function updatePassword(currentPassword, newPassword) {
 }
 
 function updateSharingLocation(sharing) {
-    if (sharing) {
-        return apiCall("shareLocation", "DELETE", true)
-            .then(response => {
-                if (response.status === 401 || response.status === 403) {
-                    warn(response.message);
-                } else {
-                    notify(response);
-                }
-            })
-            .then(updateAccInfo);
-    } else {
-        return apiCall("shareLocation", "POST", true)
-            .then(response => {
-                if (response.status === 401 || response.status === 403) {
-                    warn(response.message);
-                } else {
-                    notify(response);
-                }
-            })
-            .then(updateAccInfo);
-    }
+    return apiCall("shareLocation", sharing ? "DELETE" : "POST", true)
+        .then(notify)
+        .then(updateAccInfo);
 }
 
 /**
@@ -367,7 +349,7 @@ function validate(response) {
     return response;
 }
 
-window.addEventListener('unhandledrejection', function (event) { //catches the unhandled rejection
+window.addEventListener('unhandledrejection', event => { //catches the unhandled rejection
     if (event.reason instanceof AuthError) { // no need to log these errors and i dont want to add manually a catch at the end of each promise.
         event.preventDefault();
     }

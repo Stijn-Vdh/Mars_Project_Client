@@ -15,16 +15,11 @@ function updateSettings() {
 
     const newName = document.querySelector('#new-name').value;
     if (newName !== '' && newName !== accInfo.displayName) {
-        updateName(newName).finally(userInit);
+        updateName(newName).then(userInit);
     }
 
-    if (accInfo.shareLocation && !(document.querySelector('#shareLocation-setting-change input').checked)){
-        updateSharingLocation(accInfo.shareLocation).finally(userInit);
-
-
-    }
-    if (!(accInfo.shareLocation) && document.querySelector('#shareLocation-setting-change input').checked){
-        updateSharingLocation(accInfo.shareLocation).finally(userInit);
+    if (accInfo.shareLocation !== document.querySelector('#shareLocation-setting-change input').checked){
+        updateSharingLocation(accInfo.shareLocation).then(userInit);
     }
 
 }
