@@ -8,6 +8,8 @@ function initPoints() {
 function updatePoints() {
     if (points >= 100) {
         document.querySelector('.points p').innerHTML = '<span></span>';
+    } else if (points <= 10) {
+        document.querySelector('.points p').innerHTML = '00<span></span>';
     } else {
         document.querySelector('.points p').innerHTML = '0<span></span>';
     }
