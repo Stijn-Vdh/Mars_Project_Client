@@ -1545,7 +1545,7 @@
   margin: 0.5rem 0;
 }
 #account-settings ul li div.hidden {
-  display: block;
+  display: block !important;
 }
 #account-settings ul li div.hidden *:not(a) {
   display: none;

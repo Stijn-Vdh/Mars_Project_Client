@@ -48,7 +48,7 @@
                 }
 
                 &.hidden {
-                    display: block;
+                    display: block!important;
 
                     *:not(a) {
                         display: none;
