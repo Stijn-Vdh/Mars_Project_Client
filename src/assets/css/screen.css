@@ -1925,5 +1925,15 @@ h1, h2, h3, h4, h5, h6 {
     stroke-dashoffset: 0;
   }
 }
+@media screen and (max-width: 600px) {
+  .warning-screen {
+    display: none;
+  }
+}
+@media screen and (min-width: 600px) {
+  body > *:not(.warning-screen) {
+    display: none;
+  }
+}
 
 /*# sourceMappingURL=screen.css.map */
