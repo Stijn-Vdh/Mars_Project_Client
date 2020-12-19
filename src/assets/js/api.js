@@ -276,6 +276,10 @@ function getTravelEndpoints() {
     return apiCall("endpoint/travel", 'GET', true);
 }
 
+function report(body) {
+    return apiCall('report', 'POST', true, body);
+}
+
 
 function getEndpoint(id) {
     return apiCall(`endpoint/${id}`, 'GET');
