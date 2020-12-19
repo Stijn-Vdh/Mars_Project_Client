@@ -1,0 +1,61 @@
+@use '../util';
+
+#points-popup {
+    position: absolute;
+    top: 39%;
+    transform: translateY(-50%);
+    margin-left: .5rem;
+    z-index: 100;
+    color: util.$background-primary;
+
+    &:not(.active) {
+        .icon {
+            opacity: 0;
+            transform: scale(0.7);
+        }
+
+        p {
+            width: 0;
+        }
+    }
+
+    .icon {
+        position: absolute;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        background: util.$accent-red;
+        text-align: center;
+        line-height: 2.2rem;
+        opacity: 1;
+        transform: scale(1);
+        transition: opacity .3s ease-in-out, transform .3s ease-in-out;
+        transition-delay: 0;
+    }
+
+    p {
+        height: 2rem;
+        line-height: 2rem;
+        width: 5rem;
+        font-size: 0.8rem;
+        text-align: center;
+        background: util.$accent-red;
+        border-top-right-radius: 1rem;
+        border-bottom-right-radius: 1rem;
+        margin-left: 1rem;
+        overflow: hidden;
+        transition: width .3s ease-in-out;
+        transition-delay: .3s;
+        letter-spacing: 0.2rem;
+    }
+
+    &.close {
+        .icon {
+            transition-delay: 0.6s;
+        }
+
+        p {
+            transition-delay: 0;
+        }
+    }
+}

@@ -5,12 +5,35 @@ function podOrderInit() {
     document.querySelector('#select-travel-location').updateEventListener('submit', orderPod);
     document.querySelector('#favourite-endpoint').addEventListener('change', favouriteRoute);
 
+    document.querySelector('#reward-points').addEventListener('change', checkedRewardPoints);
+    document.querySelector('#discount').addEventListener('input', updateRange);
+}
+
+function updateRange(e) {
+    document.querySelector('#discount-used').value = e.currentTarget.value;
+    document.querySelector('#pod-pricing span').innerHTML = `M${3 - (parseInt(e.currentTarget.value) / 100)}`;
+}
+
+function checkedRewardPoints() {
+    document.querySelector('#discount-used').value = document.querySelector('#discount').value;
+    if (document.querySelector('#reward-points').checked) {
+        document.querySelector('#luxury-pod').click();
+        document.querySelector('#travel-discount-info').classList.remove('hidden');
+    } else {
+        document.querySelector('#travel-discount-info').classList.add('hidden');
+        document.querySelector('#pod-pricing span').innerHTML = `M3`;
+    }
 }
 
 function switchPod(e) {
     const selectedPod = e.currentTarget.id;
 
     document.querySelector('#selected-pod').value = selectedPod.split('-')[0];
+
+    if (selectedPod.split('-')[0] === "standard") {
+        document.querySelector('#reward-points').checked = false;
+        checkedRewardPoints();
+    }
 
     e.currentTarget.parentNode.querySelectorAll('div').forEach(el => {
         if (el.id === selectedPod) {

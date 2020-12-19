@@ -10,7 +10,7 @@
         align-items: center;
         margin: 2rem 0 1rem;
 
-        button {
+        button, .points {
             background: none;
             border: 0;
             font-size: 1.2rem;
@@ -24,10 +24,35 @@
                 left: 1rem;
                 top: -0.2rem;
             }
+        }
 
-            &.achievements {
-                right: 1rem;
-                top: 0;
+        .points {
+            right: 1rem;
+
+            letter-spacing: 0.4rem;
+            color: lighten(util.$text-secondary, 30%);
+            padding-right: 1.5rem;
+
+            p {
+                width: 0;
+                overflow: hidden;
+                height: 1rem;
+                transition: width 0.3s ease-in-out;
+
+                &.active {
+                    width: 3.5rem;
+                }
+            }
+
+            #points-button {
+                color: #8f8389;
+                top: -0.1rem;
+                right: 0;
+                position: absolute;
+            }
+
+            span {
+                color: util.$text-secondary;
             }
         }
 

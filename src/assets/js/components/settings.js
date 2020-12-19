@@ -1,7 +1,25 @@
 "use strict";
 
+let pointsTimeout = null;
+
 function initSettings() {
     loadDataIntoSettings(accInfo);
+    document.querySelector('#points-button').updateEventListener('click', togglePoints);
+}
+
+function togglePoints(e) {
+    const el = e.currentTarget.parentNode.querySelector('p');
+    
+    el.classList.toggle('active');
+    if (pointsTimeout === null) {
+        pointsTimeout = setTimeout(() => {
+            el.classList.remove('active');
+            pointsTimeout = null;
+        }, 3000);
+    } else {
+        clearTimeout(pointsTimeout);
+    }
+    
 }
 
 function loadDataIntoSettings(user) {

@@ -18,9 +18,9 @@ function initAuthentication() {
                     accInfo = response;
                     initLogin();
                 } else {
-                    goTo('#authentication');
+                    errorHandling();
                 }
-            }).catch(() => goTo('#authentication'));
+            }).catch(errorHandling);
     }
 }
 

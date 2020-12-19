@@ -31,6 +31,8 @@ function initMain() {
         .then(history => {
             loadRecentTrips(history, "recent");
         });
+
+    updatePoints();
 }
 
 function addPages() {
@@ -116,6 +118,8 @@ function payloadConsumer(payload) {
         text.value = payload.name;
     }
     checkFavoured();
+
+    document.querySelector('#discount').setAttribute('max', Math.min(Math.floor(points / 100) * 100, 200));
 }
 
 // put here all the functions that only can be executed once after the user has logged in!

@@ -858,6 +858,26 @@
   background-color: #ee4949;
   color: #fbfcff;
 }
+#pod-order-view form #travel-discount-info p {
+  font-size: 0.8rem;
+}
+#pod-order-view form #travel-discount-info #info-amount {
+  font-weight: bold;
+}
+#pod-order-view form #travel-discount-info .btn-group {
+  display: flex;
+  width: 100%;
+}
+#pod-order-view form #travel-discount-info .btn-group div {
+  width: 75%;
+  display: flex;
+  flex-flow: column;
+}
+#pod-order-view form #travel-discount-info .btn-group input {
+  text-align: right;
+  font-size: 1rem;
+  letter-spacing: 0.2rem;
+}
 #pod-order-view form .btn-group {
   padding: 0.5rem 0;
 }
@@ -889,6 +909,56 @@
 }
 #pod-order-view form h2 {
   font-weight: normal;
+}
+
+#points-popup {
+  position: absolute;
+  top: 39%;
+  transform: translateY(-50%);
+  margin-left: 0.5rem;
+  z-index: 100;
+  color: #fbfcff;
+}
+#points-popup:not(.active) .icon {
+  opacity: 0;
+  transform: scale(0.7);
+}
+#points-popup:not(.active) p {
+  width: 0;
+}
+#points-popup .icon {
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: #ee4949;
+  text-align: center;
+  line-height: 2.2rem;
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  transition-delay: 0;
+}
+#points-popup p {
+  height: 2rem;
+  line-height: 2rem;
+  width: 5rem;
+  font-size: 0.8rem;
+  text-align: center;
+  background: #ee4949;
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  margin-left: 1rem;
+  overflow: hidden;
+  transition: width 0.3s ease-in-out;
+  transition-delay: 0.3s;
+  letter-spacing: 0.2rem;
+}
+#points-popup.close .icon {
+  transition-delay: 0.6s;
+}
+#points-popup.close p {
+  transition-delay: 0;
 }
 
 #trips {
@@ -1317,22 +1387,42 @@
   align-items: center;
   margin: 2rem 0 1rem;
 }
-#settings header button {
+#settings header button, #settings header .points {
   background: none;
   border: 0;
   font-size: 1.2rem;
   position: absolute;
 }
-#settings header button:focus {
+#settings header button:focus, #settings header .points:focus {
   outline: none;
 }
-#settings header button.back {
+#settings header button.back, #settings header .points.back {
   left: 1rem;
   top: -0.2rem;
 }
-#settings header button.achievements {
+#settings header .points {
   right: 1rem;
-  top: 0;
+  letter-spacing: 0.4rem;
+  color: #d8d3d6;
+  padding-right: 1.5rem;
+}
+#settings header .points p {
+  width: 0;
+  overflow: hidden;
+  height: 1rem;
+  transition: width 0.3s ease-in-out;
+}
+#settings header .points p.active {
+  width: 3.5rem;
+}
+#settings header .points #points-button {
+  color: #8f8389;
+  top: -0.1rem;
+  right: 0;
+  position: absolute;
+}
+#settings header .points span {
+  color: #8f8389;
 }
 #settings header .user-icon-wrapper {
   margin: 1rem 0;
