@@ -105,7 +105,8 @@
       margin-top: 5rem;
       @include util.button;
       padding: 1.5rem;
-      background-color: util.$accent-green;
+      background-color: util.$accent-red;
+      color: util.$background-primary;
     }
 
     .packageSearch {

@@ -21,7 +21,8 @@
             }
 
             &.active {
-                background-color: util.$accent-green;
+                background-color: util.$accent-red;
+                color: util.$background-primary;
             }
             p{
                 text-align: right;

@@ -111,9 +111,11 @@
 
     & > button:last-of-type {
         @include util.button;
-        margin-top: 2rem;
-        background-color: variables.$accent-green;
+        margin-top: 1rem;
+        background-color: util.$accent-red;
         font-weight: bold;
         color: variables.$background-primary;
+        width: 60%;
+        align-self: center;
     }
 }
