@@ -103,16 +103,16 @@ function register(body) {
 
 function addFriend(e = null) {
     if (typeof e !== 'string') e.preventDefault();
-        apiCall(`friend/${typeof e === 'string' ? e : document.querySelector('#friend-name').value}`, 'POST', true)
-            .then((response) => {
-                if (response.status === 401 || response.status === 403 || response.status === 402) {
-                    warn(response.message);
-                } else {
-                    notify(response);
-                    goBack();
-                }
-            })
-            .finally(updateAccInfo)
+    apiCall(`friend/${typeof e === 'string' ? e : document.querySelector('#friend-name').value}`, 'POST', true)
+        .then((response) => {
+            if (response.status === 401 || response.status === 403 || response.status === 402) {
+                warn(response.message);
+            } else {
+                notify(response);
+                goBack();
+            }
+        })
+        .finally(updateAccInfo)
 
 }
 
@@ -133,7 +133,7 @@ function removeFriend(e = null) {
 function orderPod(e) {
     e.preventDefault();
 
-    if (document.querySelector('#bank').checked || document.querySelector('#reward-points').checked){
+    if (document.querySelector('#bank').checked || document.querySelector('#reward-points').checked) {
         const body = {
             from: currentLocationEndpointId,
             destination: parseInt(e.target.querySelector('#select-location').value),
@@ -142,7 +142,7 @@ function orderPod(e) {
 
 
         if (body.from === body.destination) {
-            warn("You are at this endpoint already!");
+            error("You are at this endpoint already!");
             return;
         }
 
@@ -150,12 +150,6 @@ function orderPod(e) {
             body.toFriend = e.target.getAttribute('data-friend');
             e.target.removeAttribute('data-friend');
         }
-
-        if (body.from === body.destination) {
-            warn("You are at this endpoint already!");
-            return;
-        }
-
 
         apiCall('travel', 'POST', true, body)
             .then(response => {
@@ -210,8 +204,8 @@ function orderPod(e) {
                         });
                 }
             });
-    }else{
-        notify('Please choose a payment type.');
+    } else {
+        error('Please choose a payment type.');
     }
 }
 
@@ -248,34 +242,51 @@ function favouriteRoute(e) {
 function orderPackagePod(e) {
     e.preventDefault();
 
-    const body = {
-        deliveryType: "small",
-        from: parseInt(e.target.querySelector('#p-location').value),
-        destination: parseInt(e.target.querySelector('#p-destination-value').value)
-    }
 
-    apiCall("sendPackage", "POST", true, body)
-        .then(response => {
-            goTo('#process-payment');
-            if (response.status === 401 || response.status === 403 || response.status === 400) {
-                document.querySelector('#process-payment .checkmark').classList.add('active', 'error');
-                document.querySelector('#payment-response').innerHTML = response.message;
-                setTimeout(() => {
-                    goBack();
-                    document.querySelector('#process-payment .checkmark').classList.remove('active', 'error')
-                    document.querySelector('#payment-response').innerHTML = '';
-                }, 3000);
-            } else {
-                document.querySelector('#process-payment .checkmark').classList.add('active', 'success');
-                document.querySelector('#payment-response').innerHTML = `Package pod ordered #1.`;
-                setTimeout(() => {
-                    goTo('main');
-                    notify(`Your pod is on it's way!`);
-                    document.querySelector('#process-payment .checkmark').classList.remove('active', 'success')
-                    document.querySelector('#payment-response').innerHTML = '';
-                }, 3000);
-            }
-        });
+    if (document.querySelector('#p-bank').checked || document.querySelector('#p-reward-points').checked){
+        let pFrom = parseInt(e.target.querySelector('#p-location').value);
+        let pDestination = parseInt(e.target.querySelector('#p-destination-value').value);
+        if (pFrom === pDestination) {
+            error("You cannot send a package to yourself!");
+            return;
+        }
+        if (document.querySelector("#p-destination").value === ""){
+            error("Please fill in a destination!");
+            return;
+        }
+
+        const body = {
+            deliveryType: "small",
+            from: pFrom,
+            destination: pDestination
+        }
+
+        apiCall("sendPackage", "POST", true, body)
+            .then(response => {
+                goTo('#process-payment');
+                if (response.status === 401 || response.status === 403 || response.status === 400) {
+                    document.querySelector('#process-payment .checkmark').classList.add('active', 'error');
+                    document.querySelector('#payment-response').innerHTML = response.message;
+                    setTimeout(() => {
+                        goBack();
+                        document.querySelector('#process-payment .checkmark').classList.remove('active', 'error')
+                        document.querySelector('#payment-response').innerHTML = '';
+                    }, 3000);
+                } else {
+                    document.querySelector('#process-payment .checkmark').classList.add('active', 'success');
+                    document.querySelector('#payment-response').innerHTML = `Package pod ordered #1.`;
+                    setTimeout(() => {
+                        goTo('main');
+                        notify(`Your pod is on it's way!`);
+                        document.querySelector('#process-payment .checkmark').classList.remove('active', 'success')
+                        document.querySelector('#payment-response').innerHTML = '';
+                    }, 3000);
+                }
+            });
+
+    }else{
+        error("Please choose a payment method!");
+    }
 }
 
 /**
