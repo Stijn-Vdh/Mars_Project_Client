@@ -90,87 +90,84 @@ function removeFriend(e = null) {
 function orderPod(e) {
     e.preventDefault();
 
-    if (document.querySelector('#bank').checked || document.querySelector('#reward-points').checked) {
-        const body = {
-            from: currentLocationEndpointId,
-            destination: parseInt(e.target.querySelector('#select-location').value),
-            podType: e.target.querySelector('#selected-pod').value
-        }
-
-        if (body.from === body.destination) {
-            error("You are at this endpoint already!");
-            return;
-        }
-
-        if (e.target.hasAttribute('data-friend')) {
-            body.toFriend = e.target.getAttribute('data-friend');
-            e.target.removeAttribute('data-friend');
-        }
-
-        apiCall('travel', 'POST', true, body)
-            .then(response => {
-                goTo('#process-payment');
-                if (accInfo.subscription.unlimitedTravels) {
-                    document.querySelector('#process-payment h2').innerHTML = 'Checking subscription.';
-                } else {
-                    document.querySelector('#process-payment h2').innerHTML = 'Checking payment.';
-                }
-                if (response.status === 401 || response.status === 403) {
-                    document.querySelector('#process-payment .checkmark').classList.add('active', 'error');
-                    document.querySelector('#payment-response').innerHTML = response.message;
-                    setTimeout(() => {
-                        goBack();
-                        document.querySelector('#process-payment .checkmark').classList.remove('active', 'error')
-                        document.querySelector('#payment-response').innerHTML = '';
-                    }, 2000);
-                } else {
-                    updateCurrentLocation(body.destination);
-                    if (document.querySelector('#reward-points').checked) points -= parseInt(document.querySelector('#discount').value);
-
-                    document.querySelector('#reward-points').checked = false;
-                    checkedRewardPoints();
-
-                    apiCall('routeInfo', 'GET', true)
-                        .then(route => {
-                            stopMapUpdater();
-                            const eps = travelEndpoints,
-                                fromCoords = eps.find(ep => ep.id === route.from.id).coordinate,
-                                toCoords = eps.find(ep => ep.id === route.destination.id).coordinate,
-                                travelWaypoints = [
-                                    L.latLng(fromCoords.latitude, fromCoords.longitude),
-                                    L.latLng(toCoords.latitude, toCoords.longitude)
-                                ];
-
-                            routeController.setWaypoints(travelWaypoints);
-
-                            markers.filter(marker => marker.options.endpointId !== route.from.id && marker.options.endpointId !== route.destination.id).forEach(marker => {
-                                map.removeLayer(marker);
-                            });
-                            document.querySelector('#current-location').classList.add("hidden");
-
-                            document.querySelector('#travel-view').style.transitionDuration = `${route.arrivalTime}s`;
-                            document.querySelector('#travel-view .travel-pod').style.top = `9rem`;
-
-                            document.querySelector('.searchbar').style.display = 'none';
-                            document.querySelector('#quick-access').classList.add('traveling');
-                            document.querySelector('#process-payment .checkmark').classList.add('active', 'success');
-                            document.querySelector('#payment-response').innerHTML = `Ordered pod #${response.travelId}.`;
-                            setTimeout(() => {
-                                goTo('main');
-                                if (!accInfo.subscription.unlimitedTravels) {
-                                    addPoints(Math.round(Math.random() * 9) + 1);
-                                }
-                                notify(`Your pod is on it's way!`);
-                                document.querySelector('#process-payment h2').innerHTML = 'Checking payment.';
-                                document.querySelector('#process-payment .checkmark').classList.remove('active', 'success')
-                                document.querySelector('#payment-response').innerHTML = '';
-                            }, 2000);
-                        });
-                }
-            });
-    } else {
-        error('Please choose a payment type.');
+    const body = {
+        from: currentLocationEndpointId,
+        destination: parseInt(e.target.querySelector('#select-location').value),
+        podType: e.target.querySelector('#selected-pod').value
     }
+
+    if (body.from === body.destination) {
+        error("You are at this endpoint already!");
+        return;
+    }
+
+    if (e.target.hasAttribute('data-friend')) {
+        body.toFriend = e.target.getAttribute('data-friend');
+        e.target.removeAttribute('data-friend');
+    }
+
+    apiCall('travel', 'POST', true, body)
+        .then(response => {
+            goTo('#process-payment');
+            if (accInfo.subscription.unlimitedTravels) {
+                document.querySelector('#process-payment h2').innerHTML = 'Checking subscription.';
+            } else {
+                document.querySelector('#process-payment h2').innerHTML = 'Checking payment.';
+            }
+            if (response.status === 401 || response.status === 403) {
+                document.querySelector('#process-payment .checkmark').classList.add('active', 'error');
+                document.querySelector('#payment-response').innerHTML = response.message;
+                setTimeout(() => {
+                    goBack();
+                    document.querySelector('#process-payment .checkmark').classList.remove('active', 'error')
+                    document.querySelector('#payment-response').innerHTML = '';
+                }, 2000);
+            } else {
+                updateCurrentLocation(body.destination);
+                if (document.querySelector('#reward-points').checked) points -= parseInt(document.querySelector('#discount').value);
+
+                document.querySelector('#reward-points').checked = false;
+                checkedRewardPoints();
+
+                apiCall('routeInfo', 'GET', true)
+                    .then(route => {
+                        stopMapUpdater();
+                        const eps = travelEndpoints,
+                            fromCoords = eps.find(ep => ep.id === route.from.id).coordinate,
+                            toCoords = eps.find(ep => ep.id === route.destination.id).coordinate,
+                            travelWaypoints = [
+                                L.latLng(fromCoords.latitude, fromCoords.longitude),
+                                L.latLng(toCoords.latitude, toCoords.longitude)
+                            ];
+
+                        routeController.setWaypoints(travelWaypoints);
+
+                        markers.filter(marker => marker.options.endpointId !== route.from.id && marker.options.endpointId !== route.destination.id).forEach(marker => {
+                            map.removeLayer(marker);
+                        });
+                        document.querySelector('#current-location').classList.add("hidden");
+
+                        document.querySelector('#travel-view').style.transitionDuration = `${route.arrivalTime}s`;
+                        document.querySelector('#travel-view .travel-pod').style.top = `9rem`;
+
+                        document.querySelector('.searchbar').style.display = 'none';
+                        document.querySelector('#quick-access').classList.add('traveling');
+                        document.querySelector('#process-payment .checkmark').classList.add('active', 'success');
+                        document.querySelector('#payment-response').innerHTML = `Ordered pod #${response.travelId}.`;
+
+                        setTimeout(() => {
+                            goTo('main');
+                            if (!accInfo.subscription.unlimitedTravels) {
+                                addPoints(Math.round(Math.random() * 9) + 1);
+                            }
+                            notify(`Your pod is on it's way!`);
+                            document.querySelector('#process-payment h2').innerHTML = 'Checking payment.';
+                            document.querySelector('#process-payment .checkmark').classList.remove('active', 'success')
+                            document.querySelector('#payment-response').innerHTML = '';
+                        }, 2000);
+                    });
+            }
+        });
 }
 
 function favouriteRoute(e) {
@@ -198,54 +195,49 @@ function favouriteRoute(e) {
 function orderPackagePod(e) {
     e.preventDefault();
 
+    let pFrom = parseInt(e.target.querySelector('#p-location').value);
+    let pDestination = parseInt(e.target.querySelector('#p-destination-value').value);
 
-    if (document.querySelector('#p-bank').checked || document.querySelector('#p-reward-points').checked) {
-        let pFrom = parseInt(e.target.querySelector('#p-location').value);
-        let pDestination = parseInt(e.target.querySelector('#p-destination-value').value);
-        if (pFrom === pDestination) {
-            error("You cannot send a package to yourself!");
-            return;
-        }
-        if (document.querySelector("#p-destination").value === "") {
-            error("Please fill in a destination!");
-            return;
-        }
-
-        const body = {
-            deliveryType: "small",
-            from: pFrom,
-            destination: pDestination
-        }
-
-        apiCall("sendPackage", "POST", true, body)
-            .then(response => {
-                goTo('#process-payment');
-                if (response.status === 401 || response.status === 403 || response.status === 400) {
-                    document.querySelector('#process-payment .checkmark').classList.add('active', 'error');
-                    document.querySelector('#payment-response').innerHTML = response.message;
-                    setTimeout(() => {
-                        goBack();
-                        document.querySelector('#process-payment .checkmark').classList.remove('active', 'error')
-                        document.querySelector('#payment-response').innerHTML = '';
-                    }, 2000);
-                } else {
-                    document.querySelector('#process-payment .checkmark').classList.add('active', 'success');
-                    document.querySelector('#payment-response').innerHTML = `Package pod ordered #1.`;
-                    setTimeout(() => {
-                        goTo('main');
-                        if (!accInfo.subscription.unlimitedPackages) {
-                            addPoints(Math.round(Math.random() * 9) + 1);
-                        }
-                        notify(`Your pod is on it's way!`);
-                        document.querySelector('#process-payment .checkmark').classList.remove('active', 'success')
-                        document.querySelector('#payment-response').innerHTML = '';
-                    }, 2000);
-                }
-            });
-
-    } else {
-        error("Please choose a payment method!");
+    if (pFrom === pDestination) {
+        error("You cannot send a package to yourself!");
+        return;
     }
+    if (document.querySelector("#p-destination").value === "") {
+        error("Please fill in a destination!");
+        return;
+    }
+
+    const body = {
+        deliveryType: "small",
+        from: pFrom,
+        destination: pDestination
+    }
+
+    apiCall("sendPackage", "POST", true, body)
+        .then(response => {
+            goTo('#process-payment');
+            if (response.status === 401 || response.status === 403 || response.status === 400) {
+                document.querySelector('#process-payment .checkmark').classList.add('active', 'error');
+                document.querySelector('#payment-response').innerHTML = response.message;
+                setTimeout(() => {
+                    goBack();
+                    document.querySelector('#process-payment .checkmark').classList.remove('active', 'error')
+                    document.querySelector('#payment-response').innerHTML = '';
+                }, 2000);
+            } else {
+                document.querySelector('#process-payment .checkmark').classList.add('active', 'success');
+                document.querySelector('#payment-response').innerHTML = `Package pod ordered #1.`;
+                setTimeout(() => {
+                    goTo('main');
+                    if (!accInfo.subscription.unlimitedPackages) {
+                        addPoints(Math.round(Math.random() * 9) + 1);
+                    }
+                    notify(`Your pod is on it's way!`);
+                    document.querySelector('#process-payment .checkmark').classList.remove('active', 'success')
+                    document.querySelector('#payment-response').innerHTML = '';
+                }, 2000);
+            }
+        });
 }
 
 /**

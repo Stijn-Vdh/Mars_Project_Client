@@ -54,7 +54,7 @@ function checkOnline() {
         notify('Back online!')
         setTimeout(() => {
             location.reload();
-        },1000);
+        }, 1000);
     } else {
         error("You are currently offline. You need to be online to continue using the app.");
         wasOffline = true;
@@ -88,10 +88,12 @@ function addPages() {
         }
     });
     addPage('#subscription-settings', ['li[data-open-setting="subscription-settings"', '#edit-subscription', '#edit-subscription-quick'], {onOpen: initSubscription});
-    addPage('#package-order-view', ['#send-package'], {onOpen: () => {
-        document.querySelector('#p-location').value = currentLocationEndpointId;
-        document.querySelector('#p-from').value = travelEndpoints.find(ep => ep.id === currentLocationEndpointId).name;
-    }});
+    addPage('#package-order-view', ['#send-package'], {
+        onOpen: () => {
+            document.querySelector('#p-location').value = currentLocationEndpointId;
+            document.querySelector('#p-from').value = travelEndpoints.find(ep => ep.id === currentLocationEndpointId).name;
+        }
+    });
 }
 
 function setViewPortStatic() {
@@ -138,7 +140,7 @@ function payloadConsumer(payload) {
         loc.value = from.getAttribute('data-order-pod');
         text.value = from.querySelector('h2') ? from.querySelector('h2').innerHTML : from.innerHTML;
     } else {
-        
+
         if (payload.friend) {
             document.querySelector('#select-travel-location').setAttribute('data-friend', payload.friend);
         }
