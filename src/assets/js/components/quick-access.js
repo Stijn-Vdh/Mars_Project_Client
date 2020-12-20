@@ -110,7 +110,7 @@ function dragEnd(e) {
         }
     } else {
         document.querySelector('#quick-access').style.transform = `translateY(75vh)`;
-        goBack();
+        goTo('main')
     }
     dragInfo.initialized = false;
     setTimeout(() => {
