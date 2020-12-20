@@ -1153,6 +1153,9 @@
   padding: 3rem 0 0 2rem;
   background-color: transparent;
 }
+#quick-access:not(.active) header ion-icon {
+  transform: translateX(-50%);
+}
 #quick-access:not(.active) header h3 {
   margin-left: 0.4rem;
 }
@@ -1161,21 +1164,20 @@
   background-color: #eff1f4;
   transition: background-color 0.3s ease-in-out;
 }
-#quick-access header::before {
-  content: "";
+#quick-access header ion-icon {
   position: absolute;
-  top: 1rem;
+  top: 0.5rem;
   left: 50%;
-  width: 10%;
-  height: 0.5rem;
-  background-color: #a79ea3;
-  border-radius: 3rem;
-  transform: translateX(-50%);
+  transform: translateX(-50%) rotate(180deg);
+  font-size: 1.5rem;
+  color: #a79ea3;
 }
 #quick-access article:first-of-type {
   margin-top: 2.7rem;
 }
-#quick-access #open-settings, #quick-access #send-package, #quick-access #logout {
+#quick-access #open-settings,
+#quick-access #send-package,
+#quick-access #logout {
   border: 0;
   padding: 0.7rem 1rem;
   border-radius: 3rem;
@@ -1185,7 +1187,9 @@
   width: calc(100% - 4rem);
   box-sizing: border-box;
 }
-#quick-access #open-settings:focus, #quick-access #send-package:focus, #quick-access #logout:focus {
+#quick-access #open-settings:focus,
+#quick-access #send-package:focus,
+#quick-access #logout:focus {
   outline: none;
 }
 #quick-access #open-settings {
