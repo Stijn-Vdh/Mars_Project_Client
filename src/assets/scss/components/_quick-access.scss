@@ -2,155 +2,157 @@
 @use '../util';
 
 #quick-access {
-    z-index: 2;
+  z-index: 2;
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  bottom: 0;
+  background-color: util.$background-primary;
+  box-sizing: border-box;
+  box-shadow: 0 0px 1.8px rgba(0, 0, 0, 0.111), 0 0px 5px rgba(0, 0, 0, 0.16),
+    0 0px 12.1px rgba(0, 0, 0, 0.209), 0 0px 40px rgba(0, 0, 0, 0.32);
+  transform: translateY(0);
+  will-change: transform;
+
+  &:not(.traveling) {
+    .traveling {
+      display: none;
+    }
+  }
+
+  .travel-pod {
+    width: 1rem;
     position: absolute;
-    width: 100%;
-    height: 100vh;
-    bottom: 0;
-    background-color: util.$background-primary;
-    box-sizing: border-box;
-    box-shadow: 0 0px 1.8px rgba(0, 0, 0, 0.111), 0 0px 5px rgba(0, 0, 0, 0.16), 0 0px 12.1px rgba(0, 0, 0, 0.209), 0 0px 40px rgba(0, 0, 0, 0.32);
-    transform: translateY(0);
-    will-change: transform;
+    top: -0.15rem;
+    left: 0%;
+    z-index: 1;
+    transform: rotate(90deg);
+    transition: left 0s ease-in-out, top 0s ease-in-out;
+    transition-duration: inherit;
+  }
 
-    &:not(.traveling) {
-        .traveling {
-            display: none;
-        }
+  &.traveling {
+    & > *:not(header):not(.traveling) {
+      display: none;
     }
-    
-    .travel-pod {
-        width: 1rem;
+
+    header {
+      .traveling {
         position: absolute;
-        top: -0.15rem;
-        left: 0%;
-        z-index: 1;
-        transform: rotate(90deg);
-        transition: left 0s ease-in-out, top 0s ease-in-out;
-        transition-duration: inherit;
-    }
-
-    &.traveling {
-        & > *:not(header):not(.traveling) {
-            display: none;
-        }
-
-        header {
-
-            .traveling {
-                position: absolute;
-                display: flex;
-                top: -1.5rem;
-                left: 0;
-                width: 100%;
-                background-color: util.$background-secondary;
-                z-index: -1;
-                height: 3rem;
-                padding: 0.5rem;
-                box-sizing: border-box;
-                border-radius: 1rem 1rem 0 0;
-
-                .timeline {
-                    position: relative;
-                    flex-grow: 1;
-                    height: 2px;
-                    margin: 0.5rem 1rem;
-                    background-color: util.$text-secondary;
-
-                    .travel-pod {
-                        transform: rotate(0deg);
-                    }
-
-                    &::before, &::after {
-                        content: '';
-                        position: absolute;
-                        top: -5px;
-                        border-radius: 50%;
-                        border: 2px solid util.$background-secondary;
-                        width: 0.5rem;
-                        height: 0.5rem;
-                        background-color: util.$text-secondary;
-                    }
-
-                    &::before {
-                        left: 0;
-                    }
-
-                    &::after {
-                        right: 0;
-                    }
-                }
-
-                &::after {
-                    content: "";
-                    position: absolute;
-                    bottom: 0;
-                    width: 100%;
-                    height: 1rem;
-                    background-color: util.$background-primary;
-                    left: 0;
-                    border-radius: 1rem 1rem 0 0;
-                }
-            }
-        }
-    }
-
-    &:not(.active) {
-        transform: translateY(75vh);
+        display: flex;
+        top: -1.5rem;
+        left: 0;
+        width: 100%;
+        background-color: util.$background-secondary;
+        z-index: -1;
+        height: 3rem;
+        padding: 0.5rem;
+        box-sizing: border-box;
         border-radius: 1rem 1rem 0 0;
 
-        header {
-            display: flex;
-            padding: 3rem 0 0 2rem;
-            background-color: transparent;
+        .timeline {
+          position: relative;
+          flex-grow: 1;
+          height: 2px;
+          margin: 0.5rem 1rem;
+          background-color: util.$text-secondary;
 
-            h3 {
-                margin-left: 0.4rem;
-            }
-        }
-    }
-    
-    header {
-        padding: 3rem 0 2.3rem 2rem;
-        background-color: util.$background-secondary;
-        transition: background-color 0.3s ease-in-out;
+          .travel-pod {
+            transform: rotate(0deg);
+          }
 
-        &::before {
-            content: '';
+          &::before,
+          &::after {
+            content: "";
             position: absolute;
-            top: 1rem;
-            left: 50%;
-            width: 10%;
+            top: -5px;
+            border-radius: 50%;
+            border: 2px solid util.$background-secondary;
+            width: 0.5rem;
             height: 0.5rem;
-            background-color: lighten(util.$text-secondary, 10%);
-            border-radius: 3rem;
+            background-color: util.$text-secondary;
+          }
 
-            transform: translateX(-50%);
+          &::before {
+            left: 0;
+          }
+
+          &::after {
+            right: 0;
+          }
         }
+
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+          height: 1rem;
+          background-color: util.$background-primary;
+          left: 0;
+          border-radius: 1rem 1rem 0 0;
+        }
+      }
     }
+  }
 
-    article:first-of-type {
-        margin-top: 2.7rem;
+  &:not(.active) {
+    transform: translateY(75vh);
+    border-radius: 1rem 1rem 0 0;
+
+    header {
+      display: flex;
+      padding: 3rem 0 0 2rem;
+      background-color: transparent;
+
+      ion-icon {
+        transform: translateX(-50%);
+      }
+
+      h3 {
+        margin-left: 0.4rem;
+      }
     }
+  }
 
-    #open-settings, #send-package, #logout {
-        @include util.button;
-        margin: 2rem;
+  header {
+    padding: 3rem 0 2.3rem 2rem;
+    background-color: util.$background-secondary;
+    transition: background-color 0.3s ease-in-out;
 
-        width: calc(100% - 4rem);
-        box-sizing: border-box;
+    ion-icon {
+      position: absolute;
+      top: 0.5rem;
+      left: 50%;
+      transform: translateX(-50%) rotate(180deg);
+      font-size: 1.5rem;
+      color: lighten(util.$text-secondary, 10%);
     }
+  }
 
-    #open-settings {
-        margin-top: 1rem;
-    }
+  article:first-of-type {
+    margin-top: 2.7rem;
+  }
 
-    #send-package {
-        margin-bottom: 1rem;
-    }
+  #open-settings,
+  #send-package,
+  #logout {
+    @include util.button;
+    margin: 2rem;
 
-    #logout {
-        margin-top: auto;
-    }
+    width: calc(100% - 4rem);
+    box-sizing: border-box;
+  }
 
+  #open-settings {
+    margin-top: 1rem;
+  }
+
+  #send-package {
+    margin-bottom: 1rem;
+  }
+
+  #logout {
+    margin-top: auto;
+  }
 }
