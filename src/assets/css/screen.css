@@ -1321,6 +1321,11 @@
   right: 0.75rem;
   top: 0.7rem;
 }
+.searchbar.package-endpoint-selection label,
+.searchHomeEndpoint.package-endpoint-selection label,
+.package-endpoint-selection.package-endpoint-selection label {
+  top: 0.25rem;
+}
 .searchbar input,
 .searchHomeEndpoint input,
 .package-endpoint-selection input {
