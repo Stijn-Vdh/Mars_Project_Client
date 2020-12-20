@@ -1,6 +1,7 @@
 "use strict";
 
 let endpoints;
+let wasOffline = false;
 
 document.addEventListener("DOMContentLoaded", init);
 
