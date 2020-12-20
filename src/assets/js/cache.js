@@ -27,7 +27,7 @@ function cacheSubscriptions() {
         .then((currSubscriptions) => subscriptions = currSubscriptions);
 }
 
-function cacheTravelEndpoints() {
+function updateTravelEndpoints() {
     return getTravelEndpoints().then(endpoints => travelEndpoints = endpoints);
 }
 

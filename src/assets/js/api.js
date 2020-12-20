@@ -74,6 +74,7 @@ function addFriend(e = null) {
             }
         })
         .then(updateAccInfo)
+        .then(updateMarkers)
 
 }
 
@@ -82,7 +83,8 @@ function removeFriend(e = null) {
 
     apiCall(`friend/${typeof e === 'string' ? e : e.currentTarget.getAttribute('data-remove-friend')}`, 'DELETE', true)
         .then(notifyThenGoBack)
-        .then(updateAccInfo);
+        .then(updateAccInfo)
+        .then(updateMarkers);
 }
 
 function orderPod(e) {
@@ -94,7 +96,6 @@ function orderPod(e) {
             destination: parseInt(e.target.querySelector('#select-location').value),
             podType: e.target.querySelector('#selected-pod').value
         }
-
 
         if (body.from === body.destination) {
             error("You are at this endpoint already!");

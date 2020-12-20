@@ -1,6 +1,6 @@
 "use strict";
 
-let map, routeController;
+let map, routeController, markerUpdater;
 
 function initMap() {
     //set the map config
@@ -69,6 +69,9 @@ function initMap() {
 
     //add legend
     addLegend();
+
+    //endpoints updater every  5 minute
+    markerUpdater = setInterval(updateMarkers, 5 * 60 * 1000);
 }
 
 function deInitMap() { //removes the map
@@ -76,6 +79,8 @@ function deInitMap() { //removes the map
         map.off();
         map.remove();
         map = null;
+        console.log("stop updating")
+        clearInterval(markerUpdater);
     }
 }
 
@@ -216,5 +221,16 @@ function addMarkers() {
         if (endpoint.id !== currentLocationEndpointId) {
             marker.on("click", travelTo);
         }
+    });
+}
+
+function updateMarkers() {
+    updateTravelEndpoints().then(() => {
+        markers.forEach(marker => {
+            map.removeLayer(marker);
+        });
+
+        markers = [];
+        addMarkers();
     });
 }

@@ -129,7 +129,7 @@ function initLogin() {
     return updateAccInfo().then(() => {
         initNotificationSocket();
         cacheSubscriptions();
-        cacheTravelEndpoints()
+        updateTravelEndpoints()
             .then(initMap)
             .then(initSearchbar)
             .then(initQuickAccess);
