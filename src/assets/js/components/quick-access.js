@@ -80,6 +80,7 @@ function logout() {
         .then(() => {
             localStorage.removeItem("token");
             deInitMap();
+            currentLocationEndpointId = undefined;
             goTo('#authentication');
         });
 }

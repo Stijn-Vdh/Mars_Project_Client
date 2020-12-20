@@ -77,7 +77,6 @@ function deInitMap() { //removes the map
         map.remove();
         map = null;
         stopMapUpdater();
-        currentLocationEndpointId = undefined;
     }
 }
 
@@ -251,4 +250,15 @@ function startMapUpdater() {
 function stopMapUpdater() {
     if (markerUpdater) clearInterval(markerUpdater);
     markerUpdater = null;
+}
+
+function disableMapControl() {
+    map.scrollWheelZoom.disable();
+    document.querySelector(".leaflet-control-zoom").classList.add("hidden");
+
+}
+
+function enableMapControl() {
+    deInitMap();
+    initMap();
 }

@@ -95,6 +95,7 @@ function setTraveling() {
                     routeController.setWaypoints([]);
                     updateMarkers();
                     startMapUpdater();
+                    enableMapControl();
                 }, 2000)
             }, (arriveOn * 1000));
         })

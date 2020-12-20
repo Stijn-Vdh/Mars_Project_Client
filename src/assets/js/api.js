@@ -132,6 +132,7 @@ function orderPod(e) {
                 apiCall('routeInfo', 'GET', true)
                     .then(route => {
                         stopMapUpdater();
+                        disableMapControl();
                         const eps = travelEndpoints,
                             fromCoords = eps.find(ep => ep.id === route.from.id).coordinate,
                             toCoords = eps.find(ep => ep.id === route.destination.id).coordinate,
@@ -313,6 +314,7 @@ function validate(response) {
         goTo('#authentication');
         if (accInfo) error("Something went wrong!"); // only display message when previously logged in
         localStorage.removeItem("token");
+        currentLocationEndpointId = undefined;
         deInitMap();
         throw new AuthError("USER NOT AUTHENTICATED"); // makes the promise rejected and prevents the resolved callbacks from being called
     }
