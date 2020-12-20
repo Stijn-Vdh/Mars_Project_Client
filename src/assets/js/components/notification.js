@@ -3,7 +3,6 @@
 let notificationId = 0;
 const notifications = {};
 
-const CHNL_TO_SERVER = "events.to.server";
 const EVENTBUS_PATH = "https://project-ii.ti.howest.be/mars-15/events";
 const CHNL_TO_CLIENT_NOTIFICATION = "events.client.";
 const domains = {
@@ -33,7 +32,7 @@ function packageReceived(error, message) {
 
 function receivedFriendRequest(error, message) {
     updateAccInfo()
-        .finally(() => checkForFriendRequests(accInfo));
+        .then(() => checkForFriendRequests(accInfo));
 }
 
 function travelPodArrived(error, message) {
@@ -63,12 +62,13 @@ function checkNotificationPermissions() {
     if (Notification.permission !== "denied") Notification.requestPermission();
 }
 
-function sendToServer(message) {
-    eb.send(CHNL_TO_SERVER, message);
-}
-
 function notify(message) {
     sendNotification('success', message);
+}
+
+function notifyThenGoBack(message){
+    notify(message);
+    goBack();
 }
 
 function mttsPrompt(message, accept, deny) {
@@ -166,19 +166,6 @@ function removeNotification(e) {
         hideNotification(e.currentTarget.id.split('-')[1]);
     }
 }
-
-// function checkQueue() {
-
-//     if (notificationQueue.length > 0 && !notificationShown) {
-//         const notification = notificationQueue.shift();
-//         document.querySelector('#main-notification p').innerHTML = notification[1];
-//         document.querySelector('#main-notification').classList.add(notification[0]);
-//         document.querySelector('#main-notification').classList.add('open');
-
-//         notificationShown = true;
-//         setTimeout(hideNotification, 5000);
-//     }
-// }
 
 function hideNotification(id) {
     delete notifications[`notification-${id}`]

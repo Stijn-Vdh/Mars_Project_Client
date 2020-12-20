@@ -8,20 +8,6 @@ function initAuthentication() {
         document.querySelector('.searchHomeEndpoint').classList.add('active');
         document.querySelector('.searchHomeEndpoint input').focus();
     });
-
-    if (localStorage.getItem('token') === null) {
-        goTo('#authentication');
-    } else {
-        getUserInfo()
-            .then(response => {
-                if (response.status === 200) {
-                    accInfo = response;
-                    initLogin();
-                } else {
-                    errorHandling();
-                }
-            }).catch(errorHandling);
-    }
 }
 
 

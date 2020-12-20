@@ -7,18 +7,9 @@ function initReport() {
 function postReport(e) {
     e.preventDefault();
 
-    const body = {
-        section: document.querySelector('#report #select-type').value,
-        description: document.querySelector('#report #reason').value
-    }
-
-    apiCall('report', 'POST', true, body)
-        .then(response => {
-            if (response.status === 401 || response.status === 403 || response.status === 422) {
-                warn(response.message);
-            } else {
-                notify(response);
-                goBack();
-            }
-        })
+    report({
+        section: document.querySelector('#select-type').value,
+        description: document.querySelector('#reason').value
+    }).then(notifyThenGoBack);
+    document.querySelector('#reason').value = ""; // empties the text area
 }

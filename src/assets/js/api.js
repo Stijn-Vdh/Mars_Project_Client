@@ -5,62 +5,24 @@ const api = 'https://project-ii.ti.howest.be/mars-15/api/';
 // const api = 'http://localhost:8080/api/';
 
 function getUserInfo() {
-    return apiCall('accountInformation', 'GET', true)
-        .then(response => {
-            if (response.status === 401) {
-                warn(response.message);
-            } else {
-                return response;
-            }
-        })
+    return apiCall('accountInformation', 'GET', true);
 }
 
 function updateName(newName) {
     return apiCall('changeDisplayName', 'POST', true, {newDisplayName: newName})
-        .then(response => {
-            if (response.status === 401 || response.status === 403) {
-                warn(response.message);
-            } else {
-                notify(response);
-            }
-        })
+        .then(notify)
         .then(updateAccInfo);
 }
 
 function updatePassword(currentPassword, newPassword) {
-    apiCall('changePassword', 'POST', true, {newPassword: newPassword})
-        .then(response => {
-                if (response.status === 401 || response.status === 403) {
-                    warn(response.message);
-                } else {
-                    notify(response);
-                }
-            }
-        );
+    return apiCall('changePassword', 'POST', true, {newPassword: newPassword})
+        .then(notify);
 }
 
 function updateSharingLocation(sharing) {
-    if (sharing) {
-        return apiCall("shareLocation", "DELETE", true)
-            .then(response => {
-                if (response.status === 401 || response.status === 403) {
-                    warn(response.message);
-                } else {
-                    notify(response);
-                }
-            })
-            .then(updateAccInfo);
-    } else {
-        return apiCall("shareLocation", "POST", true)
-            .then(response => {
-                if (response.status === 401 || response.status === 403) {
-                    warn(response.message);
-                } else {
-                    notify(response);
-                }
-            })
-            .then(updateAccInfo);
-    }
+    return apiCall("shareLocation", sharing ? "DELETE" : "POST", true)
+        .then(notify)
+        .then(updateAccInfo);
 }
 
 /**
@@ -76,7 +38,7 @@ function login(body) {
             } else {
                 checkNotificationPermissions();
                 localStorage.setItem('token', response);
-                initLogin().finally(() => {
+                initLogin().then(() => {
                     clearNavigationHistory();
                     notify('Welcome back');
                 });
@@ -104,15 +66,14 @@ function register(body) {
 function addFriend(e = null) {
     if (typeof e !== 'string') e.preventDefault();
     apiCall(`friend/${typeof e === 'string' ? e : document.querySelector('#friend-name').value}`, 'POST', true)
-        .then((response) => {
-            if (response.status === 401 || response.status === 403 || response.status === 402) {
+        .then(response => {
+            if (response.status === 402) {
                 warn(response.message);
             } else {
-                notify(response);
-                goBack();
+                notifyThenGoBack(response)
             }
         })
-        .finally(updateAccInfo)
+        .then(updateAccInfo)
 
 }
 
@@ -120,14 +81,8 @@ function removeFriend(e = null) {
     if (typeof e !== 'string') e.preventDefault();
 
     apiCall(`friend/${typeof e === 'string' ? e : e.currentTarget.getAttribute('data-remove-friend')}`, 'DELETE', true)
-        .then((response) => {
-            if (response.status === 401 || response.status === 403) {
-                warn(response.message);
-            } else {
-                notify(response);
-                goBack();
-            }
-        }).finally(updateAccInfo);
+        .then(notifyThenGoBack)
+        .then(updateAccInfo);
 }
 
 function orderPod(e) {
@@ -224,23 +179,15 @@ function favouriteRoute(e) {
     if (!checked) {
         apiCall(`endpoint/favorite/${id}`, "DELETE", true)
             .then(response => {
-                if (response.status === 401 || response.status === 403) {
-                    warn(response.message);
-                } else {
-                    notify(response);
-                    document.querySelector('#favourite-icon').setAttribute('name', 'star-outline');
-                }
+                notify(response);
+                document.querySelector('#favourite-icon').setAttribute('name', 'star-outline');
             })
             .then(updateAccInfo);
     } else {
         return apiCall(`endpoint/favorite/${id}`, "POST", true)
             .then(response => {
-                if (response.status === 401 || response.status === 403) {
-                    warn(response.message);
-                } else {
-                    notify(response);
-                    document.querySelector('#favourite-icon').setAttribute('name', 'star');
-                }
+                notify(response);
+                document.querySelector('#favourite-icon').setAttribute('name', 'star');
             })
             .then(updateAccInfo);
     }
@@ -250,14 +197,14 @@ function orderPackagePod(e) {
     e.preventDefault();
 
 
-    if (document.querySelector('#p-bank').checked || document.querySelector('#p-reward-points').checked){
+    if (document.querySelector('#p-bank').checked || document.querySelector('#p-reward-points').checked) {
         let pFrom = parseInt(e.target.querySelector('#p-location').value);
         let pDestination = parseInt(e.target.querySelector('#p-destination-value').value);
         if (pFrom === pDestination) {
             error("You cannot send a package to yourself!");
             return;
         }
-        if (document.querySelector("#p-destination").value === ""){
+        if (document.querySelector("#p-destination").value === "") {
             error("Please fill in a destination!");
             return;
         }
@@ -294,7 +241,7 @@ function orderPackagePod(e) {
                 }
             });
 
-    }else{
+    } else {
         error("Please choose a payment method!");
     }
 }
@@ -325,6 +272,10 @@ function getTravelEndpoints() {
     return apiCall("endpoint/travel", 'GET', true);
 }
 
+function report(body) {
+    return apiCall('report', 'POST', true, body);
+}
+
 
 function getEndpoint(id) {
     return apiCall(`endpoint/${id}`, 'GET');
@@ -337,7 +288,7 @@ function getTravelHistory() {
 
 function setSubscription(id) {
     return apiCall('subscription', 'POST', true, {subscriptionId: id})
-        .finally(updateAccInfo);
+        .then(updateAccInfo);
 }
 
 /** Call the api
@@ -351,33 +302,35 @@ function setSubscription(id) {
  */
 
 function apiCall(uri, method = 'GET', authenticated, body) {
-    if (localStorage.getItem('token') !== ""){
-        const request = new Request(api + uri, {
-            method: method,
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: authenticated ? `Bearer ${localStorage.getItem('token')}` : undefined
-            },
-            body: JSON.stringify(body)
-        });
-
-        return fetch(request)
-            .then(validate)
-            .then(response => response.json());
-    }else{
-        errorHandling();
-    }
+    return fetch(api + uri, {
+        method: method,
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: authenticated ? `Bearer ${localStorage.getItem('token')}` : undefined
+        },
+        body: JSON.stringify(body)
+    })
+        .then(validate)
+        .then(response => response.json());
 }
 
-function validate(response){
-    if (response.status === 403){
-        errorHandling();
+function validate(response) {
+    if (response.status === 403 || response.status === 401) { // failed to auth
+        goTo('#authentication');
+        if (accInfo) error("Something went wrong!"); // only display message when previously logged in
+        localStorage.removeItem("token");
+        deInitMap();
+        throw new AuthError("USER NOT AUTHENTICATED"); // makes the promise rejected and prevents the resolved callbacks from being called
     }
     return response;
 }
 
-function errorHandling(){
-    goTo('#authentication');
-    error("Something went wrong!");
-    localStorage.removeItem("token");
+window.addEventListener('unhandledrejection', event => { //catches the unhandled rejection
+    if (event.reason instanceof AuthError) { // no need to log these errors and i dont want to add manually a catch at the end of each promise.
+        event.preventDefault();
+    }
+});
+
+class AuthError extends Error { // custom error
+
 }

@@ -3,7 +3,6 @@
 let map, routeController;
 
 function initMap() {
-
     //set the map config
     map = L.map('map', {
         wheelPxPerZoomLevel: 150,
@@ -76,6 +75,7 @@ function deInitMap() { //removes the map
     if (map && map.remove) {
         map.off();
         map.remove();
+        map = null;
     }
 }
 

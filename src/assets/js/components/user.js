@@ -8,23 +8,19 @@ function userInit() {
 
 function updateSettings() {
     if (document.querySelector('#new-pwd').value !== '') {
-        updatePassword(document.querySelector('#current-pwd').value, document.querySelector('#new-pwd').value);
+        updatePassword(document.querySelector('#current-pwd').value, document.querySelector('#new-pwd').value)
+            .then(() => hidePassword(document.querySelector("#password-settings a")));
     }
     document.querySelector('#new-pwd').value = "";
     document.querySelector('#current-pwd').value = "";
 
     const newName = document.querySelector('#new-name').value;
     if (newName !== '' && newName !== accInfo.displayName) {
-        updateName(newName).finally(userInit);
+        updateName(newName).then(userInit);
     }
 
-    if (accInfo.shareLocation && !(document.querySelector('#shareLocation-setting-change input').checked)){
-        updateSharingLocation(accInfo.shareLocation).finally(userInit);
-
-
-    }
-    if (!(accInfo.shareLocation) && document.querySelector('#shareLocation-setting-change input').checked){
-        updateSharingLocation(accInfo.shareLocation).finally(userInit);
+    if (accInfo.shareLocation !== document.querySelector('#shareLocation-setting-change input').checked){
+        updateSharingLocation(accInfo.shareLocation).then(userInit);
     }
 
 }
@@ -58,10 +54,7 @@ function toggleEdit(e) {
             break;
         case "edit-password":
             if (clickedEl.innerHTML === "Cancel") {
-                clickedEl.innerHTML = "Change password";
-                clickedEl.parentNode.querySelector('#new-pwd').value = "";
-                clickedEl.parentNode.querySelector('#current-pwd').value = "";
-                clickedEl.parentNode.classList.add('hidden');
+              hidePassword(clickedEl);
             } else {
                 clickedEl.innerHTML = "Cancel";
                 clickedEl.parentNode.classList.remove('hidden');
@@ -70,6 +63,13 @@ function toggleEdit(e) {
         default:
             break;
     }
+}
+
+function hidePassword(el){
+    el.innerHTML = "Change password";
+    el.parentNode.querySelector('#new-pwd').value = "";
+    el.parentNode.querySelector('#current-pwd').value = "";
+    el.parentNode.classList.add('hidden');
 }
 
 function loadDataInSettings() {
