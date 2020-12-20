@@ -317,7 +317,7 @@ function apiCall(uri, method = 'GET', authenticated, body) {
 function validate(response) {
     if (response.status === 403 || response.status === 401 || response.status === 500) { // sometimes server throws 500 if token is not long enough needs to fixed so that we dont catch 500s
         goTo('#authentication');
-        error("Something went wrong!");
+        if (accInfo) error("Something went wrong!"); // only display message when previously logged in
         localStorage.removeItem("token");
         deInitMap();
         throw new AuthError("USER NOT AUTHENTICATED"); // makes the promise rejected and prevents the resolved callbacks from being called
