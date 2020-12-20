@@ -8,7 +8,8 @@ function initMap() {
         wheelPxPerZoomLevel: 150,
         zoom: 12,
         center: [52.468728, -2.025817],
-        zoomControl: false
+        zoomControl: false,
+        maxBoundsViscosity: 1.0
     });
     // add the zoombuttons
     L.control.zoom({
@@ -24,10 +25,6 @@ function initMap() {
 
     }).addTo(map)
 
-    //show the center
-    //const marker = L.marker([52.468728, -2.025817]).addTo(map);
-    //marker.bindTooltip("CENTER",).openTooltip();
-
     //limit the map to these bounds
     const northEast = L.latLng(53, -1.5);
     const southWest = L.latLng(52, -2.7);
@@ -42,7 +39,7 @@ function initMap() {
         fillColor: '#f03',
         fillOpacity: 0.2,
     }).addTo(map);
-    //dome.bindPopup("This is the start dome");
+    dome.bindPopup("Surface colony");
 
     routeController = L.Routing.control({
         waypoints: [],
@@ -80,7 +77,6 @@ function deInitMap() { //removes the map
         map.remove();
         map = null;
         stopMapUpdater();
-        currentLocationEndpointId = undefined;
     }
 }
 
@@ -95,8 +91,23 @@ function getIcon(endpoint, skipCurrentLocation = false) {
     return blueIcon;
 }
 
-function getDistance(origin, destination) {     // return distance in meters
+/**
+ * Prints the average distance between the given endpoints
+ * @param endpoints - an array of endpoint objects
+ */
 
+Math.rad = function (degree) {
+    return degree * Math.PI / 180;
+}
+
+/**
+ * Returns the distance between the origin and the destination coordinate in meters
+ * @param origin - coordinate
+ * @param destination - coordinate
+ * @return {number}
+ */
+
+function getDistance(origin, destination) {
     const lon1 = Math.rad(origin[1]),
         lat1 = Math.rad(origin[0]),
         lon2 = Math.rad(destination[1]),
@@ -111,9 +122,6 @@ function getDistance(origin, destination) {     // return distance in meters
     return c * EARTH_RADIUS * 1000;
 }
 
-Math.rad = function (degree) {
-    return degree * Math.PI / 180;
-}
 
 function setToolTipRange(map, tooltipThreshold) {
     let lastZoom;
@@ -242,4 +250,15 @@ function startMapUpdater() {
 function stopMapUpdater() {
     if (markerUpdater) clearInterval(markerUpdater);
     markerUpdater = null;
+}
+
+function disableMapControl() {
+    map.scrollWheelZoom.disable();
+    document.querySelector(".leaflet-control-zoom").classList.add("hidden");
+
+}
+
+function enableMapControl() {
+    deInitMap();
+    initMap();
 }

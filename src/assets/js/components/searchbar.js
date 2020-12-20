@@ -74,10 +74,18 @@ function loadSearchbar(e, endpoints=travelEndpoints) {
 }
 
 function neededDataObject(endpoint, e) {
-    if (e.classList.contains('package-endpoint-selection')) {
-        return `data-select-package-endpoint="${endpoint.id}"`;
+    if (e.classList !== undefined) {
+        if (e.classList.contains('package-endpoint-selection')) {
+            return `data-select-package-endpoint="${endpoint.id}"`;
+        } else {
+            return `data-order-pod="${endpoint.id}"`;
+        }
     } else {
-        return `data-order-pod="${endpoint.id}"`;
+        if (e.currentTarget.parentNode.classList.contains('package-endpoint-selection')) {
+            return `data-select-package-endpoint="${endpoint.id}"`;
+        } else {
+            return `data-order-pod="${endpoint.id}"`;
+        }
     }
 }
 

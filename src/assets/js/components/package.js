@@ -10,7 +10,7 @@ function initPackage() {
 
 function selectEndpoint(e) {
     const selectedEndpoint = e.target.closest('*[data-select-package-endpoint]');
-
+    console.log(selectedEndpoint);
     document.querySelector('#p-destination-value').value = selectedEndpoint.getAttribute('data-select-package-endpoint');
     document.querySelector('#p-destination').value = selectedEndpoint.querySelector('h2') ? selectedEndpoint.querySelector('h2').innerHTML : selectedEndpoint.innerHTML
 }
