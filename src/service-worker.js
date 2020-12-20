@@ -1,6 +1,7 @@
 var CACHE_NAME = "mtts-cache-v3";
 var urlsToCache = [
   "/mars-15/",
+  "/mars-15/manifest.webmanifest",
   "/mars-15/assets/css/screen.css",
   "/mars-15/assets/images/currentLoc-sprite.png",
   "/mars-15/assets/images/Lightspeed.png",
