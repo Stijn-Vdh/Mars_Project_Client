@@ -1,6 +1,7 @@
 "use strict";
 
 let endpoints;
+let wasOffline = false;
 
 document.addEventListener("DOMContentLoaded", init);
 
@@ -9,6 +10,13 @@ function init() {
         this.removeEventListener(event, cb);
         this.addEventListener(event, cb);
     }
+
+    if (!navigator.onLine) {
+        return checkOnline();
+    }
+
+    checkOnline();
+
     setViewPortStatic();
     addPages();
     initNavigation();
@@ -35,6 +43,25 @@ function initMain() {
         });
 
     updatePoints();
+}
+
+function checkOnline() {
+    if (!wasOffline && navigator.onLine) {
+        setTimeout(() => {
+            checkOnline();
+        }, 3000);
+    } else if (navigator.onLine) {
+        notify('Back online!')
+        setTimeout(() => {
+            location.reload();
+        },1000);
+    } else {
+        error("You are currently offline. You need to be online to continue using the app.");
+        wasOffline = true;
+        setTimeout(() => {
+            checkOnline();
+        }, 3000);
+    }
 }
 
 function addPages() {

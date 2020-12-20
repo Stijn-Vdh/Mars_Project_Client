@@ -25,7 +25,7 @@ MTTS Client main screen             |  MTTS Client quick access
 
 #### Martian transport
 The user:
-* elects endpoint on map or enters endpoint in search bar
+* selects endpoint on map or enters endpoint in search bar
 * selects pod type
 * payment or subscription is checked
 * pod arrival time and travel is visualised

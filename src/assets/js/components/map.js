@@ -80,6 +80,7 @@ function deInitMap() { //removes the map
         map.remove();
         map = null;
         stopMapUpdater();
+        currentLocationEndpointId = undefined;
     }
 }
 
