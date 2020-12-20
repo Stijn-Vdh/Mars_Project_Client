@@ -74,7 +74,7 @@ function loadSearchbar(e, endpoints=travelEndpoints) {
 }
 
 function neededDataObject(endpoint, e) {
-    if (e.classList.contains('package-endpoint-selection')) {
+    if (e.classList !== undefined && e.classList.contains('package-endpoint-selection')) {
         return `data-select-package-endpoint="${endpoint.id}"`;
     } else {
         return `data-order-pod="${endpoint.id}"`;
