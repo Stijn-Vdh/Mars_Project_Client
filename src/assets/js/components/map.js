@@ -71,7 +71,7 @@ function initMap() {
     addLegend();
 
     //endpoints updater every  5 minute
-    markerUpdater = setInterval(updateMarkers, 5 * 60 * 1000);
+    startMapUpdater();
 }
 
 function deInitMap() { //removes the map
@@ -79,8 +79,7 @@ function deInitMap() { //removes the map
         map.off();
         map.remove();
         map = null;
-        console.log("stop updating")
-        clearInterval(markerUpdater);
+        stopMapUpdater();
     }
 }
 
@@ -233,4 +232,13 @@ function updateMarkers() {
         markers = [];
         addMarkers();
     });
+}
+
+function startMapUpdater() {
+    markerUpdater = setInterval(updateMarkers, 5 * 60 * 1000);
+}
+
+function stopMapUpdater() {
+    if (markerUpdater) clearInterval(markerUpdater);
+    markerUpdater = null;
 }

@@ -132,6 +132,7 @@ function orderPod(e) {
 
                     apiCall('routeInfo', 'GET', true)
                         .then(route => {
+                            stopMapUpdater();
                             const eps = travelEndpoints,
                                 fromCoords = eps.find(ep => ep.id === route.from.id).coordinate,
                                 toCoords = eps.find(ep => ep.id === route.destination.id).coordinate,
