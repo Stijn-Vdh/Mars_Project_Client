@@ -76,6 +76,7 @@ function deInitMap() { //removes the map
         map.off();
         map.remove();
         map = null;
+        currentLocationEndpointId = undefined
     }
 }
 
