@@ -32,6 +32,12 @@
     top: 0.7rem;
   }
 
+  &.package-endpoint-selection  {
+    label {
+      top: 0.25rem;
+    }
+  }
+
   input {
     border: 0;
     width: 95%;

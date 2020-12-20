@@ -88,6 +88,9 @@ function setTraveling() {
                 setTimeout(() => {
                     document.querySelector('#travel-status').innerHTML = `Pod on it's way to you`;
                     document.querySelector('#travel-estm-time').innerHTML = ``;
+                    document.querySelector('#travel-view').style.transitionDuration = `0s`;
+                    document.querySelector('.timeline .travel-pod').style.left = `0%`;
+                    document.querySelector('#travel-view .travel-pod').style.top = `2.05rem`;
                     document.querySelector('.animate-route').style.animation = ``;
                     document.querySelector('.searchbar').style.display = '';
                     document.querySelector('#current-location').classList.remove("hidden");
