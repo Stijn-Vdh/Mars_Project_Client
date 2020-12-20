@@ -315,7 +315,7 @@ function apiCall(uri, method = 'GET', authenticated, body) {
 }
 
 function validate(response) {
-    if (response.status === 403 || response.status === 401 || response.status === 500) { // sometimes server throws 500 if token is not long enough needs to fixed so that we dont catch 500s
+    if (response.status === 403 || response.status === 401) { // failed to auth
         goTo('#authentication');
         if (accInfo) error("Something went wrong!"); // only display message when previously logged in
         localStorage.removeItem("token");
