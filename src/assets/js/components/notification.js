@@ -28,7 +28,7 @@ function initNotificationSocket() {
 }
 
 function packageReceived(error, message) {
-    const msg = ``;
+    onMessage(`${message.body.sender} sent a package to you.`);
 }
 
 function receivedFriendRequest(error, message) {
