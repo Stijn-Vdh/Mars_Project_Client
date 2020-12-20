@@ -10,9 +10,6 @@ function postReport(e) {
     report({
         section: document.querySelector('#select-type').value,
         description: document.querySelector('#reason').value
-    }).then(response => {
-        notify(response);
-        goBack();
-    });
+    }).then(notifyThenGoBack);
     document.querySelector('#reason').value = ""; // empties the text area
 }

@@ -66,12 +66,11 @@ function register(body) {
 function addFriend(e = null) {
     if (typeof e !== 'string') e.preventDefault();
     apiCall(`friend/${typeof e === 'string' ? e : document.querySelector('#friend-name').value}`, 'POST', true)
-        .then((response) => {
+        .then(response => {
             if (response.status === 402) {
                 warn(response.message);
             } else {
-                notify(response);
-                goBack();
+                notifyThenGoBack(response)
             }
         })
         .then(updateAccInfo)
@@ -82,10 +81,7 @@ function removeFriend(e = null) {
     if (typeof e !== 'string') e.preventDefault();
 
     apiCall(`friend/${typeof e === 'string' ? e : e.currentTarget.getAttribute('data-remove-friend')}`, 'DELETE', true)
-        .then(response => {
-            notify(response);
-            goBack();
-        })
+        .then(notifyThenGoBack)
         .then(updateAccInfo);
 }
 
